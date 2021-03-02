@@ -1,0 +1,32 @@
+{
+  "name": "project3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client": "cd client && npm run start",
+    "server": "cd server && npx nodemon server.js",
+    "dev": "concurrently --kill-others-on-fail 'npm:server' 'npm:client'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ard847/project3.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ard847/project3/issues"
+  },
+  "homepage": "https://github.com/Ard847/project3#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "node-modules": "^1.0.1",
+    "nodemon": "^2.0.7"
+  },
+  "devDependencies": {
+    "concurrently": "^6.0.0"
+  }
+}
