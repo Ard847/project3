@@ -1,6 +1,6 @@
 const express = require('express');
-const userQuery = require('./models/user');
-const orm = require('./config/orm');
+const userQuery = require('./server/models/user');
+const orm = require('./server/config/orm');
 const port = process.env.PORT || 3001;
 const app = express();
 let cors = require('cors')
