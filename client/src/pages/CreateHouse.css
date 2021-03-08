@@ -1,0 +1,11 @@
+#create-household-content {
+  display: flex;
+  height: 100%;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#create-household {
+  justify-self: center;
+}
