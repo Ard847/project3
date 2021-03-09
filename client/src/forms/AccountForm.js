@@ -8,7 +8,7 @@ import './AccountForm.css';
 const LoginForm = ({ type }) => {
 
   console.log('AccountForm.js, type =', type);
-  
+
   const [fNameInput, setFNameInput] = useState('');
   const [lNameInput, setLNameInput] = useState('');
   const [emailInput, setEmailInput] = useState('');
@@ -17,43 +17,57 @@ const LoginForm = ({ type }) => {
   const [confirmInput, setConfirmInput] = useState('');
 
   const fNameInputChange = (event) => {
-    console.log('emailInputChange =', event.target.value);
+    // console.log('emailInputChange =', event.target.value);
     setFNameInput(event.target.value);
   }
 
   const lNameInputChange = (event) => {
-    console.log('emailInputChange =', event.target.value);
+    // console.log('emailInputChange =', event.target.value);
     setLNameInput(event.target.value);
   }
 
   const emailInputChange = (event) => {
-    console.log('emailInputChange =', event.target.value);
+    // console.log('emailInputChange =', event.target.value);
     setEmailInput(event.target.value)
   }
 
   const usernameInputChange = (event) => {
-    console.log('emailInputChange =', event.target.value);
+    // console.log('emailInputChange =', event.target.value);
     setUsernameInput(event.target.value);
   }
 
   const passwordInputChange = (event) => {
-    console.log('emailInputChange =', event.target.value);
+    // console.log('emailInputChange =', event.target.value);
     setPasswordInput(event.target.value);
   }
 
   const confirmInputChange = (event) => {
-    console.log('emailInputChange =', event.target.value);
+    // console.log('emailInputChange =', event.target.value);
     setConfirmInput(event.target.value);
   }
 
   const submitForm = (event) => {
     event.preventDefault();
     event.stopPropagation();
+
+    if(passwordInput === confirmInput){
+      const user = {
+        firstName: fNameInput,
+        lastName: lNameInput,
+        email: emailInput,
+        username: usernameInput,
+        password: passwordInput,
+      }
+      console.log('AccountForm.js, user =', user);
+    } else {
+      console.log('passwords do not match');
+    }
+
   }
 
   return (
     <form>
-      
+
       { (type === 'create-account') && (
         <>
           <label htmlFor='first-name'>First Name:</label>
@@ -63,10 +77,10 @@ const LoginForm = ({ type }) => {
             placeholder='Enter your first name.'
             onChange={fNameInputChange}
           />
-        </>) 
+        </>)
       }
 
-      
+
       { (type === 'create-account') && (
         <>
           <label htmlFor='last-name'>Last Name:</label>
@@ -76,10 +90,10 @@ const LoginForm = ({ type }) => {
             placeholder='Enter your Last name.'
             onChange={lNameInputChange}
           />
-        </>) 
+        </>)
       }
-      
-      { ( type === 'create-account' || type === 'login') && (
+
+      { (type === 'create-account' || type === 'login') && (
         <>
           <label htmlFor='email'>Email:</label>
           <input
@@ -89,9 +103,9 @@ const LoginForm = ({ type }) => {
             onChange={emailInputChange}
           />
         </>
-      ) }
-      
-      { ( type === 'create-account' || type === 'login') && (
+      )}
+
+      { (type === 'create-account' || type === 'login') && (
         <>
           <label htmlFor='username'>Username:</label>
           <input
@@ -101,9 +115,9 @@ const LoginForm = ({ type }) => {
             onChange={usernameInputChange}
           />
         </>
-      ) }
+      )}
 
-      { ( type === 'create-account' || type === 'login') && (
+      { (type === 'create-account' || type === 'login') && (
         <>
           <label htmlFor='password'>Password:</label>
           <input
@@ -113,7 +127,7 @@ const LoginForm = ({ type }) => {
             onChange={passwordInputChange}
           />
         </>
-      ) }
+      )}
 
       { (type === 'create-account') && (
         <>
@@ -124,11 +138,11 @@ const LoginForm = ({ type }) => {
             placeholder='Please confirm your password'
             onChange={confirmInputChange}
           />
-        </>) 
+        </>)
       }
 
-      { (type === 'create-account') && (<button onClick={submitForm}>Create Account</button>) }
-      { (type === 'login') && (<button onClick={submitForm}>Log-in</button>) }
+      { (type === 'create-account') && (<button onClick={submitForm}>Create Account</button>)}
+      { (type === 'login') && (<button onClick={submitForm}>Log-in</button>)}
 
     </form>
   )

@@ -1,15 +1,21 @@
-const {Sequelize,DataTypes} = require('sequelize');
+const Sequelize = require('sequelize');
 require('dotenv').config();
 
 const connection = new Sequelize(
-  process.env.DB_name,
-  process.env.DB_username,
-  process.env.DB_password,
-  { host: process.env.DB_localhost,
-    dialect: 'mysql'
-  });
-connection.authenticate().then(()=>{
-  console.log('Connection has been established successfully.');
-});
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
+  {
+    host: process.env.DB_HOST,
+    dialect: 'mysql',
+    pool: {
+      max: 5,
+      min: 0,
+      acquire: 30000,
+      idle: 10000,
+    },
+  }
+);
 
-module.exports = {connection,DataTypes};
+
+module.exports = connection;
