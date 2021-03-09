@@ -1,6 +1,9 @@
 // packages
 import { useState, createContext } from 'react';
 
+// functions
+import removeFromSession from '../functions/removeFromSession';
+
 // create context 
 const LoggedInContext = createContext();
 
@@ -15,6 +18,7 @@ const LoggedInContextProvider = ({children}) => {
 
   const userLoggedOut = async (username, password) => {
     setLoggedIn(false);
+    removeFromSession('id');
   }
 
   console.log('LoggedInContext loggedIn =', loggedIn);
