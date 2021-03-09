@@ -1,6 +1,6 @@
 // packages
 import React, { useContext } from 'react';
-import { NavLink, Route } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 // styles
 import './HomePage.css';
@@ -42,24 +42,24 @@ const HomePage = () => {
 
         <div id='current-household' className='flex'>
           <div className='household'>
-            <a href='#'>
+            {/* <a href='#'> */}
               <img
                 className='household-img'
                 src=''
                 alt=''
               />
               <p>Name Here</p>
-            </a>
+            {/* </a> */}
           </div>
           <div className='household'>
-            <a href='#'>
+            {/* <a href='#'> */}
               <img
                 className='household-img'
                 src=''
                 alt=''
               />
               <p>Name Here</p>
-            </a>
+            {/* </a> */}
           </div>
         </div>
 

@@ -11,6 +11,8 @@ const HouseForm = ({userID, type}) => {
 
   const [ houseInput, setHouseInput ] = useState('');
 
+  console.log('HouseForm, houseInput =', houseInput);
+
   const houseInputChange = (event) => {
     setHouseInput(event.target.value);
   }

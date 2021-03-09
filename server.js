@@ -1,20 +1,46 @@
 const express = require('express');
-const userQuery = require('./server/models/user');
-const orm = require('./server/config/orm');
-const port = process.env.PORT || 3001;
 const app = express();
-let cors = require('cors')
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-app.use(cors())
+// const cors = require('cors');
 
-app.get("/api/result", async (req,res) => {
-  console.log("here")
-  const user = await orm.Users.findAll({/* {where:{sessionId:userId} */raw : true});
-  console.log(user)
-  res.json({Answer : user})
-})
+const connection = require('./server/config/db');
 
-app.listen(port, () => {
-  console.log('CRA server running on port', port);
+const PORT = process.env.PORT || 3001;
+
+// middleware
+// app.use(cors());
+
+// Serve up static assets (usually on heroku)
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+// set up routes
+const userRoutes = require('./server/routes/userRoutes');
+// const taskRoutes = require('./server/routes/taskRoutes');
+// const householdRoutes = require('./server/routes/householdRoutes');
+
+app.use('/api/user', userRoutes );
+// app.use('api/task', taskRoutes );
+// app.use('api/household', householdRoutes);
+
+// Send every other request to the React app
+// Define any API routes before this runs
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
+
+// server
+connection.authenticate()
+  .then(async () => {
+    connection.sync();
+    console.log('Connection has been established successfully.');
+  })
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log('CRA server running on port', PORT);
+    });
+  })
+  .catch((err) => console.log('connection error=', err));
