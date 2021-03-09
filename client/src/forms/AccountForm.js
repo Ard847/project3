@@ -5,9 +5,9 @@ import React, { useState } from 'react';
 import './AccountForm.css';
 
 
-const LoginForm = ({ type }) => {
+const AccountForm = ({ type, onCreate, onSubmit }) => {
 
-  console.log('AccountForm.js, type =', type);
+  // console.log('AccountForm.js, type =', type);
 
   const [fNameInput, setFNameInput] = useState('');
   const [lNameInput, setLNameInput] = useState('');
@@ -46,11 +46,11 @@ const LoginForm = ({ type }) => {
     setConfirmInput(event.target.value);
   }
 
-  const submitForm = (event) => {
+  const submitCreate = (event) => {
     event.preventDefault();
     event.stopPropagation();
 
-    if(passwordInput === confirmInput){
+    if (passwordInput === confirmInput) {
       const user = {
         firstName: fNameInput,
         lastName: lNameInput,
@@ -58,16 +58,29 @@ const LoginForm = ({ type }) => {
         username: usernameInput,
         password: passwordInput,
       }
-      console.log('AccountForm.js, user =', user);
+      // console.log('AccountForm.js, submitCreate, user =', user);
+      onCreate(user);
+
     } else {
       console.log('passwords do not match');
     }
+  };
 
+  const submitLogin = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const user = {
+      email: emailInput,
+      username: usernameInput,
+      password: passwordInput,
+    }
+    // console.log('AccountForm, submitLogin, user =', user);
+    onSubmit(user);
   }
 
   return (
     <form>
-
       { (type === 'create-account') && (
         <>
           <label htmlFor='first-name'>First Name:</label>
@@ -79,8 +92,6 @@ const LoginForm = ({ type }) => {
           />
         </>)
       }
-
-
       { (type === 'create-account') && (
         <>
           <label htmlFor='last-name'>Last Name:</label>
@@ -92,7 +103,6 @@ const LoginForm = ({ type }) => {
           />
         </>)
       }
-
       { (type === 'create-account' || type === 'login') && (
         <>
           <label htmlFor='email'>Email:</label>
@@ -104,7 +114,6 @@ const LoginForm = ({ type }) => {
           />
         </>
       )}
-
       { (type === 'create-account' || type === 'login') && (
         <>
           <label htmlFor='username'>Username:</label>
@@ -116,7 +125,6 @@ const LoginForm = ({ type }) => {
           />
         </>
       )}
-
       { (type === 'create-account' || type === 'login') && (
         <>
           <label htmlFor='password'>Password:</label>
@@ -128,7 +136,6 @@ const LoginForm = ({ type }) => {
           />
         </>
       )}
-
       { (type === 'create-account') && (
         <>
           <label htmlFor='confirm-password'>Confirm Password:</label>
@@ -140,12 +147,10 @@ const LoginForm = ({ type }) => {
           />
         </>)
       }
-
-      { (type === 'create-account') && (<button onClick={submitForm}>Create Account</button>)}
-      { (type === 'login') && (<button onClick={submitForm}>Log-in</button>)}
-
+      { (type === 'create-account') && (<button onClick={submitCreate}>Create Account</button>)}
+      { (type === 'login') && (<button onClick={submitLogin}>Log-in</button>)}
     </form>
   )
 }
 
-export default LoginForm;
+export default AccountForm;

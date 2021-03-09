@@ -1,28 +1,28 @@
 const express = require('express');
 const app = express();
+// const cors = require('cors');
 
 const connection = require('./server/config/db');
 
 const PORT = process.env.PORT || 3001;
 
 // middleware
-let cors = require('cors');
-app.use(cors());
+// app.use(cors());
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // set up routes
 const userRoutes = require('./server/routes/userRoutes');
-const taskRoutes = require('./server/routes/taskRoutes');
-const householdRoutes = require('./server/routes/householdRoutes');
+// const taskRoutes = require('./server/routes/taskRoutes');
+// const householdRoutes = require('./server/routes/householdRoutes');
 
-app.use('api/user', userRoutes );
+app.use('/api/user', userRoutes );
 // app.use('api/task', taskRoutes );
 // app.use('api/household', householdRoutes);
 
