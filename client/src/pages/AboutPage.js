@@ -4,8 +4,13 @@ import React from 'react';
 // styles
 import './AboutPage.css';
 
+// hooks
+import useSiteLocation from '../hooks/useSiteLocation';
 
-const AboutPage = () => {
+
+const AboutPage = ({location}) => {
+
+  useSiteLocation(location);
 
   return (
     <article id='about-content'>

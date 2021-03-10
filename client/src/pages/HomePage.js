@@ -8,11 +8,19 @@ import './HomePage.css';
 // context
 import LoggedInContext from "../context/LoggedInContext";
 
+// hooks
+import useGetHouseholds from '../hooks/useGetHouseholds';
+import useSiteLocation from '../hooks/useSiteLocation';
 
 
-const HomePage = () => {
+
+const HomePage = ({location}) => {
 
   const { loggedIn } = useContext(LoggedInContext);
+  useSiteLocation(location);
+
+  const households = useGetHouseholds();
+  console.log('households =', households);
 
   if (loggedIn === false) {
 
@@ -28,7 +36,7 @@ const HomePage = () => {
       <article id='home-content' className='flex'>
 
         <div id='create-household'>
-          <NavLink 
+          <NavLink
             to='/createHousehold'
           >
             <img
@@ -41,26 +49,22 @@ const HomePage = () => {
         </div>
 
         <div id='current-household' className='flex'>
-          <div className='household'>
-            {/* <a href='#'> */}
-              <img
-                className='household-img'
-                src=''
-                alt=''
-              />
-              <p>Name Here</p>
-            {/* </a> */}
-          </div>
-          <div className='household'>
-            {/* <a href='#'> */}
-              <img
-                className='household-img'
-                src=''
-                alt=''
-              />
-              <p>Name Here</p>
-            {/* </a> */}
-          </div>
+
+          {households.map((household) => {
+            return (
+              <div key={household.id} className='household'>
+                <NavLink to={`/dashboard/${household.id}`} >
+                  <img
+                    className='household-img'
+                    src=''
+                    alt=''
+                  />
+                  <p>{household.houseName}</p>
+                </NavLink>
+              </div>
+            )
+          })}
+
         </div>
 
       </article>

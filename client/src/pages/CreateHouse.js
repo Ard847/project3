@@ -7,10 +7,17 @@ import './CreateHouse.css';
 // components
 import HouseForm from '../forms/HouseForm';
 
+// functions
+import getSession from '../functions/getSession';
 
-const CreateHouse = () => {
+// hooks
+import useSiteLocation from '../hooks/useSiteLocation';
 
-  const id = 'Sam';
+
+const CreateHouse = ({location}) => {
+
+  const id = getSession('id');
+  useSiteLocation(location);
 
   return (
     <article id='create-household-content'>
@@ -23,10 +30,10 @@ const CreateHouse = () => {
           alt=''
         />
       </div>
-      <HouseForm userID={id} type={'create'}/>
+      <HouseForm userID={id} type={'create'} />
 
       <h2> Join an Existing Household</h2>
-      <HouseForm userID={id} type={'join'}/>
+      <HouseForm userID={id} type={'join'} />
 
       <NavLink to='/' >Back to Households</NavLink>
     </article>

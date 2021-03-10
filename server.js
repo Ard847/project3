@@ -20,11 +20,11 @@ app.use(express.json());
 // set up routes
 const userRoutes = require('./server/routes/userRoutes');
 // const taskRoutes = require('./server/routes/taskRoutes');
-// const householdRoutes = require('./server/routes/householdRoutes');
+const householdRoutes = require('./server/routes/householdRoutes');
 
 app.use('/api/user', userRoutes );
-// app.use('api/task', taskRoutes );
-// app.use('api/household', householdRoutes);
+// app.use('/api/task', taskRoutes );
+app.use('/api/household', householdRoutes );
 
 // Send every other request to the React app
 // Define any API routes before this runs

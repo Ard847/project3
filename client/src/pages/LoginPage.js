@@ -13,10 +13,15 @@ import AccountForm from '../forms/AccountForm'
 // functions
 import saveToSession from '../functions/saveToSession';
 
-const LoginPage = () => {
+// hooks
+import useSiteLocation from '../hooks/useSiteLocation';
+
+
+const LoginPage = ({location}) => {
 
   const { loggedIn, userLoggedIn, userLoggedOut } = useContext(LoggedInContext);
   const [ userMatch, setUserMatch ] = useState(false);
+  useSiteLocation(location);
 
   const handleSubmit = async (user) => {
     // console.log('LoginPage, handleSubmit, user =', user);

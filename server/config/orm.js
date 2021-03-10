@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
-const connection  = require('./db');
+const connection = require('./db');
 
-const User = connection.define('user', 
+const User = connection.define('user',
   {
     id: { type: DataTypes.INTEGER, allowNull: false, primaryKey: true, autoIncrement: true },
     firstName: { type: DataTypes.STRING(50) },
@@ -15,60 +15,68 @@ const User = connection.define('user',
   }
 );
 
-const Household = connection.define('houseHold', 
+const Household = connection.define('household',
   {
-  id: { type: DataTypes.INTEGER, allowNull: false, primaryKey: true, autoIncrement: true },
-  houseName: { type: DataTypes.STRING(50) },
-  }, 
+    id: { type: DataTypes.INTEGER, allowNull: false, primaryKey: true, autoIncrement: true },
+    houseName: { type: DataTypes.STRING(50) },
+  },
   {
-  timestamps: false,
+    timestamps: false,
   }
 );
 
-const Task = connection.define('tasks', {
-  id: { type: DataTypes.INTEGER, allowNull: false, primaryKey: true, autoIncrement: true },
-  householdID: { type: DataTypes.INTEGER },
-  userID: { type: DataTypes.INTEGER, allowNull: true, },
-  taskName: { type: DataTypes.STRING(50) },
-  startDate: { type: DataTypes.STRING(50) },
-  endDate: { type: DataTypes.STRING(50) },
-  inPrgressBy: { type: DataTypes.STRING(50) },
-  completedBy: { type: DataTypes.STRING(50) }
-}, {
-  timestamps: false,
-});
-
-const HouseholdMember = connection.define('householdMember', {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-    allowNull: false,
+const Task = connection.define('tasks',
+  {
+    id: { type: DataTypes.INTEGER, allowNull: false, primaryKey: true, autoIncrement: true },
+    householdID: { type: DataTypes.INTEGER },
+    userID: { type: DataTypes.INTEGER, allowNull: true, },
+    taskName: { type: DataTypes.STRING(50) },
+    startDate: { type: DataTypes.STRING(50) },
+    endDate: { type: DataTypes.STRING(50) },
+    inPrgressBy: { type: DataTypes.STRING(50) },
+    completedBy: { type: DataTypes.STRING(50) }
   },
-  householdID: {
-    // ref outfit ID
-    type: DataTypes.INTEGER,
+  {
+    timestamps: false,
+  }
+);
 
-    primaryKey: false,
-    references: {
-      model: 'household',
-      key: 'id',
+const HouseholdMember = connection.define('householdMember',
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false,
+    },
+    householdID: {
+      // ref outfit ID
+      type: DataTypes.INTEGER,
+
+      primaryKey: false,
+      references: {
+        model: 'household',
+        key: 'id',
+      },
+    },
+    userID: {
+      // ref item ID
+      type: DataTypes.INTEGER,
+
+      primaryKey: false,
+      references: {
+        model: 'user',
+        key: 'id',
+      },
     },
   },
-  userID: {
-    // ref item ID
-    type: DataTypes.INTEGER,
+  {
+    timestamps: false,
+  }
+);
 
-    primaryKey: false,
-    references: {
-      model: 'user',
-      key: 'id',
-    },
-  },
-})
-
-Task.belongsTo(Household, { foreignKey: 'householdID'});
-Task.belongsTo(User, { foreignKey: 'userID'});
+Task.belongsTo(Household, { foreignKey: 'householdID' });
+Task.belongsTo(User, { foreignKey: 'userID' });
 
 HouseholdMember.belongsTo(User, {
   forgeignKey: 'userID',
@@ -77,13 +85,13 @@ HouseholdMember.belongsTo(User, {
 });
 HouseholdMember.belongsTo(Household, {
   foreignKey: 'householdID',
-  targetKey: 'id', 
+  targetKey: 'id',
   as: 'household',
 });
 
-Household.belongsToMany(User, {through: HouseholdMember, foreignKey: 'householdID'});
+Household.belongsToMany(User, { through: HouseholdMember, foreignKey: 'householdID' });
 
-User.belongsToMany(Household, { through: HouseholdMember, foreignKey: 'userID'});
+User.belongsToMany(Household, { through: HouseholdMember, foreignKey: 'userID' });
 
 module.exports = {
   User,
