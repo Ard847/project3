@@ -10,10 +10,14 @@ import LoggedInContext from '../context/LoggedInContext'
 // components
 import AccountForm from '../forms/AccountForm'
 
+// hooks
+import useSiteLocation from '../hooks/useSiteLocation';
 
-const SignupPage = () => {
+
+const SignupPage = ({location}) => {
 
   const { loggedIn, userLoggedIn, userLoggedOut } = useContext(LoggedInContext);
+  useSiteLocation(location);
 
   const handleCreate = (user) => {
     const url = '/api/user/createNew';

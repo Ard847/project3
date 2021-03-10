@@ -1,5 +1,5 @@
 // packages
-// import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { HashRouter as Router, NavLink, Route } from 'react-router-dom';
 
 // styles
@@ -11,9 +11,19 @@ import AboutPage from '../pages/AboutPage';
 import LoginPage from '../pages/LoginPage';
 import SignupPage from '../pages/SignupPage';
 import CreateHouse from '../pages/CreateHouse';
+import DashboardHome from '../pages/dashboard/DashboardHome';
 
+// context
+import LocationContext from '../context/LocationContext';
 
-function App() {
+const App = () => {
+
+  const { siteLocation } = useContext(LocationContext);
+  console.log('siteLocation =', siteLocation);
+
+  const indexPages = ['/', '/about', '/logIn', '/signUp', '/createHousehold'];
+
+  console.log("indexPages.includes(siteLocation)", indexPages.includes(siteLocation));
 
   return (
     <div id='App'>
@@ -25,7 +35,7 @@ function App() {
           <NavLink to='/logIn'>Log In </NavLink>
           <NavLink to='/signUp'>Sign Up</NavLink>
         </nav>
-
+        
         <main>
           <section id='app-titles'>
             <h1 id='main-title'>Welcome to Household Manager.</h1>
@@ -40,6 +50,11 @@ function App() {
             <Route exact path='/createHousehold' component={CreateHouse} />
           </section>
         </main>
+
+        <main>
+            <Route path='/dashboard/:householdID' component={DashboardHome} />
+        </main>
+
       </Router >
     </div>
   );
