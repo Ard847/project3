@@ -1,5 +1,4 @@
 const removeFromSession = (key) => {
-
   sessionStorage.removeItem(key);
 }
 
