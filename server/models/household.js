@@ -1,5 +1,6 @@
 const { User, Household, HouseholdMember } = require('../config/orm');
 
+
 const createHousehold = async (name) => {
   return await Household.create(
     {
@@ -33,7 +34,7 @@ const findHousehold = async (houseID) => {
     raw: true,
   })
   .then((data) => {
-    console.log('findHousehold data =', data);
+    // console.log('findHousehold data =', data);
     return data;
   })
   .catch((err) => {
@@ -42,17 +43,17 @@ const findHousehold = async (houseID) => {
 }
 
 const findAllHousehold = async (userID) => {
-  console.log('findAllHouseholds userID =', userID);
+  // console.log('findAllHouseholds, userID =', userID);
   return await User.findAll({
     where: {id: userID},
     attributes: ['id', 'firstName', 'lastName'],
     include: [{
       model: Household, 
-      attributes: ['id', 'houseName',],
+      attributes: ['id', 'houseName'],
     }]
   })
   .then((data) => {
-    console.log('findAllHousehold data =', data);
+    // console.log('findAllHousehold data =', data);
     return data;
   })
   .catch((err) => {
