@@ -1,4 +1,4 @@
-const { User } = require('../config/orm');
+const { User, Household } = require('../config/orm');
 
 const createUser = async (firstName, lastName, email, username, password) => {
   return await User.create({
@@ -27,7 +27,7 @@ const findUser = async (email, username, password) => {
     raw: true,
   })
   .then((data) => {
-    console.log('findUser data =', data);
+    // console.log('findUser data =', data);
     return {user: data};
   })
   .catch((err) => {
@@ -35,8 +35,30 @@ const findUser = async (email, username, password) => {
   })
 }
 
+const findAllUser = async (houseID) => {
+  // console.log('findAllUser, houseID =', houseID);
+  return await Household.findAll({
+    where: {id: houseID},
+    attributes: ['id', 'houseName'],
+    include: [{
+      model: User, 
+      attributes: ['id', 'firstName', 'lastName'],
+    }]
+  })
+  .then((data) => {
+    // console.log('findAllUser data =', data);
+    return data;
+  })
+  .catch((err) => {
+    console.log('household model, findAllUser, error =', err);
+  });
+
+}
+
+
 
 module.exports = {
   createUser,
   findUser,
+  findAllUser,
 };

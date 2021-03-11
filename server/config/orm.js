@@ -78,20 +78,20 @@ const HouseholdMember = connection.define('householdMember',
 Task.belongsTo(Household, { foreignKey: 'householdID' });
 Task.belongsTo(User, { foreignKey: 'userID' });
 
-HouseholdMember.belongsTo(User, {
-  forgeignKey: 'userID',
-  targetKey: 'id',
-  as: 'user'
-});
-HouseholdMember.belongsTo(Household, {
-  foreignKey: 'householdID',
-  targetKey: 'id',
-  as: 'household',
-});
-
-Household.belongsToMany(User, { through: HouseholdMember, foreignKey: 'householdID' });
+// HouseholdMember.belongsTo(User, {
+//   forgeignKey: 'userID',
+//   targetKey: 'id',
+//   as: 'user'
+// });
+// HouseholdMember.belongsTo(Household, {
+//   foreignKey: 'householdID',
+//   targetKey: 'id',
+//   as: 'household',
+// });
 
 User.belongsToMany(Household, { through: HouseholdMember, foreignKey: 'userID' });
+Household.belongsToMany(User, { through: HouseholdMember, foreignKey: 'householdID' });
+
 
 module.exports = {
   User,

@@ -1,6 +1,6 @@
 // packages
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 // styles
 import './ChooseHouse.css';
@@ -18,51 +18,55 @@ import getSession from '../../functions/getSession';
 const ChooseHouse = () => {
 
   const households = useGetHouseholds();
-  console.log('households =', households);
+  // console.log('households =', households);
 
   const id = getSession('id');
 
   return (
     <>
-        <WelcomeTitles />
-        <section>
-          <article id='home-content' className='flex'>
+      <WelcomeTitles />
+      <section>
+        <article id='home-content' className='flex'>
 
-            <div id='create-household'>
-              <NavLink
-                to='/createHousehold'
-              >
-                <img
-                  className='household-img'
-                  src=''
-                  alt=''
-                />
-                <p>Create New Household</p>
-              </NavLink>
-            </div>
+          <div id='create-household'>
+            <NavLink
+              to='/createHousehold'
+            >
+              <img
+                className='household-img'
+                src=''
+                alt=''
+              />
+              <p>Create New Household</p>
+            </NavLink>
+          </div>
 
-            <div id='current-household' className='flex'>
+          <div id='current-household' className='flex'>
 
-              {households.map((household) => {
-                return (
-                  <div key={household.id} className='household'>
-                    <NavLink to={`/dashboard/${id}/${household.id}`} >
-                      <img
-                        className='household-img'
-                        src=''
-                        alt=''
-                      />
-                      <p>{household.houseName}</p>
-                    </NavLink>
-                  </div>
-                )
-              })}
+            {households.map((household) => {
+              return (
+                <div key={household.id} className='household'>
+                  <NavLink 
+                    to={{
+                      pathname: `/dashboard/${id}/${household.id}`,
+                      aboutProps: { houseName: household.houseName },
+                    }} >
+                    <img
+                      className='household-img'
+                      src=''
+                      alt=''
+                    />
+                    <p>{household.houseName}</p>
+                  </NavLink>
+                </div>
+              )
+            })}
 
-            </div>
+          </div>
 
-          </article>
-        </section>
-      </>
+        </article>
+      </section>
+    </>
   )
 }
 
