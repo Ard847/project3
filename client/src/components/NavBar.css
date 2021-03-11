@@ -1,0 +1,6 @@
+nav {
+  background-color: var(--white);
+  height: 30px;
+  display: flex;
+  justify-content: flex-end;
+}

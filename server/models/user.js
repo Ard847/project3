@@ -27,7 +27,7 @@ const findUser = async (email, username, password) => {
     raw: true,
   })
   .then((data) => {
-    console.log('data =', data);
+    console.log('findUser data =', data);
     return {user: data};
   })
   .catch((err) => {
