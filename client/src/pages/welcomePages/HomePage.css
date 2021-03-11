@@ -9,15 +9,3 @@ article#home-content {
   align-items: center;
   
 }
-
-img.household-img {
-  height: 150px;
-  width: 150px;
-  margin: 6px;
-  border-radius: 75px;
-  background-color: var(--white);
-}
-
-div.household > a:hover {
-  transform: scale(1.1);
-}

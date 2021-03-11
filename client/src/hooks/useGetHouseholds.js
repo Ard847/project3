@@ -1,3 +1,4 @@
+// packages
 import { useEffect, useState } from 'react';
 
 // functions
@@ -14,7 +15,7 @@ const useGetHouseholds = () => {
     const url = `/api/household/gethousehold/${id}`;
     const householdResponse = await fetcher(url, 'GET');
     
-    // console.log('householdResponse =', householdResponse);
+    console.log('householdResponse =', householdResponse);
     setHouseholds(householdResponse);
   }
 
