@@ -4,61 +4,38 @@ import React, { useState } from 'react';
 // styles
 import './HouseForm.css';
 
+// functions 
+import fetcher from '../../functions/fetcher';
+
 
 const HouseForm = ({ userID, type }) => {
   // console.log('HouseForm, userID =', userID);
   // console.log('HouseForm, type =', type);
 
   const [houseInput, setHouseInput] = useState('');
-
   // console.log('HouseForm, houseInput =', houseInput);
 
   const houseInputChange = (event) => {
     setHouseInput(event.target.value);
   }
 
-  const createNewHousehold = (event) => {
+  const createNewHousehold = async (event) => {
     event.preventDefault();
     event.stopPropagation();
 
     // console.log('createNewHousehold');
     const url = `/api/household/createNew/${userID}`;
-    fetch(url, {
-      method: 'POST',
-      headers: { 'content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: houseInput,
-      })
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Success:', data);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+    await fetcher (url, 'POST', {name: houseInput});
+    
   }
 
-  const joinExistingHousehold = (event) => {
+  const joinExistingHousehold = async (event) => {
     event.preventDefault();
     event.stopPropagation();
 
-    console.log('joinExistingHousehold');
+    // console.log('joinExistingHousehold');
     const url = `/api/household/join/${userID}`;
-    fetch(url, {
-      method: 'POST',
-      headers: { 'content-Type': 'application/json' },
-      body: JSON.stringify({
-        householdID: houseInput,
-      })
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Success:', data);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+    await fetcher(url, 'POST', {householdID: houseInput});
   }
 
   return (

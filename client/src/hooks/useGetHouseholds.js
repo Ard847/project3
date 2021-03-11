@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 
 // functions
 import getSession from '../functions/getSession';
+import fetcher from '../functions/fetcher';
+
 
 const useGetHouseholds = () => {
 
@@ -10,15 +12,10 @@ const useGetHouseholds = () => {
   const fetchData = async () => {
     const id = getSession('id');
     const url = `/api/household/gethousehold/${id}`;
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Success:', data);
-        setHouseholds(data);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+    const householdResponse = await fetcher(url, 'GET');
+    
+    // console.log('householdResponse =', householdResponse);
+    setHouseholds(householdResponse);
   }
 
   useEffect(() => {

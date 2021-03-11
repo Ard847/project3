@@ -1,10 +1,3 @@
-nav {
-  background-color: var(--white);
-  height: 30px;
-  display: flex;
-  justify-content: flex-end;
-}
-
 main {
   display: flex;
   justify-content: center;
@@ -15,22 +8,5 @@ main {
 
 }
 
-section {
-  width: 50%;
-  padding: 12px;
-  min-height: 100%;
 
-  border: 5px solid var(--blue);
-}
 
-section#app-titles {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-
-  padding: 12px 36px;
-}
-
-h1#main-title {
-  font-size: 4em;
-}
