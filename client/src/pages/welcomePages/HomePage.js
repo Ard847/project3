@@ -1,6 +1,7 @@
 // packages
 import React, { useContext } from 'react';
-import { NavLink } from 'react-router-dom';
+import { browserHistory } from 'react-router';
+import { BrowserRouter, Redirect, Route } from 'react-router-dom';
 
 // styles
 import './HomePage.css';
@@ -9,11 +10,13 @@ import './HomePage.css';
 import LoggedInContext from "../../context/LoggedInContext";
 
 // hooks
-import useGetHouseholds from '../../hooks/useGetHouseholds';
 import useSiteLocation from '../../hooks/useSiteLocation';
 
 // components
 import WelcomeTitles from '../../components/WelcomeTitles';
+
+// functions
+import getSession from '../../functions/getSession';
 
 
 
@@ -22,11 +25,12 @@ const HomePage = ({ location }) => {
   const { loggedIn } = useContext(LoggedInContext);
   useSiteLocation(location);
 
-  const households = useGetHouseholds();
-  console.log('households =', households);
+  const id = getSession('id');
 
-  if (loggedIn === false) {
-
+  if (loggedIn){
+    return (<Redirect to={`/home/${id}`} />);
+    // return browserHistory.push(`/${id}`);
+  } else {
     return (
       <>
         <WelcomeTitles />
@@ -36,55 +40,7 @@ const HomePage = ({ location }) => {
           </article>
         </section>
       </>
-
     )
-
-  } else if (loggedIn === true) {
-
-    return (
-      <>
-        <WelcomeTitles />
-        <section>
-          <article id='home-content' className='flex'>
-
-            <div id='create-household'>
-              <NavLink
-                to='/createHousehold'
-              >
-                <img
-                  className='household-img'
-                  src=''
-                  alt=''
-                />
-                <p>Create New Household</p>
-              </NavLink>
-            </div>
-
-            <div id='current-household' className='flex'>
-
-              {households.map((household) => {
-                return (
-                  <div key={household.id} className='household'>
-                    <NavLink to={`/dashboard/${household.id}`} >
-                      <img
-                        className='household-img'
-                        src=''
-                        alt=''
-                      />
-                      <p>{household.houseName}</p>
-                    </NavLink>
-                  </div>
-                )
-              })}
-
-            </div>
-
-          </article>
-        </section>
-      </>
-
-    )
-
   }
 
 }

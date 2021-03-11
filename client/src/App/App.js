@@ -1,6 +1,6 @@
 // packages
 import { useContext } from 'react';
-import { HashRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // styles
 import './App.css';
@@ -14,6 +14,9 @@ import AboutPage from '../pages/welcomePages/AboutPage';
 import LoginPage from '../pages/welcomePages/LoginPage';
 import SignupPage from '../pages/welcomePages/SignupPage';
 import CreateHouse from '../pages/welcomePages/CreateHouse';
+import ChooseHouse from '../pages/welcomePages/ChooseHouse';
+// import NoMatchPage from '../pages/welcomePages/NoMatchPage';
+
 import DashboardHome from '../pages/dashboardPages/DashboardHome';
 
 // components
@@ -31,15 +34,19 @@ const App = () => {
   return (
     <div id='App'>
       <Router >
-        <NavBar />
-        <main>
+        {/* <Switch> */}
+          <NavBar />
+          <main>
             <Route exact path='/' component={HomePage} />
+            <Route exact path='/home/:id' component={ChooseHouse} />
             <Route exact path='/about' component={AboutPage} />
             <Route exact path='/logIn' component={LoginPage} />
             <Route exact path='/signUp' component={SignupPage} />
             <Route exact path='/createHousehold' component={CreateHouse} />
-            <Route exact path='/dashboard/:householdID' component={DashboardHome} />
-        </main>
+            <Route exact path='/dashboard/:id/:householdID' component={DashboardHome} />
+            {/* <Route component={NoMatchPage} /> */}
+          </main>
+        {/* </Switch> */}
       </Router >
     </div>
   );
