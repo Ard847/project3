@@ -130,7 +130,7 @@ const AccountForm = ({ type, onCreate, onSubmit }) => {
           <label htmlFor='password'>Password:</label>
           <input
             id='password'
-            type='text'
+            type='password'
             placeholder='Enter Password'
             onChange={passwordInputChange}
           />
@@ -141,7 +141,7 @@ const AccountForm = ({ type, onCreate, onSubmit }) => {
           <label htmlFor='confirm-password'>Confirm Password:</label>
           <input
             id='confirm-password'
-            type='text'
+            type='password'
             placeholder='Please confirm your password'
             onChange={confirmInputChange}
           />
