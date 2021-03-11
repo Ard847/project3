@@ -13,6 +13,7 @@ import WelcomeTitles from '../../components/WelcomeTitles';
 
 // functions
 import saveToSession from '../../functions/saveToSession';
+import fetcher from '../../functions/fetcher';
 
 // hooks
 import useSiteLocation from '../../hooks/useSiteLocation';
@@ -25,15 +26,16 @@ const LoginPage = ({location}) => {
   useSiteLocation(location);
 
   const handleSubmit = async (user) => {
-    console.log('LoginPage, handleSubmit, user =', user);
-    const url = `/api/user/findOne?username=${user.username}&email=${user.email}&password=${user.password}`;
-    const fetchUser = await fetch(url);
-    const response = await fetchUser.json();
-    console.log('response =', response);
-    if(response.user === null){
+    //console.log('LoginPage, handleSubmit, user =', user);
+    const {username,email,password} = user
+    console.log(username,email,password)
+    const url = "/api/user/login"
+    await fetcher(url,"Post",user)
+   
+    //console.log('response =', response);
+    /* if(response.user === null){
       console.log('The credentials do not match any users');
       setUserMatch(true);
-
     } else {
       console.log('response.user =', response.user);
       setUserMatch(false);
@@ -41,7 +43,7 @@ const LoginPage = ({location}) => {
       const value = response.user.id;
       saveToSession(key, value);
       userLoggedIn();
-    }
+    } */
   }
 
   if (loggedIn === false){
