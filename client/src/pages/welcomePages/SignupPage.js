@@ -1,5 +1,5 @@
 // packages
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
 // styles
 import './SignupPage.css';
@@ -23,11 +23,16 @@ const SignupPage = ({ location }) => {
   const { loggedIn, userLoggedOut } = useContext(LoggedInContext);
   useSiteLocation(location);
 
+  const [ userCreated, setUserCreated ] = useState(false);
+
   const handleCreate = async (user) => {
     const url = '/api/user/createNew';
     // const createUserResponse = 
-    await fetcher(url, 'POST', user);
-    // console.log('createUserResponse =', createUserResponse);
+    const createUserResponse = await fetcher(url, 'POST', user);
+    console.log('createUserResponse =', createUserResponse);
+    if (createUserResponse.message === 'success'){
+      setUserCreated(true);
+    }
   }
 
   if (loggedIn === false) {
@@ -39,7 +44,7 @@ const SignupPage = ({ location }) => {
           <article id='login-content'>
             <h1>Sign Up Page</h1>
             <p>If you do not have an account you can create one here. </p>
-            <AccountForm type={'create-account'} onCreate={handleCreate} />
+            <AccountForm type={'create-account'} onCreate={handleCreate} onSuccess={userCreated}/>
           </article>
         </section>
       </>

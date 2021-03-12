@@ -31,16 +31,17 @@ const LoginPage = ({location}) => {
     const url = `/api/user/login?username=${user.username}&email=${user.email}&password=${user.password}`;
    
     const response = await fetcher(url, "GET");
-    console.log('response =', response);
+    // console.log('response =', response);
 
     if( response.message === 'success' ){
       console.log('Success');
 
       const authResponse = await fetcher("/api/user/authentication", "GET", '', response.token);
-      console.log('au',authResponse);
+      // console.log('authResponse =', authResponse);
       if(authResponse.success){
         saveToSession('id', response.user.id);
         userLoggedIn();
+        setUserNoMatch(false);
       }
 
     } else {
@@ -48,7 +49,7 @@ const LoginPage = ({location}) => {
       setUserNoMatch(true);
     }
 
-    console.log('loggedIn =', loggedIn);
+    // console.log('loggedIn =', loggedIn);
  
   } 
 
