@@ -8,7 +8,7 @@ import './NavBar.css'
 
 const Navbar = () => {
   return (
-    <nav>
+    <nav id='main-nav'>
       <p id='brand'>Logo</p>
       <NavLink to='/'>Home</NavLink>
       <NavLink to='/about'>About</NavLink>

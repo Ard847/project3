@@ -1,5 +1,5 @@
 // packages
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 // styles
 import './AccountForm.css';

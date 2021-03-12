@@ -13,8 +13,7 @@ const useGetMembers = () => {
     const houseID = getSession('houseID');
     const url = `/api/user/getusers/${houseID}`;
     const userResponse = await fetcher( url, 'GET'); 
-
-    console.log('userResponse =', userResponse);
+    // console.log('userResponse =', userResponse);
     setMembers(userResponse);
   }
 
