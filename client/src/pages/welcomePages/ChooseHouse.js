@@ -18,7 +18,7 @@ import getSession from '../../functions/getSession';
 const ChooseHouse = () => {
 
   const households = useGetHouseholds();
-  // console.log('households =', households);
+  console.log('households =', households);
 
   const id = getSession('id');
 

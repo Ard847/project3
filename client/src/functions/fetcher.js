@@ -1,15 +1,16 @@
-const fetcher = async (url, method, body,token) => {
+const fetcher = async (url, method, body, token) => {
 
   const parameters = {
     method: method,
     headers: {},
   };
 
-  if (body && body != 'token') {
+  if (body) {
     parameters.body = JSON.stringify(body);
     parameters.headers['Content-Type'] = 'application/json';
   }
-  if(body = 'token'){
+
+  if(token){
     parameters.headers['Authorization'] = 'Bearer ' + token;
   }
 
@@ -29,3 +30,4 @@ const fetcher = async (url, method, body,token) => {
 
 
 export default fetcher;
+

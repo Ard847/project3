@@ -34,7 +34,7 @@ const LoggedInContextProvider = ({children}) => {
 
   console.log('LoggedInContext loggedIn =', loggedIn);
   return (
-    <LoggedInContext.Provider value={{ loggedIn, setLoggedIn, userLoggedIn, userLoggedOut }}>
+    <LoggedInContext.Provider value={{ loggedIn, userLoggedIn, userLoggedOut }}>
       {children}
     </LoggedInContext.Provider>
   )

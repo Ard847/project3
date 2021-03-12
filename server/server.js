@@ -1,14 +1,14 @@
 const express = require('express');
 const app = express();
 const path = require("path")
-const cors = require('cors');
+// const cors = require('cors');
 
 const connection = require('./config/db');
 
 const PORT = process.env.PORT || 3001;
 
 // middleware
-app.use(cors());
+// app.use(cors());
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
@@ -20,12 +20,12 @@ app.use(express.json());
 
 // set up routes
 const userRoutes = require('./routes/userRoutes');
-// const taskRoutes = require('./server/routes/taskRoutes');
-// const householdRoutes = require('./server/routes/householdRoutes');
+// const taskRoutes = require('./routes/taskRoutes');
+const householdRoutes = require('./routes/householdRoutes');
 
 app.use('/api/user', userRoutes );
-// app.use('api/task', taskRoutes );
-// app.use('api/household', householdRoutes);
+// app.use('/api/task', taskRoutes );
+app.use('/api/household', householdRoutes);
 
 // Send every other request to the React app
 // Define any API routes before this runs
