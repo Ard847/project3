@@ -1,4 +1,4 @@
-const fetcher = async (url, method, body) => {
+const fetcher = async (url, method, body, token) => {
 
   const parameters = {
     method: method,
@@ -10,10 +10,14 @@ const fetcher = async (url, method, body) => {
     parameters.headers['Content-Type'] = 'application/json';
   }
 
+  if(token){
+    parameters.headers['Authorization'] = 'Bearer ' + token;
+  }
+
   try {
     const fetchData = await fetch(url, parameters);
     const response = await fetchData.json();
-    console.log('Success:', response);
+    // console.log('Success:', response);
     return response;
 
   } catch (err) {
@@ -26,3 +30,4 @@ const fetcher = async (url, method, body) => {
 
 
 export default fetcher;
+

@@ -1,8 +1,9 @@
 const express = require('express');
 const app = express();
+const path = require("path")
 // const cors = require('cors');
 
-const connection = require('./server/config/db');
+const connection = require('./config/db');
 
 const PORT = process.env.PORT || 3001;
 
@@ -11,25 +12,25 @@ const PORT = process.env.PORT || 3001;
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
+  app.use(express.static("../client/build"));
 }
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // set up routes
-const userRoutes = require('./server/routes/userRoutes');
-// const taskRoutes = require('./server/routes/taskRoutes');
-const householdRoutes = require('./server/routes/householdRoutes');
+const userRoutes = require('./routes/userRoutes');
+// const taskRoutes = require('./routes/taskRoutes');
+const householdRoutes = require('./routes/householdRoutes');
 
 app.use('/api/user', userRoutes );
 // app.use('/api/task', taskRoutes );
-app.use('/api/household', householdRoutes );
+app.use('/api/household', householdRoutes);
 
 // Send every other request to the React app
 // Define any API routes before this runs
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+  res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
 
 // server

@@ -15,7 +15,7 @@ const LoggedInContextProvider = ({children}) => {
 
   useEffect(() => {
     const isLoggedIn = getSession('id');
-    console.log('isLoggedIn =', isLoggedIn);
+    // console.log('isLoggedIn =', isLoggedIn);
     
     if (isLoggedIn){
       setLoggedIn(true);
@@ -23,16 +23,18 @@ const LoggedInContextProvider = ({children}) => {
   }, [loggedIn])
 
 
-  const userLoggedIn = async (username, password) => {
+  const userLoggedIn = async () => {
     setLoggedIn(true);
   }
 
-  const userLoggedOut = async (username, password) => {
+  const userLoggedOut = async () => {
     setLoggedIn(false);
     removeFromSession('id');
+    removeFromSession('id');
+    removeFromSession('houseName');
   }
 
-  console.log('LoggedInContext loggedIn =', loggedIn);
+  // console.log('LoggedInContext loggedIn =', loggedIn);
   return (
     <LoggedInContext.Provider value={{ loggedIn, userLoggedIn, userLoggedOut }}>
       {children}

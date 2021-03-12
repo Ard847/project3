@@ -11,14 +11,17 @@ import useGetMembers from '../../hooks/useGetMembers';
 // functions
 import saveToSession from '../../functions/saveToSession';
 
+// components
+import Clock from '../../components/Clock';
+
 const DashboardHome = ({ match, location }) => {
 
-  console.log('match =', match);
-  console.log(location);
+  // console.log('match =', match);
+  // console.log(location);
   useSiteLocation(location);
 
   const members = useGetMembers();
-  console.log('members =', members);
+  // console.log('members =', members);
 
   const houseID = parseInt(match.params.householdID);
   saveToSession('houseID', houseID);
@@ -65,7 +68,9 @@ const DashboardHome = ({ match, location }) => {
         </div>
 
         <div id='dash-intro' className='container'>
-            <h4>Today's Date: </h4>
+            <h4>Today's Date: 
+              <Clock day={true} time={true}/>
+              </h4>
         </div>
 
         <div id='dash-members' className='container'>

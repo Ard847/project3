@@ -1,0 +1,7 @@
+div.clock-content {
+  display: inline-block;
+}
+
+div.clock-content > p {
+  font-family: 'Noto Sans SC', sans-serif;
+}

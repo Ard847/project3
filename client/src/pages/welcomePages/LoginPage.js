@@ -13,6 +13,7 @@ import WelcomeTitles from '../../components/WelcomeTitles';
 
 // functions
 import saveToSession from '../../functions/saveToSession';
+import fetcher from '../../functions/fetcher';
 
 // hooks
 import useSiteLocation from '../../hooks/useSiteLocation';
@@ -21,28 +22,35 @@ import useSiteLocation from '../../hooks/useSiteLocation';
 const LoginPage = ({location}) => {
 
   const { loggedIn, userLoggedIn, userLoggedOut } = useContext(LoggedInContext);
-  const [ userMatch, setUserMatch ] = useState(false);
+  const [ userNoMatch, setUserNoMatch ] = useState(false);
   useSiteLocation(location);
 
   const handleSubmit = async (user) => {
     // console.log('LoginPage, handleSubmit, user =', user);
-    const url = `/api/user/findOne?username=${user.username}&email=${user.email}&password=${user.password}`;
-    const fetchUser = await fetch(url);
-    const response = await fetchUser.json();
+
+    const url = `/api/user/login?username=${user.username}&email=${user.email}&password=${user.password}`;
+   
+    const response = await fetcher(url, "GET");
     console.log('response =', response);
-    if(response.user === null){
-      console.log('The credentials do not match any users');
-      setUserMatch(true);
+
+    if( response.message === 'success' ){
+      console.log('Success');
+
+      const authResponse = await fetcher("/api/user/authentication", "GET", '', response.token);
+      console.log('au',authResponse);
+      if(authResponse.success){
+        saveToSession('id', response.user.id);
+        userLoggedIn();
+      }
 
     } else {
-      console.log('response.user =', response.user);
-      setUserMatch(false);
-      const key = 'id';
-      const value = response.user.id;
-      saveToSession(key, value);
-      userLoggedIn();
+
+      setUserNoMatch(true);
     }
-  }
+
+    console.log('loggedIn =', loggedIn);
+ 
+  } 
 
   if (loggedIn === false){
 
@@ -54,7 +62,7 @@ const LoginPage = ({location}) => {
         <h1>Log-in Page</h1>
         <p>You are not yet logged in, please provide your details below to access your account</p>
         <AccountForm type={'login'} onSubmit={handleSubmit} />
-        {userMatch && (
+        {userNoMatch && (
           <p>The credentials do not match any users.</p>
         )}
       </article>
@@ -76,11 +84,8 @@ const LoginPage = ({location}) => {
       </article>
       </section>
       </>
-      
     )
-
   }
-
 }
 
 export default LoginPage;
