@@ -13,6 +13,7 @@ import WelcomeTitles from '../../components/WelcomeTitles';
 
 // functions
 import saveToSession from '../../functions/saveToSession';
+import fetcher from '../../functions/fetcher';
 
 // hooks
 import useSiteLocation from '../../hooks/useSiteLocation';
@@ -20,29 +21,25 @@ import useSiteLocation from '../../hooks/useSiteLocation';
 
 const LoginPage = ({location}) => {
 
-  const { loggedIn, userLoggedIn, userLoggedOut } = useContext(LoggedInContext);
+  const { loggedIn,setLoggedIn, userLoggedIn, userLoggedOut } = useContext(LoggedInContext);
   const [ userMatch, setUserMatch ] = useState(false);
   useSiteLocation(location);
 
   const handleSubmit = async (user) => {
-    console.log('LoginPage, handleSubmit, user =', user);
-    const url = `/api/user/findOne?username=${user.username}&email=${user.email}&password=${user.password}`;
-    const fetchUser = await fetch(url);
-    const response = await fetchUser.json();
-    console.log('response =', response);
-    if(response.user === null){
-      console.log('The credentials do not match any users');
-      setUserMatch(true);
-
-    } else {
-      console.log('response.user =', response.user);
-      setUserMatch(false);
-      const key = 'id';
-      const value = response.user.id;
-      saveToSession(key, value);
-      userLoggedIn();
+    localStorage.setItem("token","")
+    //console.log('LoginPage, handleSubmit, user =', user);
+    const {username,email,password} = user
+    console.log(username,email,password)
+    const url = "/api/user/login"
+    const response = await fetcher(url,"Post",user)
+    localStorage.setItem("token",response.token)
+ 
+    const authResponse = await fetcher("/api/user/authentication","Get",'token',response.token)
+    console.log('au',authResponse)
+    if(authResponse.success){
+      setLoggedIn(true)
     }
-  }
+  } 
 
   if (loggedIn === false){
 
@@ -76,11 +73,8 @@ const LoginPage = ({location}) => {
       </article>
       </section>
       </>
-      
     )
-
   }
-
 }
 
 export default LoginPage;

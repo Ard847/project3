@@ -1,13 +1,16 @@
-const fetcher = async (url, method, body) => {
+const fetcher = async (url, method, body,token) => {
 
   const parameters = {
     method: method,
     headers: {},
   };
 
-  if (body) {
+  if (body && body != 'token') {
     parameters.body = JSON.stringify(body);
     parameters.headers['Content-Type'] = 'application/json';
+  }
+  if(body = 'token'){
+    parameters.headers['Authorization'] = 'Bearer ' + token;
   }
 
   try {

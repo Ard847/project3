@@ -1,44 +1,40 @@
-DROP DATABASE IF EXISTS project3;
-CREATE DATABASE project3;
-
-USE project3;
-
-create table Users(
-  id integer not null unique auto_increment,
-  Email varchar(50),
-  userName varchar(50),
-  userRealName varchar(50),
-  userPassword  varchar(255)
-);
-
-create table houseHold(
-  id integer not null auto_increment,
-  usersId integer,
-  houseName varchar(50),
-  membersName varchar(50)
-);
-
-create table householdTasks(
-  id integer not null unique auto_increment,
-  householdID integer,
-  usersId integer,
-  userName varchar(50),
-  taskDescription varchar(200),
-  startDate varchar(50),
-  endDate varchar(50),
-  inPrgressBy varchar(50),
-  completedBy varchar(50)
-);
-
-create table userTasks(
-  id integer not null unique auto_increment,
-  householdTaskID integer,
-  usersId integer,
-  userName varchar(50),
-  allTasks varchar(50),
-  completed varchar(50),
-  inProgress varchar(50),
-  taskDescription varchar(200),
-  startDate varchar(50),
-  endDate varchar(50)
-);
+ USE project3;
+ 
+ CREATE TABLE IF NOT EXISTS `users` (
+ `id` INTEGER NOT NULL auto_increment , 
+ `firstName` VARCHAR(50), 
+ `lastName` VARCHAR(50), 
+ `email` VARCHAR(50) NOT NULL, 
+ `username` VARCHAR(50) NOT NULL,
+ `userPassword` VARCHAR(255) NOT NULL, 
+ PRIMARY KEY (`id`)
+ ) ENGINE=InnoDB;
+ 
+  CREATE TABLE IF NOT EXISTS `households` (
+  `id` INTEGER NOT NULL auto_increment , 
+  `houseName` VARCHAR(50), 
+  PRIMARY KEY (`id`)
+  ) ENGINE=InnoDB;
+ 
+  CREATE TABLE IF NOT EXISTS `tasks` (
+  `id` INTEGER NOT NULL auto_increment , 
+  `householdID` INTEGER, 
+  `userID` INTEGER, 
+  `taskName` VARCHAR(50),
+  `startDate` VARCHAR(50), 
+  `endDate` VARCHAR(50), 
+  `inPrgressBy` VARCHAR(50), 
+  `completedBy` VARCHAR(50), 
+  PRIMARY KEY (`id`), 
+  FOREIGN KEY (`householdID`) REFERENCES `households` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE, 
+  FOREIGN KEY (`userID`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+  ) ENGINE=InnoDB;
+ 
+ CREATE TABLE IF NOT EXISTS `householdMembers` (
+ `id` INTEGER NOT NULL auto_increment , 
+ `householdID` INTEGER, `userID` INTEGER, 
+ UNIQUE `householdMembers_userID_householdID_unique` (`householdID`, `userID`), 
+ PRIMARY KEY (`id`),
+ FOREIGN KEY (`householdID`) REFERENCES `households` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE, 
+ FOREIGN KEY (`userID`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+ ) ENGINE=InnoDB;
