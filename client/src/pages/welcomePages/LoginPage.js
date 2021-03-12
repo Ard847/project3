@@ -25,7 +25,7 @@ const LoginPage = ({location}) => {
   useSiteLocation(location);
 
   const handleSubmit = async (user) => {
-    console.log('LoginPage, handleSubmit, user =', user);
+    // console.log('LoginPage, handleSubmit, user =', user);
     const url = `/api/user/findOne?username=${user.username}&email=${user.email}&password=${user.password}`;
     const fetchUser = await fetch(url);
     const response = await fetchUser.json();

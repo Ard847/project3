@@ -38,7 +38,9 @@ p#user-name{
 }
 
 div#dash-title {
+  display: flex;
   grid-column: 1 / span 2;
+  justify-content: space-between;
 }
 
 .container {
@@ -60,4 +62,23 @@ img.member-img {
   margin: 15px;
   border-radius: 30px;
   background-color: var(--grey);
+}
+
+button#invite {
+  margin: 12px;
+  width: fit-content;
+  cursor: pointer;
+}
+
+div#house-id{
+  display: flex;
+  height: 40px;
+  width: 160px;
+  margin: 12px;
+  text-align: center;
+  justify-content: center;
+}
+
+div#house-id > p {
+  margin: auto 0;
 }

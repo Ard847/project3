@@ -9,6 +9,7 @@ import useSiteLocation from '../../hooks/useSiteLocation';
 
 // components
 import WelcomeTitles from '../../components/WelcomeTitles';
+import Clock from '../../components/Clock';
 
 
 const AboutPage = ({location}) => {
@@ -24,6 +25,8 @@ const AboutPage = ({location}) => {
         <p>
           Here goes some instructions for using the application. 
         </p>
+        <Clock date={true} day={true} month={true} year={true} time={true}/>
+        
       </article>
     </section>
     </>

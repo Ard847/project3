@@ -1,5 +1,5 @@
 // packages
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 
 // styles
 import './DashboardHome.css';
@@ -9,7 +9,6 @@ import useSiteLocation from '../../hooks/useSiteLocation';
 import useGetMembers from '../../hooks/useGetMembers';
 
 // functions
-import fetcher from '../../functions/fetcher';
 import saveToSession from '../../functions/saveToSession';
 
 const DashboardHome = ({ match, location }) => {
@@ -24,6 +23,19 @@ const DashboardHome = ({ match, location }) => {
   const houseID = parseInt(match.params.householdID);
   saveToSession('houseID', houseID);
   saveToSession('houseName', location.aboutProps.houseName);
+
+  const [ showInviteButton, setShowInviteButton ] = useState(true);
+
+  const handleShowHouseID = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    setShowInviteButton(false);
+  }
+
+  const handleHideHouseID = () => {
+    setTimeout(() => setShowInviteButton(true), 2000 );
+  }
 
 
   return (
@@ -41,11 +53,21 @@ const DashboardHome = ({ match, location }) => {
       </nav>
 
       <article id='dash-body'>
+
         <div id='dash-title' className='container'>
           <h2>Dashboard of {location.aboutProps.houseName}</h2>
-
+          { showInviteButton && <button id='invite' onMouseDown={handleShowHouseID}> + Invite another Member </button>}
+          { (showInviteButton === false) && (
+            <div id='house-id' onMouseOut={handleHideHouseID}>
+              <p>Your House ID is {houseID}</p>
+            </div>
+          ) }
         </div>
-        <div id='dash-intro' className='container'></div>
+
+        <div id='dash-intro' className='container'>
+            <h4>Today's Date: </h4>
+        </div>
+
         <div id='dash-members' className='container'>
           {members.map((member) => {
             return (

@@ -1,7 +1,6 @@
 // packages
 import React, { useContext } from 'react';
-import { browserHistory } from 'react-router';
-import { BrowserRouter, Redirect, Route } from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 
 // styles
 import './HomePage.css';
