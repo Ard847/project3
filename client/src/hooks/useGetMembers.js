@@ -11,8 +11,10 @@ const useGetMembers = () => {
 
   const fetchData = async () => {
     const houseID = getSession('houseID');
+    let token = getSession('token').split('"')
+    token = token[1]
     const url = `/api/user/getusers/${houseID}`;
-    const userResponse = await fetcher( url, 'GET'); 
+    const userResponse = await fetcher( url, 'GET','',token); 
     // console.log('userResponse =', userResponse);
     setMembers(userResponse);
   }

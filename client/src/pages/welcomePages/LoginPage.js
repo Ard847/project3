@@ -27,19 +27,19 @@ const LoginPage = ({location}) => {
 
   const handleSubmit = async (user) => {
     // console.log('LoginPage, handleSubmit, user =', user);
-
-    const url = `/api/user/login?username=${user.username}&email=${user.email}&password=${user.password}`;
-   
-    const response = await fetcher(url, "GET");
-    // console.log('response =', response);
+    saveToSession('token',)
+    const url = "/api/user/login"
+    const response = await fetcher(url,"Post",user)
+    console.log('response =', response);
 
     if( response.message === 'success' ){
       console.log('Success');
 
       const authResponse = await fetcher("/api/user/authentication", "GET", '', response.token);
-      // console.log('authResponse =', authResponse);
+      //console.log('authResponse =', response.token);
       if(authResponse.success){
         saveToSession('id', response.user.id);
+        saveToSession('token',response.token)
         userLoggedIn();
         setUserNoMatch(false);
       }

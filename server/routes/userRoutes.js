@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+ 
 
 // required models
 const userModel = require('../models/user');
@@ -11,29 +12,16 @@ const userModel = require('../models/user');
 
 
 //token authentication 
-const auth = async (req, res, next) => {
-  console.log("userRouters, auth function");
-  const authHeader = req.headers['authorization'];
-  console.log('authHeader =', authHeader);
-  const token = authHeader && authHeader.split(' ')[1];
-
-  if (token == null) return res.sendStatus(401)
-
-  jwt.verify(token, process.env.SECRET, (err, user) => {
-    if (err) return res.sendStatus(403)
-    req.user = user
-    next()
-  })
-}
+const auth = require('../auth')
 
 router.get('/authentication', auth, (req, res) => {
-  console.log(' I am here at /api/test');
+  console.log('authenticated');
   res.json({ success: true })
 })
 
-router.get('/login', async (req, res) => {
-  console.log('userRoutes.js, req.query=', req.query);
-  const { username, email, password } = await req.query;
+router.post('/login', async (req, res) => {
+  console.log('userRoutes.js, req.body=', req.body);
+  const { username, email, password } = await req.body;
 
   const user = await userModel.findUser( email, username);
   console.log('user =', user);
