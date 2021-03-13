@@ -6,6 +6,7 @@ import './HouseForm.css';
 
 // functions 
 import fetcher from '../../functions/fetcher';
+import getSession from "../../functions/getSession";
 
 
 const HouseForm = ({ userID, type }) => {
@@ -25,11 +26,12 @@ const HouseForm = ({ userID, type }) => {
   const createNewHousehold = async (event) => {
     event.preventDefault();
     event.stopPropagation();
-
+    let token = getSession('token').split('"')
+    token = token[1]
     // console.log('createNewHousehold');
     const url = `/api/household/createNew/${userID}`;
-    const createHouseholdResponse = await fetcher (url, 'POST', {name: houseInput});
-    // console.log('createHouseholdResponse =', createHouseholdResponse);
+    const createHouseholdResponse = await fetcher (url, 'POST', {name: houseInput},token);
+    console.log('createHouseholdResponse =', createHouseholdResponse);
     if(createHouseholdResponse.message === 'success'){
       setHouseCreated(true);
     }
@@ -39,10 +41,11 @@ const HouseForm = ({ userID, type }) => {
   const joinExistingHousehold = async (event) => {
     event.preventDefault();
     event.stopPropagation();
-
+    let token = getSession('token').split('"')
+    token = token[1]
     // console.log('joinExistingHousehold');
     const url = `/api/household/join/${userID}`;
-    const joinHouseholdResponse = await fetcher(url, 'POST', {householdID: houseInput});
+    const joinHouseholdResponse = await fetcher(url, 'POST', {householdID: houseInput},token);
     console.log('joinHouseholdResponse =', joinHouseholdResponse);
     if(joinHouseholdResponse.message === 'success'){
       setHouseJoined(true);

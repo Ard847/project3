@@ -1,14 +1,15 @@
 const express = require('express');
 const router = express.Router();
+const auth = require('../auth')
 
 // required models
 const householdModel = require('../models/household');
 
+
 // WE NEED TO INCLUDE ERROR HANDELING, 
 // FEEDBACK FOR LAST PROJECT WAS WE WERE MARKED DOWN FOR NOT HAVING IT.
 
-
-router.get('/gethousehold/:id', async (req, res) => {
+router.get('/gethousehold/:id',auth ,async (req, res) => {
   const userHouseholds = await householdModel
     .findAllHousehold(req.params.id);
   // console.log('userHouseholds =', userHouseholds);
@@ -17,7 +18,7 @@ router.get('/gethousehold/:id', async (req, res) => {
   res.send(households);
 });
 
-router.post('/createNew/:id', async (req, res) => {
+router.post('/createNew/:id', auth ,async (req, res) => {
   console.log('householdRoutes, req.body =', req.body);
   console.log('householdRoutes, req.params =', req.params);
 
@@ -46,7 +47,7 @@ router.post('/createNew/:id', async (req, res) => {
   }
 });
 
-router.post('/join/:id', async (req, res) => {
+router.post('/join/:id',auth,async (req, res) => {
   console.log('householdRoutes, req.body =', req.body);
   console.log('householdRoutes, req.params =', req.params);
 

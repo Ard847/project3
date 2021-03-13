@@ -12,8 +12,10 @@ const useGetHouseholds = () => {
   
   const fetchData = async () => {
     const id = getSession('id');
+    let token = getSession('token').split('"')
+    token = token[1]
     const url = `/api/household/gethousehold/${id}`;
-    const householdResponse = await fetcher(url, 'GET');
+    const householdResponse = await fetcher(url, 'GET','',token);
     
     // console.log('householdResponse =', householdResponse);
     setHouseholds(householdResponse);
