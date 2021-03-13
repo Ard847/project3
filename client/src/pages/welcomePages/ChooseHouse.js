@@ -1,6 +1,6 @@
 // packages
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink} from 'react-router-dom';
 
 // styles
 import './ChooseHouse.css';
@@ -18,7 +18,7 @@ import getSession from '../../functions/getSession';
 const ChooseHouse = () => {
 
   const households = useGetHouseholds();
-  console.log('households =', households);
+  // console.log('households =', households);
 
   const id = getSession('id');
 

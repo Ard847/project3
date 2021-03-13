@@ -1,28 +1,4 @@
-section.dashboard {
-  display: flex;
-
-  width: 100%;
-  padding: 0;
-}
-
-nav#dash-nav {
-  justify-content: center;
-
-  width: 20vw;
-  height: 100%;
-
-  background-color: var(--white);
-}
-
-img.user-img {
-  height: 150px;
-  width: 150px;
-  margin: 15px;
-  border-radius: 75px;
-  background-color: var(--grey);
-}
-
-article#dash-body {
+div#dash-home-content {
   display: grid;
   grid-template-columns: 1fr 1fr ;
   grid-template-rows: 64px 150px auto ;
@@ -31,6 +7,7 @@ article#dash-body {
 
   flex-grow: 1;
   padding: 12px;
+  height: 100%;
 }
 
 p#user-name{
@@ -38,11 +15,14 @@ p#user-name{
 }
 
 div#dash-title {
+  display: flex;
   grid-column: 1 / span 2;
+  justify-content: space-between;
 }
 
 .container {
   background-color: var(--white);
+  padding: 12px;
 }
 
 .text-centre {
@@ -60,4 +40,23 @@ img.member-img {
   margin: 15px;
   border-radius: 30px;
   background-color: var(--grey);
+}
+
+button#invite {
+  margin: 12px;
+  width: fit-content;
+  cursor: pointer;
+}
+
+div#house-id{
+  display: flex;
+  height: 40px;
+  width: 160px;
+  margin: 12px;
+  text-align: center;
+  justify-content: center;
+}
+
+div#house-id > p {
+  margin: auto 0;
 }

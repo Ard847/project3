@@ -75,7 +75,10 @@ router.post('/createNew', async (req, res) => {
       hash
     )
     .then((post) => {
-      res.send(post);
+      res.json({
+        message: 'success',
+        data: post,
+      });
     })
     .catch((err) => {
       res.status(401).json(err);

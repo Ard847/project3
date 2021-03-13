@@ -23,7 +23,7 @@ const AboutPage = ({location}) => {
         <h2>How to manage your home with us</h2>
         <p>
           Here goes some instructions for using the application. 
-        </p>
+        </p>        
       </article>
     </section>
     </>

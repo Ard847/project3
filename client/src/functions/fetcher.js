@@ -17,7 +17,7 @@ const fetcher = async (url, method, body, token) => {
   try {
     const fetchData = await fetch(url, parameters);
     const response = await fetchData.json();
-    console.log('Success:', response);
+    // console.log('Success:', response);
     return response;
 
   } catch (err) {

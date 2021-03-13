@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import './AccountForm.css';
 
 
-const AccountForm = ({ type, onCreate, onSubmit }) => {
+const AccountForm = ({ type, onCreate, onSubmit, onSuccess }) => {
 
   // console.log('AccountForm.js, type =', type);
 
@@ -15,6 +15,7 @@ const AccountForm = ({ type, onCreate, onSubmit }) => {
   const [usernameInput, setUsernameInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
   const [confirmInput, setConfirmInput] = useState('');
+  const [passwordNoMatch, setPasswordNoMatch] = useState(false);
 
   const fNameInputChange = (event) => {
     // console.log('emailInputChange =', event.target.value);
@@ -62,7 +63,8 @@ const AccountForm = ({ type, onCreate, onSubmit }) => {
       onCreate(user);
 
     } else {
-      console.log('passwords do not match');
+      // console.log('passwords do not match');
+      setPasswordNoMatch(true);
     }
   };
 
@@ -78,6 +80,9 @@ const AccountForm = ({ type, onCreate, onSubmit }) => {
     // console.log('AccountForm, submitLogin, user =', user);
     onSubmit(user);
   }
+
+  // console.log('onSuccess =', onSuccess);
+  
 
   return (
     <form>
@@ -96,7 +101,7 @@ const AccountForm = ({ type, onCreate, onSubmit }) => {
         <>
           <label htmlFor='last-name'>Last Name:</label>
           <input
-            id='first-name'
+            id='last-name'
             type='text'
             placeholder='Enter your Last name.'
             onChange={lNameInputChange}
@@ -147,8 +152,18 @@ const AccountForm = ({ type, onCreate, onSubmit }) => {
           />
         </>)
       }
-      { (type === 'create-account') && (<button onClick={submitCreate}>Create Account</button>)}
-      { (type === 'login') && (<button onClick={submitLogin}>Log-in</button>)}
+      { (type === 'create-account' && onSuccess !== true) && (
+        <button onClick={submitCreate}>Create Account</button>
+      )}
+      { (type === 'create-account' && onSuccess === true) && (
+        <p>User was successfully created. go to Log In page to use the application.</p>
+      )}
+      { (passwordNoMatch && onSuccess === false) && (
+        <p>Your passwords do not match</p>
+      )}
+      { (type === 'login') && (
+        <button onClick={submitLogin}>Log-in</button>
+      )}
     </form>
   )
 }

@@ -14,10 +14,13 @@ const HouseForm = ({ userID, type }) => {
 
   const [houseInput, setHouseInput] = useState('');
   // console.log('HouseForm, houseInput =', houseInput);
+  const [houseCreated, setHouseCreated] = useState(false);
+  const [houseJoined, setHouseJoined] = useState(false);
 
   const houseInputChange = (event) => {
     setHouseInput(event.target.value);
   }
+
 
   const createNewHousehold = async (event) => {
     event.preventDefault();
@@ -25,7 +28,11 @@ const HouseForm = ({ userID, type }) => {
 
     // console.log('createNewHousehold');
     const url = `/api/household/createNew/${userID}`;
-    await fetcher (url, 'POST', {name: houseInput});
+    const createHouseholdResponse = await fetcher (url, 'POST', {name: houseInput});
+    // console.log('createHouseholdResponse =', createHouseholdResponse);
+    if(createHouseholdResponse.message === 'success'){
+      setHouseCreated(true);
+    }
     
   }
 
@@ -35,7 +42,11 @@ const HouseForm = ({ userID, type }) => {
 
     // console.log('joinExistingHousehold');
     const url = `/api/household/join/${userID}`;
-    await fetcher(url, 'POST', {householdID: houseInput});
+    const joinHouseholdResponse = await fetcher(url, 'POST', {householdID: houseInput});
+    console.log('joinHouseholdResponse =', joinHouseholdResponse);
+    if(joinHouseholdResponse.message === 'success'){
+      setHouseJoined(true);
+    }
   }
 
   return (
@@ -59,6 +70,9 @@ const HouseForm = ({ userID, type }) => {
       ) : (
         <button onClick={joinExistingHousehold} > Join </button>
       )}
+
+      {houseCreated && <p>Household created, go back to households to enter the manager. </p>}
+      {houseJoined && <p>Household Joined, go back to households to enter the manager. </p>}
 
     </form>
   )

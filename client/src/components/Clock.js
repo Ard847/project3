@@ -20,40 +20,43 @@ const months = [
   "December",
 ];
 
-const Clock = (date, time) => {
+const Clock = ({day, time}) => {
 
-  const [ clockDate , setClockDate] = useState(new Date());
-  const [ clockDay, setClockDay ] =  useState('');
-  const [ clockTime, setClockTime]
+  const [ date , setDate] = useState(new Date());
+  const [ dayString, setDayString ] = useState('');
 
   const dateObject = new Date();
   const d = dateObject.getDate();
-  const day = days[dateObject.getDay()]; 
+  const today = days[dateObject.getDay()]; 
   const month = months[dateObject.getMonth()];
-  const year = dateObject.getFullYear();
-  const h = dateObject.getHours();
-  const m = dateObject.getMinutes();
-  const s = dateObject.getSeconds(); 
+  // const year = dateObject.getFullYear();
+  // const h = dateObject.getHours();
+  // const m = dateObject.getMinutes();
+  // const s = dateObject.getSeconds(); 
   // console.log(day)
-  let dateOutput = [];
-  if(time){
-    dateOutput.push(`${h}:${m}:${s}`);
-  }
+ 
 
   const tick = () => {
-    setDate(dateOutput);
+    setDate(dateObject);
   }
   
   useEffect(() => {
     const timer = setInterval(() => tick(), 1000);
-
+    
     return () => {clearInterval(timer)};
   });
 
+  useEffect(() => {
+    if(day){
+      setDayString(`${today} ${d} ${month}`);
+    }
+  }, [day, today, d, month])
+
+  // console.log('dayString =', dayString);
 
   return (
     <div className='clock-content'>
-      <h4>{date.toLocaleString()}</h4>
+      <p><strong>{day && dayString} {time && date.toLocaleTimeString()}</strong></p>
     </div>
   )
 }
