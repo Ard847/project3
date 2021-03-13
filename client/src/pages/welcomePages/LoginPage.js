@@ -21,24 +21,35 @@ import useSiteLocation from '../../hooks/useSiteLocation';
 
 const LoginPage = ({location}) => {
 
-  const { loggedIn,setLoggedIn, userLoggedIn, userLoggedOut } = useContext(LoggedInContext);
-  const [ userMatch, setUserMatch ] = useState(false);
+  const { loggedIn, userLoggedIn, userLoggedOut } = useContext(LoggedInContext);
+  const [ userNoMatch, setUserNoMatch ] = useState(false);
   useSiteLocation(location);
 
   const handleSubmit = async (user) => {
-    localStorage.setItem("token","")
-    //console.log('LoginPage, handleSubmit, user =', user);
-    const {username,email,password} = user
-    console.log(username,email,password)
-    const url = "/api/user/login"
-    const response = await fetcher(url,"Post",user)
-    localStorage.setItem("token",response.token)
- 
-    const authResponse = await fetcher("/api/user/authentication","Get",'token',response.token)
-    console.log('au',authResponse)
-    if(authResponse.success){
-      setLoggedIn(true)
+    // console.log('LoginPage, handleSubmit, user =', user);
+
+    const url = `/api/user/login?username=${user.username}&email=${user.email}&password=${user.password}`;
+   
+    const response = await fetcher(url, "GET");
+    console.log('response =', response);
+
+    if( response.message === 'success' ){
+      console.log('Success');
+
+      const authResponse = await fetcher("/api/user/authentication", "GET", '', response.token);
+      console.log('au',authResponse);
+      if(authResponse.success){
+        saveToSession('id', response.user.id);
+        userLoggedIn();
+      }
+
+    } else {
+
+      setUserNoMatch(true);
     }
+
+    console.log('loggedIn =', loggedIn);
+ 
   } 
 
   if (loggedIn === false){
@@ -51,7 +62,7 @@ const LoginPage = ({location}) => {
         <h1>Log-in Page</h1>
         <p>You are not yet logged in, please provide your details below to access your account</p>
         <AccountForm type={'login'} onSubmit={handleSubmit} />
-        {userMatch && (
+        {userNoMatch && (
           <p>The credentials do not match any users.</p>
         )}
       </article>
