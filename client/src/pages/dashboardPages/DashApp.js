@@ -17,11 +17,12 @@ import DashNav from '../../components/DashNav';
 
 // pages
 import DashHome from './DashHome';
+import DashTasks from './DashTasks';
 
 
 const DashApp = ({ match, location }) => {
 
-  console.log('match =', match);
+  // console.log('match =', match);
   // console.log(location);
   useSiteLocation(location);
 
@@ -50,9 +51,13 @@ const DashApp = ({ match, location }) => {
     <section id='dashboard-content' className='dashboard'>
       <Router >
 
-        <DashNav currentUser={currentUser} />
+        <DashNav match={match} currentUser={currentUser} />
         <article id='dash-body'>
-        <DashHome match={match} location={location} members={members} />
+          <Route exact path={`${match.url}`} render={(props) => (
+            <DashHome {...props} match={match} location={location} members={members} />
+
+          )} />
+          <Route exact path={`${match.url}/tasks`} component={DashTasks} />
           
 
         </article>

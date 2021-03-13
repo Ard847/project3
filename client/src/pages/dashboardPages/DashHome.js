@@ -9,7 +9,6 @@ import Clock from '../../components/Clock';
 
 const DashHome = ({ match, location, members }) => {
 
-  console.log(match);
   const houseID = parseInt(match.params.householdID);
 
   const [showInviteButton, setShowInviteButton] = useState(true);
@@ -29,7 +28,7 @@ const DashHome = ({ match, location, members }) => {
   return (
     <div id='dash-home-content'>
       {/* <> */}
-      <div id='dash-title' >
+      <div className='dash-title' >
         <h2>Dashboard of {location.aboutProps.houseName}</h2>
         {showInviteButton && <button id='invite' onMouseDown={handleShowHouseID}> + Invite another Member </button>}
         {(showInviteButton === false) && (

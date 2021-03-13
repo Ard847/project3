@@ -1,0 +1,19 @@
+div#dash-tasks-content {
+  display: grid;
+  grid-template-columns: 1fr ;
+  grid-template-rows: 64px auto;
+  row-gap: 12px;
+
+  padding: 12px;
+  height: 100%;
+}
+
+select#tasks-views{
+  display: flex;
+  height: 40px;
+  width: 160px;
+  margin: 12px;
+  text-align: center;
+  justify-content: center;
+  
+}
