@@ -5,7 +5,6 @@ div#dash-home-content {
   row-gap: 12px;
   column-gap: 12px;
 
-  flex-grow: 1;
   padding: 12px;
   height: 100%;
 }
@@ -14,7 +13,7 @@ p#user-name{
   justify-self: center;
 }
 
-div#dash-title {
+div.dash-title {
   display: flex;
   grid-column: 1 / span 2;
   justify-content: space-between;
