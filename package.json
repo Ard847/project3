@@ -29,7 +29,9 @@
     "mysql2": "^2.2.5",
     "node-modules": "^1.0.1",
     "nodemon": "^2.0.7",
-    "sequelize": "^6.5.0"
+    "react-router-dom": "^5.2.0",
+    "sequelize": "^6.5.0",
+    "styled-components": "^5.2.1"
   },
   "devDependencies": {
     "concurrently": "^6.0.0",

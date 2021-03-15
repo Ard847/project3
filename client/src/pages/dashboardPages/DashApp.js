@@ -18,6 +18,7 @@ import DashNav from '../../components/DashNav';
 // pages
 import DashHome from './DashHome';
 import DashTasks from './DashTasks';
+import DashCalendar from './DashCalendar';
 
 
 const DashApp = ({ match, location }) => {
@@ -58,6 +59,7 @@ const DashApp = ({ match, location }) => {
 
           )} />
           <Route exact path={`${match.url}/tasks`} component={DashTasks} />
+          <Route exact path={`${match.url}/calendar`} component={DashCalendar} />
           
 
         </article>
