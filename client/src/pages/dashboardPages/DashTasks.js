@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import './DashTasks.css';
 
 // components
-import Kanban from '../../components/Kanban';
+import Kanban from '../../components/kanban/Kanban';
 
 
 const DashTasks =() => {
