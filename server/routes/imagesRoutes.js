@@ -9,7 +9,7 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET,
 })
 
-router.get('images',auth, async(req,res) => {
+router.get('/',auth, async(req,res) => {
     const {resources} = await cloudinary.search.expression 
     ('folder:dev_setups')
     .sort_by('public_id', 'desc')
@@ -33,4 +33,4 @@ router.post('/upload',auth, async (req,res) => {
     }
 })
 
-dii2emagu
+ 
