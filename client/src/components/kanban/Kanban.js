@@ -19,7 +19,7 @@ const Kanban = () => {
   // const [ items, setItems ] = useState({});
   const [tasks, setTasks] = useState(jobs);
 
-  console.log({tasks});
+  // console.log({tasks});
 
   const moveCard = useCallback(
     (item, channel) => {
@@ -31,7 +31,7 @@ const Kanban = () => {
       let newTasks = [...tasks];
       // console.log('newTasks[taskIndex].channel =', newTasks[taskIndex].channel );
       newTasks[taskIndex].channel = channel;
-      console.log('newTasks =', newTasks);
+      // console.log('newTasks =', newTasks);
       setTasks(newTasks);
     },
     [tasks]

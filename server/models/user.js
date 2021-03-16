@@ -15,8 +15,8 @@ const createUser = async (firstName, lastName, email, username, password) => {
 };
 
 const findUser = async (email, username) => {
-  console.log({email});
-  console.log({username});
+  // console.log({email});
+  // console.log({username});
   // console.log({password});
   return await User.findOne({
     where: {

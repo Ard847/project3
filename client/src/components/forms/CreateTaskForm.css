@@ -1,0 +1,43 @@
+#create-task {
+  grid-template-columns: 3fr 2fr;
+  grid-template-rows: auto;
+}
+
+#name-input-section {
+  grid-column: 1 / span 2;
+}
+
+#duration-number, 
+#repeat-number,
+#alert-number,
+#complete-number {
+  display: flex;
+  align-items: center;
+  grid-column: 1 / span 1;
+}
+
+#duration-radio,
+#repeat-radio,
+#alert-radio,
+#complete-radio {
+  display: flex;
+  align-items: center;
+  grid-column: 2/ span 1;
+}
+
+label {
+  padding: 6px;
+  width: 25%;
+  margin: 0;
+}
+
+input {
+  margin: 6px 3px;
+}
+
+input[type=number],
+input[type=text] {
+  flex-grow: 1;
+  padding: 3px;
+  width: 75%;
+}

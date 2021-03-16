@@ -14,6 +14,7 @@ import saveToSession from '../../functions/saveToSession';
 
 // components
 import DashNav from '../../components/DashNav';
+import Modal from '../../components/Modal';
 
 // pages
 import DashHome from './DashHome';
@@ -35,6 +36,15 @@ const DashApp = ({ match, location }) => {
   saveToSession('houseName', location.aboutProps.houseName);
 
   const [currentUser, setCurrentUser] = useState({});
+  const [ modalOpen, setModalOpen ] = useState(false);
+
+  const handleToggelModal = () => {
+    setModalOpen(true);
+  }
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  }
   
   useEffect(() => {
     const fetchUser = async () => {
@@ -48,22 +58,25 @@ const DashApp = ({ match, location }) => {
 
 
   return (
-    <section id='dashboard-content' className='dashboard'>
-      <Router >
+    <>
+      <section id='dashboard-content' className='dashboard'>
+        <Router >
 
-        <DashNav match={match} currentUser={currentUser} />
-        <article id='dash-body'>
-          <Route exact path={`${match.url}`} render={(props) => (
-            <DashHome {...props} match={match} location={location} members={members} />
+          <DashNav match={match} currentUser={currentUser} toggelModal={handleToggelModal}/>
+          <article id='dash-body'>
+            <Route exact path={`${match.url}`} render={(props) => (
+              <DashHome {...props} match={match} location={location} members={members} />
 
-          )} />
-          <Route exact path={`${match.url}/tasks`} component={DashTasks} />
-          
+            )} />
+            <Route exact path={`${match.url}/tasks`} component={DashTasks} />
+            
 
-        </article>
+          </article>
 
-      </Router>
-    </section>
+        </Router>
+      </section>
+      { modalOpen && <Modal closeModal={handleCloseModal}/> }
+    </>
   )
 
 }

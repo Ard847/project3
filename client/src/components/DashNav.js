@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 // styles
 import './DashNav.css'
 
-const DashNav = ({match, currentUser}) => {
+const DashNav = ({match, currentUser, toggelModal}) => {
   // console.log('currentUser =', currentUser);
   // console.log('match dash nav =', match);
   return (
@@ -30,7 +30,9 @@ const DashNav = ({match, currentUser}) => {
         <li className='nav-item'>
           <NavLink to={`${match.url}/tasks`}>Tasks</NavLink>
         </li>
-        <li className='nav-item'>Calendar</li>
+        <li className='nav-item'>
+          <button onClick={toggelModal}>Create Task</button>
+        </li>
         <li className='nav-item'>Budget Tracker</li>
       </ul>
     </nav>
