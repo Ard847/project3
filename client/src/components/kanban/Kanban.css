@@ -19,3 +19,9 @@
   margin-top: 0;
   text-align: center;
 }
+
+.card {
+  background-color: white;
+  border-radius: 5px;
+  padding: 1px 6px;
+}

@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
+
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
  
 
 // required models
@@ -17,7 +18,7 @@ const auth = require('../auth')
 router.get('/authentication', auth, (req, res) => {
   console.log('authenticated');
   res.json({ success: true })
-})
+});
 
 router.post('/login', async (req, res) => {
   console.log('userRoutes.js, req.body=', req.body);
@@ -69,7 +70,10 @@ router.post('/createNew', async (req, res) => {
       });
     })
     .catch((err) => {
-      res.status(401).json(err);
+      res.status(401).json({
+        message: 'error',
+        data: err,
+      });
     })
 });
 
