@@ -1,5 +1,5 @@
 // packages
-import React, { useState } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
@@ -7,39 +7,75 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import './Kanban.css';
 
 // components
-import KanbanBoard from './KanbanBoard'; 
+import KanbanBoard from './KanbanBoard';
 import Card from './Card';
 
 // data
-import { tasks } from './data';
+import { jobs } from './data';
 
 
 const Kanban = () => {
 
   // const [ items, setItems ] = useState({});
-  const [ index, setIndex ] = useState(1);
+  const [tasks, setTasks] = useState(jobs);
 
-  const moveCard = (i) => {
-    setIndex(i); 
-  }
+  console.log({tasks});
 
-  return(
+  const moveCard = useCallback(
+    (item, channel) => {
+      
+      // console.log('item =', item);
+      let task = tasks.find(task => task.id === item.id);
+      const taskIndex = tasks.indexOf(task);
+      // console.log('channel =', channel);      
+      let newTasks = [...tasks];
+      // console.log('newTasks[taskIndex].channel =', newTasks[taskIndex].channel );
+      newTasks[taskIndex].channel = channel;
+      console.log('newTasks =', newTasks);
+      setTasks(newTasks);
+    },
+    [tasks]
+  );
+
+  return (
     <DndProvider backend={HTML5Backend}>
       <div id='kanban-board-container'>
-      {/* <h3>Kanban</h3> */}
-        <KanbanBoard title={'Tasks to do'} card={index === 1} moveCard={moveCard.bind(null, 1)}>
-        
-          { tasks.map((task) => {
-            console.log('task =', task);
-            return <Card key={task.id} data={task}/>
-          })}
-
+        {/* <h3>Kanban</h3> */}
+        <KanbanBoard title={'Tasks to do'} channel={'to-do'} moveCard={moveCard} >
+          {tasks
+            .filter((task) => {
+              return task.channel === 'to-do';
+            })
+            .map((task) => {
+              // console.log('task =', task);
+              return <Card key={task.id} data={task} />
+            })}
         </KanbanBoard>
-        <KanbanBoard title={'Assigned'} card={index === 2} moveCard={moveCard.bind(null, 2)}/>
-        <KanbanBoard title={'Complete'} card={index === 3} moveCard={moveCard.bind(null, 3)}/>
+
+        <KanbanBoard title={'Assigned'} channel={'assigned'} moveCard={moveCard} >
+          {tasks
+            .filter((task) => {
+              return task.channel === 'assigned';
+            })
+            .map((task) => {
+              // console.log('task =', task);
+              return <Card key={task.id} data={task} />
+            })}
+        </KanbanBoard>
+
+        <KanbanBoard title={'Complete'} channel={'complete'} moveCard={moveCard} >
+          {tasks
+            .filter((task) => {
+              return task.channel === 'complete';
+            })
+            .map((task) => {
+              // console.log('task =', task);
+              return <Card key={task.id} data={task} />
+            })}
+        </KanbanBoard>
       </div>
     </DndProvider>
   )
 }
 
-export default Kanban; 
+export default Kanban;

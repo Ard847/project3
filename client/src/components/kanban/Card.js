@@ -10,15 +10,21 @@ import './Kanban.css';
 const Card = ({data}) => {
 
   // console.log('ItemTypes =', ItemTypes);
-  console.log('data =', data);
+  const id = data.id;
 
-  const [{ isDragging }, drag, dragPreview ] = useDrag(() => ({
-    item: {type: ItemTypes.CARD,},
-    collect: (monitor, props) => ({
+  const [{ isDragging }, drag ] = useDrag(() => ({
+    item: {type: ItemTypes.CARD, id},
+    collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
+    end: (item, monitor) => {
+      const dropEffect = monitor.getDropResult();
+      // console.log("just dropped item", item);
+      // console.log("dropEffect", dropEffect);
+    },
   }));
-  
+
+    
   return (
     <div 
       className='card'

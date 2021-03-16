@@ -7,15 +7,16 @@ import { ItemTypes } from './Constants';
 import './Kanban.css';
 
 
-const KanbanBoard = ({title, moveCard, children}) => {
+const KanbanBoard = ({title, channel, moveCard, children}) => {
 
-  console.log('KanbanList title =', title); 
-  console.log('KanbanList children =', children); 
+  // console.log('KanbanList title =', title); 
+  // console.log('KanbanList children =', children); 
+  // console.log('KanbanList channel =', channel); 
 
     
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
     accept: ItemTypes.CARD,
-    drop: () => moveCard(),
+    drop: (item) => moveCard(item, channel),
     // props to collect
     collect: (monitor) => ({
       isOver: !!monitor.isOver(),
@@ -27,7 +28,6 @@ const KanbanBoard = ({title, moveCard, children}) => {
     <div 
       className={`kanban-list-container`}
       ref={drop}
-      role={'Dustbin'}
       style={{backgroundColor: isOver ? 'red' : 'var(--white)' }}
     >
       <h5 className='kanban-title'>{title}</h5>
