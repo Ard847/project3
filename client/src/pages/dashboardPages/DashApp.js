@@ -11,6 +11,7 @@ import useGetMembers from '../../hooks/useGetMembers';
 
 // functions
 import saveToSession from '../../functions/saveToSession';
+import getSession from '../../functions/getSession';
 
 // components
 import DashNav from '../../components/DashNav';
@@ -24,20 +25,22 @@ import DashTasks from './DashTasks';
 const DashApp = ({ match, location }) => {
 
   // console.log('match =', match);
-  // console.log(location);
+  // console.log('location =', location);
   useSiteLocation(location);
 
-  const members = useGetMembers();
-  // console.log('members =', members);
-
-  const userID = parseInt(match.params.id)
+  const userID = parseInt(match.params.id);
   const houseID = parseInt(match.params.householdID);
   saveToSession('houseID', houseID);
-  saveToSession('houseName', location.aboutProps.houseName);
-
+  
+  if (location.aboutProps) {
+    saveToSession('houseName', location.aboutProps.houseName);
+  }
+  
   const [currentUser, setCurrentUser] = useState({});
   const [ modalOpen, setModalOpen ] = useState(false);
-
+  
+  const members = useGetMembers();
+  
   const handleToggelModal = () => {
     setModalOpen(true);
   }
@@ -65,7 +68,7 @@ const DashApp = ({ match, location }) => {
           <DashNav match={match} currentUser={currentUser} toggelModal={handleToggelModal}/>
           <article id='dash-body'>
             <Route exact path={`${match.url}`} render={(props) => (
-              <DashHome {...props} match={match} location={location} members={members} />
+              <DashHome {...props} members={members} />
 
             )} />
             <Route exact path={`${match.url}/tasks`} component={DashTasks} />

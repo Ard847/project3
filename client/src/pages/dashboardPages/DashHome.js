@@ -7,9 +7,16 @@ import './DashHome.css';
 // components
 import Clock from '../../components/Clock';
 
-const DashHome = ({ match, location, members }) => {
+// functions
+import saveToSession from '../../functions/saveToSession';
+import getSession from '../../functions/getSession';
 
-  const houseID = parseInt(match.params.householdID);
+
+const DashHome = ({ members }) => {
+
+  const houseID = parseInt(getSession('houseID'));
+  const getHouseName = getSession('houseName');
+  const houseName = getHouseName.replace(/['"]+/g, '');
 
   const [showInviteButton, setShowInviteButton] = useState(true);
 
@@ -29,7 +36,7 @@ const DashHome = ({ match, location, members }) => {
     <div id='dash-home-content'>
       {/* <> */}
       <div className='dash-title' >
-        <h2>Dashboard of {location.aboutProps.houseName}</h2>
+        <h2>Dashboard of {houseName}</h2>
         {showInviteButton && <button id='invite' onMouseDown={handleShowHouseID}> + Invite another Member </button>}
         {(showInviteButton === false) && (
           <div id='house-id' onMouseOut={handleHideHouseID}>
