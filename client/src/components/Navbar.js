@@ -7,6 +7,9 @@ import {Collapse,
   Nav,
   NavItem,
   NavLink,} from 'reactstrap';
+
+  //import logo
+import Logo from './images/sortedOrange-01.png'
   
 // styles
 import './NavBar.css'
@@ -19,7 +22,7 @@ const NavBar = (props) => {
     return (
       <div>
         <Navbar className="sticky fixed-top" light expand="md">
-          <NavbarBrand href="/"><img /></NavbarBrand>
+          <NavbarBrand href="/"><img src={Logo}/></NavbarBrand>
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto items" navbar>
