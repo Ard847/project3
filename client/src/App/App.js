@@ -19,7 +19,7 @@ import CreateHouse from '../pages/welcomePages/CreateHouse';
 import ChooseHouse from '../pages/welcomePages/ChooseHouse';
 // import NoMatchPage from '../pages/welcomePages/NoMatchPage';
 
-//import DashApp from '../pages/dashboardPages/DashApp';
+import DashApp from '../pages/dashboardPages/DashApp';
 
 // components
 import NavBar from '../components/Navbar';
@@ -44,6 +44,7 @@ const App = () => {
             <Route exact path='/logIn' component={LoginPage} />
             <Route exact path='/signUp' component={SignupPage} />
             <Route exact path='/createHousehold' component={CreateHouse} />
+            <Route path='/dashboard/:id/:householdID' component={DashApp} />
            
             {/* <Route component={NoMatchPage} /> */}
           </main>
@@ -55,4 +56,4 @@ const App = () => {
 
 export default App;
 
-/* <Route path='/dashboard/:id/:householdID' component={DashApp} /> */
+
