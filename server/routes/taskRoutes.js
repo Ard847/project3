@@ -28,7 +28,7 @@ router.get('/getTasks/:houseID', auth, async (req, res) => {
     })
 });
 
-router.post('/createNew/:houseID/:userID', async (req, res) => {
+router.post('/createNew/:houseID', async (req, res) => {
   // console.log('req.body =', req.body);
   // console.log('req.params =', req.params);
   
@@ -79,10 +79,9 @@ router.post('/createNew/:houseID/:userID', async (req, res) => {
   // console.log('times =', times);
 
   const houseID = req.params.houseID;
-  const userID = req.params.userID;
   const taskName = req.body.name;
   await tasksModel
-    .createTask(houseID, userID, taskName, times)
+    .createTask(houseID, taskName, times)
     .then((post) => {
       // console.log('post =', post);
       res.json({

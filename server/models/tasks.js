@@ -1,9 +1,9 @@
 const { Task } = require('../config/orm');
 
-const createTask = async (houseID, userID, taskName, times) => {
+const createTask = async (houseID, taskName, times) => {
   return await Task.create({
     householdID: houseID,
-    userID: userID,
+    userID: null,
     taskName: taskName,
     completedDate: '',
     nextDate: '',

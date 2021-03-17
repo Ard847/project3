@@ -8,8 +8,9 @@ import './DashTasks.css';
 import Kanban from '../../components/kanban/Kanban';
 
 
-const DashTasks =() => {
+const DashTasks = (props) => {
 
+  console.log('DashTasks props =', props);
   const [ view , setView ] = useState('kanban');
 
   const changeView = (event) => {

@@ -23,13 +23,15 @@ const useGetTasks = () => {
     // change the tasks array manually. - optimistic loading
     // console.log({taskID});
     // console.log({newStatus});
-    setTasks(tasks => {
-      let task = tasks.find(task => task.id === taskID); 
-      const taskIndex = tasks.indexOf(task);
-      const newTasks =[...tasks];
-      newTasks[taskIndex].status = newStatus;
-      return newTasks;
-    });
+    if(taskID && newStatus){
+      setTasks(tasks => {
+        let task = tasks.find(task => task.id === taskID); 
+        const taskIndex = tasks.indexOf(task);
+        const newTasks =[...tasks];
+        newTasks[taskIndex].status = newStatus;
+        return newTasks;
+      });
+    }
     fetchData();
   }
 
