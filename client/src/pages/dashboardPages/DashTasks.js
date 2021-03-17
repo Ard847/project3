@@ -26,7 +26,7 @@ const DashTasks = (props) => {
           <option value='kanban'>Kanban</option>
         </select>
       </div>
-      {(view === 'kanban')  && <Kanban />}
+      {/* {(view === 'kanban')  && <Kanban />} */}
    </div>
   )
 }
