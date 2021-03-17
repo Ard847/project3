@@ -1,6 +1,6 @@
 // packages
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 // styles
 import './DashApp.css';
@@ -11,7 +11,6 @@ import useGetMembers from '../../hooks/useGetMembers';
 
 // functions
 import saveToSession from '../../functions/saveToSession';
-import getSession from '../../functions/getSession';
 
 // components
 import DashNav from '../../components/DashNav';
@@ -68,12 +67,10 @@ const DashApp = ({ match, location }) => {
           <DashNav match={match} currentUser={currentUser} toggelModal={handleToggelModal}/>
           <article id='dash-body'>
             <Route exact path={`${match.url}`} render={(props) => (
-              <DashHome {...props} members={members} />
-
-            )} />
-            <Route exact path={`${match.url}/tasks`} component={DashTasks} />
-            
-
+                <DashHome {...props} members={members} />
+              )}
+            />
+            <Route exact path={`${match.url}/task-manager`} component={DashTasks} />
           </article>
 
         </Router>

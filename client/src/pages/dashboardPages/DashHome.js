@@ -8,7 +8,6 @@ import './DashHome.css';
 import Clock from '../../components/Clock';
 
 // functions
-import saveToSession from '../../functions/saveToSession';
 import getSession from '../../functions/getSession';
 
 

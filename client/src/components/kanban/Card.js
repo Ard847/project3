@@ -9,6 +9,7 @@ import './Kanban.css';
 
 const Card = ({data}) => {
 
+  // console.log({data});
   // console.log('ItemTypes =', ItemTypes);
   const id = data.id;
 
@@ -17,11 +18,11 @@ const Card = ({data}) => {
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
-    end: (item, monitor) => {
-      const dropEffect = monitor.getDropResult();
-      // console.log("just dropped item", item);
-      // console.log("dropEffect", dropEffect);
-    },
+    // end: (item, monitor) => {
+    //   const dropEffect = monitor.getDropResult();
+    //   // console.log("just dropped item", item);
+    //   // console.log("dropEffect", dropEffect);
+    // },
   }));
 
     
@@ -33,7 +34,7 @@ const Card = ({data}) => {
         backgroundColor: isDragging ? 'var(--yellow)' : 'white',
       }}
     >
-      <p>{data.name}</p>
+      <p>{data.taskName}</p>
     </div>
   )
 }

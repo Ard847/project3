@@ -11,28 +11,46 @@ import KanbanBoard from './KanbanBoard';
 import Card from './Card';
 
 // data
-import { jobs } from './data';
+// import { jobs } from './data';
+
+// hooks
+import useGetTasks from '../../hooks/useGetTasks';
+
+// functions
+import getSession from '../../functions/getSession';
+import fetcher from '../../functions/fetcher';
 
 
 const Kanban = () => {
 
-  // const [ items, setItems ] = useState({});
-  const [tasks, setTasks] = useState(jobs);
-
+  // const [tasks, setTasks] = useState([]);
   // console.log({tasks});
-
+  
+  const [tasks, refreshTasks ] = useGetTasks();
+  
   const moveCard = useCallback(
-    (item, channel) => {
+    async (item, newStatus) => {
+      console.log('item =', item);
+      console.log('newStatus =', newStatus); 
+
+      let token = getSession('token').split('"');
+      token = token[1];
+      const houseID = getSession('houseID');
+
+      const url = `/api/task/updateStatus/${houseID}`
+      const body = {
+        taskID: item.id,
+        newStatus: newStatus,
+      }
+      const updateResponse = await fetcher(url, 'PUT', body, token);
+      console.log('updateResponse =', updateResponse);
+
+      if(updateResponse.message === 'success'){
+        // console.log('its in the block');
+        
+        refreshTasks(item.id, newStatus);
+      }
       
-      // console.log('item =', item);
-      let task = tasks.find(task => task.id === item.id);
-      const taskIndex = tasks.indexOf(task);
-      // console.log('channel =', channel);      
-      let newTasks = [...tasks];
-      // console.log('newTasks[taskIndex].channel =', newTasks[taskIndex].channel );
-      newTasks[taskIndex].channel = channel;
-      // console.log('newTasks =', newTasks);
-      setTasks(newTasks);
     },
     [tasks]
   );
@@ -41,10 +59,10 @@ const Kanban = () => {
     <DndProvider backend={HTML5Backend}>
       <div id='kanban-board-container'>
         {/* <h3>Kanban</h3> */}
-        <KanbanBoard title={'Tasks to do'} channel={'to-do'} moveCard={moveCard} >
+        <KanbanBoard title={'Tasks to do'} status={'to-do'} moveCard={moveCard} >
           {tasks
             .filter((task) => {
-              return task.channel === 'to-do';
+              return task.status === 'to-do';
             })
             .map((task) => {
               // console.log('task =', task);
@@ -52,10 +70,10 @@ const Kanban = () => {
             })}
         </KanbanBoard>
 
-        <KanbanBoard title={'Assigned'} channel={'assigned'} moveCard={moveCard} >
+        <KanbanBoard title={'Assigned'} status={'assigned'} moveCard={moveCard} >
           {tasks
             .filter((task) => {
-              return task.channel === 'assigned';
+              return task.status === 'assigned';
             })
             .map((task) => {
               // console.log('task =', task);
@@ -63,10 +81,10 @@ const Kanban = () => {
             })}
         </KanbanBoard>
 
-        <KanbanBoard title={'Complete'} channel={'complete'} moveCard={moveCard} >
+        <KanbanBoard title={'Complete'} status={'complete'} moveCard={moveCard} >
           {tasks
             .filter((task) => {
-              return task.channel === 'complete';
+              return task.status === 'complete';
             })
             .map((task) => {
               // console.log('task =', task);
