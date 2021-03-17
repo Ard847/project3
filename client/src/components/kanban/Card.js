@@ -7,12 +7,12 @@ import { ItemTypes } from './Constants';
 import './Kanban.css';
 
 
-const Card = ({data}) => {
+const Card = ({data, member}) => {
 
   // console.log({data});
   // console.log('ItemTypes =', ItemTypes);
   const id = data.id;
-
+  
   const [{ isDragging }, drag ] = useDrag(() => ({
     item: {type: ItemTypes.CARD, id},
     collect: (monitor) => ({
@@ -35,6 +35,8 @@ const Card = ({data}) => {
       }}
     >
       <p>{data.taskName}</p>
+      <p className='sml-text'><strong>Time it takes: </strong>{data.duration} mins</p>
+      { data.userID && <p className='sml-text'><strong>Assigned to: </strong>{member}</p>}
     </div>
   )
 }

@@ -24,4 +24,9 @@
   background-color: white;
   border-radius: 5px;
   padding: 1px 6px;
+  margin: 6px 0;
+}
+
+p.sml-text {
+  font-size: x-small;
 }

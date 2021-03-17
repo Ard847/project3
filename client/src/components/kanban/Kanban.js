@@ -1,5 +1,5 @@
 // packages
-import React, { useState, useCallback, useEffect } from 'react'
+import React, { useCallback } from 'react'
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
@@ -15,6 +15,7 @@ import Card from './Card';
 
 // hooks
 import useGetTasks from '../../hooks/useGetTasks';
+import useGetMembers from '../../hooks/useGetMembers';
 
 // functions
 import getSession from '../../functions/getSession';
@@ -27,11 +28,13 @@ const Kanban = () => {
   // console.log({tasks});
   
   const [tasks, refreshTasks ] = useGetTasks();
+  const members = useGetMembers();
+  // console.log('members =', members);
   
   const moveCard = useCallback(
     async (item, newStatus) => {
-      console.log('item =', item);
-      console.log('newStatus =', newStatus); 
+      // console.log('item =', item);
+      // console.log('newStatus =', newStatus); 
 
       let token = getSession('token').split('"');
       token = token[1];
@@ -43,16 +46,14 @@ const Kanban = () => {
         newStatus: newStatus,
       }
       const updateResponse = await fetcher(url, 'PUT', body, token);
-      console.log('updateResponse =', updateResponse);
+      // console.log('updateResponse =', updateResponse);
 
       if(updateResponse.message === 'success'){
-        // console.log('its in the block');
-        
         refreshTasks(item.id, newStatus);
       }
       
     },
-    [tasks]
+    [refreshTasks]
   );
 
   return (
@@ -66,7 +67,8 @@ const Kanban = () => {
             })
             .map((task) => {
               // console.log('task =', task);
-              return <Card key={task.id} data={task} />
+              return <Card key={task.id} data={task}  />
+              
             })}
         </KanbanBoard>
 
@@ -76,8 +78,11 @@ const Kanban = () => {
               return task.status === 'assigned';
             })
             .map((task) => {
-              // console.log('task =', task);
-              return <Card key={task.id} data={task} />
+              if ( members.length !== 0 ){
+                let user = members.find(member => member.id === task.userID)
+                return <Card key={task.id} data={task} member={user.firstName} />
+              }
+              return null;
             })}
         </KanbanBoard>
 
@@ -87,8 +92,11 @@ const Kanban = () => {
               return task.status === 'complete';
             })
             .map((task) => {
-              // console.log('task =', task);
-              return <Card key={task.id} data={task} />
+              if ( members.length !== 0 ){
+                let user = members.find(member => member.id === task.userID)
+                return <Card key={task.id} data={task} member={user.firstName} />
+              }
+              return null;
             })}
         </KanbanBoard>
       </div>
