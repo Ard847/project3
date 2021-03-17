@@ -3,6 +3,7 @@ const router = express.Router();
 
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const auth = require('../auth');
 
 // required models
 const tasksModel = require('../models/tasks');
@@ -10,9 +11,26 @@ const tasksModel = require('../models/tasks');
 // WE NEED TO INCLUDE ERROR HANDELING, 
 // FEEDBACK FOR LAST PROJECT WAS WE WERE MARKED DOWN FOR NOT HAVING IT.
 
-router.post('/createNew/:houseID/:userID', async (req, res) => {
-  console.log('req.body =', req.body);
-  console.log('req.params =', req.params);
+router.get('/getTasks/:houseID', auth, async (req, res) => {
+  await tasksModel
+    .findAllTasks(req.params.houseID)
+    .then((get) => {
+      res.status(200).json({
+        message: 'success',
+        data: get,
+      })
+    })
+    .catch((err) => {
+      res.json({
+        message: 'error',
+        data: err,
+      })
+    })
+});
+
+router.post('/createNew/:houseID', async (req, res) => {
+  // console.log('req.body =', req.body);
+  // console.log('req.params =', req.params);
   
   let times = {
     duration:'',
@@ -61,15 +79,60 @@ router.post('/createNew/:houseID/:userID', async (req, res) => {
   // console.log('times =', times);
 
   const houseID = req.params.houseID;
-  const userID = req.params.userID;
   const taskName = req.body.name;
   await tasksModel
-    .createTask(houseID, userID, taskName, times)
+    .createTask(houseID, taskName, times)
     .then((post) => {
       // console.log('post =', post);
       res.json({
         message: 'success',
         data: post,
+      });
+    })
+    .catch((err) => {
+      res.status(401).json({
+        message: 'error',
+        data: err,
+      });
+    })
+});
+
+router.put('/updateStatus/:houseID', auth, async (req, res) => {
+  // console.log('req.body =', req.body);
+  // console.log('req.params =', req.params);
+  const taskID = req.body.taskID;
+  const houseID = req.params.houseID;
+  const newStatus = req.body.newStatus;
+  await tasksModel
+    .updateStatus(taskID, houseID, newStatus)
+    .then((put) => {
+      // console.log('put =', put);
+      res.json({
+        message: 'success',
+        data: put,
+      });
+    })
+    .catch((err) => {
+      res.status(401).json({
+        message: 'error',
+        data: err,
+      });
+    })
+});
+
+router.put('/updateUser/:houseID', auth, async (req, res) => {
+  console.log('req.body =', req.body);
+  console.log('req.params =', req.params);
+  const taskID = req.body.taskID;
+  const houseID = req.params.houseID;
+  const user = req.body.user;
+  await tasksModel
+    .updateUser(taskID, houseID, user)
+    .then((put) => {
+      // console.log('put =', put);
+      res.json({
+        message: 'success',
+        data: put,
       });
     })
     .catch((err) => {

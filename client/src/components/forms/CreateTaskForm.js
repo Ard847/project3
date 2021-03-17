@@ -9,6 +9,7 @@ import fetcher from '../../functions/fetcher';
 import getSession from '../../functions/getSession';
 
 
+
 const CreateTaskForm = () => {
 
   const [taskData, setTaskData] = useState({
@@ -34,15 +35,15 @@ const CreateTaskForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     event.stopPropagation();
-    console.log('taskData =', taskData);
+    // console.log('taskData =', taskData);
 
-    const id = getSession('id');
     const houseID = getSession('houseID')
     const token = getSession('token');
 
-    const url = `/api/task/createNew/${houseID}/${id}`;
-    const createTaskResponse = await fetcher(url, 'POST', taskData, token);
-    console.log('createTaskResponse =', createTaskResponse);
+    const url = `/api/task/createNew/${houseID}`;
+    // const createTaskResponse = 
+    await fetcher(url, 'POST', taskData, token);
+    // console.log('createTaskResponse =', createTaskResponse);
   }
 
   const handleRadioInput = (event) => {

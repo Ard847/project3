@@ -42,7 +42,7 @@ const findAllUser = async (houseID) => {
     include: [{
       model: User, 
       attributes: ['id', 'firstName', 'lastName'],
-    }]
+    }],
   })
   .then((data) => {
     // console.log('findAllUser data =', data);

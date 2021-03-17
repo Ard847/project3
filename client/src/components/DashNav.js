@@ -28,7 +28,7 @@ const DashNav = ({match, currentUser, toggelModal}) => {
           <NavLink to={`${match.url}`}>Dashboard Home</NavLink>
         </li>
         <li className='nav-item'>
-          <NavLink to={`${match.url}/tasks`}>Tasks</NavLink>
+          <NavLink to={`${match.url}/task-manager`}>Task Manager</NavLink>
         </li>
         <li className='nav-item'>
           <button onClick={toggelModal}>Create Task</button>
