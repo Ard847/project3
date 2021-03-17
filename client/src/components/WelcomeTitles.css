@@ -1,19 +1,40 @@
-section {
-  width: 50%;
-  padding: 12px;
-  min-height: 100%;
-
-  
+header{
+  height: 100vh;
+  width: 100%;
+  background-image: url('./images/bgTT-01.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
-section#app-titles {
+.header-content{
+  height: 100vh;
   display: flex;
+  flex-direction:column;
   align-items: center;
-  flex-wrap: wrap;
-
-  padding: 12px 36px;
+  justify-content: center;
 }
 
-h1#main-title {
-  font-size: 4em;
+.content-box{
+  color: rgb(0, 0, 0)
 }
+
+.title{
+  font-size: 60px;
+  font-weight: 500;
+  margin-top: 100px;
+}
+
+.content-box h1{
+  font-size: 52px;
+}
+
+.content-box a{
+  color: #fff;
+  text-decoration: none;
+  border: 2px solid #fff;
+  border-radius: 20px;
+  padding: 5px 25px;
+  margin-top: 20px;
+}
+
