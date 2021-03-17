@@ -40,7 +40,7 @@ const NavBar = (props) => {
               </NavItem>
             </Nav>
             <NavItem>
-                <NavLink className="navLink" href="/signUp">Sign up</NavLink>
+                <NavLink className="navLink nav-collapse" style={{listStyleType: 'none'}} href="/signUp">Sign up</NavLink>
               </NavItem>
           </Collapse>
         </Navbar>

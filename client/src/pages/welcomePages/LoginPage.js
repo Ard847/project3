@@ -57,7 +57,6 @@ const LoginPage = ({location}) => {
 
     return (
       <>
-      <WelcomeTitles />
       <section>
       <article id='login-content'>
         <h1>Log-in Page</h1>

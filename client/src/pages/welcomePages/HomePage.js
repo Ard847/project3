@@ -35,7 +35,7 @@ const HomePage = ({ location }) => {
         <WelcomeTitles />
         <section>
           <article id='home-content'>
-            <h2>Log In or Sign Up to see your Households</h2>
+            <h2>Add Cards here</h2>
           </article>
         </section>
       </>

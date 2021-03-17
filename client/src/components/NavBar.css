@@ -23,6 +23,10 @@ nav .navbar-nav li{
   margin-left: 25px;
 }
 
+.nav-collapse{
+  list-style-type: none;
+}
+
 /*nav.r-nav.stickyadd {
   background: rgb(131, 13, 13) !important;
   padding: 5px 0;
