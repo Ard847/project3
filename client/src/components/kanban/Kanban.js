@@ -10,6 +10,9 @@ import './Kanban.css';
 // components
 import KanbanBoard from './KanbanBoard';
 import Card from './Card';
+import Modal from '../../components/Modal';
+import EditTask from '../../components/EditTask';
+import Clock from '../../components/Clock';
 
 // hooks
 import useGetTasks from '../../hooks/useGetTasks';
@@ -24,11 +27,22 @@ const Kanban = () => {
 
   const [tasks, refreshTasks] = useGetTasks();
   const [ message , setMessage ] = useState(false);
-
+  const [ modalOpen, setModalOpen ] = useState(false);
+  const [ selectedTask , setSelectedTask ] = useState({});
   // console.log('tasks =', tasks);
 
   const members = useGetMembers();
   // console.log('members =', members);
+      
+  const handleToggelModal = (task) => {
+    // console.log('task =', task);
+    setSelectedTask(task);
+    setModalOpen(true);
+  }
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  }
 
   const moveCard = useCallback(async (item, newStatus) => {
     // console.log('item =', item);
@@ -87,6 +101,7 @@ const Kanban = () => {
   return (
     <DndProvider backend={HTML5Backend}>
       <div id='kanban-content'>
+      <Clock day={true} time={false} />
         {message ? <h6>You must assign a member in the task editor first</h6> : <h6></h6>}
         <div id='kanban-board-container'>
           <KanbanBoard title={'Tasks to do'} status={'to-do'} moveCard={moveCard} >
@@ -99,9 +114,9 @@ const Kanban = () => {
                 if (members.length !== 0) {
                   let user = members.find(member => member.id === task.userID)
                   if (user) {
-                    return <Card key={task.id} data={task} index={index} member={user.firstName} sortCard={sortCard} />
+                    return <Card key={task.id} data={task} index={index} member={user.firstName} sortCard={sortCard} toggelModal={handleToggelModal} />
                   } else {
-                    return <Card key={task.id} data={task} index={index} sortCard={sortCard} />
+                    return <Card key={task.id} data={task} index={index} sortCard={sortCard} toggelModal={handleToggelModal}/>
                   }
                 }
                 return null;
@@ -117,9 +132,9 @@ const Kanban = () => {
                 if (members.length !== 0) {
                   let user = members.find(member => member.id === task.userID)
                   if (user) {
-                    return <Card key={task.id} data={task} index={index} member={user.firstName} sortCard={sortCard} />
+                    return <Card key={task.id} data={task} index={index} member={user.firstName} sortCard={sortCard} toggelModal={handleToggelModal}/>
                   } else {
-                    return <Card key={task.id} data={task} index={index} sortCard={sortCard} />
+                    return <Card key={task.id} data={task} index={index} sortCard={sortCard} toggelModal={handleToggelModal}/>
                   }
                 }
                 return null;
@@ -135,15 +150,16 @@ const Kanban = () => {
                 if (members.length !== 0) {
                   let user = members.find(member => member.id === task.userID)
                   if (user) {
-                    return <Card key={task.id} data={task} index={index} member={user.firstName} sortCard={sortCard} />
+                    return <Card key={task.id} data={task} index={index} member={user} sortCard={sortCard} toggelModal={handleToggelModal}/>
                   } else {
-                    return <Card key={task.id} data={task} index={index} sortCard={sortCard} />
+                    return <Card key={task.id} data={task} index={index} sortCard={sortCard} toggelModal={handleToggelModal}/>
                   }
                 }
                 return null;
               })}
           </KanbanBoard>
         </div>
+        { modalOpen && <Modal closeModal={handleCloseModal} ><EditTask task={selectedTask} /></Modal> }
       </div>
     </DndProvider>
   )

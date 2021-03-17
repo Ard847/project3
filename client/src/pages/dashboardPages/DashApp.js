@@ -15,6 +15,7 @@ import saveToSession from '../../functions/saveToSession';
 // components
 import DashNav from '../../components/DashNav';
 import Modal from '../../components/Modal';
+import CreateTaskForm from '../../components/forms/CreateTaskForm';
 
 // pages
 import DashHome from './DashHome';
@@ -75,7 +76,7 @@ const DashApp = ({ match, location }) => {
 
         </Router>
       </section>
-      { modalOpen && <Modal closeModal={handleCloseModal}/> }
+      { modalOpen && <Modal closeModal={handleCloseModal} ><CreateTaskForm /></Modal> }
     </>
   )
 

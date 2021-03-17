@@ -7,11 +7,15 @@ import { ItemTypes } from './Constants';
 import './Kanban.css';
 
 
-const Card = ({ data, member, index, sortCard }) => {
+const Card = ({ data, member, index, sortCard, toggelModal }) => {
 
   const id = data.id;
   const ref = useRef(null);
   
+  const onToggelModal = (event) => {
+    toggelModal(data);
+  }
+
   const [{ handlerId }, drop] = useDrop({
     accept: ItemTypes.CARD,
     collect(monitor) {
@@ -75,10 +79,11 @@ const Card = ({ data, member, index, sortCard }) => {
       style={{
         backgroundColor: isDragging ? 'var(--yellow)' : 'white',
       }}
+      onClick={onToggelModal}
     >
       <p>{data.taskName}</p>
       <p className='sml-text'><strong>Time it takes: </strong>{data.duration} mins</p>
-      { data.userID && <p className='sml-text'><strong>Assigned to: </strong>{member}</p>}
+      { member && <p className='sml-text'><strong>Assigned to: </strong>{member}</p>}
     </div>
   )
 }
