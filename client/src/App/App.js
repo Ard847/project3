@@ -12,6 +12,7 @@ import './App.css';
 // pages
 import HomePage from '../pages/welcomePages/HomePage';
 import AboutPage from '../pages/welcomePages/AboutPage';
+import Contact from '../pages/welcomePages/Contact';
 import LoginPage from '../pages/welcomePages/LoginPage';
 import SignupPage from '../pages/welcomePages/SignupPage';
 import CreateHouse from '../pages/welcomePages/CreateHouse';
@@ -39,6 +40,7 @@ const App = () => {
             <Route exact path='/' component={HomePage} />
             <Route exact path='/home/:id' component={ChooseHouse} />
             <Route exact path='/about' component={AboutPage} />
+            <Route exact path='/contact' component={Contact} />
             <Route exact path='/logIn' component={LoginPage} />
             <Route exact path='/signUp' component={SignupPage} />
             <Route exact path='/createHousehold' component={CreateHouse} />
