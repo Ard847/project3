@@ -1,6 +1,58 @@
-nav#main-nav {
-  background-color: var(--white);
-  height: 30px;
-  display: flex;
-  justify-content: flex-end;
+nav.r-nav{
+  background: transparent!important;
+  padding: 20px 0;
+  transition: .5s all;
+}
+
+.items{
+  font-size: 50px;
+  color: rgb(197, 178, 178);
+}
+
+nav .navbar-nav li a{
+ color: rgba(252, 252, 252, 0.8)!important;
+ font-size:10px;
+ letter-spacing: 0.05em;
+ font-weight: 600;
+ font-family: 'Nunito', sans-serif;
+}
+
+nav .navbar-nav li{
+  margin-left: 25px;
+}
+
+nav.r-nav.stickyadd {
+  background: rgb(131, 13, 13) !important;
+  padding: 5px 0;
+  box-shadow: 0 1px 8px 3px rgba(0,0,0,0.5);
+  transition: .5s all ease-in-out;
+}
+
+nav.stickyadd .navbar-brand{
+  color:black;
+  font-size: 30px;
+  transition: .5s all;
+}
+
+nav.stickyadd .navbar-nav .nav-link{
+  color:black !important;
+ 
+}
+
+.navbar .hamburger{
+  color: rgb(213, 55, 55);
+}
+
+nav.stickyadd .hamburger{
+  color:#000;
+}
+
+.register{
+  font-weight: 900;
+  border: 2px solid green;
+  border-radius: 20%;
+}
+
+.logo{
+  width: 100px;
 }
