@@ -39,7 +39,6 @@ const SignupPage = ({ location }) => {
 
     return (
       <>
-        <WelcomeTitles />
         <section>
           <article id='login-content'>
             <h1>Sign Up Page</h1>
