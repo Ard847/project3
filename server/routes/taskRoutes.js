@@ -120,4 +120,27 @@ router.put('/updateStatus/:houseID', auth, async (req, res) => {
     })
 });
 
+router.put('/updateUser/:houseID', auth, async (req, res) => {
+  console.log('req.body =', req.body);
+  console.log('req.params =', req.params);
+  const taskID = req.body.taskID;
+  const houseID = req.params.houseID;
+  const user = req.body.user;
+  await tasksModel
+    .updateUser(taskID, houseID, user)
+    .then((put) => {
+      // console.log('put =', put);
+      res.json({
+        message: 'success',
+        data: put,
+      });
+    })
+    .catch((err) => {
+      res.status(401).json({
+        message: 'error',
+        data: err,
+      });
+    })
+});
+
 module.exports = router ;

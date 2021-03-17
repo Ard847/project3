@@ -10,7 +10,7 @@ import Kanban from '../../components/kanban/Kanban';
 
 const DashTasks = (props) => {
 
-  console.log('DashTasks props =', props);
+  // console.log('DashTasks props =', props);
   const [ view , setView ] = useState('kanban');
 
   const changeView = (event) => {
@@ -26,7 +26,7 @@ const DashTasks = (props) => {
           <option value='kanban'>Kanban</option>
         </select>
       </div>
-      {/* {(view === 'kanban')  && <Kanban />} */}
+      {(view === 'kanban')  && <Kanban />}
    </div>
   )
 }

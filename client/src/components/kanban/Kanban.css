@@ -1,5 +1,12 @@
+#kanban-content {
+  height: 100%;
+  display: grid;
+  grid-template-rows: 50px auto;
+}
+
 #kanban-board-container {
   display: flex;
+  
 }
 
 .kanban-list-container {

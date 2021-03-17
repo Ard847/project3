@@ -58,7 +58,7 @@ const DashApp = ({ match, location }) => {
     fetchUser();
   }, [members, userID]);
 
-  console.log('match.url =', match.url);
+  // console.log('match.url =', match.url);
   return (
     <>
       <section id='dashboard-content' className='dashboard'>
