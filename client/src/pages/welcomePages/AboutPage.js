@@ -17,7 +17,7 @@ const AboutPage = ({location}) => {
 
   return (
     
-    <section className="about" style={{ marginTop: '100px', height: '100vh'}}>
+    <section className="about">
 <div className="container">
 <div className="row">
 <div className="col-lg-6">
