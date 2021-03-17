@@ -42,7 +42,7 @@ const App = () => {
             <Route exact path='/logIn' component={LoginPage} />
             <Route exact path='/signUp' component={SignupPage} />
             <Route exact path='/createHousehold' component={CreateHouse} />
-            <Route exact path='/dashboard/:id/:householdID' component={DashApp} />
+            <Route path='/dashboard/:id/:householdID' component={DashApp} />
             {/* <Route component={NoMatchPage} /> */}
           </main>
         {/* </Switch> */}

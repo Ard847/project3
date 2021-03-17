@@ -1,5 +1,12 @@
+#kanban-content {
+  height: 100%;
+  display: grid;
+  grid-template-rows: 50px auto;
+}
+
 #kanban-board-container {
   display: flex;
+  
 }
 
 .kanban-list-container {
@@ -24,4 +31,10 @@
   background-color: white;
   border-radius: 5px;
   padding: 1px 6px;
+  margin: 6px 0;
+  cursor: pointer;
+}
+
+p.sml-text {
+  font-size: x-small;
 }

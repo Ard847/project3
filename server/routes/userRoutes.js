@@ -3,6 +3,8 @@ const router = express.Router();
 
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+//token authentication 
+const auth = require('../auth')
  
 
 // required models
@@ -12,8 +14,6 @@ const userModel = require('../models/user');
 // FEEDBACK FOR LAST PROJECT WAS WE WERE MARKED DOWN FOR NOT HAVING IT.
 
 
-//token authentication 
-const auth = require('../auth')
 
 router.get('/authentication', auth, (req, res) => {
   console.log('authenticated');
@@ -40,10 +40,10 @@ router.post('/login', async (req, res) => {
   })
 });
 
-router.get('/getusers/:houseID', async (req, res) => {
+router.get('/getusers/:houseID', auth, async (req, res) => {
   const householdMembers = await userModel
     .findAllUser(req.params.houseID);
-  console.log('householdMembers =', householdMembers);
+  // console.log('householdMembers =', householdMembers);
   // console.log('householdMembers =', householdMembers[0].dataValues);
   const members = householdMembers[0].dataValues.users;
   res.send(members);
