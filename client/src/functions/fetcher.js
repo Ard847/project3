@@ -1,5 +1,5 @@
 const fetcher = async (url, method, body, token) => {
-
+  
   const parameters = {
     method: method,
     headers: {},

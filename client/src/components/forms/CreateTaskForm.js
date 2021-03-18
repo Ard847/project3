@@ -9,7 +9,6 @@ import fetcher from '../../functions/fetcher';
 import getSession from '../../functions/getSession';
 
 
-
 const CreateTaskForm = () => {
 
   const [taskData, setTaskData] = useState({
@@ -38,7 +37,8 @@ const CreateTaskForm = () => {
     // console.log('taskData =', taskData);
 
     const houseID = getSession('houseID')
-    const token = getSession('token');
+    let token = getSession('token').split('"');
+    token = token[1];
 
     const url = `/api/task/createNew/${houseID}`;
     // const createTaskResponse = 
