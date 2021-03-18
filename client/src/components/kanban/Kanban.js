@@ -2,7 +2,6 @@
 import React, { useCallback, useState } from 'react'
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import update from 'immutability-helper';
 
 // styles
 import './Kanban.css';
@@ -26,7 +25,8 @@ import fetcher from '../../functions/fetcher';
 const Kanban = () => {
 
   const [tasks, refreshTasks] = useGetTasks();
-  const [ message , setMessage ] = useState(false);
+
+  // const [ message , setMessage ] = useState(false);
   const [ modalOpen, setModalOpen ] = useState(false);
   const [ selectedTask , setSelectedTask ] = useState({});
   // console.log('tasks =', tasks);
@@ -54,29 +54,42 @@ const Kanban = () => {
       const houseID = getSession('houseID');
 
       if (item.data.userID === null && newStatus === 'assigned'){
-          setMessage(true);
-          setTimeout(() => {
-            setMessage(false)
-          }, 2000);
+          // setMessage(true);
+          // setTimeout(() => {
+          //   setMessage(false)
+          // }, 2000);
         return;
       }
 
       if (item.data.userID !== null && newStatus === 'to-do'){
-        const url = `/api/task/updateUser/${houseID}`
-        const body = {
+        const userURL = `/api/task/updateUser/${houseID}`;
+        const user = {
           taskID: item.id,
           user: null,
-        }
-        const updateUserResponse = await fetcher(url, 'PUT', body, token);
-        console.log('updateUserResponse =', updateUserResponse);
+        };
+        // const updateUserResponse = 
+        await fetcher(userURL, 'PUT', user, token);
+        // console.log('updateUserResponse, kanban.js =', updateUserResponse);
+      }
+
+      if(newStatus === 'complete'){
+        const getDate = new Date().toLocaleDateString();
+        const formatDate = getDate.replaceAll("/", "-").split('-').reverse().join('-');
         
+        const dateURL = `/api/task/updateCompletedDate/${houseID}`
+        const date = {
+          taskID: item.id,
+          completedDate: formatDate,
+        };
+        const updateCompletedDateResponse = await fetcher(dateURL, 'PUT', date, token);
+        console.log('updateCompletedDateResponse =', updateCompletedDateResponse);
       }
 
       const url = `/api/task/updateStatus/${houseID}`
       const body = {
         taskID: item.id,
         newStatus: newStatus,
-      }
+      };
       const updateStatusResponse = await fetcher(url, 'PUT', body, token);
       // console.log('updateResponse =', updateResponse);
 
@@ -85,15 +98,15 @@ const Kanban = () => {
       }
     }
 
-  }, [refreshTasks, tasks]);
+  }, [refreshTasks]);
 
   const sortCard = useCallback(async (dragIndex, hoverIndex) => {
     // if (dragIndex && hoverIndex) {
     //   console.log('dragIndex =', dragIndex);
     //   console.log('hoverIndex =', hoverIndex);
     //   console.log('tasks =', tasks);
-      const dragCard = tasks.find(task => task.id === dragIndex);
-      console.log('dragCard =', dragCard);
+      // const dragCard = tasks.find(task => task.id === dragIndex);
+      // console.log('dragCard =', dragCard);
     // };
 
   }, [tasks]);
@@ -102,7 +115,7 @@ const Kanban = () => {
     <DndProvider backend={HTML5Backend}>
       <div id='kanban-content'>
       <Clock day={true} time={false} />
-        {message ? <h6>You must assign a member in the task editor first</h6> : <h6></h6>}
+        {/* {message ? <h6>You must assign a member in the task editor first</h6> : <h6></h6>} */}
         <div id='kanban-board-container'>
           <KanbanBoard title={'Tasks to do'} status={'to-do'} moveCard={moveCard} >
             {tasks
@@ -159,7 +172,7 @@ const Kanban = () => {
               })}
           </KanbanBoard>
         </div>
-        { modalOpen && <Modal closeModal={handleCloseModal} ><EditTask task={selectedTask} /></Modal> }
+        { modalOpen && <Modal closeModal={handleCloseModal} ><EditTask task={selectedTask} refresh={() => refreshTasks()} /></Modal> }
       </div>
     </DndProvider>
   )
