@@ -8,9 +8,6 @@ import './HomePage.css';
 // context
 import LoggedInContext from "../../context/LoggedInContext";
 
-// hooks
-import useSiteLocation from '../../hooks/useSiteLocation';
-
 // components
 import WelcomeTitles from '../../components/WelcomeTitles';
 
@@ -19,10 +16,9 @@ import getSession from '../../functions/getSession';
 
 
 
-const HomePage = ({ location }) => {
+const HomePage = () => {
 
   const { loggedIn } = useContext(LoggedInContext);
-  useSiteLocation(location);
 
   const id = getSession('id');
 

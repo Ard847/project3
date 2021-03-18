@@ -143,6 +143,22 @@ const updateCompletedDate = async (taskID, houseID, completedDate) => {
   })
 }
 
+const deleteTask = async (taskID, houseID) => {
+  return await Task.destroy({
+    where: {
+      id: taskID,
+      householdID: houseID,
+    },
+  })
+  .then((data) => {
+    // console.log('deleteTask, data =', data);
+    return data;
+  })
+  .catch((err) => {
+    console.log('task model, deleteTask, error =', err);
+  })
+}
+
 module.exports = {
   createTask,
   findAllTasks,
@@ -152,4 +168,5 @@ module.exports = {
   updateTask,
   updateCompletedDate,
   updateNextDate,
+  deleteTask,
 }

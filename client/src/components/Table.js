@@ -7,7 +7,6 @@ import './Table.css';
 // components
 import Modal from '../components/Modal';
 import EditTask from '../components/EditTask';
-import Clock from '../components/Clock';
 
 // hooks
 import useGetTasks from '../hooks/useGetTasks';
@@ -17,16 +16,20 @@ import useGetMembers from '../hooks/useGetMembers';
 import getSession from '../functions/getSession';
 import fetcher from '../functions/fetcher';
 
+
 const Table = () => {
 
   const members = useGetMembers();
-  console.log('members =', members);
+  const houseID = getSession('houseID');
+  let token = getSession('token').split('"');
+  token = token[1];
+  // console.log('members =', members);
 
   const [tasks, refreshTasks] = useGetTasks();
   const [ modalOpen, setModalOpen ] = useState(false);
   const [ selectedTask , setSelectedTask ] = useState({});
 
-  console.log('tasks =', tasks);
+  // console.log('tasks =', tasks);
 
   const toggelModal = (task) => {
     setSelectedTask(task);
@@ -56,7 +59,17 @@ const Table = () => {
     }
   }
 
-  const deleteTask = (task) => {
+  const deleteTask = async (task) => {
+    console.log('task to delete =', task);
+    const url = `/api/task/deleteTask/${houseID}`;
+    const body = {
+      task: task,
+    }
+    const deleteResponse = await fetcher(url, 'DELETE', body, token);
+    console.log('deleteResponse =', deleteResponse);
+    if (deleteResponse.message === 'success'){
+      refreshTasks();
+    }
 
   }
 
@@ -79,16 +92,16 @@ const Table = () => {
         <tbody>
           {tasks.map((task) => {
             return (
-              <tr key={task.id} onClick={() => {toggelModal(task)}}>
-                <td>{task.taskName}</td>
-                <td>{task.duration} mins</td>
-                <td>{formatDate(task.nextDate)}</td>
-                <td>{task.alertBefore} days before</td>
-                <td>{task.completeBy} days after</td>
-                <td>Every {task.repeatEvery} days</td>
-                <td>{getUser(task.userID)}</td>
-                <td>{task.status}</td>
-                <td>{formatDate(task.completedDate)}</td>
+              <tr key={task.id} >
+                <td onClick={() => {toggelModal(task)}}>{task.taskName}</td>
+                <td onClick={() => {toggelModal(task)}}>{task.duration} mins</td>
+                <td onClick={() => {toggelModal(task)}}>{formatDate(task.nextDate)}</td>
+                <td onClick={() => {toggelModal(task)}}>{task.alertBefore} days before</td>
+                <td onClick={() => {toggelModal(task)}}>{task.completeBy} days after</td>
+                <td onClick={() => {toggelModal(task)}}>Every {task.repeatEvery} days</td>
+                <td onClick={() => {toggelModal(task)}}>{getUser(task.userID)}</td>
+                <td onClick={() => {toggelModal(task)}}>{task.status}</td>
+                <td onClick={() => {toggelModal(task)}}>{formatDate(task.completedDate)}</td>
                 <td><button className='delete-btn' onClick={() => {deleteTask(task)}} >Delete</button></td>
               </tr>
             )

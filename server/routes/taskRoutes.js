@@ -180,8 +180,8 @@ router.put('/updateAll/:houseID', auth, async (req, res) => {
 });
 
 router.put('/updateCompletedDate/:houseID', auth, async (req, res) => {
-  console.log('req.body =', req.body);
-  console.log('req.params =', req.params);
+  // console.log('req.body =', req.body);
+  // console.log('req.params =', req.params);
   const houseID = req.params.houseID;
   const taskID = req.body.taskID;
   const completedDate = req.body.completedDate;
@@ -219,6 +219,30 @@ router.put('/updateCompletedDate/:houseID', auth, async (req, res) => {
         data: err,
       });
     })
+});
+
+router.delete('/deleteTask/:houseID', auth, async (req, res) => {
+  console.log('req.body =', req.body);
+  console.log('req.params =', req.params);
+
+  const houseID = req.params.houseID;
+  const taskID = req.body.task.id;
+
+  await tasksModel
+    .deleteTask(taskID, houseID)
+    .then((deleted) => {
+      res.status(200).json({
+        message: 'success',
+        data: deleted,
+      });
+    })
+    .catch((err) => {
+      res.status(401).json({
+        message: 'error',
+        data: err,
+      });
+    })
+
 });
 
 module.exports = router ;
