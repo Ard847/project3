@@ -1,0 +1,32 @@
+div#table-content {
+  overflow-x: scroll;
+  background-color: var(--white);
+  padding: 12px;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+tr:hover {
+  background-color: white;
+  cursor: pointer;
+}
+
+td {
+  font-size: 12px;
+  padding: 6px;
+  white-space: nowrap;
+  background-color:rgba(255, 255, 255, 0.5);
+  border-right: 6px solid var(--white);
+}
+
+th {
+  padding: 6px;
+  white-space: nowrap;
+}
+
+button.delete-btn {
+  margin: 0;
+  cursor: pointer;
+}

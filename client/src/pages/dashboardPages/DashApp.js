@@ -13,7 +13,7 @@ import useGetMembers from '../../hooks/useGetMembers';
 import saveToSession from '../../functions/saveToSession';
 
 // components
-import DashNav from '../../components/DashNav';
+import DashNav from '../../components/navigation/DashNav';
 import Modal from '../../components/Modal';
 import CreateTaskForm from '../../components/forms/CreateTaskForm';
 

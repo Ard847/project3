@@ -21,7 +21,7 @@ import ChooseHouse from '../pages/welcomePages/ChooseHouse';
 import DashApp from '../pages/dashboardPages/DashApp';
 
 // components
-import NavBar from '../components/Navbar';
+import NavBar from '../components/navigation/Navbar';
 
 
 
