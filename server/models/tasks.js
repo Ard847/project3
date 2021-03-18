@@ -127,7 +127,7 @@ const updateNextDate = async (taskID, houseID, nextDate) => {
 
 const updateCompletedDate = async (taskID, houseID, completedDate) => {
   return await Task.update({
-    completeBy: completedDate,
+    completedDate: completedDate,
   },{
     where: {
       id: taskID,
