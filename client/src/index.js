@@ -3,7 +3,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 // context
-import { LocationContextProvider } from './context/LocationContext';
 import { LoggedInContextProvider } from './context/LoggedInContext';
 
 // styles
@@ -14,11 +13,9 @@ import App from './App/App';
 
 ReactDOM.render(
   <React.StrictMode>
-    <LocationContextProvider>
-      <LoggedInContextProvider>
-        <App />
-      </LoggedInContextProvider>
-    </LocationContextProvider>
+    <LoggedInContextProvider>
+      <App />
+    </LoggedInContextProvider>
   </React.StrictMode>,
 
   document.getElementById('root')

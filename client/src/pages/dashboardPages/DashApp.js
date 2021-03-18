@@ -6,14 +6,13 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './DashApp.css';
 
 // hooks
-import useSiteLocation from '../../hooks/useSiteLocation';
 import useGetMembers from '../../hooks/useGetMembers';
 
 // functions
 import saveToSession from '../../functions/saveToSession';
 
 // components
-import DashNav from '../../components/DashNav';
+import DashNav from '../../components/navigation/DashNav';
 import Modal from '../../components/Modal';
 import CreateTaskForm from '../../components/forms/CreateTaskForm';
 
@@ -26,7 +25,6 @@ const DashApp = ({ match, location }) => {
 
   // console.log('match =', match);
   // console.log('location =', location);
-  useSiteLocation(location);
 
   const userID = parseInt(match.params.id);
   const houseID = parseInt(match.params.householdID);
@@ -40,6 +38,7 @@ const DashApp = ({ match, location }) => {
   const [ modalOpen, setModalOpen ] = useState(false);
   
   const members = useGetMembers();
+  console.log(members);
   
   const handleToggelModal = () => {
     setModalOpen(true);

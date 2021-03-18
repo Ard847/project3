@@ -12,13 +12,11 @@ import WelcomeTitles from '../../components/WelcomeTitles';
 import getSession from '../../functions/getSession';
 
 // hooks
-import useSiteLocation from '../../hooks/useSiteLocation';
 
 
-const CreateHouse = ({ location }) => {
+const CreateHouse = () => {
 
   const id = getSession('id');
-  useSiteLocation(location);
 
   return (
     <>
