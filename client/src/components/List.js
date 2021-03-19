@@ -60,7 +60,7 @@ const List = ({ title, id, list, refresh }) => {
             <p>{task.taskName}</p>
             {
               task.status === 'complete'
-                ? <input type='checkbox' onClick={() => false} checked />
+                ? <input type='checkbox' onClick={() => false} checked readOnly/>
                 : <input type='checkbox' onChange={() => toggelTaskComplete(task.id, task.taskName, true)} />
             }
           </div>
