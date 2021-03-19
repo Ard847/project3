@@ -42,7 +42,7 @@ const Kanban = () => {
 
       tasks.forEach(task => {
         
-        const todaysDate = new Date(2021,2,20);
+        const todaysDate = new Date();
         // task range
         const startDate = new Date(task.nextDate);
         startDate.setDate(startDate.getDate() - Number(task.alertBefore));
@@ -65,7 +65,7 @@ const Kanban = () => {
     if (tasks.length > 0){
 
       tasks.forEach(task => {
-        const todaysDate = new Date(2021,2,20);
+        const todaysDate = new Date();
         const completedDate = new Date(task.completedDate);
 
         if( completedDate <= todaysDate && task.status === 'complete'){
