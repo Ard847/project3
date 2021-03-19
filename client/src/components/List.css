@@ -1,0 +1,42 @@
+.list-title {
+  border-radius: 5px;
+  background-color: var(--grey);
+  margin-top: 0;
+  text-align: center;
+}
+
+div#dash-today-list {
+  grid-column: 1 / span 1;
+  grid-row: 3 / span 1;
+}
+
+div#tasks-to-do {
+  grid-column: 2 / span 1;
+  grid-row: 3 / span 1;
+  display: flex;
+  flex-flow: column;
+}
+
+div#tasks-to-do > div:first-child {
+  margin-bottom: 6px;
+}
+
+div#tasks-to-do > div:last-child {
+  margin-top: 6px;
+}
+
+div#dash-my-list,
+div#dash-assigned-list {
+  flex-grow: 1;
+}
+
+
+div#dash-month-list {
+  grid-column: 3 / span 1;
+  grid-row: 3 / span 1;
+}
+
+div#dash-overdue-list {
+  grid-column: 4 / span 1;
+  grid-row: 3 / span 1;
+}
