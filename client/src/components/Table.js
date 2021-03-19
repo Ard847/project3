@@ -1,5 +1,5 @@
 // packages
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // styles
 import './Table.css';
@@ -19,17 +19,31 @@ import fetcher from '../functions/fetcher';
 
 const Table = () => {
 
+  // hooks
   const members = useGetMembers();
+  const [tasks, refreshTasks] = useGetTasks();
+  console.log('tasks =', tasks);
+
+  // variables
   const houseID = getSession('houseID');
   let token = getSession('token').split('"');
   token = token[1];
   // console.log('members =', members);
 
-  const [tasks, refreshTasks] = useGetTasks();
+  // state
   const [ modalOpen, setModalOpen ] = useState(false);
   const [ selectedTask , setSelectedTask ] = useState({});
+  const [ sortedTasks, setSortedTasks ] = useState([]);
 
-  // console.log('tasks =', tasks);
+
+  useEffect(() => {
+
+    const sortedData = tasks.slice(0).sort(function (a, b) {
+      return new Date(a.nextDate) - new Date(b.nextDate);
+    });
+    setSortedTasks(sortedData);
+
+  }, [tasks]);
 
   const toggelModal = (task) => {
     setSelectedTask(task);
@@ -90,7 +104,7 @@ const Table = () => {
           </tr>
         </thead>
         <tbody>
-          {tasks.map((task) => {
+          {sortedTasks.map((task) => {
             return (
               <tr key={task.id} >
                 <td onClick={() => {toggelModal(task)}}>{task.taskName}</td>

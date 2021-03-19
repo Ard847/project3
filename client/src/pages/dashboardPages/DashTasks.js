@@ -9,9 +9,8 @@ import Kanban from '../../components/kanban/Kanban';
 import Table from '../../components/Table';
 
 
-const DashTasks = (props) => {
+const DashTasks = () => {
 
-  // console.log('DashTasks props =', props);
   const [ view , setView ] = useState('kanban');
 
   const changeView = (event) => {
