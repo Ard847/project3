@@ -112,7 +112,7 @@ const EditTask = ({ task, refresh }) => {
   }
 
   const assignHouseholdMember = async (member) => {
-    console.log('assignHouseholdMember, member =', member);
+    // console.log('assignHouseholdMember, member =', member);
     const url = `/api/task/updateUser/${taskData.householdID}`;
     const body = {
       taskID: task.id,
@@ -121,14 +121,14 @@ const EditTask = ({ task, refresh }) => {
     let token = getSession('token').split('"');
     token = token[1];
     const updateUserResponse = await fetcher(url, 'PUT', body, token);
-    console.log('updateUserResponse =', updateUserResponse.message);
+    // console.log('updateUserResponse =', updateUserResponse.message);
     if (updateUserResponse.message === 'success') {
-      console.log('in this block');
+      // console.log('in this block');
       let newTaskData = { ...taskData };
-      console.log('newTaskData 1 =', newTaskData);
+      // console.log('newTaskData 1 =', newTaskData);
       newTaskData.userID = member.id;
       newTaskData.status = 'assigned';
-      console.log('newTaskData 2 =', newTaskData);
+      // console.log('newTaskData 2 =', newTaskData);
       setTaskData(newTaskData);
       refresh();
     }; 

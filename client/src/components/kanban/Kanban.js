@@ -1,5 +1,5 @@
 // packages
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
@@ -25,15 +25,60 @@ import fetcher from '../../functions/fetcher';
 const Kanban = () => {
 
   const [tasks, refreshTasks] = useGetTasks();
+  console.log('tasks =', tasks);
 
   // const [ message , setMessage ] = useState(false);
   const [ modalOpen, setModalOpen ] = useState(false);
   const [ selectedTask , setSelectedTask ] = useState({});
-  // console.log('tasks =', tasks);
+  const [ filteredTasks, setFilteredTasks ] = useState([]);
+  const [ completedTasks, setCompletedTasks ] = useState([]);
 
   const members = useGetMembers();
   // console.log('members =', members);
-      
+
+  useEffect(() => {
+    let filteredData = [];
+    if (tasks.length > 0){
+
+      tasks.forEach(task => {
+        
+        const todaysDate = new Date(2021,2,20);
+        // task range
+        const startDate = new Date(task.nextDate);
+        startDate.setDate(startDate.getDate() - Number(task.alertBefore));
+        const endDate = new Date(task.nextDate);
+        endDate.setDate(endDate.getDate() + Number(task.completeBy));
+        // console.log('todaysDate =', todaysDate);
+        // console.log('startDate =', startDate);
+        // console.log('endDate =', endDate);
+        if( startDate <= todaysDate && todaysDate <= endDate ){
+          console.log('dates between');
+          filteredData.push(task);
+        }
+      });
+      setFilteredTasks(filteredData);
+    }
+  }, [tasks]);
+
+  useEffect(() => {
+    let filteredData = [];
+    if (tasks.length > 0){
+
+      tasks.forEach(task => {
+        const todaysDate = new Date(2021,2,20);
+        const completedDate = new Date(task.completedDate);
+
+        if( completedDate <= todaysDate && task.status === 'complete'){
+          filteredData.push(task);
+        }
+      });
+      setCompletedTasks(filteredData);
+    }
+
+  }, [tasks]);
+
+
+  // call modal --------------------------------------------------------------
   const handleToggelModal = (task) => {
     // console.log('task =', task);
     setSelectedTask(task);
@@ -44,6 +89,7 @@ const Kanban = () => {
     setModalOpen(false);
   }
 
+  // drag and drop -----------------------------------------------------------
   const moveCard = useCallback(async (item, newStatus) => {
     // console.log('item =', item);
     // console.log('newStatus =', newStatus); 
@@ -111,6 +157,7 @@ const Kanban = () => {
 
   }, [tasks]);
 
+  // rendered ----------------------------------------------------------------
   return (
     <DndProvider backend={HTML5Backend}>
       <div id='kanban-content'>
@@ -118,7 +165,7 @@ const Kanban = () => {
         {/* {message ? <h6>You must assign a member in the task editor first</h6> : <h6></h6>} */}
         <div id='kanban-board-container'>
           <KanbanBoard title={'Tasks to do'} status={'to-do'} moveCard={moveCard} >
-            {tasks
+            {filteredTasks
               .filter((task) => {
                 return task.status === 'to-do';
               })
@@ -137,7 +184,7 @@ const Kanban = () => {
           </KanbanBoard>
 
           <KanbanBoard title={'Assigned'} status={'assigned'} moveCard={moveCard} >
-            {tasks
+            {filteredTasks
               .filter((task) => {
                 return task.status === 'assigned';
               })
@@ -155,10 +202,7 @@ const Kanban = () => {
           </KanbanBoard>
 
           <KanbanBoard title={'Complete'} status={'complete'} moveCard={moveCard} >
-            {tasks
-              .filter((task) => {
-                return task.status === 'complete';
-              })
+            {completedTasks
               .map((task, index) => {
                 if (members.length !== 0) {
                   let user = members.find(member => member.id === task.userID)

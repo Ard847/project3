@@ -54,7 +54,7 @@ router.post('/createNew/:houseID', auth, async (req, res) => {
       times.repeat = req.body.repeat.time * 7;
       break;
       case 'months':
-      times.repeat = req.body.repeat.time * 60;
+      times.repeat = req.body.repeat.time * 30;
       break;
   }
   switch(req.body.alert.unit){
@@ -65,7 +65,7 @@ router.post('/createNew/:houseID', auth, async (req, res) => {
       times.alert = req.body.alert.time * 7;
       break;
       case 'months':
-      times.alert = req.body.alert.time * 60;
+      times.alert = req.body.alert.time * 30;
       break;
   }
   switch(req.body.complete.unit){
@@ -193,17 +193,18 @@ router.put('/updateCompletedDate/:houseID', auth, async (req, res) => {
     })
     .then( async (put) => {
       const task = await tasksModel.findTask(taskID);
-      console.log('task =', task);
+      // console.log('task =', task);
       const repeatEvery = task[0].repeatEvery;
       const date = new Date(completedDate);
       date.setDate(date.getDate() + Number(repeatEvery));
-      console.log('date =', date); 
+      // console.log('date =', date); 
       const nextDate = date.toLocaleDateString().slice(0, 10);
       console.log('nextDate =', nextDate, typeof(nextDate));
       const formatDate = nextDate.replace("/", "-").replace("/", "-").split('-').reverse().join('-');
-      console.log(formatDate);
-      const updateNextDate = await tasksModel.updateNextDate(taskID, houseID, formatDate).then((data) =>{return data});
-      console.log('updateNextDate =', updateNextDate);
+      // console.log(formatDate);
+      // const updateNextDate = 
+      await tasksModel.updateNextDate(taskID, houseID, formatDate).then((data) =>{return data});
+      // console.log('updateNextDate =', updateNextDate);
 
       res.status(200).json({
         message: 'success',
