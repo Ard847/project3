@@ -38,7 +38,7 @@ const DashApp = ({ match, location }) => {
   const [ modalOpen, setModalOpen ] = useState(false);
   
   const members = useGetMembers();
-  console.log(members);
+  // console.log(members);
   
   const handleToggelModal = () => {
     setModalOpen(true);
@@ -70,7 +70,9 @@ const DashApp = ({ match, location }) => {
                 <DashHome {...props} members={members} />
               )}
             />
-            <Route exact path={`${match.url}/task-manager`} component={DashTasks} />
+            <Route exact path={`${match.url}/task-manager`} render={(props) => (
+                <DashTasks {...props} />
+              )} />
           </article>
 
         </Router>
