@@ -180,18 +180,18 @@ router.put('/updateAll/:houseID', auth, async (req, res) => {
 });
 
 router.put('/updateCompletedDate/:houseID', auth, async (req, res) => {
-  // console.log('req.body =', req.body);
-  // console.log('req.params =', req.params);
+  console.log('req.body =', req.body);
+  console.log('req.params =', req.params);
   const houseID = req.params.houseID;
+  console.log({houseID});
   const taskID = req.body.taskID;
+  console.log({taskID});
   const completedDate = req.body.completedDate;
+  console.log({completedDate});
   await tasksModel
     .updateCompletedDate(taskID, houseID, completedDate)
     .then( async (put) => {
       console.log(put);
-      
-    })
-    .then( async (put) => {
       const task = await tasksModel.findTask(taskID);
       // console.log('task =', task);
       const repeatEvery = task[0].repeatEvery;

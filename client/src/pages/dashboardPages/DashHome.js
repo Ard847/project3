@@ -24,15 +24,16 @@ const DashHome = ({ members }) => {
   const userID = parseInt(getSession('id'));
 
   // hooks -------------------------------------------------------------------
-  const [ tasks, ] = useGetTasks();
+  const [tasks, refreshTasks] = useGetTasks();
 
   // state --------------------------------------------------------------------
   const [showInviteButton, setShowInviteButton] = useState(true);
-  const [ todaysTasks, setTodaysTasks ] = useState([]);
-  const [ myTasks, setMyTasks ] = useState([]);
-  const [ assignedTasks, setAssignedTasks ] = useState([]);
-  const [ monthTasks, setMonthTasks ] = useState([]);
-  const [ overdueTasks, setOverdueTasks] = useState([]);
+  const [todaysTasks, setTodaysTasks] = useState([]);
+  const [myTasks, setMyTasks] = useState([]);
+  const [assignedTasks, setAssignedTasks] = useState([]);
+  const [monthTasks, setMonthTasks] = useState([]);
+  const [overdueTasks, setOverdueTasks] = useState([]);
+  const [completedTasks, setCompletedTasks] = useState([]);
 
   // Invite to household ------------------------------------------------------
   const handleShowHouseID = (event) => {
@@ -52,51 +53,58 @@ const DashHome = ({ members }) => {
     let myTaskData = [];
     let assignedTaskData = [];
     let overdueTaskData = [];
-    if (tasks.length > 0){
+    let completedData = [];
+    if (tasks.length > 0) {
 
       tasks.forEach(task => {
-        
+
         const todaysDate = new Date();
         // task range
         const startDate = new Date(task.nextDate);
         startDate.setDate(startDate.getDate() - Number(task.alertBefore));
         const endDate = new Date(task.nextDate);
         endDate.setDate(endDate.getDate() + Number(task.completeBy));
-       
-        if( (startDate <= todaysDate && todaysDate <= endDate) && task.status === 'to-do' ){
+        const completedDate = new Date(task.completedDate);
+
+        if ((startDate <= todaysDate && todaysDate <= endDate) && task.status === 'to-do') {
           // console.log('date is in range');
           todaysTaskData.push(task);
         }
 
-        if( (startDate <= todaysDate && todaysDate <= endDate) && (task.userID === userID) ){
+        if ((startDate <= todaysDate && todaysDate <= endDate) && (task.userID === userID)) {
           // console.log('dates between');
           myTaskData.push(task);
         }
 
-        if( (startDate <= todaysDate && todaysDate <= endDate) && (task.userID !== userID) ){
+        if ((startDate <= todaysDate && todaysDate <= endDate) && (task.userID !== userID && task.status === 'assigned')) {
           // console.log('dates between');
           assignedTaskData.push(task);
         }
 
-        if( endDate < todaysDate && task.status !== 'complete' ){
+        if (endDate < todaysDate && task.status !== 'complete') {
           // console.log('dates between');
           overdueTaskData.push(task);
+        }
+
+        if (completedDate <= todaysDate && task.status === 'complete') {
+          completedData.push(task);
         }
       });
       setTodaysTasks(todaysTaskData);
       setMyTasks(myTaskData);
       setAssignedTasks(assignedTaskData);
       setOverdueTasks(overdueTaskData);
+      setCompletedTasks(completedData);
     }
 
   }, [tasks]);
 
   useEffect(() => {
     let monthTaskData = [];
-    if (tasks.length > 0){
+    if (tasks.length > 0) {
 
       tasks.forEach(task => {
-        
+
         const todaysDate = new Date().toLocaleDateString();
         // console.log('todaysDate =', todaysDate);
         let todaysMonth = todaysDate.split('/');
@@ -106,7 +114,7 @@ const DashHome = ({ members }) => {
         const date = new Date(task.nextDate).toLocaleDateString();
         let dateMonth = date.split('/');
         dateMonth = dateMonth[1];
-        if( todaysMonth === dateMonth && task.repeatEvery > 7 ){
+        if (todaysMonth === dateMonth && task.repeatEvery > 7) {
           monthTaskData.push(task);
         }
 
@@ -115,7 +123,10 @@ const DashHome = ({ members }) => {
     }
   }, [tasks]);
 
- 
+  const onRefresh = (taskID, newStatus) => {
+    console.log('here')
+    refreshTasks(taskID, newStatus);
+  }
 
   // render ------------------------------------------------------------------------
   return (
@@ -151,13 +162,16 @@ const DashHome = ({ members }) => {
           )
         })}
       </div>
-      <List title={"Today's Tasks"} id={'dash-today-list'} list={todaysTasks}/>
+      <List title={"Today's Tasks"} id={'dash-today-list'} list={todaysTasks} refresh={onRefresh } />
       <div id='tasks-to-do'>
-        <List title={"My Tasks"} id={'dash-my-list'} list={myTasks}/>
-        <List title={"Assigned Tasks"} id={'dash-assigned-list'} list={assignedTasks}/>
+        <List title={"My Tasks"} id={'dash-my-list'} list={myTasks} refresh={onRefresh } />
+        <List title={"Assigned Tasks"} id={'dash-assigned-list'} list={assignedTasks} refresh={onRefresh } />
       </div>
-      <List title={"Coming up this month"} id={'dash-month-list'} list={monthTasks}/>
-      <List title={"Over Due"} id={'dash-overdue-list'} list={overdueTasks}/>
+      <List title={"Coming up this month"} id={'dash-month-list'} list={monthTasks} refresh={onRefresh } />
+      <div id='tasks-col-4' >
+        <List title={"Over Due"} id={'dash-overdue-list'} list={overdueTasks} refresh={onRefresh } />
+        <List title={"Completed"} id={'dash-complete-list'} list={completedTasks} refresh={onRefresh } />
+      </div>
     </div>
   )
 };

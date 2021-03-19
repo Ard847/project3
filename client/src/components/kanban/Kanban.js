@@ -38,6 +38,7 @@ const Kanban = () => {
 
   useEffect(() => {
     let filteredData = [];
+    let completedData = [];
     if (tasks.length > 0){
 
       tasks.forEach(task => {
@@ -48,34 +49,27 @@ const Kanban = () => {
         startDate.setDate(startDate.getDate() - Number(task.alertBefore));
         const endDate = new Date(task.nextDate);
         endDate.setDate(endDate.getDate() + Number(task.completeBy));
+        const completedDate = new Date(task.completedDate);
         // console.log('todaysDate =', todaysDate);
         // console.log('startDate =', startDate);
         // console.log('endDate =', endDate);
+
         if( startDate <= todaysDate && todaysDate <= endDate ){
           console.log('dates between');
           filteredData.push(task);
         }
-      });
-      setFilteredTasks(filteredData);
-    }
-  }, [tasks]);
-
-  useEffect(() => {
-    let filteredData = [];
-    if (tasks.length > 0){
-
-      tasks.forEach(task => {
-        const todaysDate = new Date();
-        const completedDate = new Date(task.completedDate);
 
         if( completedDate <= todaysDate && task.status === 'complete'){
-          filteredData.push(task);
+          completedData.push(task);
         }
-      });
-      setCompletedTasks(filteredData);
-    }
 
+      });
+      setFilteredTasks(filteredData);
+      setCompletedTasks(completedData);
+    }
   }, [tasks]);
+
+  
 
 
   // call modal --------------------------------------------------------------
@@ -122,7 +116,7 @@ const Kanban = () => {
         const getDate = new Date().toLocaleDateString();
         const formatDate = getDate.replaceAll("/", "-").split('-').reverse().join('-');
         
-        const dateURL = `/api/task/updateCompletedDate/${houseID}`
+        const dateURL = `/api/task/updateCompletedDate/${houseID}`;
         const date = {
           taskID: item.id,
           completedDate: formatDate,
