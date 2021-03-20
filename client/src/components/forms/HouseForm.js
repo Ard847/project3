@@ -81,7 +81,7 @@ const HouseForm = ({ userID, type }) => {
   const uploadImage = async (base64EncodedImage) => {
     let token = getSession('token').split('"')
     token = token[1]
-    console.log(base64EncodedImage)
+    //console.log(base64EncodedImage)
     try{
       //await fetcher('/api/images/upload','Post',{data :base64EncodedImage, id : id},token)
       createNewHousehold(base64EncodedImage)

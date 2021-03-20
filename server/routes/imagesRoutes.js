@@ -14,19 +14,28 @@ cloudinary.config({
 router.get('/:id',auth, async(req,res) => {
     const userHouseholds = await householdModel.findAllHousehold(req.params.id);
     const households = userHouseholds[0].dataValues.households; 
-    console.log('yo',households)
+    //console.log('yo',households)
     const images =  households.map( (household) => household.dataValues.image)
     const {resources} = await cloudinary.search.expression 
     ('folder:project3/houses')
     .sort_by('public_id')
     .execute();
     const publicIds = resources.map( file => file.public_id ) 
-    console.log('public',publicIds)
-    console.log('images',images)
-    const imagesToSend = images.filter((image,n) => image === publicIds[n])
+    //console.log('public',publicIds)
+    //console.log('images',images)
+    let imagesToSend = []
+    for(let i = 0; i < images.length; i++){
+        for(let j = 0; j < publicIds.length; j++){
+            if(images[i] === publicIds[j] || images[i] === null ){
+                imagesToSend.push(images[i])
+            }
+            
+        }
+    }
+   
     console.log('imagest to send' ,imagesToSend)
     //res.sec(publicIds)
-    res.json({Answer : 'Hey'})
+    res.send(imagesToSend)
 })
 
 router.post('/upload',auth,  async (req,res) => {
