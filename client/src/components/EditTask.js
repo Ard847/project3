@@ -35,9 +35,9 @@ const EditTask = ({ task, refresh }) => {
   // console.log('members =',members);
   // console.log('taskData =', taskData);
 
-  console.log("displayDate =", displayDate );
+  // console.log("displayDate =", displayDate );
   useEffect(() => {
-    console.log('taskData.nextDate =', taskData.nextDate);
+    // console.log('taskData.nextDate =', taskData.nextDate);
     if(taskData.nextDate === null){
       setDisplayDate('Invalid Date');
     } else {
@@ -76,9 +76,9 @@ const EditTask = ({ task, refresh }) => {
 
   const handleInputChange = (event) => {
     const target = event.target;
-    console.log('target =', target);
-    console.log('target.name =', target.name);
-    console.log('target.value =', target.value);
+    // console.log('target =', target);
+    // console.log('target.name =', target.name);
+    // console.log('target.value =', target.value);
 
     if ( target.name === 'task-name' ) {
       let newTaskName = { ...taskData }
@@ -94,7 +94,7 @@ const EditTask = ({ task, refresh }) => {
 
     if( target.name === 'due-date-input' ){
       const date = new Date(target.value);
-      console.log('date =', date);
+      // console.log('date =', date);
       let newTaskDue = { ...taskData }
       newTaskDue.nextDate = date;
       setTaskData(newTaskDue);

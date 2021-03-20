@@ -12,6 +12,8 @@ import getPriority from '../../functions/getPriority';
 
 const Card = ({ data, member, index, sortCard, toggelModal }) => {
 
+  console.log('member =', member);
+
   const id = data.id;
   const ref = useRef(null);
   

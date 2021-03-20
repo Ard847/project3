@@ -56,7 +56,7 @@ const Kanban = () => {
         // console.log('startDate =', startDate);
         // console.log('endDate =', endDate);
 
-        if( (startDate <= todaysDate && todaysDate <= endDate) || task.status === 'overdue' ){
+        if( (startDate <= todaysDate && todaysDate <= endDate) || todaysDate > endDate ){
           // console.log('dates between');
           filteredData.push(task);
         }
@@ -162,7 +162,7 @@ const Kanban = () => {
           <KanbanBoard title={'Tasks to do'} status={'to-do'} moveCard={moveCard} >
             {filteredTasks
               .filter((task) => {
-                return task.status === 'to-do' || task.status === 'overdue';
+                return task.status === 'to-do';
               })
               .map((task, index) => {
                 // console.log('task =', task);
@@ -202,7 +202,7 @@ const Kanban = () => {
                 if (members.length !== 0) {
                   let user = members.find(member => member.id === task.userID)
                   if (user) {
-                    return <Card key={task.id} data={task} index={index} member={user} sortCard={sortCard} toggelModal={handleToggelModal}/>
+                    return <Card key={task.id} data={task} index={index} member={user.firstName} sortCard={sortCard} toggelModal={handleToggelModal}/>
                   } else {
                     return <Card key={task.id} data={task} index={index} sortCard={sortCard} toggelModal={handleToggelModal}/>
                   }
