@@ -16,8 +16,8 @@ const useGetTasks = () => {
     token = token[1];
     const url = `/api/task/getTasks/${houseID}`;
     const tasksResponse = await fetcher(url, 'GET', '', token);
-    // console.log('tasksResponse =', tasksResponse);
-    
+    console.log('tasksResponse =', tasksResponse);
+    checkForOverdue(tasksResponse.data);
     setTasks(tasksResponse.data);
   }
 

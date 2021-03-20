@@ -65,11 +65,11 @@ const Table = () => {
   }
 
   const formatDate = (date) => {
-    if(date !== ""){
+    if(date !== null){
       const newDate = new Date(date).toDateString();
       return newDate;
     } else { 
-      return ''; 
+      return null; 
     }
   }
 

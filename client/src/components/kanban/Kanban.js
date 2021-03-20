@@ -44,7 +44,7 @@ const Kanban = () => {
       tasks.forEach(task => {
         
         const todaysDate = new Date();
-        // console.log('task kanban =', task);
+        console.log('task kanban =', task);
         // task range
         const startDate = new Date(task.nextDate);
         startDate.setDate(startDate.getDate() - Number(task.alertBefore));
@@ -56,7 +56,7 @@ const Kanban = () => {
         // console.log('startDate =', startDate);
         // console.log('endDate =', endDate);
 
-        if( startDate <= todaysDate && todaysDate <= endDate ){
+        if( (startDate <= todaysDate && todaysDate <= endDate) || task.status === 'overdue' ){
           // console.log('dates between');
           filteredData.push(task);
         }
@@ -115,13 +115,12 @@ const Kanban = () => {
       }
 
       if(newStatus === 'complete'){
-        const getDate = new Date().toLocaleDateString();
-        const formatDate = getDate.replaceAll("/", "-").split('-').reverse().join('-');
+        const getDate = new Date
         
         const dateURL = `/api/task/updateCompletedDate/${houseID}`;
         const date = {
           taskID: item.id,
-          completedDate: formatDate,
+          completedDate: getDate,
         };
         const updateCompletedDateResponse = await fetcher(dateURL, 'PUT', date, token);
         console.log('updateCompletedDateResponse =', updateCompletedDateResponse);
@@ -163,7 +162,7 @@ const Kanban = () => {
           <KanbanBoard title={'Tasks to do'} status={'to-do'} moveCard={moveCard} >
             {filteredTasks
               .filter((task) => {
-                return task.status === 'to-do';
+                return task.status === 'to-do' || task.status === 'overdue';
               })
               .map((task, index) => {
                 // console.log('task =', task);

@@ -115,8 +115,8 @@ router.put('/updateUser/:houseID', auth, async (req, res) => {
 });
 
 router.put('/updateAll/:houseID', auth, async (req, res) => {
-  // console.log('req.body =', req.body);
-  // console.log('req.params =', req.params);
+  console.log('req.body =', req.body);
+  console.log('req.params =', req.params);
   await tasksModel
     .updateTask(req.body, req.params.houseID)
     .then((put) => {
@@ -146,21 +146,16 @@ router.put('/updateCompletedDate/:houseID', auth, async (req, res) => {
   await tasksModel
     .updateCompletedDate(taskID, houseID, completedDate)
     .then(async (put) => {
-      console.log(put);
+      // console.log(put);
       const task = await tasksModel.findTask(taskID);
       // console.log('task =', task);
       const repeatEvery = task[0].repeatEvery;
       const date = new Date(completedDate);
       date.setDate(date.getDate() + Number(repeatEvery));
       // console.log('date =', date); 
-      const nextDate = date.toLocaleDateString().slice(0, 10);
-      console.log('nextDate =', nextDate, typeof (nextDate));
-      const formatDate = nextDate.replace("/", "-").replace("/", "-").split('-').reverse().join('-');
-      // console.log(formatDate);
       // const updateNextDate = 
-      await tasksModel.updateNextDate(taskID, houseID, formatDate).then((data) => { return data });
+      await tasksModel.updateNextDate(taskID, houseID, date);
       // console.log('updateNextDate =', updateNextDate);
-
       res.status(200).json({
         message: 'success',
         data: {
