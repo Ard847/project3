@@ -23,6 +23,14 @@ const getPriority = (task) => {
     }
   }
 
+  if ((todayDate < startDate ) || (todayDate > endDate && task.status === 'complete' )){
+    return {
+      'backgroundColor': 'unset',
+      'borderRadius': '5px',
+      'padding': '3px 6px',
+    }
+  }
+
   // if task is overdue
   if (endDate < todayDate) {
     return {
