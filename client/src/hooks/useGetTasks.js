@@ -1,10 +1,9 @@
 // packages
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // functions
 import getSession from '../functions/getSession';
 import fetcher from '../functions/fetcher';
-import checkForOverdue from '../functions/checkForOverdue';
 
 const useGetTasks = () => {
 
@@ -16,8 +15,7 @@ const useGetTasks = () => {
     token = token[1];
     const url = `/api/task/getTasks/${houseID}`;
     const tasksResponse = await fetcher(url, 'GET', '', token);
-    console.log('tasksResponse =', tasksResponse);
-    checkForOverdue(tasksResponse.data);
+    // console.log('tasksResponse =', tasksResponse);
     setTasks(tasksResponse.data);
   }
 

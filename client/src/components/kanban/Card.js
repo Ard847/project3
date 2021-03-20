@@ -6,6 +6,9 @@ import { ItemTypes } from './Constants';
 // styles
 import './Kanban.css';
 
+// functions
+import getPriority from '../../functions/getPriority';
+
 
 const Card = ({ data, member, index, sortCard, toggelModal }) => {
 
@@ -84,7 +87,7 @@ const Card = ({ data, member, index, sortCard, toggelModal }) => {
       <p>{data.taskName}</p>
       <p className='sml-text'><strong>Time it takes: </strong>{data.duration} mins</p>
       { member && <p className='sml-text'><strong>Assigned to: </strong>{member}</p>}
-      <p className='sml-text'>Due date: {data.nextDate}</p> 
+      <p className='sml-text' style={getPriority(data)}>Due date: {data.nextDate}</p> 
     </div>
   )
 }

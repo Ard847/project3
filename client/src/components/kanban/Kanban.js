@@ -44,7 +44,7 @@ const Kanban = () => {
       tasks.forEach(task => {
         
         const todaysDate = new Date();
-        console.log('task kanban =', task);
+        // console.log('task kanban =', task);
         // task range
         const startDate = new Date(task.nextDate);
         startDate.setDate(startDate.getDate() - Number(task.alertBefore));
