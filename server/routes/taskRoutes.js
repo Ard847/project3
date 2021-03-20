@@ -28,7 +28,7 @@ router.get('/getTasks/:houseID', auth, async (req, res) => {
     })
 });
 
-router.post('/createNew/:houseID', async (req, res) => {
+router.post('/createNew/:houseID', auth, async (req, res) => {
   // console.log('req.body =', req.body);
   // console.log('req.params =', req.params);
   
@@ -54,7 +54,7 @@ router.post('/createNew/:houseID', async (req, res) => {
       times.repeat = req.body.repeat.time * 7;
       break;
       case 'months':
-      times.repeat = req.body.repeat.time * 60;
+      times.repeat = req.body.repeat.time * 30;
       break;
   }
   switch(req.body.alert.unit){
@@ -65,7 +65,7 @@ router.post('/createNew/:houseID', async (req, res) => {
       times.alert = req.body.alert.time * 7;
       break;
       case 'months':
-      times.alert = req.body.alert.time * 60;
+      times.alert = req.body.alert.time * 30;
       break;
   }
   switch(req.body.complete.unit){
@@ -121,15 +121,51 @@ router.put('/updateStatus/:houseID', auth, async (req, res) => {
 });
 
 router.put('/updateUser/:houseID', auth, async (req, res) => {
-  console.log('req.body =', req.body);
-  console.log('req.params =', req.params);
+  // console.log('req.body =', req.body);
+  // console.log('req.params =', req.params);
   const taskID = req.body.taskID;
   const houseID = req.params.houseID;
   const user = req.body.user;
   await tasksModel
     .updateUser(taskID, houseID, user)
+    .then(async () => {
+      if(user !== null){
+        await tasksModel
+          .updateStatus(taskID, houseID, 'assigned')
+          .then((put) => {
+            console.log('if(user !== null) put =', put);
+            res.json({
+              message: 'success',
+              data: put,
+            });
+          })
+      } else if (user === null){
+        await tasksModel
+          .updateStatus(taskID, houseID, 'to-do')
+          .then((put) => {
+            console.log('if(user === null) put =', put);
+            res.json({
+              message: 'success',
+              data: put,
+            });
+          })
+      }
+    })
+    .catch((err) => {
+      res.status(401).json({
+        message: 'error',
+        data: err,
+      });
+    })
+});
+
+router.put('/updateAll/:houseID', auth, async (req, res) => {
+  // console.log('req.body =', req.body);
+  // console.log('req.params =', req.params);
+  await tasksModel
+    .updateTask(req.body, req.params.houseID)
     .then((put) => {
-      // console.log('put =', put);
+      console.log('put =', put);
       res.json({
         message: 'success',
         data: put,
@@ -141,6 +177,73 @@ router.put('/updateUser/:houseID', auth, async (req, res) => {
         data: err,
       });
     })
+});
+
+router.put('/updateCompletedDate/:houseID', auth, async (req, res) => {
+  console.log('req.body =', req.body);
+  console.log('req.params =', req.params);
+  const houseID = req.params.houseID;
+  console.log({houseID});
+  const taskID = req.body.taskID;
+  console.log({taskID});
+  const completedDate = req.body.completedDate;
+  console.log({completedDate});
+  await tasksModel
+    .updateCompletedDate(taskID, houseID, completedDate)
+    .then( async (put) => {
+      console.log(put);
+      const task = await tasksModel.findTask(taskID);
+      // console.log('task =', task);
+      const repeatEvery = task[0].repeatEvery;
+      const date = new Date(completedDate);
+      date.setDate(date.getDate() + Number(repeatEvery));
+      // console.log('date =', date); 
+      const nextDate = date.toLocaleDateString().slice(0, 10);
+      console.log('nextDate =', nextDate, typeof(nextDate));
+      const formatDate = nextDate.replace("/", "-").replace("/", "-").split('-').reverse().join('-');
+      // console.log(formatDate);
+      // const updateNextDate = 
+      await tasksModel.updateNextDate(taskID, houseID, formatDate).then((data) =>{return data});
+      // console.log('updateNextDate =', updateNextDate);
+
+      res.status(200).json({
+        message: 'success',
+        data: {
+          put: put,
+          nextDate:formatDate
+        },
+      })
+    })
+    .catch((err) => {
+      res.status(401).json({
+        message: 'error',
+        data: err,
+      });
+    })
+});
+
+router.delete('/deleteTask/:houseID', auth, async (req, res) => {
+  console.log('req.body =', req.body);
+  console.log('req.params =', req.params);
+
+  const houseID = req.params.houseID;
+  const taskID = req.body.task.id;
+
+  await tasksModel
+    .deleteTask(taskID, houseID)
+    .then((deleted) => {
+      res.status(200).json({
+        message: 'success',
+        data: deleted,
+      });
+    })
+    .catch((err) => {
+      res.status(401).json({
+        message: 'error',
+        data: err,
+      });
+    })
+
 });
 
 module.exports = router ;

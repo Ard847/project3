@@ -33,7 +33,6 @@ const DashNav = ({match, currentUser, toggelModal}) => {
         <li className='nav-item'>
           <button onClick={toggelModal}>Create Task</button>
         </li>
-        <li className='nav-item'>Budget Tracker</li>
       </ul>
     </nav>
   )

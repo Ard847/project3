@@ -25,7 +25,7 @@ router.post('/createNew/:id', auth ,async (req, res) => {
   try {
 
     const household = await householdModel.createHousehold(req.body.name);
-    // console.log('household =', household.dataValues);
+    console.log('household =', household.dataValues);
     const householdMember = await householdModel.addNewMember(household.dataValues.id, req.params.id);
     // console.log('householdMember =', householdMember);
     const response = {

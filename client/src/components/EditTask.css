@@ -1,0 +1,61 @@
+div#task-information {
+  padding: 12px;
+  max-height: 90%;
+  overflow-y: scroll;
+}
+
+div#task-information > div {
+  background-color: rgba(255, 255, 255, 0.3);
+  margin: 6px 0;
+  padding: 6px;
+  cursor: default;
+}
+
+div#task-information > div > input {
+  outline: unset;
+  border: unset;
+
+  background-color: rgba(255, 255, 255, 0.5);
+  max-width: 200px;
+}
+
+div#task-information > div > input::placeholder,
+div#task-information > div > * { 
+  color: black;
+  opacity: 1;
+  font-size: 16px;
+  padding: 6px;
+}
+
+div#task-information > div > label > input {
+  outline: unset;
+  border: unset;
+
+  background-color: rgba(255, 255, 255, 0.5);
+  max-width: 50px;
+}
+
+div#task-information > div > button {
+  margin: 12px;
+  width: fit-content;
+  cursor: pointer;
+  margin: 0 0 12px 6px;
+}
+
+div#dash-members {
+  display: flex;
+  padding: 12px;
+  cursor: pointer;
+}
+
+div#due-date > p:nth-child(2) {
+  display: inline-block;
+}
+
+div#task-information > div > button.save-btn {
+  float: right;
+}
+
+input#due-date-input {
+  cursor: pointer;
+}

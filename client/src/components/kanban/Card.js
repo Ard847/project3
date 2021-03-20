@@ -12,7 +12,7 @@ const Card = ({ data, member, index, sortCard, toggelModal }) => {
   const id = data.id;
   const ref = useRef(null);
   
-  const onToggelModal = (event) => {
+  const onToggelModal = () => {
     toggelModal(data);
   }
 
@@ -84,6 +84,7 @@ const Card = ({ data, member, index, sortCard, toggelModal }) => {
       <p>{data.taskName}</p>
       <p className='sml-text'><strong>Time it takes: </strong>{data.duration} mins</p>
       { member && <p className='sml-text'><strong>Assigned to: </strong>{member}</p>}
+      <p className='sml-text'>Due date: {data.nextDate}</p> 
     </div>
   )
 }

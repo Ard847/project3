@@ -15,15 +15,11 @@ import WelcomeTitles from '../../components/WelcomeTitles';
 import saveToSession from '../../functions/saveToSession';
 import fetcher from '../../functions/fetcher';
 
-// hooks
-import useSiteLocation from '../../hooks/useSiteLocation';
-
 
 const LoginPage = ({location}) => {
 
   const { loggedIn, userLoggedIn, userLoggedOut } = useContext(LoggedInContext);
   const [ userNoMatch, setUserNoMatch ] = useState(false);
-  useSiteLocation(location);
 
   const handleSubmit = async (user) => {
     // console.log('LoginPage, handleSubmit, user =', user);

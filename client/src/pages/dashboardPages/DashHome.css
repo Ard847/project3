@@ -1,6 +1,6 @@
 div#dash-home-content {
   display: grid;
-  grid-template-columns: 1fr 1fr ;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 64px 150px auto ;
   row-gap: 12px;
   column-gap: 12px;
@@ -9,29 +9,38 @@ div#dash-home-content {
   height: 100%;
 }
 
-p#user-name{
-  justify-self: center;
-}
-
 div.dash-title {
   display: flex;
-  grid-column: 1 / span 2;
+  grid-column: 1 / span 4;
   justify-content: space-between;
 }
 
-.container {
+.container,
+.list-container {
   background-color: var(--white);
   padding: 12px;
+}
+
+.list-container {
+  border-radius: 5px;
 }
 
 .text-centre {
   text-align: center;
 }
 
+div#dash-intro {
+  grid-column: 1 / span 2;
+  grid-row: 2 / span 1;
+}
+
 div#dash-members {
+  grid-column: 3 / span 2;
+  grid-row: 2 / span 1;
   display: flex;
   padding: 12px;
 }
+
 
 img.member-img {
   height: 60px;
@@ -59,3 +68,4 @@ div#house-id{
 div#house-id > p {
   margin: auto 0;
 }
+

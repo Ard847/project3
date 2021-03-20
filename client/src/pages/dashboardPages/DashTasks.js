@@ -6,11 +6,11 @@ import './DashTasks.css';
 
 // components
 import Kanban from '../../components/kanban/Kanban';
+import Table from '../../components/Table';
 
 
-const DashTasks = (props) => {
+const DashTasks = () => {
 
-  // console.log('DashTasks props =', props);
   const [ view , setView ] = useState('kanban');
 
   const changeView = (event) => {
@@ -24,9 +24,11 @@ const DashTasks = (props) => {
         <h2>Tasks</h2>
         <select name='views' id='tasks-views' onChange={changeView}>
           <option value='kanban'>Kanban</option>
+          <option value='all-tasks'>All Tasks</option>
         </select>
       </div>
       {(view === 'kanban')  && <Kanban />}
+      {(view === 'all-tasks') && <Table />}
    </div>
   )
 }

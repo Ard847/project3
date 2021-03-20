@@ -30,3 +30,7 @@ img.user-img {
   border-radius: 75px;
   background-color: var(--grey);
 }
+
+p#user-name{
+  justify-self: center;
+}

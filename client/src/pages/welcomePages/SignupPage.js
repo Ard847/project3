@@ -5,9 +5,7 @@ import React, { useContext, useState } from 'react';
 import './SignupPage.css';
 
 // context
-import LoggedInContext from '../../context/LoggedInContext'
-// hooks
-import useSiteLocation from '../../hooks/useSiteLocation';
+import LoggedInContext from '../../context/LoggedInContext';
 
 // components
 import AccountForm from '../../components/forms/AccountForm';
@@ -18,10 +16,9 @@ import fetcher from '../../functions/fetcher';
 
 
 
-const SignupPage = ({ location }) => {
+const SignupPage = () => {
 
   const { loggedIn, userLoggedOut } = useContext(LoggedInContext);
-  useSiteLocation(location);
 
   const [ userCreated, setUserCreated ] = useState(false);
 

@@ -12,6 +12,10 @@ import getSession from "../../functions/getSession";
 const HouseForm = ({ userID, type }) => {
   // console.log('HouseForm, userID =', userID);
   // console.log('HouseForm, type =', type);
+  const id = getSession('id');
+  const [fileInputState,setFileInputState] = useState('')
+  const [selectedFile, setSelectedFile] = useState('')
+  const [previewSource,setPreviewSource] = useState('')
 
   const [houseInput, setHouseInput] = useState('');
   // console.log('HouseForm, houseInput =', houseInput);
@@ -51,6 +55,36 @@ const HouseForm = ({ userID, type }) => {
       setHouseJoined(true);
     }
   }
+  const handleFileInputChange = (e) => {
+    const file = e.target.files[0]
+    previewFile(file)
+  }
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file)
+    reader.onloadend = () => {
+      setPreviewSource(reader.result) 
+    }
+  }
+
+  const handleSubmitFile = (e) => {
+    e.preventDefault();
+    //if(!previewSource) return;
+    uploadImage(previewSource)
+    //const reader = new FileReader();
+   // reader.
+  }
+
+  const uploadImage = async (base64EncodedImage) => {
+    let token = getSession('token').split('"')
+    token = token[1]
+    console.log(base64EncodedImage)
+    try{
+      //await fetcher('/api/images/upload','Post',{data :base64EncodedImage, id : id},token)
+    }catch(e){
+      console.log("error image",e)
+    }
+  }
 
   return (
     <form>
@@ -58,6 +92,20 @@ const HouseForm = ({ userID, type }) => {
         type === 'create'
           ? 'Household Name' : 'Household ID'
       }</label>
+      {type === 'create' && (<div id='create-household'>
+        {previewSource ? (
+          <img
+            className='household-img'
+            src = {previewSource}
+            alt = "chosen"
+          />) :  <img
+            className='household-img'
+            src=''
+            alt=''
+          />}
+           <input type = "file" name = "image" onChange = {handleFileInputChange} value = {fileInputState}/>
+        </div>)}
+
       <input
         id='house-name'
         type='text'
@@ -69,7 +117,7 @@ const HouseForm = ({ userID, type }) => {
       />
 
       {type === 'create' ? (
-        <button onClick={createNewHousehold} > Create </button>
+        <button onClick= {(e) => {handleSubmitFile(e);createNewHousehold(e)}} > Create </button>
       ) : (
         <button onClick={joinExistingHousehold} > Join </button>
       )}

@@ -4,16 +4,11 @@ import React from 'react';
 // styles
 import './AboutPage.css';
 
-// hooks
-import useSiteLocation from '../../hooks/useSiteLocation';
-
 // components
 import WelcomeTitles from '../../components/WelcomeTitles';
 
 
 const AboutPage = ({location}) => {
-
-  useSiteLocation(location);
 
   return (
     <>

@@ -9,7 +9,6 @@ import fetcher from '../../functions/fetcher';
 import getSession from '../../functions/getSession';
 
 
-
 const CreateTaskForm = () => {
 
   const [taskData, setTaskData] = useState({
@@ -38,12 +37,15 @@ const CreateTaskForm = () => {
     // console.log('taskData =', taskData);
 
     const houseID = getSession('houseID')
-    const token = getSession('token');
+    let token = getSession('token').split('"');
+    token = token[1];
 
     const url = `/api/task/createNew/${houseID}`;
-    // const createTaskResponse = 
-    await fetcher(url, 'POST', taskData, token);
+    const createTaskResponse = await fetcher(url, 'POST', taskData, token);
     // console.log('createTaskResponse =', createTaskResponse);
+    if (createTaskResponse.message === 'success'){
+      console.log('success');
+    }
   }
 
   const handleRadioInput = (event) => {
@@ -244,7 +246,7 @@ const CreateTaskForm = () => {
       <div id='complete-number'>
         <label htmlFor='duration'>Completion time:</label>
         <input
-          id='alert'
+          id='completeBy'
           type='number'
           placeholder='How long to complete the task? (1-4)'
           min='1'
