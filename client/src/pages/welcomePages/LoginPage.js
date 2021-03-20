@@ -63,7 +63,7 @@ const LoginPage = ({location}) => {
        
         <AccountForm type={'login'} onSubmit={handleSubmit} />
         {userNoMatch && (
-          <p>The credentials do not match any users.</p>
+          <p className="error-login-msg text-center">The credentials do not match any users!</p>
         )}
       </article>
       </section>
