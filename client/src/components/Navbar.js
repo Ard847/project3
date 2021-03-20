@@ -33,14 +33,11 @@ const NavBar = (props) => {
                 <NavLink className="navLink"href="/about">About</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink className="navLink" href="/contact">Contact</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink className="navLink" href="/logIn">Login</NavLink>
+                <NavLink className="navLink" href="/contact">Instructions</NavLink>
               </NavItem>
             </Nav>
             <NavItem>
-                <NavLink className="navLink nav-collapse" style={{listStyleType: 'none'}} href="/signUp">Sign up</NavLink>
+                <NavLink className="navLink" href="/logIn">Login</NavLink>
               </NavItem>
           </Collapse>
         </Navbar>

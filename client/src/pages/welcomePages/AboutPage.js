@@ -21,11 +21,11 @@ const AboutPage = ({ location }) => {
   return (
 
     <section className="about">
-      <div className="container">
+      <div className="container-fluid">
         <div className="row">
           <div className="colll-1 col-lg-6 mt-5 mt-lg-0 title">
             <h2 className="head-section">About Us</h2>
-            <h4> Heading...</h4>
+            <h3> Assign tasks amongst your family </h3>
             <p className="text-section">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi quia numquam eos explicabo iure perspiciatis. Libero, ab enim impedit, quis porro corrupti quo est minima sint consequuntur nulla illum eius.</p>
           </div>
           <div className="col-lg-6">
