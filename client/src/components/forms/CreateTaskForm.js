@@ -7,6 +7,7 @@ import './CreateTaskForm.css';
 // functions
 import fetcher from '../../functions/fetcher';
 import getSession from '../../functions/getSession';
+import processToDays from '../../functions/processToDays';
 
 
 const CreateTaskForm = () => {
@@ -40,8 +41,17 @@ const CreateTaskForm = () => {
     let token = getSession('token').split('"');
     token = token[1];
 
+    // console.log('taskData =', taskData);
+    const timings = await processToDays(taskData);
+    console.log('timings =', timings);
+
+    const body = {
+      name: taskData.name,
+      timings: timings,
+    }
+
     const url = `/api/task/createNew/${houseID}`;
-    const createTaskResponse = await fetcher(url, 'POST', taskData, token);
+    const createTaskResponse = await fetcher(url, 'POST', body, token);
     // console.log('createTaskResponse =', createTaskResponse);
     if (createTaskResponse.message === 'success'){
       console.log('success');
