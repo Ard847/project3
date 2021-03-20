@@ -9,13 +9,18 @@ nav.r-nav{
   letter-spacing: 0.05em;
   margin-left: 80px;
   color: rgba(0, 0, 0, 0.8)!important;
+  display: flex;
+    justify-content: space-around;
+    text-decoration: none;
+    letter-spacing: 3px;
+    font-weight: bold;
+    font-size: 14px;
+   
+    
 }
 
-nav .navbar-nav li a{
- font-weight: 600;
- font-family: 'Nunito', sans-serif;
- margin-right: 10px;
-}
+
+
 
 .nav-collapse{
   list-style-type: none;

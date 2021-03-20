@@ -35,10 +35,11 @@ const NavBar = (props) => {
               <NavItem>
                 <NavLink className="navLink" href="/contact">Instructions</NavLink>
               </NavItem>
-            </Nav>
-            <NavItem>
+              <NavItem>
                 <NavLink className="navLink" href="/logIn">Login</NavLink>
               </NavItem>
+            </Nav>
+            
           </Collapse>
         </Navbar>
       </div>
