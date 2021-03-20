@@ -25,7 +25,7 @@ import fetcher from '../../functions/fetcher';
 const Kanban = () => {
 
   const [tasks, refreshTasks] = useGetTasks();
-  console.log('tasks =', tasks);
+  // console.log('tasks =', tasks);
 
   // const [ message , setMessage ] = useState(false);
   const [ modalOpen, setModalOpen ] = useState(false);
@@ -44,9 +44,11 @@ const Kanban = () => {
       tasks.forEach(task => {
         
         const todaysDate = new Date();
+        // console.log('task kanban =', task);
         // task range
         const startDate = new Date(task.nextDate);
         startDate.setDate(startDate.getDate() - Number(task.alertBefore));
+        
         const endDate = new Date(task.nextDate);
         endDate.setDate(endDate.getDate() + Number(task.completeBy));
         const completedDate = new Date(task.completedDate);
@@ -54,8 +56,8 @@ const Kanban = () => {
         // console.log('startDate =', startDate);
         // console.log('endDate =', endDate);
 
-        if( startDate <= todaysDate && todaysDate <= endDate ){
-          console.log('dates between');
+        if( (startDate <= todaysDate && todaysDate <= endDate) || todaysDate > endDate ){
+          // console.log('dates between');
           filteredData.push(task);
         }
 
@@ -113,13 +115,12 @@ const Kanban = () => {
       }
 
       if(newStatus === 'complete'){
-        const getDate = new Date().toLocaleDateString();
-        const formatDate = getDate.replaceAll("/", "-").split('-').reverse().join('-');
+        const getDate = new Date
         
         const dateURL = `/api/task/updateCompletedDate/${houseID}`;
         const date = {
           taskID: item.id,
-          completedDate: formatDate,
+          completedDate: getDate,
         };
         const updateCompletedDateResponse = await fetcher(dateURL, 'PUT', date, token);
         console.log('updateCompletedDateResponse =', updateCompletedDateResponse);
@@ -201,7 +202,7 @@ const Kanban = () => {
                 if (members.length !== 0) {
                   let user = members.find(member => member.id === task.userID)
                   if (user) {
-                    return <Card key={task.id} data={task} index={index} member={user} sortCard={sortCard} toggelModal={handleToggelModal}/>
+                    return <Card key={task.id} data={task} index={index} member={user.firstName} sortCard={sortCard} toggelModal={handleToggelModal}/>
                   } else {
                     return <Card key={task.id} data={task} index={index} sortCard={sortCard} toggelModal={handleToggelModal}/>
                   }

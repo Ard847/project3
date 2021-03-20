@@ -7,6 +7,8 @@ import './DashHome.css';
 // components
 import Clock from '../../components/Clock';
 import List from '../../components/List';
+import Modal from '../../components/Modal';
+import LeaveHousehold from '../../components/LeaveHousehold';
 
 // functions
 import getSession from '../../functions/getSession';
@@ -15,9 +17,9 @@ import getSession from '../../functions/getSession';
 import useGetTasks from '../../hooks/useGetTasks';
 
 
-const DashHome = ({ members }) => {
+const DashHome = ({ members, match }) => {
 
-  // variables
+    // variables
   const houseID = parseInt(getSession('houseID'));
   const getHouseName = getSession('houseName');
   const houseName = getHouseName.replace(/['"]+/g, '');
@@ -34,6 +36,7 @@ const DashHome = ({ members }) => {
   const [monthTasks, setMonthTasks] = useState([]);
   const [overdueTasks, setOverdueTasks] = useState([]);
   const [completedTasks, setCompletedTasks] = useState([]);
+  const [ modalOpen, setModalOpen ] = useState(false);
 
   // Invite to household ------------------------------------------------------
   const handleShowHouseID = (event) => {
@@ -45,6 +48,16 @@ const DashHome = ({ members }) => {
 
   const handleHideHouseID = () => {
     setTimeout(() => setShowInviteButton(true), 1500);
+  }
+
+  // call modal --------------------------------------------------------------
+  const handleToggelModal = (task) => {
+    // console.log('task =', task);
+    setModalOpen(true);
+  }
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
   }
 
   // list data ----------------------------------------------------------------
@@ -81,7 +94,7 @@ const DashHome = ({ members }) => {
           assignedTaskData.push(task);
         }
 
-        if (endDate < todaysDate && task.status !== 'complete') {
+        if (endDate < todaysDate && task.status !== 'complete' && task.nextDate !== null) {
           // console.log('dates between');
           overdueTaskData.push(task);
         }
@@ -132,6 +145,7 @@ const DashHome = ({ members }) => {
   return (
     <div id='dash-home-content'>
       {/* <> */}
+      <div id='title-bar'>
       <div className='dash-title' >
         <h2>Dashboard of {houseName}</h2>
         {showInviteButton && <button id='invite' onMouseDown={handleShowHouseID}> + Invite another Member </button>}
@@ -141,6 +155,8 @@ const DashHome = ({ members }) => {
           </div>
         )}
       </div>
+        <button onClick={handleToggelModal} id='leave-household'>Leave Household</button>
+        </div>
 
       <div id='dash-intro' className='container'>
         <h4>Today's Date:
@@ -172,6 +188,7 @@ const DashHome = ({ members }) => {
         <List title={"Over Due"} id={'dash-overdue-list'} list={overdueTasks} refresh={onRefresh } />
         <List title={"Completed"} id={'dash-complete-list'} list={completedTasks} refresh={onRefresh } />
       </div>
+      { modalOpen && <Modal closeModal={handleCloseModal} ><LeaveHousehold match={match} /></Modal> }
     </div>
   )
 };

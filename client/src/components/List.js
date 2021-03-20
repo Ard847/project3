@@ -8,6 +8,7 @@ import './List.css';
 // functions
 import getSession from '../functions/getSession';
 import fetcher from '../functions/fetcher';
+import getPriority from '../functions/getPriority';
 
 const List = ({ title, id, list, refresh }) => {
 
@@ -16,7 +17,7 @@ const List = ({ title, id, list, refresh }) => {
   let token = getSession('token').split('"');
   token = token[1];
 
-
+  
   const toggelTaskComplete = async (taskID, taskName, checked) => {
 
     if (checked) {
@@ -57,10 +58,13 @@ const List = ({ title, id, list, refresh }) => {
       {list.map((task) => {
         return (
           <div key={task.id}>
-            <p>{task.taskName}</p>
+            <p 
+            // className={'test'} 
+            style={getPriority(task)}
+            >{task.taskName}</p>
             {
               task.status === 'complete'
-                ? <input type='checkbox' onClick={() => false} checked />
+                ? <input type='checkbox' onClick={() => false} checked readOnly/>
                 : <input type='checkbox' onChange={() => toggelTaskComplete(task.id, task.taskName, true)} />
             }
           </div>

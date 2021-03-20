@@ -48,8 +48,8 @@ router.post('/createNew/:id', auth ,async (req, res) => {
 });
 
 router.post('/join/:id',auth,async (req, res) => {
-  console.log('householdRoutes, req.body =', req.body);
-  console.log('householdRoutes, req.params =', req.params);
+  // console.log('householdRoutes, req.body =', req.body);
+  // console.log('householdRoutes, req.params =', req.params);
 
   try {
     const household = await householdModel.findHousehold(req.body.householdID);
@@ -74,5 +74,24 @@ router.post('/join/:id',auth,async (req, res) => {
     });
   }
 });
+
+router.delete('/leaveHousehold/:userID/:houseID', auth, async (req, res) => {
+  console.log('householdRoutes, req.params =', req.params);
+  try {
+    const removeMember = await householdModel.deleteMember(req.params.userID, req.params.houseID);
+    // console.log('removeMember =', removeMember);
+    
+    res.json({
+      message: 'success',
+      data: removeMember,
+    });
+
+  } catch (err) {
+    res.json({
+      message: 'error',
+      data: err,
+    });
+  }
+})
 
 module.exports = router;

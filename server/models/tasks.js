@@ -5,8 +5,8 @@ const createTask = async (houseID, taskName, times) => {
     householdID: houseID,
     userID: null,
     taskName: taskName,
-    completedDate: '',
-    nextDate: '',
+    completedDate: null,
+    nextDate: null,
     duration: times.duration,
     repeatEvery: times.repeat,
     alertBefore: times.alert,
@@ -84,9 +84,10 @@ const updateUser = async (taskID, houseID, user) => {
 }
 
 const updateTask = async (task, houseID) => {
+  console.log('tasks, task =', task);
   return await Task.update({
     taskName: task.taskName,
-    nextDate: task.nextDate,
+    nextDate: Date.parse(task.nextDate),
     duration: task.duration,
     repeatEvery: task.repeatEvery,
     alertBefore: task.alertBefore,

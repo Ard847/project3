@@ -1,0 +1,11 @@
+div#Leave-Household-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-flow: column;
+  
+}
+
+div#Leave-Household-content > h2 {
+  margin: 3em;
+}
