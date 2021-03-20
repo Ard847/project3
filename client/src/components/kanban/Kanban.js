@@ -11,7 +11,7 @@ import './Kanban.css';
 import KanbanBoard from './KanbanBoard';
 import Card from './Card';
 import Modal from '../../components/Modal';
-import EditTask from '../../components/EditTask';
+//import EditTask from '../../components/EditTask';
 import Clock from '../../components/Clock';
 
 // hooks
@@ -159,7 +159,7 @@ const Kanban = () => {
               })}
           </KanbanBoard>
         </div>
-        { modalOpen && <Modal closeModal={handleCloseModal} ><EditTask task={selectedTask} /></Modal> }
+        { modalOpen && <Modal closeModal={handleCloseModal} > {/*<EditTask task={selectedTask} />*/}</Modal> }
       </div>
     </DndProvider>
   )
