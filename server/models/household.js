@@ -62,9 +62,27 @@ const findAllHousehold = async (userID) => {
   })
 }
 
+
+const deleteMember = async (userID, houseID ) => {
+  return await HouseholdMember.destroy({
+    where: {
+      userID: userID,
+      householdID: houseID,
+    }
+  })
+  .then((data) => {
+    // console.log('deleteTask, data =', data);
+    return data;
+  })
+  .catch((err) => {
+    console.log('task model, deleteTask, error =', err);
+  })
+}
+
 module.exports = {
   createHousehold,
   addNewMember,
   findHousehold,
   findAllHousehold,
+  deleteMember,
 };

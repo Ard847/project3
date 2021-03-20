@@ -29,59 +29,14 @@ router.get('/getTasks/:houseID', auth, async (req, res) => {
 });
 
 router.post('/createNew/:houseID', auth, async (req, res) => {
-  // console.log('req.body =', req.body);
-  // console.log('req.params =', req.params);
-  
-  let times = {
-    duration:'',
-    repeat:'',
-    alert:'',
-    complete:'',
-  }
-  switch(req.body.duration.unit){
-    case 'mins':
-      times.duration = req.body.duration.time * 1;
-      break;
-    case 'hours':
-      times.duration = req.body.duration.time * 60;
-      break;
-  }
-  switch(req.body.repeat.unit){
-    case 'days':
-      times.repeat = req.body.repeat.time * 1;
-      break;
-    case 'weeks':
-      times.repeat = req.body.repeat.time * 7;
-      break;
-      case 'months':
-      times.repeat = req.body.repeat.time * 30;
-      break;
-  }
-  switch(req.body.alert.unit){
-    case 'days':
-      times.alert = req.body.alert.time * 1;
-      break;
-    case 'weeks':
-      times.alert = req.body.alert.time * 7;
-      break;
-      case 'months':
-      times.alert = req.body.alert.time * 30;
-      break;
-  }
-  switch(req.body.complete.unit){
-    case 'days':
-      times.complete = req.body.complete.time * 1;
-      break;
-    case 'weeks':
-      times.complete = req.body.complete.time * 7;
-      break;
-  }
-  // console.log('times =', times);
+  console.log('req.body =', req.body);
+  console.log('req.params =', req.params);
 
   const houseID = req.params.houseID;
   const taskName = req.body.name;
+  const timings = req.body.timings;
   await tasksModel
-    .createTask(houseID, taskName, times)
+    .createTask(houseID, taskName, timings)
     .then((post) => {
       // console.log('post =', post);
       res.json({
@@ -129,7 +84,7 @@ router.put('/updateUser/:houseID', auth, async (req, res) => {
   await tasksModel
     .updateUser(taskID, houseID, user)
     .then(async () => {
-      if(user !== null){
+      if (user !== null) {
         await tasksModel
           .updateStatus(taskID, houseID, 'assigned')
           .then((put) => {
@@ -139,7 +94,7 @@ router.put('/updateUser/:houseID', auth, async (req, res) => {
               data: put,
             });
           })
-      } else if (user === null){
+      } else if (user === null) {
         await tasksModel
           .updateStatus(taskID, houseID, 'to-do')
           .then((put) => {
@@ -160,8 +115,8 @@ router.put('/updateUser/:houseID', auth, async (req, res) => {
 });
 
 router.put('/updateAll/:houseID', auth, async (req, res) => {
-  // console.log('req.body =', req.body);
-  // console.log('req.params =', req.params);
+  console.log('req.body =', req.body);
+  console.log('req.params =', req.params);
   await tasksModel
     .updateTask(req.body, req.params.houseID)
     .then((put) => {
@@ -183,34 +138,29 @@ router.put('/updateCompletedDate/:houseID', auth, async (req, res) => {
   console.log('req.body =', req.body);
   console.log('req.params =', req.params);
   const houseID = req.params.houseID;
-  console.log({houseID});
+  console.log({ houseID });
   const taskID = req.body.taskID;
-  console.log({taskID});
+  console.log({ taskID });
   const completedDate = req.body.completedDate;
-  console.log({completedDate});
+  console.log({ completedDate });
   await tasksModel
     .updateCompletedDate(taskID, houseID, completedDate)
-    .then( async (put) => {
-      console.log(put);
+    .then(async (put) => {
+      // console.log(put);
       const task = await tasksModel.findTask(taskID);
       // console.log('task =', task);
       const repeatEvery = task[0].repeatEvery;
       const date = new Date(completedDate);
       date.setDate(date.getDate() + Number(repeatEvery));
       // console.log('date =', date); 
-      const nextDate = date.toLocaleDateString().slice(0, 10);
-      console.log('nextDate =', nextDate, typeof(nextDate));
-      const formatDate = nextDate.replace("/", "-").replace("/", "-").split('-').reverse().join('-');
-      // console.log(formatDate);
       // const updateNextDate = 
-      await tasksModel.updateNextDate(taskID, houseID, formatDate).then((data) =>{return data});
+      await tasksModel.updateNextDate(taskID, houseID, date);
       // console.log('updateNextDate =', updateNextDate);
-
       res.status(200).json({
         message: 'success',
         data: {
           put: put,
-          nextDate:formatDate
+          nextDate: formatDate
         },
       })
     })
@@ -246,4 +196,4 @@ router.delete('/deleteTask/:houseID', auth, async (req, res) => {
 
 });
 
-module.exports = router ;
+module.exports = router;

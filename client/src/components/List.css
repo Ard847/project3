@@ -54,3 +54,7 @@ div#dash-month-list {
   grid-column: 3 / span 1;
   grid-row: 3 / span 1;
 }
+
+p.test {
+  background-color: rgba(248, 120, 34, 0.5);
+}

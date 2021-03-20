@@ -15,6 +15,7 @@ import useGetMembers from '../hooks/useGetMembers';
 // functions
 import getSession from '../functions/getSession';
 import fetcher from '../functions/fetcher';
+import getPriority from '../functions/getPriority';
 
 
 const Table = () => {
@@ -22,7 +23,7 @@ const Table = () => {
   // hooks
   const members = useGetMembers();
   const [tasks, refreshTasks] = useGetTasks();
-  console.log('tasks =', tasks);
+  // console.log('tasks =', tasks);
 
   // variables
   const houseID = getSession('houseID');
@@ -65,11 +66,11 @@ const Table = () => {
   }
 
   const formatDate = (date) => {
-    if(date !== ""){
+    if(date !== null){
       const newDate = new Date(date).toDateString();
       return newDate;
     } else { 
-      return ''; 
+      return null; 
     }
   }
 
@@ -109,12 +110,12 @@ const Table = () => {
               <tr key={task.id} >
                 <td onClick={() => {toggelModal(task)}}>{task.taskName}</td>
                 <td onClick={() => {toggelModal(task)}}>{task.duration} mins</td>
-                <td onClick={() => {toggelModal(task)}}>{formatDate(task.nextDate)}</td>
+                <td style={getPriority(task)} onClick={() => {toggelModal(task)}}>{formatDate(task.nextDate)}</td>
                 <td onClick={() => {toggelModal(task)}}>{task.alertBefore} days before</td>
                 <td onClick={() => {toggelModal(task)}}>{task.completeBy} days after</td>
                 <td onClick={() => {toggelModal(task)}}>Every {task.repeatEvery} days</td>
                 <td onClick={() => {toggelModal(task)}}>{getUser(task.userID)}</td>
-                <td onClick={() => {toggelModal(task)}}>{task.status}</td>
+                <td style={getPriority(task)} onClick={() => {toggelModal(task)}}>{task.status}</td>
                 <td onClick={() => {toggelModal(task)}}>{formatDate(task.completedDate)}</td>
                 <td><button className='delete-btn' onClick={() => {deleteTask(task)}} >Delete</button></td>
               </tr>
