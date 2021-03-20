@@ -26,6 +26,7 @@ const DashApp = ({ match, location }) => {
   // console.log('match =', match);
   // console.log('location =', location);
 
+  
   const userID = parseInt(match.params.id);
   const houseID = parseInt(match.params.householdID);
   saveToSession('houseID', houseID);
@@ -39,6 +40,8 @@ const DashApp = ({ match, location }) => {
   
   const members = useGetMembers();
   // console.log(members);
+
+  
   
   const handleToggelModal = () => {
     setModalOpen(true);
@@ -46,6 +49,7 @@ const DashApp = ({ match, location }) => {
 
   const handleCloseModal = () => {
     setModalOpen(false);
+    window.location.reload();
   }
   
   useEffect(() => {

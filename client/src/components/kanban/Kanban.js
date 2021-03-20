@@ -25,7 +25,7 @@ import fetcher from '../../functions/fetcher';
 const Kanban = () => {
 
   const [tasks, refreshTasks] = useGetTasks();
-  console.log('tasks =', tasks);
+  // console.log('tasks =', tasks);
 
   // const [ message , setMessage ] = useState(false);
   const [ modalOpen, setModalOpen ] = useState(false);
@@ -44,9 +44,11 @@ const Kanban = () => {
       tasks.forEach(task => {
         
         const todaysDate = new Date();
+        // console.log('task kanban =', task);
         // task range
         const startDate = new Date(task.nextDate);
         startDate.setDate(startDate.getDate() - Number(task.alertBefore));
+        
         const endDate = new Date(task.nextDate);
         endDate.setDate(endDate.getDate() + Number(task.completeBy));
         const completedDate = new Date(task.completedDate);
@@ -55,7 +57,7 @@ const Kanban = () => {
         // console.log('endDate =', endDate);
 
         if( startDate <= todaysDate && todaysDate <= endDate ){
-          console.log('dates between');
+          // console.log('dates between');
           filteredData.push(task);
         }
 
