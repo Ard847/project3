@@ -1,31 +1,29 @@
-// packages
-import React from 'react';
+//packages
+import React from "react";
+//styles
+import "./WelcomeTitles.css";
 
-//image
+//images
+import IMG from './images/bg33-01.png';
 
+function WelcomeTitles() {
 
-// styles
-import './WelcomeTitles.css';
-
-const WelcomeTitles = () => {
   return (
-    <div>
-   <header id="home">
-<div className="container-fluid header-content">
-  <div className="row">
-    <div className="col-lg-6 text-start">
-      <div className="content-box">
-        <h4 className="title">Manage Your Home</h4>
-        
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, porro!</p>
+    <div className="container">
+      <div className="row">
+        <div className="coll-1">
+          <h2 className="sorted-title">Sorted:</h2>
+          <h3>Home Management System</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde earum accusamus neque exercitationem inventore corporis tempora incidunt, laborum odio distinctio architecto nihil in quod iste, praesentium, velit repellat nesciunt. Eum!</p>
+          <button className="btn btn-primary" type="button">Get Started</button>
+        </div>
+        <div className="col-2">
+          <img src={IMG} className="background-img" />
+        </div>
       </div>
     </div>
-  </div>
-</div>
-</header>
 
-    </div>
-)
+  );
 }
 
 export default WelcomeTitles;

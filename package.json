@@ -29,6 +29,7 @@
     "mysql2": "^2.2.5",
     "node-modules": "^1.0.1",
     "nodemon": "^2.0.7",
+    "react-spring": "^8.0.27",
     "sequelize": "^6.5.0"
   },
   "devDependencies": {

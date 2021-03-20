@@ -40,9 +40,8 @@ const SignupPage = ({ location }) => {
     return (
       <>
         <section>
-          <article id='login-content'>
-            <h1>Sign Up Page</h1>
-            <p>If you do not have an account you can create one here. </p>
+          <article id='login-content' className="signUpForm">
+            
             <AccountForm type={'create-account'} onCreate={handleCreate} onSuccess={userCreated}/>
           </article>
         </section>

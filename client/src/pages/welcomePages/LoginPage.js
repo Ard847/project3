@@ -9,7 +9,7 @@ import LoggedInContext from '../../context/LoggedInContext'
 
 // components
 import AccountForm from '../../components/forms/AccountForm';
-import WelcomeTitles from '../../components/WelcomeTitles';
+
 
 // functions
 import saveToSession from '../../functions/saveToSession';
@@ -58,9 +58,9 @@ const LoginPage = ({location}) => {
     return (
       <>
       <section>
-      <article id='login-content'>
-        <h1>Log-in Page</h1>
-        <p>You are not yet logged in, please provide your details below to access your account</p>
+      <article id='login-content' className="loginInForm">
+        
+       
         <AccountForm type={'login'} onSubmit={handleSubmit} />
         {userNoMatch && (
           <p>The credentials do not match any users.</p>
@@ -75,10 +75,9 @@ const LoginPage = ({location}) => {
 
     return (
       <>
-      <WelcomeTitles />
-      <section>
+      <section className="loginInForm">
       <article id='login-content'>
-        <h1>Log-in Page</h1>
+        <h1 className="title">Log-in Page</h1>
         <p>You are logged in. Navigate to the Home page to see your housholds or create a new one. </p>
         <button onClick={userLoggedOut}>Log Out</button>
       </article>
