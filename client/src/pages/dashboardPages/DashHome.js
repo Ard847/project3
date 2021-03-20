@@ -94,7 +94,7 @@ const DashHome = ({ members, match }) => {
           assignedTaskData.push(task);
         }
 
-        if (endDate < todaysDate && task.status !== 'complete') {
+        if (endDate < todaysDate && task.status !== 'complete' && task.nextDate !== null) {
           // console.log('dates between');
           overdueTaskData.push(task);
         }

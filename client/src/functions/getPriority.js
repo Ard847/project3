@@ -7,6 +7,13 @@ const getPriority = (task) => {
   const startDate = new Date(task.nextDate);
   startDate.setDate(startDate.getDate() - Number(task.alertBefore));
   
+  if (task.nextDate === null){
+    return {
+      'backgroundColor': 'unset',
+      'borderRadius': '5px',
+      'padding': '3px 6px',
+    }
+  }
 
   if(task.status === 'complete'){
     return {
