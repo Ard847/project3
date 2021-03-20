@@ -29,7 +29,8 @@ const ChooseHouse = () => {
   
   useEffect(() => {
     const fetchImages = async () => {
-      const response = await fetcher(`/api/images/${id}`,"Get",'',token)
+      console.log('here')
+      const response = await fetcher(`/api/images/houseHold/${id}`,'Get','',token)
       setImageIds(response)
       //console.log('res',response[0])
     } 

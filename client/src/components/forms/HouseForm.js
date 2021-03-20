@@ -58,6 +58,7 @@ const HouseForm = ({ userID, type }) => {
       setHouseJoined(true);
     }
   }
+  //Image handlers
   const handleFileInputChange = (e) => {
     const file = e.target.files[0]
     previewFile(file)

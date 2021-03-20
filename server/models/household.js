@@ -49,7 +49,7 @@ const findAllHousehold = async (userID) => {
     where: {id: userID},
     attributes: ['id', 'firstName', 'lastName'],
     include: [{
-      model: Household, 
+      model: Household,
       attributes: ['id','houseName', 'image'],
     }]
   })
