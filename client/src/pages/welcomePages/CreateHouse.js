@@ -11,7 +11,7 @@ import WelcomeTitles from '../../components/WelcomeTitles';
 
 // functions
 import getSession from '../../functions/getSession';
-import fetcher from '../../functions/fetcher';
+ 
 
 // hooks
 

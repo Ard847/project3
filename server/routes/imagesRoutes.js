@@ -12,15 +12,19 @@ cloudinary.config({
 })
 
 router.get('/:id',auth, async(req,res) => {
-    //const households = await orm.findHousehold(req.params.id);
-    //const households = userHouseholds[0].dataValues
-    //console.log(households)
-    //const {resources} = await cloudinary.search.expression 
-    //('folder:dev_setups')
-    //.sort_by('public_id')
-    //.execute();
-
-    //const publicIds = resources.map( file => file.public_id )
+    const userHouseholds = await householdModel.findAllHousehold(req.params.id);
+    const households = userHouseholds[0].dataValues.households; 
+    console.log('yo',households)
+    const images =  households.map( (household) => household.dataValues.image)
+    const {resources} = await cloudinary.search.expression 
+    ('folder:project3/houses')
+    .sort_by('public_id')
+    .execute();
+    const publicIds = resources.map( file => file.public_id ) 
+    console.log('public',publicIds)
+    console.log('images',images)
+    const imagesToSend = images.filter((image,n) => image === publicIds[n])
+    console.log('imagest to send' ,imagesToSend)
     //res.sec(publicIds)
     res.json({Answer : 'Hey'})
 })

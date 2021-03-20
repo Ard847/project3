@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const auth = require('../auth')
+const auth = require('../auth');
+const cloudinary = require('cloudinary').v2
 
 // required models
 const householdModel = require('../models/household');
@@ -19,12 +20,17 @@ router.get('/gethousehold/:id',auth ,async (req, res) => {
 });
 
 router.post('/createNew/:id', auth ,async (req, res) => {
-  console.log('householdRoutes, req.body =', req.body);
+  console.log('householdRoutes, req.body.name =', req.body.name);
   console.log('householdRoutes, req.params =', req.params);
-
-  try {
-
-    const household = await householdModel.createHousehold(req.body.name);
+   
+   try {
+    const fileStr = req.body.data
+    const uploadRespose = await cloudinary.uploader.upload(fileStr, {
+      use_filename : true,
+      folder : "project3/houses"
+  }) 
+     console.log(uploadRespose)   
+    const household = await householdModel.createHousehold(req.body.name,uploadRespose.public_id);
     console.log('household =', household.dataValues);
     const householdMember = await householdModel.addNewMember(household.dataValues.id, req.params.id);
     // console.log('householdMember =', householdMember);
@@ -33,18 +39,17 @@ router.post('/createNew/:id', auth ,async (req, res) => {
       householdID: householdMember.dataValues.householdID,
       userID: householdMember.dataValues.userID,
       houseName: household.dataValues.houseName,
-    };
+    }; 
     res.json({
       message: 'success',
       data: response,
     });
-
   } catch (err) {
     res.json({
       message: 'error',
       data: err,
     });
-  }
+  } 
 });
 
 router.post('/join/:id',auth,async (req, res) => {
