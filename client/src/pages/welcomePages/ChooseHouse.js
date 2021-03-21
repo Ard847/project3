@@ -29,7 +29,7 @@ const ChooseHouse = () => {
   
   useEffect(() => {
     const fetchImages = async () => {
-      console.log('here')
+      
       const response = await fetcher(`/api/images/houseHold/${id}`,'Get','',token)
       setImageIds(response)
       //console.log('res',response[0])
@@ -42,7 +42,6 @@ const ChooseHouse = () => {
       <WelcomeTitles />
       <section>
         <article id='home-content' className='flex'>
-          
           <div id='create-household'>
             <NavLink
               to='/createHousehold'

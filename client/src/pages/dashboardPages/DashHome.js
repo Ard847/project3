@@ -12,9 +12,13 @@ import LeaveHousehold from '../../components/LeaveHousehold';
 
 // functions
 import getSession from '../../functions/getSession';
+import fetcher from '../../functions/fetcher'
 
 // hooks
 import useGetTasks from '../../hooks/useGetTasks';
+
+//cloudinary
+import {Image} from 'cloudinary-react';
 
 
 const DashHome = ({ members, match }) => {
@@ -24,6 +28,8 @@ const DashHome = ({ members, match }) => {
   const getHouseName = getSession('houseName');
   const houseName = getHouseName.replace(/['"]+/g, '');
   const userID = parseInt(getSession('id'));
+  let token = getSession('token').split('"')
+  token = token[1]    
 
   // hooks -------------------------------------------------------------------
   const [tasks, refreshTasks] = useGetTasks();
@@ -37,6 +43,7 @@ const DashHome = ({ members, match }) => {
   const [overdueTasks, setOverdueTasks] = useState([]);
   const [completedTasks, setCompletedTasks] = useState([]);
   const [ modalOpen, setModalOpen ] = useState(false);
+  const [imageIds,setImageIds] = useState([])
 
   // Invite to household ------------------------------------------------------
   const handleShowHouseID = (event) => {
@@ -59,6 +66,17 @@ const DashHome = ({ members, match }) => {
   const handleCloseModal = () => {
     setModalOpen(false);
   }
+//Fetch user images
+useEffect(() => {
+  const fetchImages = async () => {
+    console.log('here')
+    const response = await fetcher(`/api/images/user/${houseID}&${userID}`,'Get','',token)
+    //console.log(response)
+    setImageIds(response.images)
+    //console.log(imageIds)
+  } 
+  fetchImages()
+},[])
 
   // list data ----------------------------------------------------------------
   useEffect(() => {
@@ -141,10 +159,6 @@ const DashHome = ({ members, match }) => {
     refreshTasks(taskID, newStatus);
   }
 
-  
-
-  
-
   // render ------------------------------------------------------------------------
   return (
     <div id='dash-home-content'>
@@ -169,14 +183,20 @@ const DashHome = ({ members, match }) => {
       </div>
 
       <div id='dash-members' className='container'>
-        {members.map((member) => {
+      
+        {members.map((member,index) => {
           return (
             <div key={member.id} className='member-profile'>
-              <img
-                className='member-img'
-                src=''
-                alt=''
-              />
+              {imageIds && imageIds[index] == null ?(<img
+                      className='member-img'
+                      src=''
+                      alt=''
+                    />):(<Image
+                        key = {index} 
+                        cloudName = 'dii2emagu'
+                        publicId = {imageIds && imageIds.length >0 ? imageIds[index] : imageIds}
+                        className='member-img' 
+                      />)}
               <p id='user-name' className='text-centre'>{member.firstName} {member.lastName}</p>
             </div>
           )

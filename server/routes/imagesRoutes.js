@@ -37,57 +37,37 @@ router.get('/houseHold/:id',auth, async(req,res) => {
         }
     }
    
-    console.log('image to send' ,imagesToSend)
+   // console.log('image to send' ,imagesToSend)
     res.send(imagesToSend)
 })
 
 router.get('/user/:houseID&:id',auth, async( req,res) => {
     const householdMembers = await userModel.findAllUser(req.params.houseID);
     const members = householdMembers[0].dataValues.users;
-   console.log('Users', members)
+   //console.log('Users', members)
    const membersID = members.map((memb) => memb.dataValues.id)
-   console.log(membersID)
+   //console.log(membersID)
    const users = []
        for (let i = 0; i < membersID.length; i++){
            users.push(await orm.User.findOne({where : {id: membersID[i]}}))
        }
-
-   console.log('awaitas ta ?!', users)
    const images =  users.map( (user) => user.dataValues.image)
-   console.log("mostra as imagens bicha", images)
-   const {resources} = await cloudinary.search.expression 
-    ('folder:project3/users')
-    .sort_by('public_id')
-    .execute();
-    const publicIds = resources.map( file => file.public_id ) 
-    //console.log('public',publicIds)
-    //console.log('images',images)
-    let imagesToSend = []
-    for(let i = 0; i < images.length; i++){
-        for(let j = 0; j < publicIds.length; j++){
-            if(images[i] === publicIds[j] || images[i] === null ){
-                imagesToSend.push(images[i])
-            }
-            
-        }
-    } 
    const currentUser =  await orm.User.findOne({where: { id :req.params.id}},{raw:true});
-    console.log('imagest to send' ,imagesToSend)
-    console.log('current',currentUser)
-    res.send({imagesToSend,currentUser: currentUser.image })
+    //console.log('current',currentUser)
+    res.send({images,currentUser: currentUser.image })
 })
 
 router.post('/upload',auth,  async (req,res) => {
     try{
-        
         const fileStr = req.body.data
         //console.log(fileStr)
-        const uploadRespose = await cloudinary.uploader.upload(fileStr, {
+        const uploadResponse = await cloudinary.uploader.upload(fileStr, {
             use_filename : true,
             folder : "project3/users"
         }) 
-        console.log(uploadRespose)  
-        await orm.User.update({image : uploadRespose.public_id},{where:{ id : req.body.id}});
+        //console.log(uploadResponse)  
+        await orm.User.update({image : uploadResponse.public_id},{where:{ id : req.body.id}});
+        //console.log('uploaded',req.body.id)
         res.json({msg : "Saved with success"}) 
     }catch(e){
         console.log(e)

@@ -51,7 +51,7 @@ const handleFileInputChange = (e) => {
     
     console.log(base64EncodedImage)
     try{
-      await fetcher('/api/images/upload','Post',{data :base64EncodedImage, id : houseID},token)
+      await fetcher('/api/images/upload','Post',{data :base64EncodedImage, id : userID},token)
       //createNewHousehold(base64EncodedImage)
     }catch(e){
       console.log("error image",e)
@@ -75,7 +75,6 @@ const handleFileInputChange = (e) => {
     <nav id='dash-nav'>
 
       <div id='user-profile'>
-        <h1>Here</h1>
     <form onSubmit = {handleSubmitFile}>
       {previewSource ? (
       <img
