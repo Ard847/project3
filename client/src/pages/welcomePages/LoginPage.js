@@ -23,9 +23,8 @@ const LoginPage = ({location}) => {
 
   const handleSubmit = async (user) => {
     // console.log('LoginPage, handleSubmit, user =', user);
-    saveToSession('token',)
-    const url = "/api/user/login"
-    const response = await fetcher(url,"Post",user)
+    const url = "/api/user/login";
+    const response = await fetcher(url, "POST", user);
     console.log('response =', response);
 
     if( response.message === 'success' ){
@@ -35,7 +34,7 @@ const LoginPage = ({location}) => {
       //console.log('authResponse =', response.token);
       if(authResponse.success){
         saveToSession('id', response.user.id);
-        saveToSession('token',response.token)
+        saveToSession('token',response.token);
         userLoggedIn();
         setUserNoMatch(false);
       }

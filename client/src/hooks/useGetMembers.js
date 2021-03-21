@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import getSession from '../functions/getSession';
 import fetcher from '../functions/fetcher';
 
-const useGetMembers = () => {
+const useGetMembers = (here) => {
 
   const [ members, setMembers ] = useState([]);
 
@@ -13,9 +13,10 @@ const useGetMembers = () => {
     const houseID = getSession('houseID');
     let token = getSession('token').split('"');
     token = token[1];
+
     const url = `/api/user/getusers/${houseID}`;
     const userResponse = await fetcher( url, 'GET','',token); 
-    // console.log('userResponse =', userResponse);
+    // console.log(`userResponse called from ${here}=`, userResponse);
     setMembers(userResponse);
   }
 
@@ -23,10 +24,12 @@ const useGetMembers = () => {
 
     fetchData();
     return () => {
-      console.log('I did unmount');
+      console.log(`I did unmount at ${here}`);
     }; 
 
   }, []);
+
+  // console.log(`hook ${here} members =`, members);
 
   return members;
 }
