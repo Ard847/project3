@@ -1,8 +1,11 @@
 // packages
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 
 // styles
 import './DashHome.css';
+
+// context
+import TaskContext from '../../context/TaskContext';
 
 // components
 import Clock from '../../components/Clock';
@@ -15,7 +18,7 @@ import getSession from '../../functions/getSession';
 import fetcher from '../../functions/fetcher'
 
 // hooks
-import useGetTasks from '../../hooks/useGetTasks';
+// import useGetTasks from '../../hooks/useGetTasks';
 
 //cloudinary
 import {Image} from 'cloudinary-react';
@@ -32,7 +35,9 @@ const DashHome = ({ members, match }) => {
   token = token[1]    
 
   // hooks -------------------------------------------------------------------
-  const [tasks, refreshTasks] = useGetTasks();
+  // const [tasks, refreshTasks] = useGetTasks();
+  // context -----------------------------------------------------------------
+  const { tasks, refreshTasks } = useContext(TaskContext);
 
   // state --------------------------------------------------------------------
   const [showInviteButton, setShowInviteButton] = useState(true);
@@ -97,7 +102,7 @@ useEffect(() => {
         endDate.setDate(endDate.getDate() + Number(task.completeBy));
         const completedDate = new Date(task.completedDate);
 
-        if ((startDate <= todaysDate && todaysDate <= endDate) && task.status === 'to-do') {
+        if ((startDate <= todaysDate && todaysDate <= endDate) && (task.status === 'to-do' || task.status === 'progress') && task.userID === null) {
           // console.log('date is in range');
           todaysTaskData.push(task);
         }
@@ -107,7 +112,7 @@ useEffect(() => {
           myTaskData.push(task);
         }
 
-        if ((startDate <= todaysDate && todaysDate <= endDate) && (task.userID !== userID && task.status === 'assigned')) {
+        if ((startDate <= todaysDate && todaysDate <= endDate) && ((task.userID !== userID && task.userID !== null) && (task.status === 'assigned' || task.status === 'progress'))) {
           // console.log('dates between');
           assignedTaskData.push(task);
         }
@@ -128,10 +133,11 @@ useEffect(() => {
       setCompletedTasks(completedData);
     }
 
-  }, [tasks]);
+  }, [tasks, userID]);
 
   useEffect(() => {
     let monthTaskData = [];
+    if(tasks !== undefined){
     if (tasks.length > 0) {
 
       tasks.forEach(task => {
@@ -152,6 +158,7 @@ useEffect(() => {
       });
       setMonthTasks(monthTaskData);
     }
+  }
   }, [tasks]);
 
   const onRefresh = (taskID, newStatus) => {

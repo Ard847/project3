@@ -1,8 +1,11 @@
 // packages
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 // styles
 import './CreateTaskForm.css';
+
+// context
+import TaskContext from '../../context/TaskContext';
 
 // functions
 import fetcher from '../../functions/fetcher';
@@ -11,6 +14,8 @@ import processToDays from '../../functions/processToDays';
 
 
 const CreateTaskForm = () => {
+
+  const { refreshTasks } = useContext(TaskContext);
 
   const [taskData, setTaskData] = useState({
     name: '',
@@ -54,7 +59,8 @@ const CreateTaskForm = () => {
     const createTaskResponse = await fetcher(url, 'POST', body, token);
     // console.log('createTaskResponse =', createTaskResponse);
     if (createTaskResponse.message === 'success'){
-      console.log('success');
+      // console.log('success');
+      refreshTasks();
     }
   }
 

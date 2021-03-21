@@ -12,7 +12,7 @@ const KanbanBoard = ({title, status, moveCard, children}) => {
   // console.log('KanbanList title =', title); 
   // console.log('KanbanList children =', children);
   
-  const [{ canDrop, isOver }, drop] = useDrop(() => ({
+  const [{ isOver }, drop] = useDrop(() => ({
     accept: ItemTypes.CARD,
     drop: (item) => moveCard(item, status),
     // props to collect

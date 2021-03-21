@@ -1,6 +1,6 @@
 // packages
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import React, { useEffect, useState} from 'react';
+import { Route} from 'react-router-dom';
 
 // styles
 import './DashApp.css';
@@ -19,15 +19,12 @@ import CreateTaskForm from '../../components/forms/CreateTaskForm';
 // pages
 import DashHome from './DashHome';
 import DashTasks from './DashTasks';
-import App from '../../App/App';
-import ChooseHouse from '../welcomePages/ChooseHouse';
 
 
 const DashApp = ({ match, location }) => {
 
   // console.log('match =', match);
   // console.log('location =', location);
-
 
   const userID = parseInt(match.params.id);
   const houseID = parseInt(match.params.householdID);
@@ -40,9 +37,8 @@ const DashApp = ({ match, location }) => {
   const [currentUser, setCurrentUser] = useState({});
   const [modalOpen, setModalOpen] = useState(false);
 
-  const members = useGetMembers();
+  const members = useGetMembers('dash-app');
   // console.log(members);
-
 
 
   const handleToggelModal = () => {
@@ -51,7 +47,6 @@ const DashApp = ({ match, location }) => {
 
   const handleCloseModal = () => {
     setModalOpen(false);
-    
   }
 
   useEffect(() => {

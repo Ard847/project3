@@ -1,5 +1,5 @@
 // packages
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 
 // styles
 import './Table.css';
@@ -8,8 +8,11 @@ import './Table.css';
 import Modal from '../components/Modal';
 import EditTask from '../components/EditTask';
 
+// context
+import TaskContext from '../context/TaskContext';
+
 // hooks
-import useGetTasks from '../hooks/useGetTasks';
+// import useGetTasks from '../hooks/useGetTasks';
 import useGetMembers from '../hooks/useGetMembers';
 
 // functions
@@ -21,15 +24,17 @@ import getPriority from '../functions/getPriority';
 const Table = () => {
 
   // hooks
-  const members = useGetMembers();
-  const [tasks, refreshTasks] = useGetTasks();
+  const { tasks, refreshTasks } = useContext(TaskContext);
+  // const [tasks, refreshTasks ] = useGetTasks();
   // console.log('tasks =', tasks);
+
+  const members = useGetMembers('table');
+  console.log('members =', members);
 
   // variables
   const houseID = getSession('houseID');
   let token = getSession('token').split('"');
   token = token[1];
-  // console.log('members =', members);
 
   // state
   const [ modalOpen, setModalOpen ] = useState(false);
@@ -43,6 +48,11 @@ const Table = () => {
       return new Date(a.nextDate) - new Date(b.nextDate);
     });
     setSortedTasks(sortedData);
+
+    return () => {
+      console.log('I did unmount');
+      setSortedTasks([]);
+    }
 
   }, [tasks]);
 
@@ -58,7 +68,7 @@ const Table = () => {
   const getUser = (userID) => {
     if (userID !== null) {
       const user = members.find(member => member.id === userID);
-      const userName = `${user.firstName} ${user.lastName}`;
+      const userName = `${user?.firstName} ${user?.lastName}`;
       return userName;
     } else { 
       return ''; 
