@@ -1,6 +1,5 @@
 // packages
-import React, { useState } from 'react';
-
+import React from 'react';
 
 // styles
 import './List.css';
@@ -9,6 +8,8 @@ import './List.css';
 import getSession from '../functions/getSession';
 import fetcher from '../functions/fetcher';
 import getPriority from '../functions/getPriority';
+
+
 
 const List = ({ title, id, list, refresh }) => {
 

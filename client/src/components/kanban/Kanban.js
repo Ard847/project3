@@ -1,20 +1,23 @@
 // packages
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState, useContext } from 'react'
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
 // styles
 import './Kanban.css';
 
+// context
+import TaskContext from '../../context/TaskContext';
+
 // components
 import KanbanBoard from './KanbanBoard';
 import Card from './Card';
-import Modal from '../../components/Modal';
-//import EditTask from '../../components/EditTask';
-import Clock from '../../components/Clock';
+import Modal from '../Modal';
+import EditTask from '../EditTask';
+import Clock from '../Clock';
 
 // hooks
-import useGetTasks from '../../hooks/useGetTasks';
+// import useGetTasks from '../../hooks/useGetTasks';
 import useGetMembers from '../../hooks/useGetMembers';
 
 // functions
@@ -24,7 +27,7 @@ import fetcher from '../../functions/fetcher';
 
 const Kanban = () => {
 
-  const [tasks, refreshTasks] = useGetTasks();
+  const { tasks, refreshTasks } = useContext(TaskContext);
   // console.log('tasks =', tasks);
 
   // const [ message , setMessage ] = useState(false);
@@ -33,7 +36,7 @@ const Kanban = () => {
   const [ filteredTasks, setFilteredTasks ] = useState([]);
   const [ completedTasks, setCompletedTasks ] = useState([]);
 
-  const members = useGetMembers();
+  const members = useGetMembers('kanban');
   // console.log('members =', members);
 
   useEffect(() => {
@@ -115,7 +118,7 @@ const Kanban = () => {
       }
 
       if(newStatus === 'complete'){
-        const getDate = new Date
+        const getDate = new Date();
         
         const dateURL = `/api/task/updateCompletedDate/${houseID}`;
         const date = {
@@ -141,16 +144,7 @@ const Kanban = () => {
 
   }, [refreshTasks]);
 
-  const sortCard = useCallback(async (dragIndex, hoverIndex) => {
-    // if (dragIndex && hoverIndex) {
-    //   console.log('dragIndex =', dragIndex);
-    //   console.log('hoverIndex =', hoverIndex);
-    //   console.log('tasks =', tasks);
-      // const dragCard = tasks.find(task => task.id === dragIndex);
-      // console.log('dragCard =', dragCard);
-    // };
-
-  }, [tasks]);
+  
 
   // rendered ----------------------------------------------------------------
   return (
@@ -169,9 +163,9 @@ const Kanban = () => {
                 if (members.length !== 0) {
                   let user = members.find(member => member.id === task.userID)
                   if (user) {
-                    return <Card key={task.id} data={task} index={index} member={user.firstName} sortCard={sortCard} toggelModal={handleToggelModal} />
+                    return <Card key={task.id} data={task} index={index} toggelModal={handleToggelModal} member={user.firstName} />
                   } else {
-                    return <Card key={task.id} data={task} index={index} sortCard={sortCard} toggelModal={handleToggelModal}/>
+                    return <Card key={task.id} data={task} index={index} toggelModal={handleToggelModal}/>
                   }
                 }
                 return null;
@@ -187,9 +181,27 @@ const Kanban = () => {
                 if (members.length !== 0) {
                   let user = members.find(member => member.id === task.userID)
                   if (user) {
-                    return <Card key={task.id} data={task} index={index} member={user.firstName} sortCard={sortCard} toggelModal={handleToggelModal}/>
+                    return <Card key={task.id} data={task} index={index} toggelModal={handleToggelModal} member={user.firstName} />
                   } else {
-                    return <Card key={task.id} data={task} index={index} sortCard={sortCard} toggelModal={handleToggelModal}/>
+                    return <Card key={task.id} data={task} index={index} toggelModal={handleToggelModal}/>
+                  }
+                }
+                return null;
+              })}
+          </KanbanBoard>
+
+          <KanbanBoard title={'In Progress'} status={'progress'} moveCard={moveCard} >
+            {filteredTasks
+              .filter((task) => {
+                return task.status === 'progress';
+              })
+              .map((task, index) => {
+                if (members.length !== 0) {
+                  let user = members.find(member => member.id === task.userID)
+                  if (user) {
+                    return <Card key={task.id} data={task} index={index} toggelModal={handleToggelModal} member={user.firstName} />
+                  } else {
+                    return <Card key={task.id} data={task} index={index} toggelModal={handleToggelModal}/>
                   }
                 }
                 return null;
@@ -202,9 +214,9 @@ const Kanban = () => {
                 if (members.length !== 0) {
                   let user = members.find(member => member.id === task.userID)
                   if (user) {
-                    return <Card key={task.id} data={task} index={index} member={user.firstName} sortCard={sortCard} toggelModal={handleToggelModal}/>
+                    return <Card key={task.id} data={task} index={index} toggelModal={handleToggelModal} member={user.firstName} />
                   } else {
-                    return <Card key={task.id} data={task} index={index} sortCard={sortCard} toggelModal={handleToggelModal}/>
+                    return <Card key={task.id} data={task} index={index} toggelModal={handleToggelModal}/>
                   }
                 }
                 return null;

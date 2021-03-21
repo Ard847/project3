@@ -26,7 +26,6 @@ const HouseForm = ({ userID, type }) => {
     setHouseInput(event.target.value);
   }
 
-
   const createNewHousehold = async (event) => {
     event.preventDefault();
     event.stopPropagation();

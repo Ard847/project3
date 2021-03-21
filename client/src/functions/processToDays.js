@@ -14,7 +14,7 @@ const processToDays = async (taskData) => {
   // DURATION
   let duration = '';
   switch (taskData.duration.unit) {
-    case 'mins':
+    default:
       duration = taskData.duration.time * 1;
       break;
     case 'hours':
@@ -25,7 +25,7 @@ const processToDays = async (taskData) => {
   // REPEAT
   let repeat ='';
   switch (taskData.repeat.unit) {
-    case 'days':
+    default:
       repeat = taskData.repeat.time * 1;
       break;
     case 'weeks':
@@ -39,7 +39,7 @@ const processToDays = async (taskData) => {
   // ALERT
   let alertBefore = '';
   switch (taskData.alert.unit) {
-    case 'days':
+    default:
       alertBefore = taskData.alert.time * 1;
       break;
     case 'weeks':
@@ -53,7 +53,7 @@ const processToDays = async (taskData) => {
   // COMPLETE
   let complete = '';
   switch (taskData.complete.unit) {
-    case 'days':
+    default:
       complete = taskData.complete.time * 1;
       break;
     case 'weeks':
