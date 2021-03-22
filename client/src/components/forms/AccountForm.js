@@ -16,6 +16,7 @@ const AccountForm = ({ type, onCreate, onSubmit, onSuccess }) => {
   const [passwordInput, setPasswordInput] = useState('');
   const [confirmInput, setConfirmInput] = useState('');
   const [passwordNoMatch, setPasswordNoMatch] = useState(false);
+  const [ colour , setColourInput ] = useState('');
 
   const fNameInputChange = (event) => {
     // console.log('emailInputChange =', event.target.value);
@@ -47,6 +48,11 @@ const AccountForm = ({ type, onCreate, onSubmit, onSuccess }) => {
     setConfirmInput(event.target.value);
   }
 
+  const colourInputChange = (event) => {
+    // console.log('event.target.value =', event.target.value);
+    setColourInput(event.target.value)
+  }
+
   const submitCreate = (event) => {
     event.preventDefault();
     event.stopPropagation();
@@ -58,6 +64,7 @@ const AccountForm = ({ type, onCreate, onSubmit, onSuccess }) => {
         email: emailInput,
         username: usernameInput,
         password: passwordInput,
+        color: colour,
       }
       // console.log('AccountForm.js, submitCreate, user =', user);
       onCreate(user);
@@ -129,6 +136,16 @@ const AccountForm = ({ type, onCreate, onSubmit, onSuccess }) => {
             onChange={usernameInputChange}
           />
         </>
+      )}
+      { (type === 'create-account') && (
+        <>
+        <label htmlFor='username'>Pick a colour:</label>
+        <input
+          id='colour'
+          type='color'
+          onChange={colourInputChange}
+        />
+      </>
       )}
       { (type === 'create-account' || type === 'login') && (
         <>

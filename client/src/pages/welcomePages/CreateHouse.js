@@ -37,7 +37,7 @@ const CreateHouse = () => {
           <h2> Join an Existing Household</h2>
           <HouseForm userID={id} type={'join'} />
 
-          <NavLink to='/' >Back to Households</NavLink>
+          <NavLink to='/logIn/:userID' >Back to Households</NavLink>
         </article>
       </section>
     </>

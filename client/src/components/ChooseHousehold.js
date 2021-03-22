@@ -3,16 +3,16 @@ import React from 'react';
 import { NavLink} from 'react-router-dom';
 
 // styles
-import './ChooseHouse.css';
+import './ChooseHousehold.css';
 
 // hooks
-import useGetHouseholds from '../../hooks/useGetHouseholds';
+import useGetHouseholds from '../hooks/useGetHouseholds';
 
 // components
-import WelcomeTitles from '../../components/WelcomeTitles';
+import WelcomeTitles from './WelcomeTitles';
 
 // functions
-import getSession from '../../functions/getSession';
+import getSession from '../functions/getSession';
 
 
 const ChooseHouse = () => {
@@ -24,8 +24,7 @@ const ChooseHouse = () => {
 
   return (
     <>
-      <WelcomeTitles />
-      <section>
+      
         <article id='home-content' className='flex'>
 
           <div id='create-household'>
@@ -65,7 +64,7 @@ const ChooseHouse = () => {
           </div>
 
         </article>
-      </section>
+      
     </>
   )
 }

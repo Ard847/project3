@@ -8,7 +8,8 @@ const User = connection.define('user',
     lastName: { type: DataTypes.STRING(50) },
     email: { type: DataTypes.STRING(50), allowNull: false },
     username: { type: DataTypes.STRING(50), allowNull: false },
-    userPassword: { type: DataTypes.STRING(255), allowNull: false }
+    userPassword: { type: DataTypes.STRING(255), allowNull: false },
+    color: { type: DataTypes.STRING(16)},
   },
   {
     timestamps: false,
