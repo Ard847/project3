@@ -3,17 +3,17 @@ import React, { useState, useEffect } from 'react';
 import { NavLink} from 'react-router-dom';
 
 // styles
-import './ChooseHouse.css';
+import './ChooseHousehold.css';
 
 // hooks
-import useGetHouseholds from '../../hooks/useGetHouseholds';
+import useGetHouseholds from '../hooks/useGetHouseholds';
 
 // components
-import WelcomeTitles from '../../components/WelcomeTitles';
+import WelcomeTitles from './WelcomeTitles';
 
 // functions
-import getSession from '../../functions/getSession';
-import fetcher from '../../functions/fetcher';
+import getSession from '../functions/getSession';
+import fetcher from '../functions/fetcher';
 
 //cloudinary
 import {Image} from 'cloudinary-react';
@@ -39,8 +39,7 @@ const ChooseHouse = () => {
 
   return (
     <>
-      <WelcomeTitles />
-      <section>
+      
         <article id='home-content' className='flex'>
           <div id='create-household'>
             <NavLink
@@ -85,7 +84,7 @@ const ChooseHouse = () => {
           </div>
 
         </article>
-      </section>
+      
     </>
   )
 }

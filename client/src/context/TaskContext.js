@@ -1,10 +1,13 @@
 // packages
-import { useState, createContext, useEffect } from 'react';
+import { useState, createContext, useEffect, useContext, useCallback } from 'react';
 
 // functions
 import getSession from '../functions/getSession';
 import fetcher from '../functions/fetcher';
 import checkTaskStatus from '../functions/checkTaskStaus';
+
+// context
+import LoggedInContext from './LoggedInContext';
 
 // create context 
 const TaskContext = createContext();
@@ -13,18 +16,20 @@ const TaskContext = createContext();
 const TaskContextProvider = ({children}) => {
 
   const [ tasks, setTasks] = useState([]);
-
-  const fetchData = async () => {
-    const houseID = getSession('houseID');
-    let token =getSession('token') === null ? null : getSession('token').split('"');
-    if(token === null ) return
-    token = token[1];
-    const url = `/api/task/getTasks/${houseID}`;
-    const tasksResponse = await fetcher(url, 'GET', '', token);
-    //console.log('tasksResponse =', tasksResponse);
-    checkTaskStatus(tasksResponse.data);
-    setTasks(tasksResponse.data);
-  }
+  const { loggedIn } = useContext(LoggedInContext);
+  
+  const fetchData = useCallback(async () => {
+      if(loggedIn){
+      const houseID = getSession('houseID');
+      let token = getSession('token').split('"');
+      token = token[1];
+      const url = `/api/task/getTasks/${houseID}`;
+      const tasksResponse = await fetcher(url, 'GET', '', token);
+      // console.log('tasksResponse =', tasksResponse);
+      checkTaskStatus(tasksResponse.data);
+      setTasks(tasksResponse.data);
+    }
+  }, [loggedIn]);
 
   const refreshTasks = (taskID, newStatus) => {
     console.log('refreshing');
@@ -52,7 +57,7 @@ const TaskContextProvider = ({children}) => {
       console.log('I did unmount');
     };
 
-  }, []);
+  }, [fetchData]);
 
   return (
     <TaskContext.Provider value={{ tasks, fetchData, refreshTasks }}>

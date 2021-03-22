@@ -51,7 +51,7 @@ router.get('/getusers/:houseID', auth, async (req, res) => {
 
 router.post('/createNew', async (req, res) => {
   console.log('userRoutes.js, req.body =', req.body);
-  console.log(req.body.firstName)
+  console.log(req.body.lastName)
 
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(req.body.password, salt);
@@ -61,7 +61,8 @@ router.post('/createNew', async (req, res) => {
       req.body.lastName,
       req.body.email,
       req.body.username,
-      hash
+      hash,
+      req.body.color,
     )
     .then((post) => {
       res.json({

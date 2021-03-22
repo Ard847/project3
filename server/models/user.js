@@ -1,12 +1,13 @@
 const { User, Household } = require('../config/orm');
 
-const createUser = async (firstName, lastName, email, username, password) => {
+const createUser = async (firstName, lastName, email, username, password, color) => {
   return await User.create({
       firstName: firstName,
       lastName: lastName,
       email: email,
       username: username,
       userPassword: password,
+      color: color,
     })
   .then((create) => {
     return create;
@@ -41,7 +42,7 @@ const findAllUser = async (houseID) => {
     attributes: ['id', 'houseName'],
     include: [{
       model: User, 
-      attributes: ['id', 'firstName', 'lastName'],
+      attributes: ['id', 'firstName', 'lastName', 'color'],
     }],
   })
   .then((data) => {

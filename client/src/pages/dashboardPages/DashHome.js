@@ -26,7 +26,7 @@ import {Image} from 'cloudinary-react';
 
 const DashHome = ({ members, match }) => {
 
-    // variables
+  // variables
   const houseID = parseInt(getSession('houseID'));
   const getHouseName = getSession('houseName');
   const houseName = getHouseName.replace(/['"]+/g, '');
@@ -171,17 +171,17 @@ useEffect(() => {
     <div id='dash-home-content'>
       {/* <> */}
       <div id='title-bar'>
-      <div className='dash-title' >
-        <h2>Dashboard of {houseName}</h2>
-        {showInviteButton && <button id='invite' onMouseDown={handleShowHouseID}> + Invite another Member </button>}
-        {(showInviteButton === false) && (
-          <div id='house-id' onMouseOut={handleHideHouseID}>
-            <p>Your House ID is {houseID}</p>
-          </div>
-        )}
-      </div>
-        <button onClick={handleToggelModal} id='leave-household'>Leave Household</button>
+        <div className='dash-title' >
+          <h2>Dashboard of {houseName}</h2>
+          {showInviteButton && <button id='invite' onMouseDown={handleShowHouseID}> + Invite another Member </button>}
+          {(showInviteButton === false) && (
+            <div id='house-id' onMouseOut={handleHideHouseID}>
+              <p>Your House ID is {houseID}</p>
+            </div>
+          )}
         </div>
+        <button onClick={handleToggelModal} id='leave-household'>Leave Household</button>
+      </div>
 
       <div id='dash-intro' className='container'>
         <h4>Today's Date:
@@ -204,22 +204,29 @@ useEffect(() => {
                         publicId = {imageIds && imageIds.length >0 ? imageIds[index] : imageIds}
                         className='member-img' 
                       />)}
-              <p id='user-name' className='text-centre'>{member.firstName} {member.lastName}</p>
+                      <p
+                      id='user-name' 
+                      style={{
+                        'backgroundColor': member.color,
+                        'borderRadius': '5px',
+                        'padding': '3px 6px',
+                      }}
+                      className='text-centre'>{member.firstName} {member.lastName}</p>
             </div>
           )
         })}
       </div>
-      <List title={"Today's Tasks"} id={'dash-today-list'} list={todaysTasks} refresh={onRefresh } />
+      <List title={"Today's Tasks"} id={'dash-today-list'} list={todaysTasks} refresh={onRefresh} />
       <div id='tasks-to-do'>
-        <List title={"My Tasks"} id={'dash-my-list'} list={myTasks} refresh={onRefresh } />
-        <List title={"Assigned Tasks"} id={'dash-assigned-list'} list={assignedTasks} refresh={onRefresh } />
+        <List title={"My Tasks"} id={'dash-my-list'} list={myTasks} refresh={onRefresh} />
+        <List title={"Assigned Tasks"} id={'dash-assigned-list'} list={assignedTasks} refresh={onRefresh} />
       </div>
-      <List title={"Coming up this month"} id={'dash-month-list'} list={monthTasks} refresh={onRefresh } />
+      <List title={"Coming up this month"} id={'dash-month-list'} list={monthTasks} refresh={onRefresh} />
       <div id='tasks-col-4' >
-        <List title={"Over Due"} id={'dash-overdue-list'} list={overdueTasks} refresh={onRefresh } />
-        <List title={"Completed"} id={'dash-complete-list'} list={completedTasks} refresh={onRefresh } />
+        <List title={"Over Due"} id={'dash-overdue-list'} list={overdueTasks} refresh={onRefresh} />
+        <List title={"Completed"} id={'dash-complete-list'} list={completedTasks} refresh={onRefresh} />
       </div>
-      { modalOpen && <Modal closeModal={handleCloseModal} ><LeaveHousehold match={match} /></Modal> }
+      { modalOpen && <Modal closeModal={handleCloseModal} ><LeaveHousehold match={match} /></Modal>}
     </div>
   )
 };

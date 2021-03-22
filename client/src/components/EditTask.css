@@ -48,6 +48,16 @@ div#dash-members {
   cursor: pointer;
 }
 
+div.member-profile {
+  display: grid;
+  grid-template-rows: auto, auto;
+  margin: 6px;
+}
+
+div.member-profile > img{
+  justify-self: center;
+}
+
 div#due-date > p:nth-child(2) {
   display: inline-block;
 }
@@ -58,4 +68,8 @@ div#task-information > div > button.save-btn {
 
 input#due-date-input {
   cursor: pointer;
+}
+
+span {
+  margin: 0 6px;
 }

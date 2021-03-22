@@ -14,7 +14,7 @@ import './DashNav.css'
 import {Image} from 'cloudinary-react';
 
 const DashNav = ({match, currentUser, toggelModal}) => {
-  // console.log('currentUser =', currentUser);
+  console.log('currentUser =', currentUser);
   // console.log('match dash nav =', match);
 const [fileInputState,setFileInputState] = useState('')
 const [selectedFile, setSelectedFile] = useState('')
@@ -49,7 +49,7 @@ const handleFileInputChange = (e) => {
 
   const uploadImage = async (base64EncodedImage) => {
     
-    console.log(base64EncodedImage)
+    //console.log(base64EncodedImage)
     try{
       await fetcher('/api/images/upload','Post',{data :base64EncodedImage, id : userID},token)
       //createNewHousehold(base64EncodedImage)
@@ -70,6 +70,12 @@ const handleFileInputChange = (e) => {
     fetchImages()
   },[])
 
+
+  const userStyle = {
+    'backgroundColor': currentUser?.color,
+    'borderRadius': '5px',
+    'padding': '3px 6px',
+  }
 
   return (
     <nav id='dash-nav'>
@@ -93,7 +99,7 @@ const handleFileInputChange = (e) => {
     </form>
         {
           (currentUser) &&
-          (<p id='user-name' className='text-centre'>{`${currentUser.firstName} ${currentUser.lastName}`}</p>)
+          (<p id='user-name' className='text-centre' style={userStyle}>{`${currentUser.firstName} ${currentUser.lastName}`}</p>)
         }
       </div>
 
