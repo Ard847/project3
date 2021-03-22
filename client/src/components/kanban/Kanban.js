@@ -223,7 +223,7 @@ const Kanban = () => {
               })}
           </KanbanBoard>
         </div>
-        { modalOpen && <Modal closeModal={handleCloseModal} ><EditTask task={selectedTask} refresh={() => refreshTasks()} /></Modal> }
+        { modalOpen && <Modal closeModal={handleCloseModal} > {/*<EditTask task={selectedTask} refresh={() => refreshTasks() />*/}</Modal> }
       </div>
     </DndProvider>
   )

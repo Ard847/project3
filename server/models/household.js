@@ -1,10 +1,11 @@
 const { User, Household, HouseholdMember } = require('../config/orm');
 
 
-const createHousehold = async (name) => {
+const createHousehold = async (name,imageUrl) => {
   return await Household.create(
     {
       houseName: name,
+      image : imageUrl,
     }
   )
   .then((create) => {
@@ -48,8 +49,8 @@ const findAllHousehold = async (userID) => {
     where: {id: userID},
     attributes: ['id', 'firstName', 'lastName'],
     include: [{
-      model: Household, 
-      attributes: ['id', 'houseName'],
+      model: Household,
+      attributes: ['id','houseName', 'image'],
     }]
   })
   .then((data) => {

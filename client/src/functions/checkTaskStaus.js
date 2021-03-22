@@ -6,9 +6,9 @@ import fetcher from "./fetcher";
 const checkTaskStatus = (allTasks) => {
 
   const houseID = getSession('houseID');
-  let token = getSession('token').split('"');
-  token = token[1];
-
+  let token =getSession('token') === null ? null : getSession('token').split('"');
+  token = token === null ? null : token[1];
+  if(allTasks === undefined) return
   allTasks.forEach( async (task) => {
 
     const todayDate = new Date();

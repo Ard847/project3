@@ -15,18 +15,19 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("../client/build"));
 }
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(express.urlencoded({limit:'50mb', extended: true }));
+app.use(express.json({limit : '50mb'}));
 
 // set up routes
 const userRoutes = require('./routes/userRoutes');
 const taskRoutes = require('./routes/taskRoutes');
 const householdRoutes = require('./routes/householdRoutes');
+const imagesRoutes = require('./routes/imagesRoutes')
 
 app.use('/api/user', userRoutes );
 app.use('/api/task', taskRoutes );
 app.use('/api/household', householdRoutes);
-
+app.use('/api/images', imagesRoutes)
 // Send every other request to the React app
 // Define any API routes before this runs
 app.get("*", (req, res) => {

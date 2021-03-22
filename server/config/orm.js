@@ -9,6 +9,7 @@ const User = connection.define('user',
     email: { type: DataTypes.STRING(50), allowNull: false },
     username: { type: DataTypes.STRING(50), allowNull: false },
     userPassword: { type: DataTypes.STRING(255), allowNull: false },
+    image : {type :DataTypes.STRING(255)},
     color: { type: DataTypes.STRING(16)},
   },
   {
@@ -20,6 +21,7 @@ const Household = connection.define('household',
   {
     id: { type: DataTypes.INTEGER, allowNull: false, primaryKey: true, autoIncrement: true },
     houseName: { type: DataTypes.STRING(50) },
+    image : {type :DataTypes.STRING(255)},
   },
   {
     timestamps: false,
