@@ -39,8 +39,7 @@ const SignupPage = () => {
      
         <section>
           <article id='login-content'>
-            <h1>Sign Up Page</h1>
-            <p>If you do not have an account you can create one here. </p>
+            
             <AccountForm type={'create-account'} onCreate={handleCreate} onSuccess={userCreated}/>
           </article>
         </section>
