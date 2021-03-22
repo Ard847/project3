@@ -10,6 +10,7 @@ const User = connection.define('user',
     username: { type: DataTypes.STRING(50), allowNull: false },
     userPassword: { type: DataTypes.STRING(255), allowNull: false },
     image : {type :DataTypes.STRING(255)},
+    color: { type: DataTypes.STRING(16)},
   },
   {
     timestamps: false,

@@ -31,6 +31,13 @@ img.user-img {
   background-color: var(--grey);
 }
 
+div#user-profile{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 p#user-name{
   justify-self: center;
+  display: inline-block;
 }
