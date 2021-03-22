@@ -1,6 +1,28 @@
-nav#main-nav {
-  background-color: var(--white);
-  height: 30px;
+nav.r-nav{
+  background: transparent!important;
+  padding: 20px 0;
+  transition: .5s all;
+}
+
+.navLink{
+  font-size: 15px;
+  letter-spacing: 0.05em;
+  margin-left: 80px;
+  color: rgba(0, 0, 0, 0.8)!important;
   display: flex;
-  justify-content: flex-end;
+    justify-content: space-around;
+    text-decoration: none;
+    letter-spacing: 3px;
+    font-weight: bold;
+    font-size: 14px;
+   
+    
+}
+
+.nav-collapse{
+  list-style-type: none;
+}
+
+.logo{
+  width: 100px;
 }

@@ -4,4 +4,19 @@
   flex-flow: column;
   justify-content: center;
   
+  
 }
+
+.loginInForm{
+  margin-top: 130px;
+}
+
+.error-login-msg{
+  margin-top: -70px;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: .9rem;
+  color: red;
+}
+
+

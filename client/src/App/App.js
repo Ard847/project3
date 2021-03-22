@@ -13,6 +13,7 @@ import './App.css';
 import HomePage from '../pages/welcomePages/HomePage';
 import LoggedInHome from '../pages/welcomePages/LoggedInHome';
 import AboutPage from '../pages/welcomePages/AboutPage';
+import Instructions from '../pages/welcomePages/Instructions';
 import LoginPage from '../pages/welcomePages/LoginPage';
 import SignupPage from '../pages/welcomePages/SignupPage';
 import CreateHouse from '../pages/welcomePages/CreateHouse';
@@ -40,6 +41,7 @@ const App = () => {
             <Route exact path='/' component={HomePage} />
             <Route exact path='/home/:id' component={LoggedInHome} />
             <Route exact path='/about' component={AboutPage} />
+            <Route exact path='/instructions' component={Instructions} />
             <Route exact path='/logIn' component={LoginPage} />
             <Route exact path='/logIn/:id' component={LoggedInPage} />
             <Route exact path='/signUp' component={SignupPage} />

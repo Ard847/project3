@@ -20,7 +20,7 @@ const LoggedInPage = () => {
   if (loggedIn === true){
     return (
       <>
-      <WelcomeTitles />
+      
       <section>
       <article id='login-content'>
         <h1>MyHouseholds: </h1>

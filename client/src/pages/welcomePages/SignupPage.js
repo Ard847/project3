@@ -36,7 +36,7 @@ const SignupPage = () => {
 
     return (
       <>
-        <WelcomeTitles />
+     
         <section>
           <article id='login-content'>
             <h1>Sign Up Page</h1>
@@ -52,7 +52,7 @@ const SignupPage = () => {
 
     return (
       <>
-        <WelcomeTitles />
+     
         <section>
           <article id='login-content'>
             <h1>Sign Up Page</h1>
