@@ -27,7 +27,7 @@ const useGetMembers = (here) => {
       console.log(`I did unmount at ${here}`);
     }; 
 
-  }, []);
+  }, [here]);
 
   // console.log(`hook ${here} members =`, members);
 

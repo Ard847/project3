@@ -61,7 +61,8 @@ router.post('/createNew', async (req, res) => {
       req.body.lastName,
       req.body.email,
       req.body.username,
-      hash
+      hash,
+      req.body.color,
     )
     .then((post) => {
       res.json({

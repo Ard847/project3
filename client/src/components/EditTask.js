@@ -18,7 +18,7 @@ const EditTask = ({ task, refresh }) => {
   const members = useGetMembers();
 
   const [taskData, setTaskData] = useState({
-    id:task.id,
+    id: task.id,
     taskName: task.taskName,
     alertBefore: task.alertBefore,
     completeBy: task.completeBy,
@@ -38,30 +38,30 @@ const EditTask = ({ task, refresh }) => {
   // console.log("displayDate =", displayDate );
   useEffect(() => {
     // console.log('taskData.nextDate =', taskData.nextDate);
-    if(taskData.nextDate === null){
+    if (taskData.nextDate === null) {
       setDisplayDate('Invalid Date');
     } else {
       const newDisplayDate = new Date(taskData.nextDate).toString().split(' ').splice(0, 4).join(' ');
       setDisplayDate(newDisplayDate);
     }
   }, [taskData]);
-  
+
   useEffect(() => {
-    
+
     const getUser = async () => {
       let newUser = await members.find(member => member.id === taskData.userID);
       setUser(newUser);
       // console.log('user taskData.userID true =', user);
     }
 
-    const createUser = async () =>{
+    const createUser = async () => {
       setUser(
         {
           id: 0,
           firstName: 'All Household',
           lastName: 'Members',
         }
-      ) 
+      )
       // console.log('user taskData.userID false =', user);
     }
 
@@ -72,7 +72,7 @@ const EditTask = ({ task, refresh }) => {
       createUser();
     }
 
-  },[taskData, members]);
+  }, [taskData, members]);
 
   const handleInputChange = (event) => {
     const target = event.target;
@@ -80,19 +80,19 @@ const EditTask = ({ task, refresh }) => {
     // console.log('target.name =', target.name);
     // console.log('target.value =', target.value);
 
-    if ( target.name === 'task-name' ) {
+    if (target.name === 'task-name') {
       let newTaskName = { ...taskData }
       newTaskName.taskName = target.value;
       setTaskData(newTaskName);
     }
 
-    if( target.name === 'duration-input' ){
+    if (target.name === 'duration-input') {
       let newTaskDuration = { ...taskData }
       newTaskDuration.duration = target.value;
       setTaskData(newTaskDuration);
     }
 
-    if( target.name === 'due-date-input' ){
+    if (target.name === 'due-date-input') {
       const date = new Date(target.value);
       // console.log('date =', date);
       let newTaskDue = { ...taskData }
@@ -100,19 +100,19 @@ const EditTask = ({ task, refresh }) => {
       setTaskData(newTaskDue);
     }
 
-    if( target.name === 'alert-date-input' ){
+    if (target.name === 'alert-date-input') {
       let newTaskAlert = { ...taskData }
       newTaskAlert.alertBefore = target.value;
       setTaskData(newTaskAlert);
     }
 
-    if( target.name === 'completeBy-date-input' ){
+    if (target.name === 'completeBy-date-input') {
       let newTaskComplete = { ...taskData }
       newTaskComplete.completeBy = target.value;
       setTaskData(newTaskComplete);
     }
-    
-    if( target.name === 'repeat-input' ){
+
+    if (target.name === 'repeat-input') {
       let newTaskRepeat = { ...taskData }
       newTaskRepeat.repeatEvery = target.value;
       setTaskData(newTaskRepeat);
@@ -140,7 +140,7 @@ const EditTask = ({ task, refresh }) => {
       // console.log('newTaskData 2 =', newTaskData);
       setTaskData(newTaskData);
       refresh();
-    }; 
+    };
   };
 
   const handleSave = async (event) => {
@@ -158,7 +158,7 @@ const EditTask = ({ task, refresh }) => {
 
     const updateTaskResponse = await fetcher(url, 'PUT', taskData, token);
     // console.log('updateTaskResponse =', updateTaskResponse);
-    if (updateTaskResponse.message === 'success'){
+    if (updateTaskResponse.message === 'success') {
       refresh();
     }
   }
@@ -180,18 +180,35 @@ const EditTask = ({ task, refresh }) => {
       </div>
 
       <div id='assigned-to' >
-        <p>Assigned To: {`${user?.firstName} ${user?.lastName}`}</p>
+        <p>Assigned To:
+          <span style={{
+            'backgroundColor': user?.color,
+            'borderRadius': '5px',
+            'padding': '3px 6px',
+            }}
+          >
+            {`${user?.firstName} ${user?.lastName}`}
+          </span>
+        </p>
         <p>Assign a household member: </p>
         <div id='dash-members' className='container'>
           {members.map((member) => {
             return (
-              <div key={member.id} className='member-profile' onClick={() => {assignHouseholdMember(member)}}>
+              <div key={member.id} className='member-profile' onClick={() => { assignHouseholdMember(member) }}>
                 <img
                   className='member-img'
                   src=''
                   alt=''
                 />
-                <p id='user-name' className='text-centre'>{member.firstName} {member.lastName}</p>
+                <p
+                  id='user-name'
+                  style={{
+                    'backgroundColor': member.color,
+                    'borderRadius': '5px',
+                    'padding': '3px 6px',
+                  }}
+                  className='text-centre'>{member.firstName} {member.lastName}
+                </p>
               </div>
             )
           })}
@@ -217,9 +234,9 @@ const EditTask = ({ task, refresh }) => {
       </div>
 
       <div id='due-date' >
-        <p>Due Date: {displayDate === 'Invalid Date' ? 'No Date set': displayDate}</p>
+        <p>Due Date: {displayDate === 'Invalid Date' ? 'No Date set' : displayDate}</p>
         <p>Set Date: </p>
-        <input  
+        <input
           type='date'
           id='due-date-input'
           name='due-date-input'
@@ -243,15 +260,15 @@ const EditTask = ({ task, refresh }) => {
       </div>
 
       <div id='completeBy-date' >
-        <label htmlFor='completeBy-date-input'>Deadline tollerance 
+        <label htmlFor='completeBy-date-input'>Deadline tollerance
         <input
-          type='number'
-          id='completeBy-date-input'
-          value={taskData.completeBy}
-          name='completeBy-date-input'
-          onChange={handleInputChange}
-        />
-        days after. 
+            type='number'
+            id='completeBy-date-input'
+            value={taskData.completeBy}
+            name='completeBy-date-input'
+            onChange={handleInputChange}
+          />
+        days after.
         </label>
         <button className='save-btn' onClick={handleSave}>Save</button>
       </div>

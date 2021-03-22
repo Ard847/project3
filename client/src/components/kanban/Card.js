@@ -10,13 +10,13 @@ import './Kanban.css';
 import getPriority from '../../functions/getPriority';
 
 
-const Card = ({ data, member, index, sortCard, toggelModal }) => {
+const Card = ({ data, member, index, sortCard, toggelModal, colour }) => {
 
-  // console.log('member =', member);
+  console.log('member =', member);
 
   const id = data.id;
   const ref = useRef(null);
-  
+
   const onToggelModal = () => {
     toggelModal(data);
   }
@@ -28,7 +28,7 @@ const Card = ({ data, member, index, sortCard, toggelModal }) => {
         handlerId: monitor.getHandlerId(),
       };
     },
-    
+
   });
 
   const [{ isDragging }, drag] = useDrag(() => ({
@@ -57,8 +57,19 @@ const Card = ({ data, member, index, sortCard, toggelModal }) => {
     >
       <p>{data.taskName}</p>
       <p className='sml-text'><strong>Time it takes: </strong>{data.duration} mins</p>
-      { member && <p className='sml-text'><strong>Assigned to: </strong>{member}</p>}
-      <p className='sml-text' style={getPriority(data)}>Due date: {data.nextDate}</p> 
+      { member &&
+        <p className='sml-text'> <strong>Assigned to: </strong>
+          <span
+            style={{
+              'backgroundColor': colour,
+              'borderRadius': '5px',
+              'padding': '3px 6px',
+            }}
+          > {member}
+          </span>
+        </p>
+      }
+      <p className='sml-text' style={getPriority(data)}>Due date: {data.nextDate}</p>
     </div>
   )
 }

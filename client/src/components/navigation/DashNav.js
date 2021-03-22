@@ -6,8 +6,15 @@ import { NavLink } from 'react-router-dom';
 import './DashNav.css'
 
 const DashNav = ({match, currentUser, toggelModal}) => {
-  // console.log('currentUser =', currentUser);
+  console.log('currentUser =', currentUser);
   // console.log('match dash nav =', match);
+
+  const userStyle = {
+    'backgroundColor': currentUser?.color,
+    'borderRadius': '5px',
+    'padding': '3px 6px',
+  }
+
   return (
     <nav id='dash-nav'>
 
@@ -19,7 +26,7 @@ const DashNav = ({match, currentUser, toggelModal}) => {
         />
         {
           (currentUser) &&
-          (<p id='user-name' className='text-centre'>{`${currentUser.firstName} ${currentUser.lastName}`}</p>)
+          (<p id='user-name' className='text-centre' style={userStyle}>{`${currentUser.firstName} ${currentUser.lastName}`}</p>)
         }
       </div>
 

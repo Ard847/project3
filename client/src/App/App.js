@@ -11,11 +11,12 @@ import './App.css';
 
 // pages
 import HomePage from '../pages/welcomePages/HomePage';
+import LoggedInHome from '../pages/welcomePages/LoggedInHome';
 import AboutPage from '../pages/welcomePages/AboutPage';
 import LoginPage from '../pages/welcomePages/LoginPage';
 import SignupPage from '../pages/welcomePages/SignupPage';
 import CreateHouse from '../pages/welcomePages/CreateHouse';
-import ChooseHouse from '../pages/welcomePages/ChooseHouse';
+import LoggedInPage from '../pages/welcomePages/LoggedInPage';
 // import NoMatchPage from '../pages/welcomePages/NoMatchPage';
 
 import DashApp from '../pages/dashboardPages/DashApp';
@@ -37,9 +38,10 @@ const App = () => {
           <NavBar />
           <main>
             <Route exact path='/' component={HomePage} />
-            <Route exact path='/home/:id' component={ChooseHouse} />
+            <Route exact path='/home/:id' component={LoggedInHome} />
             <Route exact path='/about' component={AboutPage} />
             <Route exact path='/logIn' component={LoginPage} />
+            <Route exact path='/logIn/:id' component={LoggedInPage} />
             <Route exact path='/signUp' component={SignupPage} />
             <Route exact path='/createHousehold' component={CreateHouse} />
             <Route path='/dashboard/:id/:householdID' component={DashApp} />
