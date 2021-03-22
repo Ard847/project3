@@ -15,6 +15,7 @@ import AccountForm from '../../components/forms/AccountForm';
 import saveToSession from '../../functions/saveToSession';
 import fetcher from '../../functions/fetcher';
 import getSession from '../../functions/getSession';
+import LoggedInHome from './LoggedInHome';
 
 
 const LoginPage = ({location}) => {
@@ -80,7 +81,7 @@ const LoginPage = ({location}) => {
       <>
       
       <section className="loginInForm">
-      
+      <LoggedInHome />
       <article id='login-content'>
         <h1 className="title">Log-in Page</h1>
         <p>You are logged in. Navigate to the Home page to see your housholds or create a new one. </p>

@@ -14,8 +14,7 @@ const LoggedInHome = () => {
   
   return (
     <>
-     
-    
+   
       <section>
         <article id='home-content'>
           <h2>This is the Logged In Home Page </h2>

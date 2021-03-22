@@ -41,7 +41,7 @@ const NavBar = (props) => {
               </NavItem>
               <NavItem>
                 { loggedIn 
-                ?<NavLink className="navLink" href="/logIn">Login</NavLink>
+                ?<NavLink className="navLink" href="/logIn">My Households</NavLink>
                 :<NavLink className="navLink" href="/logIn">Login</NavLink>
                  }
               </NavItem>
