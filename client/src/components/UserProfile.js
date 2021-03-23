@@ -8,21 +8,31 @@ import './UserProfile.css';
 import fetcher from '../functions/fetcher';
 import getSession from '../functions/getSession';
 
+// hooks
+import useGetImages from '../hooks/useGetImages';
+
+//cloudinary
+import { Image } from 'cloudinary-react';
 
 
 const UserProfile = () => {
 
-  // state
-  // const [selectedFile, setSelectedFile] = useState('');
-  // const [fileInputState, setFileInputState] = useState('');
-  const [userPreviewSource, setUserPreviewSource] = useState('');
-  const [housePreviewSource, setHousePreviewSource] = useState('');
-  // console.log('previewSource =', previewSource);
+  // hooks
+  const currentImage = useGetImages().toString();
+  console.log('currentImage =', currentImage);
 
+  // variables
   let token = getSession('token').split('"');
   token = token[1];
   const userID = getSession('id');
   const houseID = getSession('houseID');
+
+  // state
+  const [userPreviewSource, setUserPreviewSource] = useState('');
+  const [housePreviewSource, setHousePreviewSource] = useState('');
+  // const [selectedFile, setSelectedFile] = useState('');
+  // const [fileInputState, setFileInputState] = useState('');
+  // console.log('previewSource =', previewSource);
 
   const uploadUserImage = async (base64EncodedImage) => {
     // console.log(base64EncodedImage);
@@ -72,7 +82,7 @@ const UserProfile = () => {
     const file = e.target.files[0];
     previewUserFile(file);
   }
-  
+
   const handleSubmitHouseFile = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -105,16 +115,19 @@ const UserProfile = () => {
               alt="user"
             />
           ) : (
-            <img
+            <Image
+              key={userID}
               className='user-img'
+              cloudName='dii2emagu'
               alt='placeholder'
+              publicID={currentImage}
             />
           )
         }
 
         <form className='profile-form' onSubmit={handleSubmitUserFile}>
           <input type="file" name="image" onChange={handleUserFileInputChange} />
-          <button id='profile-image-btn' type="submit">Save Profile Image</button>
+          <button className='profile-image-btn' type="submit">Save Profile Image</button>
         </form>
 
       </article>
@@ -139,7 +152,7 @@ const UserProfile = () => {
 
         <form className='profile-form' onSubmit={handleSubmitHouseFile}>
           <input type="file" name="image" onChange={handleHouseFileInputChange} />
-          <button id='profile-image-btn' type="submit">Save House Image</button>
+          <button className='profile-image-btn' type="submit">Save House Image</button>
         </form>
       </article>
 

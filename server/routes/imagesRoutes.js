@@ -65,7 +65,7 @@ router.post('/upload/user', auth, async (req, res) => {
       use_filename: true,
       folder: "project3/users"
     })
-    //console.log(uploadResponse) 
+    console.log('uploadResponse =', uploadResponse); 
     await orm.User.update({ image: uploadResponse.public_id }, { where: { id: req.body.id } });
     //console.log('uploaded',req.body.id)
     res.json({ msg: "Saved with success" })

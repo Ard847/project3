@@ -20,7 +20,7 @@ const useGetTasks = () => {
   }
 
   const refreshTasks = (taskID, newStatus) => {
-    console.log('refreshing');
+    // console.log('refreshing');
     // change the tasks array manually. - optimistic loading
     // console.log({taskID});
     // console.log({newStatus});
