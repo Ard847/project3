@@ -21,7 +21,7 @@ import fetcher from '../../functions/fetcher'
 // import useGetTasks from '../../hooks/useGetTasks';
 
 //cloudinary
-import {Image} from 'cloudinary-react';
+import { Image } from 'cloudinary-react';
 
 
 const DashHome = ({ members, match }) => {
@@ -32,7 +32,7 @@ const DashHome = ({ members, match }) => {
   const houseName = getHouseName.replace(/['"]+/g, '');
   const userID = parseInt(getSession('id'));
   let token = getSession('token').split('"')
-  token = token[1]    
+  token = token[1]
 
   // hooks -------------------------------------------------------------------
   // const [tasks, refreshTasks] = useGetTasks();
@@ -47,8 +47,8 @@ const DashHome = ({ members, match }) => {
   const [monthTasks, setMonthTasks] = useState([]);
   const [overdueTasks, setOverdueTasks] = useState([]);
   const [completedTasks, setCompletedTasks] = useState([]);
-  const [ modalOpen, setModalOpen ] = useState(false);
-  const [imageIds,setImageIds] = useState([])
+  const [modalOpen, setModalOpen] = useState(false);
+  const [imageIds, setImageIds] = useState([])
 
   // Invite to household ------------------------------------------------------
   const handleShowHouseID = (event) => {
@@ -71,17 +71,16 @@ const DashHome = ({ members, match }) => {
   const handleCloseModal = () => {
     setModalOpen(false);
   }
-//Fetch user images
-useEffect(() => {
-  const fetchImages = async () => {
-    console.log('here')
-    const response = await fetcher(`/api/images/user/${houseID}&${userID}`,'Get','',token)
-    //console.log(response)
-    setImageIds(response.images)
-    //console.log(imageIds)
-  } 
-  fetchImages()
-},[])
+  //Fetch user images
+  useEffect(() => {
+    const fetchImages = async () => {
+      const response = await fetcher(`/api/images/user/${houseID}&${userID}`, 'GET', '', token);
+      //console.log(response)
+      setImageIds(response.images);
+      //console.log(imageIds)
+    }
+    fetchImages()
+  }, [token, userID, houseID]);
 
   // list data ----------------------------------------------------------------
   useEffect(() => {
@@ -137,28 +136,28 @@ useEffect(() => {
 
   useEffect(() => {
     let monthTaskData = [];
-    if(tasks !== undefined){
-    if (tasks.length > 0) {
+    if (tasks !== undefined) {
+      if (tasks.length > 0) {
 
-      tasks.forEach(task => {
+        tasks.forEach(task => {
 
-        const todaysDate = new Date().toLocaleDateString();
-        // console.log('todaysDate =', todaysDate);
-        let todaysMonth = todaysDate.split('/');
-        todaysMonth = todaysMonth[1];
-        // console.log('todaysMonth =', todaysMonth);
-        // task range
-        const date = new Date(task.nextDate).toLocaleDateString();
-        let dateMonth = date.split('/');
-        dateMonth = dateMonth[1];
-        if (todaysMonth === dateMonth && task.repeatEvery > 7) {
-          monthTaskData.push(task);
-        }
+          const todaysDate = new Date().toLocaleDateString();
+          // console.log('todaysDate =', todaysDate);
+          let todaysMonth = todaysDate.split('/');
+          todaysMonth = todaysMonth[1];
+          // console.log('todaysMonth =', todaysMonth);
+          // task range
+          const date = new Date(task.nextDate).toLocaleDateString();
+          let dateMonth = date.split('/');
+          dateMonth = dateMonth[1];
+          if (todaysMonth === dateMonth && task.repeatEvery > 7) {
+            monthTaskData.push(task);
+          }
 
-      });
-      setMonthTasks(monthTaskData);
+        });
+        setMonthTasks(monthTaskData);
+      }
     }
-  }
   }, [tasks]);
 
   const onRefresh = (taskID, newStatus) => {
@@ -191,28 +190,28 @@ useEffect(() => {
       </div>
 
       <div id='dash-members' className='container'>
-      
-        {members.map((member,index) => {
+
+        {members.map((member, index) => {
           return (
             <div key={member.id} className='member-profile'>
-              {imageIds && imageIds[index] == null ?(<img
-                      className='member-img'
-                      src=''
-                      alt=''
-                    />):(<Image
-                        key = {index} 
-                        cloudName = 'dii2emagu'
-                        publicId = {imageIds && imageIds.length >0 ? imageIds[index] : imageIds}
-                        className='member-img' 
-                      />)}
-                      <p
-                      id='user-name' 
-                      style={{
-                        'backgroundColor': member.color,
-                        'borderRadius': '5px',
-                        'padding': '3px 6px',
-                      }}
-                      className='text-centre'>{member.firstName} {member.lastName}</p>
+              {imageIds && imageIds[index] == null ? (<img
+                className='member-img'
+                src=''
+                alt=''
+              />) : (<Image
+                key={index}
+                cloudName='dii2emagu'
+                publicId={imageIds && imageIds.length > 0 ? imageIds[index] : imageIds}
+                className='member-img'
+              />)}
+              <p
+                id='user-name'
+                style={{
+                  'backgroundColor': member.color,
+                  'borderRadius': '5px',
+                  'padding': '3px 6px',
+                }}
+                className='text-centre'>{member.firstName} {member.lastName}</p>
             </div>
           )
         })}

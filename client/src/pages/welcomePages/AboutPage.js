@@ -13,14 +13,13 @@ import AboutTitles from '../welcomeTitles/AboutTitles';
 
 const AboutPage = () => {
 
-
   return (
     <>
       <AboutTitles />
       <section >
         <article id='about-content'>
           <div >
-            <img className="about-img" src={AboutImg} />
+            <img className="about-img" src={AboutImg} alt='about sorted styling'/>
           </div>
         </article>
       </section>

@@ -1,7 +1,6 @@
 // packages
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useEffect, useState } from 'react';
 
 //font awesome packages
 import { faCalendar, faTasks } from "@fortawesome/free-solid-svg-icons";
@@ -9,25 +8,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // functions
 import getSession from '../../functions/getSession';
-import fetcher from '../../functions/fetcher'
 
 // hooks
 import useGetImages from '../../hooks/useGetImages';
 
 // styles
-import './DashNav.css'
+import './DashNav.css';
 
 //cloudinary
 import { Image } from 'cloudinary-react';
 
 const DashNav = ({ match, currentUser, toggelModal, toggelProfile }) => {
-  console.log('currentUser =', currentUser);
+  // console.log('currentUser =', currentUser);
   // console.log('match dash nav =', match);
 
   const userID = getSession('id');
-  let token = getSession('token').split('"');
-  token = token[1];
-
+  
   const imageString = useGetImages().toString();
   // console.log('imageString =', imageString);
 

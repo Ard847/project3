@@ -10,9 +10,9 @@ import './Kanban.css';
 import getPriority from '../../functions/getPriority';
 
 
-const Card = ({ data, member, index, sortCard, toggelModal, colour }) => {
+const Card = ({ data, member, toggelModal, colour }) => {
 
-  console.log('member =', member);
+  // console.log('member =', member);
 
   const id = data.id;
   const ref = useRef(null);
