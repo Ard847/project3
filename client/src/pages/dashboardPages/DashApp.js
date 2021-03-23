@@ -15,6 +15,7 @@ import saveToSession from '../../functions/saveToSession';
 import DashNav from '../../components/navigation/DashNav';
 import Modal from '../../components/Modal';
 import CreateTaskForm from '../../components/forms/CreateTaskForm';
+import UserProfile from '../../components/UserProfile';
 
 // pages
 import DashHome from './DashHome';
@@ -36,6 +37,7 @@ const DashApp = ({ match, location }) => {
 
   const [currentUser, setCurrentUser] = useState({});
   const [modalOpen, setModalOpen] = useState(false);
+  const [modalProfile, setModalProfile] = useState(false);
 
   const members = useGetMembers('dash-app');
   // console.log(members);
@@ -45,8 +47,17 @@ const DashApp = ({ match, location }) => {
     setModalOpen(true);
   }
 
+  
   const handleCloseModal = () => {
     setModalOpen(false);
+  }
+  
+  const handleToggelProfile = () => {
+    setModalProfile(true);
+  }
+
+  const handleCloseProfile = () => {
+    setModalProfile(false);
   }
 
   useEffect(() => {
@@ -65,7 +76,7 @@ const DashApp = ({ match, location }) => {
       
         <section id='dashboard-content' className='dashboard'>
 
-          <DashNav match={match} currentUser={currentUser} toggelModal={handleToggelModal} />
+          <DashNav match={match} currentUser={currentUser} toggelModal={handleToggelModal} toggelProfile={handleToggelProfile} />
           <article id='dash-body'>
             <Route exact path={`${match.url}`} render={(props) => (
               <DashHome {...props} members={members} />
@@ -80,6 +91,7 @@ const DashApp = ({ match, location }) => {
         </section>
         
         {modalOpen && <Modal closeModal={handleCloseModal} ><CreateTaskForm /></Modal>}
+        {modalProfile && <Modal closeModal={handleCloseProfile} ><UserProfile /></Modal>}
       
     </>
   )
