@@ -29,7 +29,7 @@ const UserProfile = ({ }) => {
         data: base64EncodedImage,
         id: userID,
       };
-      await fetcher(url, 'POST', body, token);
+      await fetcher(url, 'PUT', body, token);
       //createNewHousehold(base64EncodedImage)
     } catch (e) {
       console.log("error image", e);

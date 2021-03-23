@@ -57,7 +57,8 @@ router.get('/user/:houseID&:id',auth, async( req,res) => {
     res.send({images,currentUser: currentUser.image })
 })
 
-router.post('/upload',auth,  async (req,res) => {
+router.put('/upload',auth,  async (req,res) => {
+    console.log(req.body)
     try{
         const fileStr = req.body.data
         //console.log(fileStr)
