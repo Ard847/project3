@@ -1,6 +1,7 @@
 // packages
 import React, { useContext } from 'react';
 import {Redirect} from 'react-router-dom';
+import NavBar from '../../components/navigation/Navbar'
 
 // styles
 import './HomePage.css';
@@ -28,6 +29,7 @@ const HomePage = () => {
   } else {
     return (
       <>
+      <NavBar/>
         <WelcomeTitles />
         <section>
           <article id='home-content'>
