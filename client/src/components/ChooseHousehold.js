@@ -18,25 +18,23 @@ import {Image} from 'cloudinary-react';
 
 const ChooseHouse = () => {
   const households = useGetHouseholds();
-   console.log('households =', households)
-  const [imageIds,setImageIds] = useState(null);
+  //  console.log('households =', households);
+  const [imageIds,setImageIds] = useState('');
   const id = getSession('id');
   let token = getSession('token').split('"');
   token = token[1];
   
   useEffect(() => {
     const fetchImages = async () => {
-      const response = await fetcher(`/api/images/houseHold/${id}`,'Get','',token)
-      console.log("response    ",response)
-      setImageIds(response)
-      //console.log('res',response[0])
+      
+      const response = await fetcher(`/api/images/houseHold/${id}`,'GET','',token);
+      setImageIds(response);
     } 
     fetchImages()
-  },[])
+  },[id, token]);
 
   return (
     <>
-      
         <article id='home-content' className='flex'>
           <div id='create-household'>
             <NavLink
@@ -77,11 +75,8 @@ const ChooseHouse = () => {
                 </div>
               )
             })}
-
           </div>
-
         </article>
-      
     </>
   )
 }

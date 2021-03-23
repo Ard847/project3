@@ -1,5 +1,5 @@
 // packages
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 
 //images
@@ -21,7 +21,7 @@ const NavBar = () => {
 
   return (
     <nav id='main-nav' className="mr-auto items" >
-      <NavLink to="/"><img id="logo" src={Logo} /></NavLink>
+      <NavLink to="/"><img id="logo" src={Logo} alt='sorted' /></NavLink>
       <NavLink className="navLink" to='/'>Home</NavLink>
       <NavLink className="navLink" to='/about'>About</NavLink>
       <NavLink className="navLink" to="/instructions">Instructions</NavLink>

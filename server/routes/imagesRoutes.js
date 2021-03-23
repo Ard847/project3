@@ -1,23 +1,22 @@
 const cloudinary = require('cloudinary').v2
 const express = require('express');
 const router = express.Router();
-const auth = require('../auth')
-const householdModel = require('../models/household');
+const auth = require('../auth');
 const orm = require('../config/orm')
 const imageModels = require('../models/image')
 
 // required models
+const householdModel = require('../models/household');
 const userModel = require('../models/user');
 
 cloudinary.config({
-    cloud_name:process.env.CLOUDINARY_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET,
-})
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 router.get('/houseHold/:id',auth, async(req,res) => {
     try{
-        
         const userHouseholds = await householdModel.findAllHousehold(req.params.id);
         const households = userHouseholds[0].dataValues.households; 
         //console.log('yo',households)
@@ -89,4 +88,3 @@ router.put('/upload',auth,  async (req,res) => {
 
 module.exports = router
 
- 

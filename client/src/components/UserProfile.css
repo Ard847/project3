@@ -1,0 +1,35 @@
+div#user-profile-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 12px;
+
+  padding: 12px;
+  max-height: 90%;
+  justify-self: center;
+}
+
+button.profile-image-btn {
+  margin: 12px;
+  width: fit-content;
+  cursor: pointer;
+  color: red;
+}
+
+article#profile-1 {
+  display: flex;
+  grid-column: 1 / span 1;
+  align-items: center;
+  flex-flow: column;
+}
+
+article#profile-2 {
+  display: flex;
+  grid-column: 2 / span 1;
+  align-items: center;
+  flex-flow: column;
+}
+
+form.profile-form > input,
+form.profile-form > button {
+  justify-self: center;
+}

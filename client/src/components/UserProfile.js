@@ -1,30 +1,43 @@
 // packages
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 // styles
-import './UserProfile';
+import './UserProfile.css';
 
 // functions
 import fetcher from '../functions/fetcher';
 import getSession from '../functions/getSession';
 
+// hooks
+import useGetImages from '../hooks/useGetImages';
+
+//cloudinary
+import { Image } from 'cloudinary-react';
 
 
-const UserProfile = ({ }) => {
+const UserProfile = () => {
 
-  // state
-  const [selectedFile, setSelectedFile] = useState('');
-  const [fileInputState, setFileInputState] = useState('');
-  const [previewSource, setPreviewSource] = useState('');
+  // hooks
+  const currentImage = useGetImages().toString();
+  console.log('currentImage =', currentImage);
 
+  // variables
   let token = getSession('token').split('"');
   token = token[1];
   const userID = getSession('id');
+  const houseID = getSession('houseID');
 
-  const uploadImage = async (base64EncodedImage) => {
-    //console.log(base64EncodedImage)
+  // state
+  const [userPreviewSource, setUserPreviewSource] = useState('');
+  const [housePreviewSource, setHousePreviewSource] = useState('');
+  // const [selectedFile, setSelectedFile] = useState('');
+  // const [fileInputState, setFileInputState] = useState('');
+  // console.log('previewSource =', previewSource);
+
+  const uploadUserImage = async (base64EncodedImage) => {
+    // console.log(base64EncodedImage);
     try {
-      const url = '/api/images/upload';
+      const url = '/api/images/upload/user';
       const body = {
         data: base64EncodedImage,
         id: userID,
@@ -36,49 +49,113 @@ const UserProfile = ({ }) => {
     }
   };
 
-  const handleSubmitFile = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    uploadImage(previewSource);
+  const uploadHouseImage = async (base64EncodedImage) => {
+    // console.log(base64EncodedImage);
+    try {
+      const url = '/api/images/upload/house';
+      const body = {
+        data: base64EncodedImage,
+        id: houseID,
+      };
+      await fetcher(url, 'PUT', body, token);
+      //createNewHousehold(base64EncodedImage)
+    } catch (e) {
+      console.log("error image", e);
+    }
   };
 
-  const previewFile = (file) => {
+  const handleSubmitUserFile = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    uploadUserImage(userPreviewSource);
+  };
+
+  const previewUserFile = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file)
     reader.onloadend = () => {
-      setPreviewSource(reader.result);
+      setUserPreviewSource(reader.result);
     };
   };
 
-  const handleFileInputChange = (e) => {
+  const handleUserFileInputChange = (e) => {
     const file = e.target.files[0];
-    previewFile(file);
+    previewUserFile(file);
+  }
+
+  const handleSubmitHouseFile = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    uploadHouseImage(housePreviewSource);
+  };
+
+  const previewHouseFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file)
+    reader.onloadend = () => {
+      setHousePreviewSource(reader.result);
+    };
+  };
+
+  const handleHouseFileInputChange = (e) => {
+    const file = e.target.files[0];
+    previewHouseFile(file);
   }
 
   return (
-    <div id='user-profile'>
-      <h3> user Profile</h3>
+    <div id='user-profile-content'>
+      <article id='profile-1'>
+        <h3> User Profile </h3>
 
-      {previewSource
-        ? (
-          <img
-            className='user-img'
-            src={previewSource}
-            alt="chosen"
-          />
-        ) : (
-          <img
-            className='user-img'
-            src=''
-            alt="chosen"
-          />
-        )
-      }
+        {(userPreviewSource !== '')
+          ? (
+            <img
+              className='user-img'
+              src={userPreviewSource}
+              alt="user"
+            />
+          ) : (
+            <Image
+              key={userID}
+              className='user-img'
+              cloudName='dii2emagu'
+              alt='placeholder'
+              publicID={currentImage}
+            />
+          )
+        }
 
-      <form onSubmit={handleSubmitFile}>
-        <input type="file" name="image" onChange={handleFileInputChange} value={fileInputState} />
-        <button type="submit">Save Profile Image</button>
-      </form>
+        <form className='profile-form' onSubmit={handleSubmitUserFile}>
+          <input type="file" name="image" onChange={handleUserFileInputChange} />
+          <button className='profile-image-btn' type="submit">Save Profile Image</button>
+        </form>
+
+      </article>
+      <article id='profile-2'>
+        <h3> House Profile </h3>
+
+        {(housePreviewSource !== '')
+          ? (
+            <img
+              className='user-img'
+              src={housePreviewSource}
+              alt="house"
+            />
+          ) : (
+            <img
+              className='user-img'
+              src=''
+              alt='placeholder'
+            />
+          )
+        }
+
+        <form className='profile-form' onSubmit={handleSubmitHouseFile}>
+          <input type="file" name="image" onChange={handleHouseFileInputChange} />
+          <button className='profile-image-btn' type="submit">Save House Image</button>
+        </form>
+      </article>
+
     </div>
   );
 }
