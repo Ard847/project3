@@ -20,12 +20,15 @@ const Instructions = ({ location }) => {
 
 
   return (
-   <>
+   
+   <main>
+   <section>
    <div className="instruction-text-wrap">
    <h1 className="text-center instruction-title">How to use</h1>
    <p className="subheading text-center">Here are some steps you can follow to make using this app easier</p>
    </div>
-    <div className="containers instruction-container">
+   </section>
+    <div className=" instruction-container">
       
       <div className="cards">
         <div className="circle">
@@ -52,11 +55,10 @@ const Instructions = ({ location }) => {
         </div>
       </div>     
     </div>
-    <div className="container">
-        <img className="preview-image" src={PreviewImg}/>
-      </div>
-    </>
+    </main>
+   
   )
 }
 
 export default Instructions;
+

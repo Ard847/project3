@@ -19,24 +19,24 @@ const AboutPage = ({ location }) => {
  // useSiteLocation(location);
 
   return (
-<>
-    <section>
-    <div className="about-container">
-    <div className="row">
+
+    <main>
       <div className="about-column title">
             <h2>About Us</h2>
             <h3> Assign tasks amongst your family </h3>
             <p className="text-section">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi quia numquam eos explicabo iure perspiciatis. Libero, ab enim impedit, quis porro corrupti quo est minima sint consequuntur nulla illum eius.</p>
           </div>
-          <div className=" col-2 about-image-column">
+          <section>
+          <div className="about-image-column">
           <img className="about-img" src={AboutImg} />
           </div>
-          </div>
-          </div>
+          </section>
+          </main>
+          
           
 
-    </section>
-    </>
+    
+    
   )
 }
 

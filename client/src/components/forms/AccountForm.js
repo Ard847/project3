@@ -94,7 +94,7 @@ const AccountForm = ({ type, onCreate, onSubmit, onSuccess }) => {
   return (
 
     <div>
-    <div className="login-container">
+    <div>
       
       <div className="cardForm">
         <div className="wrap-btn">

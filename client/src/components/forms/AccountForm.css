@@ -43,9 +43,7 @@ div#errorForm, div#errorName, div#errorEmail, div#errorEmail2  {
 }
 
 
-.login-body{
-  margin-top: 50px;
-}
+
 
 .form-input{
   position: relative;

@@ -1,16 +1,6 @@
-.row{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 100px 0;
-  
-}
-
 .homepage-column{
   flex-basis: 40%;
-  position: relative;
-  margin-left: 50px;
-  
+  position: relative; 
 }
 
 .homepage-column h2{
@@ -52,6 +42,6 @@
 .background-img{
   width: 1200px;
   position: relative;
-  right: 680px;
+  right: 480px;
   top: -60px;
 }
