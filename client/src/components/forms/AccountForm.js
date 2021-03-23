@@ -92,11 +92,21 @@ const AccountForm = ({ type, onCreate, onSubmit, onSuccess }) => {
   
 
   return (
-    <form>
+
+    <div className="container">
+    <div className="row px-3 login-container">
+      
+      <div className="col-lg-10 col-xl-9 cardForm flex-row mx-auto px-0">
+        <div className="wrap-btn">
+      <a href="/login" className="toggle-btn login-toggle-btn"> Login </a>
+    <a href="/signup" className="toggle-btn register-toggle-btn"> Register </a>
+    </div>
+ 
+    <form className="form-box px-3">
       { (type === 'create-account') && (
         <>
           <label htmlFor='first-name'>First Name:</label>
-          <input
+          <input className="inputBox"
             id='first-name'
             type='text'
             placeholder='Enter your first name.'
@@ -107,7 +117,7 @@ const AccountForm = ({ type, onCreate, onSubmit, onSuccess }) => {
       { (type === 'create-account') && (
         <>
           <label htmlFor='last-name'>Last Name:</label>
-          <input
+          <input className="inputBox"
             id='last-name'
             type='text'
             placeholder='Enter your Last name.'
@@ -118,7 +128,7 @@ const AccountForm = ({ type, onCreate, onSubmit, onSuccess }) => {
       { (type === 'create-account' || type === 'login') && (
         <>
           <label htmlFor='email'>Email:</label>
-          <input
+          <input className="inputBox"
             id='email'
             type='text'
             placeholder='Enter Email'
@@ -129,7 +139,7 @@ const AccountForm = ({ type, onCreate, onSubmit, onSuccess }) => {
       { (type === 'create-account' || type === 'login') && (
         <>
           <label htmlFor='username'>Username:</label>
-          <input
+          <input className="inputBox"
             id='username'
             type='text'
             placeholder='Enter Username'
@@ -140,7 +150,7 @@ const AccountForm = ({ type, onCreate, onSubmit, onSuccess }) => {
       { (type === 'create-account') && (
         <>
         <label htmlFor='username'>Pick a colour:</label>
-        <input
+        <input 
           id='colour'
           type='color'
           onChange={colourInputChange}
@@ -150,7 +160,7 @@ const AccountForm = ({ type, onCreate, onSubmit, onSuccess }) => {
       { (type === 'create-account' || type === 'login') && (
         <>
           <label htmlFor='password'>Password:</label>
-          <input
+          <input className="inputBox"
             id='password'
             type='password'
             placeholder='Enter Password'
@@ -161,7 +171,7 @@ const AccountForm = ({ type, onCreate, onSubmit, onSuccess }) => {
       { (type === 'create-account') && (
         <>
           <label htmlFor='confirm-password'>Confirm Password:</label>
-          <input
+          <input className="inputBox"
             id='confirm-password'
             type='password'
             placeholder='Please confirm your password'
@@ -170,18 +180,21 @@ const AccountForm = ({ type, onCreate, onSubmit, onSuccess }) => {
         </>)
       }
       { (type === 'create-account' && onSuccess !== true) && (
-        <button onClick={submitCreate}>Create Account</button>
+        <button className="submit-btn" onClick={submitCreate}>Create Account</button>
       )}
       { (type === 'create-account' && onSuccess === true) && (
-        <p>User was successfully created. go to Log In page to use the application.</p>
+        <p className="success-login text-center">User was successfully created. go to Log In page to use the application.</p>
       )}
       { (passwordNoMatch && onSuccess === false) && (
         <p>Your passwords do not match</p>
       )}
       { (type === 'login') && (
-        <button onClick={submitLogin}>Log-in</button>
+        <button className="submit-btn" onClick={submitLogin}>Log-in</button>
       )}
     </form>
+    </div>
+    </div>
+    </div>
   )
 }
 

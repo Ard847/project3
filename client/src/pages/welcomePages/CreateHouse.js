@@ -2,6 +2,8 @@
 import { NavLink } from 'react-router-dom';
 import React, { useState } from 'react';
 
+
+
 // styles
 import './CreateHouse.css';
 
@@ -37,7 +39,6 @@ const CreateHouse = () => {
 
   return (
     <>
-      <WelcomeTitles />
       <section>
         <article id='create-household-content'>
           <h2> Create New Household</h2>

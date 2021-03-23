@@ -21,7 +21,7 @@ import {Image} from 'cloudinary-react';
 
 const ChooseHouse = () => {
   const households = useGetHouseholds();
-  // console.log('households =', households)
+   console.log('households =', households)
   const [imageIds,setImageIds] = useState()
   const id = getSession('id');
   let token = getSession('token').split('"')

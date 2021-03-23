@@ -9,7 +9,7 @@ import LoggedInContext from '../../context/LoggedInContext';
 
 // components
 import AccountForm from '../../components/forms/AccountForm';
-import WelcomeTitles from '../../components/WelcomeTitles';
+//import WelcomeTitles from '../../components/WelcomeTitles';
 
 // functions
 import fetcher from '../../functions/fetcher';
@@ -36,11 +36,9 @@ const SignupPage = () => {
 
     return (
       <>
-        <WelcomeTitles />
         <section>
           <article id='login-content'>
-            <h1>Sign Up Page</h1>
-            <p>If you do not have an account you can create one here. </p>
+            
             <AccountForm type={'create-account'} onCreate={handleCreate} onSuccess={userCreated}/>
           </article>
         </section>
@@ -52,7 +50,7 @@ const SignupPage = () => {
 
     return (
       <>
-        <WelcomeTitles />
+     
         <section>
           <article id='login-content'>
             <h1>Sign Up Page</h1>

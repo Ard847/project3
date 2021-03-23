@@ -2,6 +2,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+import './LoggedInHome.css';
+
 // components
 import WelcomeTitles from '../../components/WelcomeTitles';
 import getSession from '../../functions/getSession';
@@ -12,7 +14,6 @@ const LoggedInHome = () => {
   
   return (
     <>
-      <WelcomeTitles />
       <section>
         <article id='home-content'>
           <h2>This is the Logged In Home Page </h2>
