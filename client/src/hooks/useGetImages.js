@@ -1,5 +1,5 @@
 // packages
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 // functions
 import fetcher from '../functions/fetcher';
@@ -18,18 +18,20 @@ const useGetImages = () => {
 
   // images handler ---------------------------------------------------------------
   
-  const fetchImages = async () => {
+  const fetchImages = useCallback(async () => {
 
     const url = `/api/images/user/${houseID}&${userID}`;
     const response = await fetcher( url , 'GET', '', token);
     // console.log('useGetImages, response = ', response);
     setImageID(response.currentUser);
 
-  }
+  },[token, userID, houseID]);
 
   useEffect(() => {
+
     fetchImages();
-  }, []);
+
+  }, [fetchImages]);
 
   return [imageID]; 
 }

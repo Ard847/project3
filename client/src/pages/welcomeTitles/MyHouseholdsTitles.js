@@ -10,7 +10,7 @@ import LoggedInContext from '../../context/LoggedInContext'
 
 const MyHouseholdTitles = () => {
 
-  const { loggedIn, userLoggedOut } = useContext(LoggedInContext);
+  const { userLoggedOut } = useContext(LoggedInContext);
 
   return (
     <section id='app-titles'>
