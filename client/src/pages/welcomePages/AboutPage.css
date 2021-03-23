@@ -3,8 +3,8 @@
     font-size: 30px;
 }
 
+
 .about{
-    margin-top: 100px;
     height: 100vh;
 }
 
@@ -14,18 +14,18 @@
 }
 
 .about-img{
-    width: 1200px;
+    width: 800px;
     position: relative;
     right: 40%;
 }
 
-.colll-1{
+.about-column{
     flex-basis: 40%;
   position: relative;
-  margin-left: 70px;
+ 
 }
 
-.colll-1::after{
+.about-column::after{
     content: '';
     width: 5px;
     height: 57%;
@@ -35,17 +35,23 @@
     top: 65px;
   }
 
-  .colll-1 h3{
+  .about-column h3{
     font-size: 30px;
     color: grey;
     font-weight: 100;
     margin: 20px 0 10px;
   }
   
-  .colll-1 p{
+  .about-column p{
     font-size: 16px;
     color: rgb(199, 196, 196);
     font-weight: 100;
     margin: 30px 0;
+  }
+
+ 
+
+  .about-image-column{
+    display: block;
   }
 

@@ -2,8 +2,6 @@
     position: relative;
     align-items: center;
     justify-content: center;
-    left: 120px
-
 }
 
 .instruction-container{
@@ -34,8 +32,6 @@
     clip-path: circle(180px at center 0);
     text-align: center;
 }
-
-
 
 .circle h2{
     color: #fff;

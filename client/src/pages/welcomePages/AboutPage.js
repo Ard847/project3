@@ -20,19 +20,20 @@ const AboutPage = ({ location }) => {
 
   return (
 <>
-    <section className="about">
-      <div className="container-fluid">
-        <div className="row">
-          <div className="colll-1 col-lg-6 mt-5 mt-lg-0 title">
-            <h2 className="head-section">About Us</h2>
+    <section>
+    <div className="about-container">
+    <div className="row">
+      <div className="about-column title">
+            <h2>About Us</h2>
             <h3> Assign tasks amongst your family </h3>
             <p className="text-section">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi quia numquam eos explicabo iure perspiciatis. Libero, ab enim impedit, quis porro corrupti quo est minima sint consequuntur nulla illum eius.</p>
           </div>
-          <div className="col-lg-6">
-            <img className="about-img" src={AboutImg} />
+          <div className=" col-2 about-image-column">
+          <img className="about-img" src={AboutImg} />
           </div>
-        </div>
-      </div>
+          </div>
+          </div>
+          
 
     </section>
     </>

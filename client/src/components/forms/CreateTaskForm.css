@@ -1,6 +1,7 @@
 #create-task {
   grid-template-columns: 3fr 2fr;
   grid-template-rows: auto;
+  
 }
 
 #name-input-section {

@@ -93,16 +93,16 @@ const AccountForm = ({ type, onCreate, onSubmit, onSuccess }) => {
 
   return (
 
-    <div className="container">
-    <div className="row px-3 login-container">
+    <div>
+    <div className="login-container">
       
-      <div className="col-lg-10 col-xl-9 cardForm flex-row mx-auto px-0">
+      <div className="cardForm">
         <div className="wrap-btn">
       <a href="/login" className="toggle-btn login-toggle-btn"> Login </a>
     <a href="/signup" className="toggle-btn register-toggle-btn"> Register </a>
     </div>
  
-    <form className="form-box px-3">
+    <form className="form-box">
       { (type === 'create-account') && (
         <>
           <label htmlFor='first-name'>First Name:</label>

@@ -1,9 +1,8 @@
 nav#dash-nav {
   justify-content: center;
-
   width: 20vw;
   height: 100%;
-
+  border-radius: 10px;
   background-color: var(--white);
 }
 
@@ -29,6 +28,15 @@ img.user-img {
   margin: 15px;
   border-radius: 75px;
   background-color: var(--grey);
+}
+
+.create-btn{
+  background: linear-gradient(to right, #fa853c, #d48019);
+  border: none;
+  border-radius: 30px;
+  color: #fff;
+  font-size: .9rem;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
 div#user-profile{

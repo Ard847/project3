@@ -95,7 +95,7 @@ const handleFileInputChange = (e) => {
     />}
                       
       <input type = "file" name = "image" onChange = {handleFileInputChange} value = {fileInputState}/>
-      <button type= "submit">Create</button>
+      <button className="create-btn" type= "submit">Create</button>
     </form>
         {
           (currentUser) &&

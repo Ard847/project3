@@ -31,7 +31,6 @@ const HomePage = () => {
         <WelcomeTitles />
         <section>
           <article id='home-content'>
-            <h2>Log In or Sign Up to see your Households</h2>
           </article>
         </section>
       </>

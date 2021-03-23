@@ -6,25 +6,25 @@
   
 }
 
-.coll-1{
+.homepage-column{
   flex-basis: 40%;
   position: relative;
   margin-left: 50px;
   
 }
 
-.coll-1 h2{
+.homepage-column h2{
   font-size: 54px;
 }
 
-.coll-1 h3{
+.homepage-column h3{
   font-size: 30px;
   color: grey;
   font-weight: 100;
   margin: 20px 0 10px;
 }
 
-.coll-1 p{
+.homepage-column p{
   font-size: 16px;
   color: rgb(199, 196, 196);
   font-weight: 100;
@@ -39,7 +39,7 @@
   background: linear-gradient(to right, #fa853c, #d48019);
 }
 
-.coll-1::after{
+.homepage-column::after{
   content: '';
   width: 5px;
   height: 57%;

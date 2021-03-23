@@ -4,7 +4,6 @@ div#dash-home-content {
   grid-template-rows: 64px 150px auto ;
   row-gap: 12px;
   column-gap: 12px;
-
   padding: 12px;
   height: 100%;
 }
@@ -24,6 +23,8 @@ div.dash-title {
 .list-container {
   background-color: var(--white);
   padding: 12px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
 .list-container {
@@ -55,11 +56,20 @@ img.member-img {
   background-color: var(--grey);
 }
 
+
+
 button#invite,
 button#leave-household {
   margin: 12px;
   width: fit-content;
   cursor: pointer;
+  background: linear-gradient(to right, #fa853c, #d48019);
+  border: none;
+  border-radius: 30px;
+  color: #fff;
+  font-size: .9rem;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  
 }
 
 button#leave-household {

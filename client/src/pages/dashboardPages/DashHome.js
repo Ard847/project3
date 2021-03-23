@@ -208,7 +208,7 @@ useEffect(() => {
                       id='user-name' 
                       style={{
                         'backgroundColor': member.color,
-                        'borderRadius': '5px',
+                        'borderRadius': '30px',
                         'padding': '3px 6px',
                       }}
                       className='text-centre'>{member.firstName} {member.lastName}</p>

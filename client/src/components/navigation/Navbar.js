@@ -2,11 +2,10 @@
 import React, { useContext, useState } from 'react';
 import {Collapse,
   Navbar,
-  NavbarToggler,
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,} from 'reactstrap';
+  NavLink,} from 'react-bootstrap';
 
   //import logo
 import Logo from '../images/sortedOrange-01.png'
@@ -25,29 +24,20 @@ const NavBar = (props) => {
   
     return (
       <div>
-        <Navbar light expand="md">
-          <NavbarBrand href="/"><img className="logo" src={Logo} /></NavbarBrand>
-          <NavbarToggler onClick={toggle} />
-          <Collapse isOpen={isOpen} navbar>
+        <Navbar expand="md">
+          <Navbar.Brand href="/"><img className="logo" src={Logo} /></Navbar.Brand>
+          <Navbar.Toggle onClick={toggle} />
+          <Navbar.Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto items" navbar>
-              <NavItem>
-                <NavLink className="navLink" href="/">Home</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink className="navLink"href="/about">About</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink className="navLink" href="/instructions">Instructions</NavLink>
-              </NavItem>
-              <NavItem>
+                <Nav.Link className="navLink" href="/">Home</Nav.Link>              
+                <Nav.Link className="navLink"href="/about">About</Nav.Link>                            
+                <Nav.Link className="navLink" href="/instructions">Instructions</Nav.Link>                            
                 { loggedIn 
-                ?<NavLink className="navLink" href="/logIn">My Households</NavLink>
-                :<NavLink className="navLink" href="/logIn">Login</NavLink>
+                ?<Nav.Link className="navLink" href="/logIn">My Households</Nav.Link>
+                :<Nav.Link className="navLink" href="/logIn">Login</Nav.Link>
                  }
-              </NavItem>
-            </Nav>
-            
-          </Collapse>
+            </Nav>            
+          </Navbar.Collapse>
         </Navbar>
       </div>
     );
