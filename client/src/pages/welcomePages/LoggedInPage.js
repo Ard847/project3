@@ -1,6 +1,6 @@
 // packages
 import React, { useContext } from 'react';
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 // styles
 import './LoginPage.css';
@@ -9,30 +9,31 @@ import './LoginPage.css';
 import LoggedInContext from '../../context/LoggedInContext'
 
 // components
-import WelcomeTitles from '../../components/WelcomeTitles';
+import MyHouseholdTitles from '../welcomeTitles/MyHouseholdsTitles';
 import ChooseHousehold from '../../components/ChooseHousehold';
 
 
 const LoggedInPage = () => {
 
-  const { loggedIn, userLoggedOut } = useContext(LoggedInContext);
-    
-  if (loggedIn === true){
+  const { loggedIn } = useContext(LoggedInContext);
+
+  if (loggedIn === true) {
     return (
       <>
-      <section>
-      <article id='login-content'>
-        <h1>MyHouseholds: </h1>
-        <button onClick={userLoggedOut}>Log Out</button>
-        <ChooseHousehold />
-      </article>
-      </section>
+        <MyHouseholdTitles />
+        <section>
+          <article id='login-content'>
+            
+            <ChooseHousehold />
+          </article>
+        </section>
       </>
     )
   } else {
-    return (<Redirect to={`/logIn`} />)
+    return (
+    <Redirect to={`/logIn`} />
+    );
   }
 }
 
 export default LoggedInPage;
-      

@@ -3,7 +3,7 @@ form{
 }
 
 label {
-  margin: 6px 0 3px 0;
+  margin: 12px 0 3px 0;
 }
 
 input {
@@ -16,7 +16,7 @@ button {
 }
 
 .cardForm{
-  width: 600px;
+  width: 100%;
   height: auto;
   padding-bottom: 25px;
   background:white;
@@ -30,9 +30,7 @@ button {
   background-size: cover;
   height: 100vh;
 }
-.login-container{
-  margin-top: 50px;
-}
+
 
 .hide {
   display: none;
@@ -46,9 +44,6 @@ div#errorForm, div#errorName, div#errorEmail, div#errorEmail2  {
   margin-top: 50px;
 }
 
-.form-input{
-  position: relative;
-}
 
 .form-input input{
   width: 100%;
@@ -63,45 +58,11 @@ div#errorForm, div#errorName, div#errorEmail, div#errorEmail2  {
   background: transparent;
 }
 
-.toggle-btn{
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  text-align: center;
-  font-size: 25px;
-  display: inline-block;
-  padding: 25px;
-  margin: 10px;
-  color: #607d8b;
-  
-}
-a.toggle-btn{
-  
-  color: rgb(164, 158, 158);
-  padding: 1em 1.5em;
-  text-decoration: none;
-  text-transform: uppercase;
-}
-
-a.toggle-btn:hover{
-  border-bottom: 3px solid #f49735; 
-}
-
 .inputBox{
-  /*width: 100%;
-  padding: 10px 20px;
-  outline: none;
-  font-weight: 400;
-  border: 1px solid #607d8b;
-  font-size: 16px;
-  letter-spacing: 1px;
-  color: #607d8b;
-  background: transparent;
-  border-radius: 30px;*/
-
   border: none;
   background: transparent;
   box-shadow: 0px 2px 0px 0px orange;
   width: 100%;
-  padding: 30px 2px;
   outline: none;
 }
 
@@ -112,15 +73,18 @@ input:-webkit-autofill {
 }
   
 .submit-btn{
-  background: linear-gradient(to right, #fa853c, #d48019);;
   color: #fff;
   outline: none;
-  border: none;
   font-weight: 500;
+  
+  background: linear-gradient(to right, #fa853c, #d48019);;
   cursor: pointer;
+  border: none;
   border-radius: 30px;
+
   width: 50%;
   height: 40px;
+  margin: 36px 0 0 0;
 }
 
 .form-box{

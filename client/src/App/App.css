@@ -5,6 +5,7 @@ main {
   min-height: calc(100vh - 40px);
   border: 5px solid var(--red);
 }
+
 section {
   width: 50%;
   padding: 12px;

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 
 // styles
-import './HouseForm.css';
+import './Forms.css';
 
 // functions 
 import fetcher from '../../functions/fetcher';
