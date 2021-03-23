@@ -23,7 +23,7 @@ import LoggedInPage from '../pages/welcomePages/LoggedInPage';
 import DashApp from '../pages/dashboardPages/DashApp';
 
 // components
-import NavBar from '../components/navigation/Navbar';
+//import NavBar from '../components/navigation/Navbar';
 
 
 
@@ -36,7 +36,7 @@ const App = () => {
     <div id='App'>
       <Router >
         {/* <Switch> */}
-          <NavBar />
+          
           <main>
             <Route exact path='/' component={HomePage} />
             <Route exact path='/home/:id' component={LoggedInHome} />
@@ -55,4 +55,5 @@ const App = () => {
   );
 }
 
+/*<NavBar />*/
 export default App;

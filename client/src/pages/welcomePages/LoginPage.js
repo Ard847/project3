@@ -5,6 +5,8 @@ import { Redirect } from 'react-router-dom';
 // styles
 import './LoginPage.css';
 
+import NavBar from '../../components/navigation/Navbar'
+
 // context
 import LoggedInContext from '../../context/LoggedInContext'
 
@@ -63,6 +65,7 @@ const LoginPage = ({location}) => {
 
     return (
       <>
+      <NavBar/>
       <section>
       <article id='login-content' className="loginInForm">
         
