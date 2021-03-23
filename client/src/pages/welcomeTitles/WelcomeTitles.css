@@ -1,13 +1,12 @@
-.row{
+section#app-titles {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin: 100px 0;
-  
+  flex-wrap: wrap;
+
+  padding: 12px 36px;
 }
 
 .coll-1{
-  flex-basis: 40%;
   position: relative;
   margin-left: 50px;
   
@@ -21,7 +20,7 @@
   font-size: 30px;
   color: grey;
   font-weight: 100;
-  margin: 20px 0 10px;
+  /* margin: 20px 0 10px; */
 }
 
 .coll-1 p{
@@ -47,11 +46,4 @@
   position: absolute;
   left: -30px;
   top: 25px;
-}
-
-.background-img{
-  width: 1200px;
-  position: relative;
-  right: 680px;
-  top: -60px;
 }

@@ -1,28 +1,31 @@
-nav.r-nav{
-  background: transparent!important;
-  padding: 20px 0;
-  transition: .5s all;
-}
-
-.navLink{
-  font-size: 15px;
-  letter-spacing: 0.05em;
-  margin-left: 80px;
-  color: rgba(0, 0, 0, 0.8)!important;
+nav#main-nav {
+  /* background-color: var(--white); */
+  /* height: 30px; */
   display: flex;
-    justify-content: space-around;
-    text-decoration: none;
-    letter-spacing: 3px;
-    font-weight: bold;
-    font-size: 14px;
-   
-    
+  /* justify-content: flex-end; */
 }
 
-.nav-collapse{
-  list-style-type: none;
+nav.r-nav {
+  background: transparent;
+  padding: 20px 0;
+  transition: 0.5s all;
 }
 
-.logo{
+nav#main-nav > .navLink {
+  margin-left: 80px;
+  justify-content: flex-end;
+
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.8);
+  font-weight: bold;
+  font-size: 14px;
+
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  letter-spacing: 3px;
+}
+
+#logo {
   width: 100px;
+  justify-content: left;
 }

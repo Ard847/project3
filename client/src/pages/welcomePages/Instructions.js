@@ -1,23 +1,14 @@
 // packages
-import React, { useContext } from 'react';
-import { Redirect } from 'react-router-dom';
+import React from 'react';
 
 //images
-import PreviewImg from '../../components/images/previewApp-01.png'
+import PreviewImg from '../../images/previewApp-01.png'
 
 // styles
 import './Instructions.css';
 
-// hooks
-//import useSiteLocation from '../../hooks/useSiteLocation';
 
-const Instructions = ({ location }) => {
-
-
-  //useSiteLocation(location);
-
-
-
+const Instructions = () => {
 
   return (
    <>

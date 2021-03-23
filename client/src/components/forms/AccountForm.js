@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 
 // styles
-import './AccountForm.css';
+import './Forms.css';
 
 
 const AccountForm = ({ type, onCreate, onSubmit, onSuccess }) => {
@@ -16,7 +16,7 @@ const AccountForm = ({ type, onCreate, onSubmit, onSuccess }) => {
   const [passwordInput, setPasswordInput] = useState('');
   const [confirmInput, setConfirmInput] = useState('');
   const [passwordNoMatch, setPasswordNoMatch] = useState(false);
-  const [ colour , setColourInput ] = useState('');
+  const [colour, setColourInput] = useState('');
 
   const fNameInputChange = (event) => {
     // console.log('emailInputChange =', event.target.value);
@@ -89,112 +89,118 @@ const AccountForm = ({ type, onCreate, onSubmit, onSuccess }) => {
   }
 
   // console.log('onSuccess =', onSuccess);
-  
+
 
   return (
 
-    <div className="container">
-    <div className="row px-3 login-container">
-      
-      <div className="col-lg-10 col-xl-9 cardForm flex-row mx-auto px-0">
-        <div className="wrap-btn">
-      <a href="/login" className="toggle-btn login-toggle-btn"> Login </a>
-    <a href="/signup" className="toggle-btn register-toggle-btn"> Register </a>
-    </div>
- 
-    <form className="form-box px-3">
-      { (type === 'create-account') && (
-        <>
-          <label htmlFor='first-name'>First Name:</label>
-          <input className="inputBox"
-            id='first-name'
-            type='text'
-            placeholder='Enter your first name.'
-            onChange={fNameInputChange}
-          />
-        </>)
-      }
-      { (type === 'create-account') && (
-        <>
-          <label htmlFor='last-name'>Last Name:</label>
-          <input className="inputBox"
-            id='last-name'
-            type='text'
-            placeholder='Enter your Last name.'
-            onChange={lNameInputChange}
-          />
-        </>)
-      }
-      { (type === 'create-account' || type === 'login') && (
-        <>
-          <label htmlFor='email'>Email:</label>
-          <input className="inputBox"
-            id='email'
-            type='text'
-            placeholder='Enter Email'
-            onChange={emailInputChange}
-          />
-        </>
-      )}
-      { (type === 'create-account' || type === 'login') && (
-        <>
-          <label htmlFor='username'>Username:</label>
-          <input className="inputBox"
-            id='username'
-            type='text'
-            placeholder='Enter Username'
-            onChange={usernameInputChange}
-          />
-        </>
-      )}
-      { (type === 'create-account') && (
-        <>
-        <label htmlFor='username'>Pick a colour:</label>
-        <input 
-          id='colour'
-          type='color'
-          onChange={colourInputChange}
-        />
-      </>
-      )}
-      { (type === 'create-account' || type === 'login') && (
-        <>
-          <label htmlFor='password'>Password:</label>
-          <input className="inputBox"
-            id='password'
-            type='password'
-            placeholder='Enter Password'
-            onChange={passwordInputChange}
-          />
-        </>
-      )}
-      { (type === 'create-account') && (
-        <>
-          <label htmlFor='confirm-password'>Confirm Password:</label>
-          <input className="inputBox"
-            id='confirm-password'
-            type='password'
-            placeholder='Please confirm your password'
-            onChange={confirmInputChange}
-          />
-        </>)
-      }
-      { (type === 'create-account' && onSuccess !== true) && (
-        <button className="submit-btn" onClick={submitCreate}>Create Account</button>
-      )}
-      { (type === 'create-account' && onSuccess === true) && (
-        <p className="success-login text-center">User was successfully created. go to Log In page to use the application.</p>
-      )}
-      { (passwordNoMatch && onSuccess === false) && (
-        <p>Your passwords do not match</p>
-      )}
-      { (type === 'login') && (
-        <button className="submit-btn" onClick={submitLogin}>Log-in</button>
-      )}
-    </form>
-    </div>
-    </div>
-    </div>
+    
+      <div className="">
+
+        <div className="cardForm">
+          <form className="form-box">
+            {(type === 'create-account') && (
+              <>
+                <label htmlFor='first-name'>First Name:</label>
+                <input 
+                  className="inputBox"
+                  id='first-name'
+                  type='text'
+                  placeholder='Enter your first name.'
+                  onChange={fNameInputChange}
+                />
+              </>)
+            }
+            {(type === 'create-account') && (
+              <>
+                <label htmlFor='last-name'>Last Name:</label>
+                <input 
+                  className="inputBox"
+                  id='last-name'
+                  type='text'
+                  placeholder='Enter your Last name.'
+                  onChange={lNameInputChange}
+                />
+              </>)
+            }
+            {(type === 'create-account' || type === 'login') && (
+              <>
+                <label htmlFor='email'>Email:</label>
+                <input 
+                  className="inputBox"
+                  id='email'
+                  type='text'
+                  placeholder='Enter Email'
+                  onChange={emailInputChange}
+                />
+              </>
+            )}
+            {(type === 'create-account' || type === 'login') && (
+              <>
+                <label htmlFor='username'>Username:</label>
+                <input 
+                  className="inputBox"
+                  id='username'
+                  type='text'
+                  placeholder='Enter Username'
+                  onChange={usernameInputChange}
+                />
+              </>
+            )}
+            {(type === 'create-account') && (
+              <>
+                <label htmlFor='username'>Pick a colour:</label>
+                <input
+                  id='colour'
+                  className="inputBox"
+                  type='color'
+                  onChange={colourInputChange}
+                />
+              </>
+            )}
+            {(type === 'create-account' || type === 'login') && (
+              <>
+                <label htmlFor='password'>Password:</label>
+                <input 
+                  id='password'
+                  className="inputBox"
+                  type='password'
+                  placeholder='Enter Password'
+                  onChange={passwordInputChange}
+                />
+              </>
+            )}
+            {(type === 'create-account') && (
+              <>
+                <label htmlFor='confirm-password'>Confirm Password:</label>
+                <input 
+                  className="inputBox"
+                  id='confirm-password'
+                  type='password'
+                  placeholder='Please confirm your password'
+                  onChange={confirmInputChange}
+                />
+              </>)
+            }
+            {(type === 'create-account' && onSuccess !== true) && (
+              <button 
+                className="submit-btn" 
+                onClick={submitCreate}>Create Account</button>
+            )}
+            {(type === 'create-account' && onSuccess === true) && (
+              <p className="success-login text-center">User was successfully created. go to Log In page to use the application.</p>
+            )}
+            {(passwordNoMatch && onSuccess === false) && (
+              <p>Your passwords do not match</p>
+            )}
+            {(type === 'login') && (
+              <button 
+                className="submit-btn" 
+                onClick={submitLogin}>Log-in</button>
+            )}
+          </form>
+        </div>
+      </div>
+    
   )
 }
 

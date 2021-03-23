@@ -12,7 +12,6 @@ import EditTask from '../components/EditTask';
 import TaskContext from '../context/TaskContext';
 
 // hooks
-// import useGetTasks from '../hooks/useGetTasks';
 import useGetMembers from '../hooks/useGetMembers';
 
 // functions

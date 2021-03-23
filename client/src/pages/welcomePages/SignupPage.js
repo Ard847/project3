@@ -9,25 +9,24 @@ import LoggedInContext from '../../context/LoggedInContext';
 
 // components
 import AccountForm from '../../components/forms/AccountForm';
-//import WelcomeTitles from '../../components/WelcomeTitles';
+import SignUpTitles from '../welcomeTitles/SignUpTitle';
 
 // functions
 import fetcher from '../../functions/fetcher';
-
 
 
 const SignupPage = () => {
 
   const { loggedIn, userLoggedOut } = useContext(LoggedInContext);
 
-  const [ userCreated, setUserCreated ] = useState(false);
+  const [userCreated, setUserCreated] = useState(false);
 
   const handleCreate = async (user) => {
     const url = '/api/user/createNew';
     // const createUserResponse = 
     const createUserResponse = await fetcher(url, 'POST', user);
     console.log('createUserResponse =', createUserResponse);
-    if (createUserResponse.message === 'success'){
+    if (createUserResponse.message === 'success') {
       setUserCreated(true);
     }
   }
@@ -36,10 +35,10 @@ const SignupPage = () => {
 
     return (
       <>
+        <SignUpTitles />
         <section>
           <article id='login-content'>
-            
-            <AccountForm type={'create-account'} onCreate={handleCreate} onSuccess={userCreated}/>
+            <AccountForm type={'create-account'} onCreate={handleCreate} onSuccess={userCreated} />
           </article>
         </section>
       </>
@@ -50,7 +49,7 @@ const SignupPage = () => {
 
     return (
       <>
-     
+        <SignUpTitles />
         <section>
           <article id='login-content'>
             <h1>Sign Up Page</h1>

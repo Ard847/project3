@@ -2,6 +2,7 @@
 import React, { useState, useContext } from 'react';
 
 // styles
+import './Forms.css';
 import './CreateTaskForm.css';
 
 // context
@@ -35,7 +36,7 @@ const CreateTaskForm = () => {
       time: '',
       unit: '',
     },
-  })
+  });
 
   const handleSubmit = async (event) => {
     event.preventDefault();

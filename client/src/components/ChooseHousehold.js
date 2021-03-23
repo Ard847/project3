@@ -8,9 +8,6 @@ import './ChooseHousehold.css';
 // hooks
 import useGetHouseholds from '../hooks/useGetHouseholds';
 
-// components
-import WelcomeTitles from './WelcomeTitles';
-
 // functions
 import getSession from '../functions/getSession';
 import fetcher from '../functions/fetcher';

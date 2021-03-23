@@ -1,11 +1,11 @@
+article#about-content {
+  height: 100%;
+
+}
+
 .title{
     padding: 50px;
     font-size: 30px;
-}
-
-.about{
-    margin-top: 100px;
-    height: 100vh;
 }
 
 .text-section{
@@ -14,9 +14,11 @@
 }
 
 .about-img{
-    width: 1200px;
-    position: relative;
-    right: 40%;
+  width: 90%;
+  margin: 0 5%;
+  align-self: center;
+  margin-top: 50%;
+  transform: translateY(-25%);
 }
 
 .colll-1{

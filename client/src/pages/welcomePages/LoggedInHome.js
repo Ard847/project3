@@ -2,10 +2,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+// styles
 import './LoggedInHome.css';
 
 // components
-import WelcomeTitles from '../../components/WelcomeTitles';
+import SortedTitles from '../welcomeTitles/SortedTitles';
 import getSession from '../../functions/getSession';
 
 const LoggedInHome = () => {
@@ -14,6 +15,7 @@ const LoggedInHome = () => {
   
   return (
     <>
+      <SortedTitles />
       <section>
         <article id='home-content'>
           <h2>This is the Logged In Home Page </h2>
