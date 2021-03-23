@@ -10,7 +10,6 @@ import './CreateHouse.css';
 // components
 import HouseForm from '../../components/forms/HouseForm';
 import WelcomeTitles from '../../components/WelcomeTitles';
-import NavBar from '../../components/navigation/Navbar'
 
 // functions
 import getSession from '../../functions/getSession';
@@ -40,7 +39,6 @@ const CreateHouse = () => {
 
   return (
     <>
-      <NavBar/>
       <section>
         <article id='create-household-content'>
           <h2> Create New Household</h2>

@@ -25,7 +25,7 @@ const NavBar = (props) => {
   
     return (
       <div>
-        <Navbar className="sticky fixed-top" light expand="md">
+        <Navbar light expand="md">
           <NavbarBrand href="/"><img className="logo" src={Logo} /></NavbarBrand>
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>

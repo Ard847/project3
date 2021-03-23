@@ -42,7 +42,7 @@ const Kanban = () => {
   useEffect(() => {
     let filteredData = [];
     let completedData = [];
-    if (tasks === 0){
+    if (tasks.length > 0){
 
       tasks.forEach(task => {
         

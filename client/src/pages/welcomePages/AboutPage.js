@@ -4,8 +4,6 @@ import React from 'react';
 // styles
 import './AboutPage.css';
 
-import NavBar from '../../components/navigation/Navbar'
-
 //image
 import AboutImg from '../../components/images/aboutBg-01.png'
 
@@ -22,7 +20,6 @@ const AboutPage = ({ location }) => {
 
   return (
 <>
-<NavBar/>
     <section className="about">
       <div className="container-fluid">
         <div className="row">

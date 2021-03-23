@@ -3,8 +3,6 @@ import React from "react";
 //styles
 import "./WelcomeTitles.css";
 
-import NavBar from './navigation/Navbar'
-
 //images
 import IMG from './images/bg33-01.png';
 
@@ -12,7 +10,6 @@ function WelcomeTitles() {
 
   return (
     <>
-    <NavBar/>
     <div className="container">
       <div className="row">
         <div className="coll-1">

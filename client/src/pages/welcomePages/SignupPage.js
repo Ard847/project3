@@ -4,8 +4,6 @@ import React, { useContext, useState } from 'react';
 // styles
 import './SignupPage.css';
 
-import NavBar from '../../components/navigation/Navbar'
-
 // context
 import LoggedInContext from '../../context/LoggedInContext';
 
@@ -38,7 +36,6 @@ const SignupPage = () => {
 
     return (
       <>
-     <NavBar/>
         <section>
           <article id='login-content'>
             

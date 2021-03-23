@@ -5,8 +5,6 @@ import {Redirect} from 'react-router-dom';
 // styles
 import './LoginPage.css';
 
-import NavBar from '../../components/navigation/Navbar'
-
 // context
 import LoggedInContext from '../../context/LoggedInContext'
 
@@ -22,7 +20,6 @@ const LoggedInPage = () => {
   if (loggedIn === true){
     return (
       <>
-      <NavBar/>
       <section>
       <article id='login-content'>
         <h1>MyHouseholds: </h1>
