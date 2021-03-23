@@ -19,15 +19,15 @@ import {Image} from 'cloudinary-react';
 const ChooseHouse = () => {
   const households = useGetHouseholds();
    console.log('households =', households)
-  const [imageIds,setImageIds] = useState()
+  const [imageIds,setImageIds] = useState(null);
   const id = getSession('id');
-  let token = getSession('token').split('"')
-  token = token[1]
+  let token = getSession('token').split('"');
+  token = token[1];
   
   useEffect(() => {
     const fetchImages = async () => {
-      
       const response = await fetcher(`/api/images/houseHold/${id}`,'Get','',token)
+      console.log("response    ",response)
       setImageIds(response)
       //console.log('res',response[0])
     } 

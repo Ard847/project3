@@ -17,7 +17,7 @@ import './DashNav.css'
 import { Image } from 'cloudinary-react';
 
 const DashNav = ({ match, currentUser, toggelModal, toggelProfile }) => {
-  console.log('currentUser =', currentUser);
+  //console.log('currentUser =', currentUser);
   // console.log('match dash nav =', match);
 
   const userID = getSession('id');
