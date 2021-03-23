@@ -13,11 +13,10 @@ import TaskContext from '../../context/TaskContext';
 import KanbanBoard from './KanbanBoard';
 import Card from './Card';
 import Modal from '../Modal';
-import EditTask from '../EditTask';
 import Clock from '../Clock';
+import EditTask from '../EditTask';
 
 // hooks
-// import useGetTasks from '../../hooks/useGetTasks';
 import useGetMembers from '../../hooks/useGetMembers';
 
 // functions
@@ -223,7 +222,7 @@ const Kanban = () => {
               })}
           </KanbanBoard>
         </div>
-        { modalOpen && <Modal closeModal={handleCloseModal} > {/*<EditTask task={selectedTask} refresh={() => refreshTasks() />*/}</Modal> }
+        { modalOpen && <Modal closeModal={handleCloseModal} > <EditTask task={selectedTask} refresh={() => refreshTasks()} /></Modal> }
       </div>
     </DndProvider>
   )

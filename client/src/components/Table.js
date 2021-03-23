@@ -28,7 +28,7 @@ const Table = () => {
   // console.log('tasks =', tasks);
 
   const members = useGetMembers('table');
-  console.log('members =', members);
+  // console.log('members =', members);
 
   // variables
   const houseID = getSession('houseID');

@@ -81,13 +81,13 @@ const EditTask = ({ task, refresh }) => {
     // console.log('target.value =', target.value);
 
     if (target.name === 'task-name') {
-      let newTaskName = { ...taskData }
+      let newTaskName = { ...taskData };
       newTaskName.taskName = target.value;
       setTaskData(newTaskName);
     }
 
     if (target.name === 'duration-input') {
-      let newTaskDuration = { ...taskData }
+      let newTaskDuration = { ...taskData };
       newTaskDuration.duration = target.value;
       setTaskData(newTaskDuration);
     }
@@ -95,7 +95,7 @@ const EditTask = ({ task, refresh }) => {
     if (target.name === 'due-date-input') {
       const date = new Date(target.value);
       // console.log('date =', date);
-      let newTaskDue = { ...taskData }
+      let newTaskDue = { ...taskData };
       newTaskDue.nextDate = date;
       setTaskData(newTaskDue);
     }
@@ -107,13 +107,13 @@ const EditTask = ({ task, refresh }) => {
     }
 
     if (target.name === 'completeBy-date-input') {
-      let newTaskComplete = { ...taskData }
+      let newTaskComplete = { ...taskData };
       newTaskComplete.completeBy = target.value;
       setTaskData(newTaskComplete);
     }
 
     if (target.name === 'repeat-input') {
-      let newTaskRepeat = { ...taskData }
+      let newTaskRepeat = { ...taskData };
       newTaskRepeat.repeatEvery = target.value;
       setTaskData(newTaskRepeat);
     }

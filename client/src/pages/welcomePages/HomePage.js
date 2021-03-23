@@ -34,7 +34,7 @@ const HomePage = () => {
         <section>
           <article id='home-content'>
             <div >
-              <img src={HomeImage} className="background-img" />
+              <img src={HomeImage} className="background-img" alt='home styling' />
             </div>
           </article>
         </section>

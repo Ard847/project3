@@ -1,6 +1,6 @@
 // packages
+import React from 'react';
 import { NavLink } from 'react-router-dom';
-import React, { useState } from 'react';
 
 // styles
 import './CreateHouse.css';
@@ -19,21 +19,7 @@ import getSession from '../../functions/getSession';
 const CreateHouse = () => {
 
   const id = getSession('id');
- /*  const [fileInputState,setFileInputState] = useState('')
-  const [selectedFile, setSelectedFile] = useState('')
-  const [previewSource,setPreviewSource] = useState('')
-  const handleFileInputChange = (e) => {
-    const file = e.target.files[0]
-    previewFile(file)
-  }
-
-  const previewFile = (file) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file)
-    reader.onloadend = () => {
-      setPreviewSource(reader.result) 
-    }
-  } */
+ 
 
   return (
     <>
@@ -46,7 +32,7 @@ const CreateHouse = () => {
             <img
               className='household-img'
               src=''
-              alt=''
+              alt='house profile'
             />
           </div>
     
