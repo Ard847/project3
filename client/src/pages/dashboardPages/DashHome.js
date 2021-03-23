@@ -172,20 +172,21 @@ const DashHome = ({ members, match }) => {
       <div id='title-bar'>
         <div className='dash-title' >
           <h2>Dashboard of {houseName}</h2>
-          {showInviteButton && <button id='invite' onMouseDown={handleShowHouseID}> + Invite another Member </button>}
+          {showInviteButton && <button className="btn-style" id='invite' onMouseDown={handleShowHouseID}> + Invite another Member </button>}
           {(showInviteButton === false) && (
             <div id='house-id' onMouseOut={handleHideHouseID}>
               <p>Your House ID is {houseID}</p>
             </div>
           )}
         </div>
-        <button onClick={handleToggelModal} id='leave-household'>Leave Household</button>
+        <button className="btn-style" onClick={handleToggelModal} id='leave-household'>Leave Household</button>
       </div>
 
       <div id='dash-intro' className='container'>
         <h4>Today's Date:
               <Clock day={true} time={true} />
         </h4>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi labore at odio quis, dolor qui? Iure repellendus reprehenderit, nemo veritatis ut magnam labore tempore, nostrum fuga ducimus quas corporis obcaecati.</p>
       </div>
 
       <div id='dash-members' className='container'>

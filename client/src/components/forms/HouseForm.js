@@ -124,7 +124,9 @@ const HouseForm = ({ userID, type }) => {
       />
 
       {type === 'create' ? (
-        <button onClick={(e) => { handleSubmitFile(e); }} > Create </button>
+ Sumaya-Hassan-Edits
+        <button className="user-btn" onClick= {(e) => {handleSubmitFile(e);}} > Create </button>
+ main
       ) : (
         <button onClick={joinExistingHousehold} > Join </button>
       )}

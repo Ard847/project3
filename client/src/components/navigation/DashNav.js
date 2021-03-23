@@ -2,6 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
+//font awesome packages
+import { faCalendar, faTasks } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 // functions
 import getSession from '../../functions/getSession';
 
@@ -43,22 +47,25 @@ const DashNav = ({ match, currentUser, toggelModal, toggelProfile }) => {
         />
         {
           (currentUser) &&
-          (<p id='user-name' className='text-centre' style={userStyle}>{`${currentUser.firstName} ${currentUser.lastName}`}</p>)
+          (<p id='user-name' className='text-centre users-name' style={userStyle}>{`${currentUser.firstName} ${currentUser.lastName}`}</p>)
         }
       </div>
 
       <ul>
-        <li className='nav-item'>
+      <li className='nav-item'>
+          <button className="btn-style" onClick={toggelProfile}>User Profile</button>
+        </li>
+       
+        <li className='nav-item text-left'>
+        <FontAwesomeIcon className="dash-icon" icon={faCalendar} />
           <NavLink to={`${match.url}`}>Dashboard Home</NavLink>
         </li>
-        <li className='nav-item'>
+        <li className='nav-item text-left'>
+        <FontAwesomeIcon className="dash-icon" icon={faTasks} />
           <NavLink to={`${match.url}/task-manager`}>Task Manager</NavLink>
         </li>
         <li className='nav-item'>
-          <button onClick={toggelModal}>Create Task</button>
-        </li>
-        <li className='nav-item'>
-          <button onClick={toggelProfile}>User Profile</button>
+          <button className="btn-style" onClick={toggelModal}>Create Task</button>
         </li>
       </ul>
     </nav>
