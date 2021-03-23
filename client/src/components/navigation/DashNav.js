@@ -1,5 +1,5 @@
 // packages
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 // functions
@@ -9,7 +9,7 @@ import getSession from '../../functions/getSession';
 import useGetImages from '../../hooks/useGetImages';
 
 // styles
-import './DashNav.css'
+import './DashNav.css';
 
 //cloudinary
 import { Image } from 'cloudinary-react';

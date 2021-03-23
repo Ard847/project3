@@ -8,7 +8,7 @@ div#user-profile-content {
   justify-self: center;
 }
 
-button#profile-image-btn {
+button.profile-image-btn {
   margin: 12px;
   width: fit-content;
   cursor: pointer;

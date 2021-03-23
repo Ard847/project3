@@ -33,7 +33,7 @@ const useGetImages = () => {
 
   }, [fetchImages]);
 
-  return [imageID]; 
+  return imageID; 
 }
 
 export default useGetImages;
