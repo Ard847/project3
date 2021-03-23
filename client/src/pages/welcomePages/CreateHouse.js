@@ -37,7 +37,7 @@ const CreateHouse = () => {
 
   return (
     <>
-      <WelcomeTitles />
+      
       <section>
         <article id='create-household-content'>
           <h2> Create New Household</h2>

@@ -15,6 +15,8 @@ import AccountForm from '../../components/forms/AccountForm';
 import saveToSession from '../../functions/saveToSession';
 import fetcher from '../../functions/fetcher';
 import getSession from '../../functions/getSession';
+
+
 import LoggedInHome from './LoggedInHome';
 
 
@@ -31,17 +33,17 @@ const LoginPage = ({location}) => {
 
   const handleSubmit = async (user) => {
     // console.log('LoginPage, handleSubmit, user =', user);
-    saveToSession('token',)
+   //saveToSession('token',)
     const url = "/api/user/login"
-    const response = await fetcher(url,"Post",user)
+    const response = await fetcher(url,"POST",user)
     console.log('response =', response);
 
-    if( response.message === 'success' ){
+    if( response.message === 'success' ) {
       console.log('Success');
 
       const authResponse = await fetcher("/api/user/authentication", "GET", '', response.token);
       //console.log('authResponse =', response.token);
-      if(authResponse.success){
+      if(authResponse.success) {
         saveToSession('id', response.user.id);
         saveToSession('token',response.token)
         userLoggedIn();
@@ -78,17 +80,7 @@ const LoginPage = ({location}) => {
   } else if (loggedIn === true){
 
     return (
-      <>
-      
-      <section className="loginInForm">
-      <LoggedInHome />
-      <article id='login-content'>
-        <h1 className="title">Log-in Page</h1>
-        <p>You are logged in. Navigate to the Home page to see your housholds or create a new one. </p>
-        <button onClick={userLoggedOut}>Log Out</button>
-      </article>
-      </section>
-      </>
+    <Redirect to={`/logIn/${id}`} />
     )
   }
 }

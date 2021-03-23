@@ -9,7 +9,7 @@ import LoggedInContext from '../../context/LoggedInContext';
 
 // components
 import AccountForm from '../../components/forms/AccountForm';
-import WelcomeTitles from '../../components/WelcomeTitles';
+//import WelcomeTitles from '../../components/WelcomeTitles';
 
 // functions
 import fetcher from '../../functions/fetcher';
