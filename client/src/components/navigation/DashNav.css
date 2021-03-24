@@ -43,6 +43,7 @@ img.user-img {
   border-radius: 75px;
   background-color: var(--white);
   box-shadow: 2px 2px 10px 1px var(--grey);
+  overflow: hidden;
 }
 
 div#user-profile{

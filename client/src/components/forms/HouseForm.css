@@ -28,18 +28,16 @@
     height: 200px;
     width: 200px;
     position: relative;
-    border: 5px solid rgb(255, 205, 97);
+    border: 5px solid rgb(247, 179, 32);
     border-radius: 50%;
     display: flex;
     background-size: 100% 100%;
     margin: 20px auto;
     overflow: hidden;
-
     background-image: url('https://images.pexels.com/photos/3764119/pexels-photo-3764119.jpeg?cs=srgb&dl=pexels-matheus-bertelli-3764119.jpg&fm=jpg');
 }
 
 input#house-name{
-    border-radius: 10px;
     margin: 10px auto;
     width: 100%;
 }

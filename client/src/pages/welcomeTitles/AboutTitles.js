@@ -14,10 +14,8 @@ const AboutTitles = () => {
         <h2 className="sorted-title">About Us</h2>
         <h3>Assign tasks amongst your family </h3>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-          Unde earum accusamus neque exercitationem inventore corporis tempora incidunt, 
-          laborum odio distinctio architecto nihil in quod iste, praesentium, velit repellat 
-          nesciunt. Eum!
+          With Sorted you can assign tasks to members of your family and track each task and set deadlines
+          using our easy to use dashboard to help you stay organised, up to date and most importantly get tasks sorted.
         </p>
         
       </div>

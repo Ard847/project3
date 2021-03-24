@@ -28,10 +28,11 @@ const CreateHouse = () => {
         <article id='create-household-content'>
           
           <HouseForm userID={id} type={'create'} />
+          <h4>or</h4>
           <h3> Join an Existing Household</h3>
           <HouseForm userID={id} type={'join'} />
 
-          <NavLink to='/logIn/:userID' >Back to Households</NavLink>
+          <NavLink to='/logIn/:userID' className="return-btn">Back to Households</NavLink>
         </article>
       </section>
     </>

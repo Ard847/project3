@@ -141,7 +141,6 @@ const CreateTaskForm = () => {
 
   return (
     <form id='create-task'>
-
       <div id='name-input-section'>
         <label htmlFor='task-name'>Task Name:</label>
         <input
@@ -151,7 +150,6 @@ const CreateTaskForm = () => {
           onChange={handleTextInput}
         />
       </div>
-
       <div id='duration-number'>
         <label htmlFor='duration'>Duration:</label>
         <input
@@ -181,7 +179,6 @@ const CreateTaskForm = () => {
         />
         <label htmlFor='mins'>Minutes</label>
       </div>
-
       <div id='repeat-number'>
         <label htmlFor='duration'>Repeat every...</label>
         <input
@@ -220,7 +217,6 @@ const CreateTaskForm = () => {
         />
         <label htmlFor='repeat-months'>Months</label>
       </div>
-
       <div id='alert-number'>
         <label htmlFor='duration'>Alert time:</label>
         <input
@@ -291,8 +287,8 @@ const CreateTaskForm = () => {
         <label htmlFor='complete-weeks'>Weeks</label>
       </div>
 
-      <input type='submit' onClick={handleSubmit} />
-      <input type='reset' />
+      <input className="input-submit" type='submit' onClick={handleSubmit} />
+      <input className="input-submit" type='reset' />
 
     </form>
   )

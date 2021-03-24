@@ -6,15 +6,23 @@ label {
   margin: 12px 0 3px 0;
 }
 
-input {
-  margin: 0 0 6px 0
+.input-submit {
+  margin: 0 10px 6px 0;
+  background-color: #fa853c;
+  color: white;
+  outline: none;
+  font-weight: 500;
+  border: none;
+  height: 40px;
+  padding: 3px 24px;
+  
 }
 
 button {
   color: #fff;
   outline: none;
   font-weight: 500;
-  background: linear-gradient(to right, #fa853c, #d48019);;
+  background: linear-gradient(to right, #fa853c, #d48019);
   cursor: pointer;
   border: none;
   border-radius: 30px;

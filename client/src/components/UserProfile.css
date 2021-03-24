@@ -12,7 +12,7 @@ button.profile-image-btn {
   margin: 12px;
   width: fit-content;
   cursor: pointer;
-  color: red;
+  color: rgb(255, 255, 255);
 }
 
 article#profile-1 {

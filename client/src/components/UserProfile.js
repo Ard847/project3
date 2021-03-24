@@ -145,7 +145,7 @@ const UserProfile = () => {
             <img
               className='user-img'
               src=''
-              alt='placeholder'
+              alt=''
             />
           )
         }

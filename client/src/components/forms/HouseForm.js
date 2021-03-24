@@ -93,10 +93,6 @@ const HouseForm = ({ userID, type }) => {
 
   return (
     <form>
-      <label htmlFor='house-name'>{
-        type === 'create'
-          ? 'Household Name' : 'Household ID'
-      }</label>
       {type === 'create' && (<div id='create-household'>
         {previewSource ? (
           <img

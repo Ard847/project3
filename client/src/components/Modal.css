@@ -18,7 +18,7 @@
   z-index: 3;
   width: 80%;
   height: 80%;
-  background-color: var(--white);
+  background-color: #fff;
   padding: 12px;
   border-radius: 5px;
   /* overflow-y: scroll; */
