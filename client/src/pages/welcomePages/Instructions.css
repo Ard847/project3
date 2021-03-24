@@ -1,22 +1,30 @@
-.containers{
-    position: relative;
-    align-items: center;
-    justify-content: center;
-    left: 120px
-
+section#instructions-content{
+  width: 100%;
+  padding: 12px;
+  min-height: 100%;
+  border: 5px solid var(--blue);
 }
 
-.instruction-container{
+.card-container{
     position: relative;
-    width: 1150px;
+    width: 100%;
     padding: 20px;
     display: flex;
+    justify-content: space-around;
 }
 
-.cards{
+.lg-card-container{
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cards {
     position: relative;
     width: 300px;
-    height: 420px;
+    height: 300px;
     background: #fff;
     margin: 20px;
     border-radius: 20px;
@@ -35,46 +43,95 @@
     text-align: center;
 }
 
-
-
-.circle h2{
+.circle > h2 {
     color: #fff;
     font-size: 4.5em;
     padding: 30px 0;
 }
 
-.content{
+h2.subheading {
+    font-size: 48px;
+}
+
+h3.subheading {
+  font-size: 24px;
+  color: grey;
+  font-weight: 100;
+  margin: 10px 0;
+}
+
+.card-content {
     position: absolute;
     bottom: 10px;
     padding: 20px;
-    margin: 30px;
+    margin: auto;
     text-align: center;
 }
 
-.content p{
+.card-content > p {
   color: #666;
-  font-size: 1.3rem;
-  
+  font-size: 16px;
 }
 
-.instruction-text-wrap{
-    margin-top: 250px;
-}
-
-.preview-image{
+.preview-image {
     width: 1000px;
 }
 
-.instruction-title{
-    font-size: 40px;
-    color: rgb(85, 84, 84);
+.instruction-title {
+    font-size: 54px;
     font-weight: 100;
     margin: 20px 0 10px;
-  }
+}
   
-  .subheading{
-    font-size: 16px;
-    color: rgb(164, 162, 162);
-    font-weight: 100;
-    margin: 10px 0;
-  }
+@media screen and (max-width: 576px) {
+
+    section#instructions-content{
+        padding: 0px;
+    }
+
+    .card-container{
+        flex-wrap: wrap;
+    }
+
+    .cards {
+        margin: 10px;
+    }
+        
+    .lg-card-container{
+        padding: 10px;
+    }
+
+    .circle > h2 {
+        color: #fff;
+        font-size: 3em;
+        padding: 30px 0;
+    }
+
+    h2.subheading {
+        font-size: 36px;
+    }
+    
+    h3.subheading {
+      font-size: 18px;
+      color: grey;
+      font-weight: 100;
+      margin: 10px 0;
+    }
+
+    .instruction-title {
+        font-size: 48px;
+    }
+}
+
+@media screen and (min-width: 576px) and (max-width: 750px) {
+
+    .card-container{
+        flex-wrap: wrap;
+    }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+    section#instructions-content{
+        max-height: unset;
+    }
+}
