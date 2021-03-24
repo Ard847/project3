@@ -18,7 +18,11 @@ const SortedTitles = () => {
 
       <div className="coll-1">
         <h2 className="sorted-title">Sorted:</h2>
-        <h3>Home Management System</h3>
+        {
+          ( loggedIn ) 
+          ? <h3> Create New Household</h3>
+          : <h3> Home Management System</h3>
+        }
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
           Unde earum accusamus neque exercitationem inventore corporis tempora incidunt, 
@@ -30,6 +34,7 @@ const SortedTitles = () => {
           ? <NavLink to="/logIn"><button type="button">My Households</button></NavLink>
           : <NavLink to="/logIn"><button type="button">Get Started</button></NavLink>
         }
+        
       </div>
 
     </section>

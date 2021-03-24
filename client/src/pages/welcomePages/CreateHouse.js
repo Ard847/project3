@@ -26,7 +26,7 @@ const CreateHouse = () => {
      <SortedTitles />
       <section>
         <article id='create-household-content'>
-          <h2> Create New Household</h2>
+          
           <HouseForm userID={id} type={'create'} />
           <h3> Join an Existing Household</h3>
           <HouseForm userID={id} type={'join'} />
