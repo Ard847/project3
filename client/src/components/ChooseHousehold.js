@@ -70,7 +70,7 @@ const ChooseHouse = () => {
                         publicId = {imageIds && imageIds.length >0 ? imageIds[index] : imageIds}
                         className='household-img'
                       />)}
-                    <p>{household.houseName}</p>
+                    <p className="text-center house-name">{household.houseName}</p>
                   </NavLink>
                 </div>
               )
