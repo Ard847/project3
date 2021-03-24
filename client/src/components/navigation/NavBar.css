@@ -29,13 +29,6 @@ nav#main-nav > .navLink:last-child {
   justify-self: flex-start;
 }
 
-@media screen and (max-width: 576px) {
-
-  button#collapsed-menu {
-    margin-right: 36px;
-  }
-}
-
 .collapsible {
   cursor: pointer;
 }
@@ -82,3 +75,16 @@ button.active:after {
   padding-bottom: 12px;
 }
 
+@media screen and (max-width: 576px) {
+
+  button#collapsed-menu {
+    margin-right: 36px;
+  }
+}
+
+@media screen and (min-width: 576px) and (max-width: 768px) {
+
+  button#collapsed-menu {
+    margin-right: 36px;
+  }
+}

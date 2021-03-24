@@ -52,7 +52,7 @@ const NavBar = () => {
         </>)
       }
       {
-        (isMobileDevice) && (<>
+        (isMobileDevice || isSmallScreen) && (<>
           <button
             id='collapsed-menu'
             className={`collapsible ${activeState}`}
