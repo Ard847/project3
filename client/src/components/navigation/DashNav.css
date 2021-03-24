@@ -41,7 +41,8 @@ img.user-img {
   width: 150px;
   margin: 15px;
   border-radius: 75px;
-  background-color: var(--grey);
+  background-color: var(--white);
+  box-shadow: 2px 2px 10px 1px var(--grey);
 }
 
 div#user-profile{

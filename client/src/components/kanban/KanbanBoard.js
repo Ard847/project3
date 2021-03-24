@@ -26,7 +26,7 @@ const KanbanBoard = ({title, status, moveCard, children}) => {
     <div 
       className={`kanban-list-container`}
       ref={drop}
-      style={{backgroundColor: isOver ? 'red' : 'var(--white)' }}
+      style={{backgroundColor: isOver ? 'red' : '#f9f6f6' }}
     >
       <h5 className='kanban-title'>{title}</h5>
       { isOver ? 'release to drop' : 'drag a box here' }
