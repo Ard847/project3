@@ -8,6 +8,8 @@
 
 #create-household {
   justify-self: center;
+  margin-top: 20px;
+  padding: 20px;
 }
 img.household-img {
   width: 150px;

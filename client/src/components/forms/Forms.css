@@ -14,12 +14,10 @@ button {
   color: #fff;
   outline: none;
   font-weight: 500;
-  
   background: linear-gradient(to right, #fa853c, #d48019);;
   cursor: pointer;
   border: none;
   border-radius: 30px;
-
   height: 40px;
   padding: 3px 24px;
 }
@@ -28,7 +26,6 @@ button {
   width: 90%;
   padding: 25px 0;
   background:white;
-
   border-radius: 20px;
   box-shadow: 0px 2px 5px rgba(0,0,0,0.2), 
   0px 20px 30px 1px rgba(0,0,0,0.2);
@@ -38,7 +35,6 @@ button {
   background-size: cover;
   height: 100vh;
 }
-
 
 .hide {
   display: none;
@@ -74,12 +70,6 @@ div#errorForm, div#errorName, div#errorEmail, div#errorEmail2  {
   outline: none;
 }
 
-input:-webkit-autofill {
-  -webkit-animation-delay: 1s; /* Safari support - any positive time runs instantly */
-  -webkit-animation-name: autofill;
-  -webkit-animation-fill-mode: both;
-}
-  
 .submit-btn{
   margin: 36px 0;
 }
@@ -101,7 +91,6 @@ input:-webkit-autofill {
   margin: 30px;
 }
 
-
 @media screen and (max-width: 576px) {
   .cardForm {
     width: 100%;
@@ -109,8 +98,7 @@ input:-webkit-autofill {
 
   button {
     white-space: nowrap;
-    width: fit-content;
-    
+    width: fit-content;    
   }
 }
 
