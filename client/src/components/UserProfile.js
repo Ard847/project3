@@ -126,7 +126,7 @@ const UserProfile = () => {
         }
 
         <form className='profile-form' onSubmit={handleSubmitUserFile}>
-          <input type="file" name="image" onChange={handleUserFileInputChange} />
+          <input className="chooseFile" type="file" name="image" onChange={handleUserFileInputChange} />
           <button className='profile-image-btn' type="submit">Save Profile Image</button>
         </form>
 
@@ -151,7 +151,7 @@ const UserProfile = () => {
         }
 
         <form className='profile-form' onSubmit={handleSubmitHouseFile}>
-          <input type="file" name="image" onChange={handleHouseFileInputChange} />
+          <input className="chooseFile" type="file" name="image" onChange={handleHouseFileInputChange} />
           <button className='profile-image-btn' type="submit">Save House Image</button>
         </form>
       </article>

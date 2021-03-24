@@ -1,5 +1,5 @@
 .chooseFile{
- position: absolute;
+ /*position: absolute;
  bottom: 0;
  outline: none;
  color: transparent;
@@ -7,7 +7,7 @@
  padding: 10px 40px 260px 10px;
  cursor: pointer;
  margin: 100px 10px;
- transition: 0.5s;
+ transition: 0.5s;*/
 }
 
 .chooseFile::-webkit-file-upload-button{
@@ -16,6 +16,7 @@
 
 .chooseFile::before{
     font-family: "Font Awesome 5 Free"; font-weight: 900; font-size: 2rem; content: "\f030";
+    display: block;
     color: black;
 }
 
@@ -29,10 +30,12 @@
     position: relative;
     border: 5px solid rgb(255, 205, 97);
     border-radius: 50%;
-    background-image: url('https://images.pexels.com/photos/3764119/pexels-photo-3764119.jpeg?cs=srgb&dl=pexels-matheus-bertelli-3764119.jpg&fm=jpg');
+    display: flex;
     background-size: 100% 100%;
     margin: 20px auto;
     overflow: hidden;
+
+    background-image: url('https://images.pexels.com/photos/3764119/pexels-photo-3764119.jpeg?cs=srgb&dl=pexels-matheus-bertelli-3764119.jpg&fm=jpg');
 }
 
 input#house-name{
