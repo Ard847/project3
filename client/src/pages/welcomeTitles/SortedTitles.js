@@ -1,12 +1,17 @@
 //packages
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from 'react-router-dom';
 
 //styles
 import "./WelcomeTitles.css";
 
+// context
+import LoggedInContext from '../../context/LoggedInContext';
+
 
 const SortedTitles = () => {
+
+  const { loggedIn } = useContext(LoggedInContext);
 
   return (
     <section id='app-titles'>
@@ -20,7 +25,11 @@ const SortedTitles = () => {
           laborum odio distinctio architecto nihil in quod iste, praesentium, velit repellat 
           nesciunt. Eum!
         </p>
-        <NavLink to="/logIn"><button className="btn btn-primary" type="button">Get Started</button></NavLink>
+        {
+          ( loggedIn ) 
+          ? <NavLink to="/logIn"><button type="button">My Households</button></NavLink>
+          : <NavLink to="/logIn"><button type="button">Get Started</button></NavLink>
+        }
       </div>
 
     </section>

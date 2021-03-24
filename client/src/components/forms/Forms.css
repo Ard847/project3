@@ -11,16 +11,24 @@ input {
 }
 
 button {
-  width: 100px;
-  margin: 6px 0;
+  color: #fff;
+  outline: none;
+  font-weight: 500;
+  
+  background: linear-gradient(to right, #fa853c, #d48019);;
+  cursor: pointer;
+  border: none;
+  border-radius: 30px;
+
+  height: 40px;
+  padding: 3px 24px;
 }
 
 .cardForm{
-  width: 100%;
-  height: auto;
-  padding-bottom: 25px;
+  width: 90%;
+  padding: 25px 0;
   background:white;
-  border: 0;
+
   border-radius: 20px;
   box-shadow: 0px 2px 5px rgba(0,0,0,0.2), 
   0px 20px 30px 1px rgba(0,0,0,0.2);
@@ -73,18 +81,7 @@ input:-webkit-autofill {
 }
   
 .submit-btn{
-  color: #fff;
-  outline: none;
-  font-weight: 500;
-  
-  background: linear-gradient(to right, #fa853c, #d48019);;
-  cursor: pointer;
-  border: none;
-  border-radius: 30px;
-
-  width: 50%;
-  height: 40px;
-  margin: 36px 0 0 0;
+  margin: 36px 0;
 }
 
 .form-box{
@@ -102,4 +99,16 @@ input:-webkit-autofill {
   font-weight: 600;
   text-transform: uppercase;
   margin: 30px;
+}
+
+@media screen and (max-width: 576px) {
+  .cardForm {
+    width: 100%;
+  }
+
+  button {
+    white-space: nowrap;
+    width: fit-content;
+    
+  }
 }

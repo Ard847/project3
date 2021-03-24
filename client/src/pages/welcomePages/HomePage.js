@@ -25,9 +25,9 @@ const HomePage = () => {
 
   const id = getSession('id');
 
-  if (loggedIn) {
-    return (<Redirect to={`/home/${id}`} />);
-  } else {
+  // if (loggedIn) {
+  //   return (<Redirect to={`/home/${id}`} />);
+  // } else {
     return (
       <>
         <SortedTitles />
@@ -40,7 +40,7 @@ const HomePage = () => {
         </section>
       </>
     )
-  }
+  // }
 
 }
 

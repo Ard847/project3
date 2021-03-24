@@ -2,18 +2,13 @@ nav#main-nav {
   /* background-color: var(--white); */
   /* height: 30px; */
   display: flex;
-  /* justify-content: flex-end; */
-}
-
-nav.r-nav {
-  background: transparent;
-  padding: 20px 0;
-  transition: 0.5s all;
+  justify-content: space-between;
+  align-items: center;
 }
 
 nav#main-nav > .navLink {
-  margin-left: 80px;
-  justify-content: flex-end;
+  /* margin-left: 80px; */
+  /* justify-self: right; */
 
   font-size: 15px;
   color: rgba(0, 0, 0, 0.8);
@@ -25,7 +20,64 @@ nav#main-nav > .navLink {
   letter-spacing: 3px;
 }
 
+nav#main-nav > .navLink:last-child {
+  margin-right: 36px;
+}
+
 #logo {
   width: 100px;
-  justify-content: left;
+  justify-self: flex-start;
+}
+
+@media screen and (max-width: 576px) {
+
+  button#collapsed-menu {
+    margin-right: 36px;
+  }
+}
+
+.collapsible {
+  cursor: pointer;
+}
+
+.collapsible:after {
+  content: '\002B';
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+button.active:after {
+  content: "\2212";
+}
+
+.collapse-content {
+  /* important for collapse */
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  /* important for collapse */
+  position: absolute;
+  top: 110px;
+  left: 0;
+  z-index: 1;
+
+  display: flex;
+  flex-wrap: wrap;
+  flex-flow: column;
+
+  width: 100%;
+
+  padding: 0 18px;
+  max-height: 0;
+  background-color: #f3f5f2ee;
+  
+}
+
+.collapse-content > .navLink {
+  text-align: center;
+  padding: 6px;
+}
+
+.collapse-content > .navLink:last-child {
+  padding-bottom: 12px;
 }
