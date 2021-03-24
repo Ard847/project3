@@ -12,6 +12,7 @@ section {
   border: 5px solid var(--blue);
 }
 
+
 @media screen and (max-width: 576px) {
 
   main {
@@ -34,4 +35,5 @@ section {
   }
 
 }
+
 

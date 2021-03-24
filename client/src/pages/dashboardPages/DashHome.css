@@ -22,8 +22,11 @@ div.dash-title {
 
 .container,
 .list-container {
-  background-color: var(--white);
+  /*background-color: var(--white);*/
+  background-color: #f7f5f2;
   padding: 12px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
 .list-container {
@@ -45,7 +48,6 @@ div#dash-members {
   display: flex;
   padding: 12px;
 }
-
 
 img.member-img {
   height: 60px;

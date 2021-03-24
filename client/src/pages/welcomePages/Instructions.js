@@ -24,6 +24,7 @@ const Instructions = () => {
       <div>
         <h1 className="text-center instruction-title">How to use: </h1>
         <h3 className="subheading text-center">Here are some steps you can follow to make using this app easier</h3>
+
       </div>
 
       <div className="card-container">
@@ -261,6 +262,7 @@ const Instructions = () => {
         <img className="preview-image" src={PreviewImg} />
       </div> */}
     </section>
+
   )
 }
 
