@@ -41,11 +41,11 @@ const ChooseHouse = () => {
               to='/createHousehold'
             >
               <img
-                className='household-img'
+                className=''
                 src=''
                 alt=''
               />
-              <p>Create New Household</p>
+              <button>Create New Household</button>
             </NavLink>
           </div>
 

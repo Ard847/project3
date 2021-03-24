@@ -2,14 +2,14 @@ main {
   display: flex;
   justify-content: center;
   max-width: 100vw;
-  border: 5px solid var(--red);
+  /*border: 5px solid var(--red);*/
 }
 
 section {
   width: 50%;
   padding: 12px;
   min-height: 100%;
-  border: 5px solid var(--blue);
+  /*border: 5px solid var(--blue);*/
 }
 
 
