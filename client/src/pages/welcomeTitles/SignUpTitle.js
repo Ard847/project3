@@ -14,10 +14,16 @@ const SignUpTitles = () => {
         <h2 className="sorted-title">Sign Up</h2>
         <h3>Create your personal profile</h3>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-          Unde earum accusamus neque exercitationem inventore corporis tempora incidunt, 
-          laborum odio distinctio architecto nihil in quod iste, praesentium, velit repellat 
-          nesciunt. Eum!
+        Here you can create your account. 
+        </p>
+        <p>
+        You will need to fill in the fields required including 
+        choosing a personal colour swatch. This will distinguish 
+        personal tasks and areas for you from those of your household.
+        </p>
+        <p>
+        Once complete you will need to login. From there you can set your 
+        profile image and households.
         </p>
         
       </div>

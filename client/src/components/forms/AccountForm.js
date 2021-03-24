@@ -176,7 +176,7 @@ const AccountForm = ({ type, onCreate, onSubmit, onSuccess, isFieldEmpty, isEmai
                   className="inputBox"
                   id='confirm-password'
                   type='password'
-                  placeholder='Please confirm your password'
+                  placeholder='Confirm password'
                   onChange={confirmInputChange}
                 />
               </>)

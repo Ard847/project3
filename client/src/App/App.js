@@ -3,6 +3,7 @@ import React from 'react';
 // import { useContext } from 'react';
 import { BrowserRouter as Router, Route} from 'react-router-dom';
 
+
 // styles
 import './App.css';
 
@@ -39,7 +40,7 @@ const App = () => {
         <NavBar/>
           <main>
             <Route exact path='/' component={HomePage} />
-            <Route exact path='/home/:id' component={LoggedInHome} />
+            {/* <Route exact path='/home/:id' component={LoggedInHome} /> */}
             <Route exact path='/about' component={AboutPage} />
             <Route exact path='/instructions' component={Instructions} />
             <Route exact path='/logIn' component={LoginPage} />

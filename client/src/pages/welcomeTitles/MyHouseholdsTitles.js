@@ -24,7 +24,7 @@ const MyHouseholdTitles = () => {
           laborum odio distinctio architecto nihil in quod iste, praesentium, velit repellat
           nesciunt. Eum!
         </p>
-        <button className="btn btn-primary" onClick={userLoggedOut} >Log Out</button>
+        <button onClick={userLoggedOut} >Log Out</button>
       </div>
 
     </section>

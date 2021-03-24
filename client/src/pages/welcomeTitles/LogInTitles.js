@@ -12,12 +12,11 @@ const LoginTitles = () => {
 
       <div className="coll-1">
         <h2 className="sorted-title">Log In: </h2>
-        <h3>Enter</h3>
+        <h3>Your Household Awaits</h3>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-          Unde earum accusamus neque exercitationem inventore corporis tempora incidunt, 
-          laborum odio distinctio architecto nihil in quod iste, praesentium, velit repellat 
-          nesciunt. Eum!
+          Log In by filling in the credentials you signed up with. 
+          This will take you through to the 'My Households' area 
+          where you can start managing your daily tasks.
         </p>
         
       </div>
