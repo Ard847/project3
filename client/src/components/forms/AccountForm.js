@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import './Forms.css';
 
 
-const AccountForm = ({ type, onCreate, onSubmit, onSuccess }) => {
+const AccountForm = ({ type, onCreate, onSubmit, onSuccess, isFieldEmpty, isEmailValid }) => {
 
   // console.log('AccountForm.js, type =', type);
 
@@ -84,7 +84,7 @@ const AccountForm = ({ type, onCreate, onSubmit, onSuccess }) => {
       username: usernameInput,
       password: passwordInput,
     }
-    // console.log('AccountForm, submitLogin, user =', user);
+     console.log('AccountForm, submitLogin, user =', user);
     onSubmit(user);
   }
 
@@ -191,6 +191,12 @@ const AccountForm = ({ type, onCreate, onSubmit, onSuccess }) => {
             )}
             {(passwordNoMatch && onSuccess === false) && (
               <p>Your passwords do not match</p>
+            )}
+            {(onSuccess !== true && isFieldEmpty=== true) &&(
+              <p>*Please fill every empty field*</p>
+            )}
+            {(onSuccess !== true && isEmailValid === false) &&(
+              <p>Please insert a valid email</p>
             )}
             {(type === 'login') && (
               <button 

@@ -12,12 +12,13 @@ const Instructions = () => {
 
   return (
    <>
+   <header>
    <div className="instruction-text-wrap">
-   <h1 className="text-center instruction-title">How to use</h1>
+   <h1 className="text-left instruction-title">How to use</h1>
    <p className="subheading text-center">Here are some steps you can follow to make using this app easier</p>
    </div>
+   </header>
     <div className="containers instruction-container">
-      
       <div className="cards">
         <div className="circle">
           <h2>01</h2>
@@ -43,9 +44,6 @@ const Instructions = () => {
         </div>
       </div>     
     </div>
-    <div className="container">
-        <img className="preview-image" src={PreviewImg}/>
-      </div>
     </>
   )
 }
