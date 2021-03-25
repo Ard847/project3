@@ -48,6 +48,10 @@ form.profile-form > button {
   justify-self: center;
 }
 
+label[htmlFor='update-user-image']:hover {
+  box-shadow: 4px 4px 5px 2px var(--grey);
+}
+
 @media screen and (max-width: 576px) {
 
   div#user-profile-content {

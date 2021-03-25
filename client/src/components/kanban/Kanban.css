@@ -23,12 +23,15 @@
 }
 
 .card {
-  background-color: white;
   border-radius: 5px;
   padding: 1px 6px;
   margin: 6px 0;
   cursor: pointer;
   background-color: #dfd5d5;
+}
+
+div.card:hover {
+background-color: #dfd5d5;
 }
 
 p.sml-text {

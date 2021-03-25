@@ -2,6 +2,9 @@
 import React, { useState } from 'react';
 // styles
 import './HouseForm.css';
+//font awesome packages
+import { faCamera, faSignInAlt, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // images
 import house from '../../images/house.png'
 // functions 
@@ -94,10 +97,10 @@ const HouseForm = ({ userID, type }) => {
               alt='generic house'
             />
           )}
-          <form className='file-upload'>
+          <div className='file-upload'>
             <input id='create-household-input' className="chooseFile" type="file" name="image" onChange={handleFileInputChange} hidden />
-            <label htmlFor='create-household-input' >Upload image</label>
-          </form>
+            <label htmlFor='create-household-input' ><FontAwesomeIcon className="dash-icon" icon={faCamera} />Upload image</label>
+          </div>
         </div>
       )}
 
@@ -113,10 +116,10 @@ const HouseForm = ({ userID, type }) => {
 
       {type === 'create' ? (
 
-        <button className="user-btn" onClick={(e) => { handleSubmitFile(e); }} > Create </button>
+        <button className="user-btn" onClick={(e) => { handleSubmitFile(e); }} ><FontAwesomeIcon className="dash-icon" icon={faPlus} /> Create </button>
 
       ) : (
-        <button onClick={joinExistingHousehold} > Join </button>
+        <button onClick={joinExistingHousehold} ><FontAwesomeIcon className="dash-icon" icon={faSignInAlt} /> Join </button>
       )}
 
       {houseCreated && <p>Household created, go back to households to enter the manager. </p>}

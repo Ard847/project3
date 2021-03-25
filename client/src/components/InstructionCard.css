@@ -19,11 +19,12 @@ h2.lower-layer{
 }
 
 .collapse-content-card {
-  padding: 0 18px;
+  padding: 0px 18px;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
-  background-color: #f3f5f2;
+  background-color: #f9f6f6;
+  border-radius: 10px;
 }
 
 div.collapse-content-card > h6 {
