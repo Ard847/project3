@@ -94,7 +94,6 @@ We have used:
 *	HTML
 *	CSS
 *	Sequelize
-*	Bootstrap
 
 
 ## Project dependencies 
