@@ -21,7 +21,7 @@
   "bugs": {
     "url": "https://github.com/Ard847/project3/issues"
   },
-  "homepage": "https://github.com/Ard847/project3#readme",
+  "homepage": "https://sortedapp.herokuapp.com/",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.25.0",
