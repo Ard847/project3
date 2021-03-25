@@ -46,7 +46,7 @@ During the project we have been able to implement different strategies and techn
 
 **Samantha Wakelam** worked on the react framework and mechanics for the front-end and the routes and server for the back-end. 
 
-**Sumaya** worked on the front-end design and css including the Sorted branding and imagery for the project. 
+**Sumaya Hassan** worked on the front-end design and css including the Sorted branding and imagery for the project. 
 
 ## Difficulties 
 While building the react framework, a difficulty presented itself in rendering the new tasks created in the ‘open page’ below modules and other overlaying tools. Given that react will re-render only the components that change depending on the props or state change, the decision was taken to lift the tasks out of state and put them in context. We felt the tasks were such an integral aspect to many of the components across the website that it was a suitable use for the context hook; this allowed for the tasks to be reached and refreshed from anywhere on the site and rendered from multiple sources.  
