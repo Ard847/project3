@@ -22,6 +22,10 @@ button {
   padding: 3px 24px;
 }
 
+button:hover {
+  box-shadow: 4px 4px 5px 2px var(--grey);
+}
+
 .input-submit {
   width: max-content;
 }

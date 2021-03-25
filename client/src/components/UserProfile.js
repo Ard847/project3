@@ -139,7 +139,7 @@ const UserProfile = () => {
 
         <form className='profile-form' onSubmit={handleSubmitUserFile}>
           <input id='update-user-image' className="chooseFile" type="file" name="image" onChange={handleUserFileInputChange} hidden/>
-          <label htmlFor='update-user-image' ><FontAwesomeIcon className="dash-icon" icon={faCamera} />Upload image</label>
+          <label className='hover' htmlFor='update-user-image' ><FontAwesomeIcon className="dash-icon" icon={faCamera} />Upload image</label>
           <button className='profile-image-btn' type="submit">Save Profile Image</button>
         </form>
 

@@ -2,7 +2,7 @@ section#instructions-content{
   width: 100%;
   padding: 12px;
   min-height: 100%;
-  border: 5px solid var(--blue);
+  /* border: 5px solid var(--blue); */
 }
 
 .card-container{
