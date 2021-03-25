@@ -135,41 +135,45 @@ router.put('/updateAll/:houseID', auth, async (req, res) => {
 });
 
 router.put('/updateCompletedDate/:houseID', auth, async (req, res) => {
-  console.log('req.body =', req.body);
-  console.log('req.params =', req.params);
+  // console.log('req.body =', req.body);
+  // console.log('req.params =', req.params);
   const houseID = req.params.houseID;
-  console.log({ houseID });
+  // console.log({ houseID });
   const taskID = req.body.taskID;
-  console.log({ taskID });
+  // console.log({ taskID });
   const completedDate = req.body.completedDate;
-  console.log({ completedDate });
-  await tasksModel
-    .updateCompletedDate(taskID, houseID, completedDate)
-    .then(async (put) => {
-      // console.log(put);
-      const task = await tasksModel.findTask(taskID);
-      // console.log('task =', task);
-      const repeatEvery = task[0].repeatEvery;
-      const date = new Date(completedDate);
-      date.setDate(date.getDate() + Number(repeatEvery));
-      // console.log('date =', date); 
-      // const updateNextDate = 
-      await tasksModel.updateNextDate(taskID, houseID, date);
-      // console.log('updateNextDate =', updateNextDate);
-      res.status(200).json({
-        message: 'success',
-        data: {
-          put: put,
-          nextDate: formatDate
-        },
-      })
-    })
-    .catch((err) => {
-      res.status(401).json({
-        message: 'error',
-        data: err,
-      });
-    })
+  // console.log({ completedDate });
+
+  try {
+    const put = await tasksModel.updateCompletedDate(taskID, houseID, completedDate)
+      console.log('/updateCompletedDate/:houseID =', put);
+
+    const task = await tasksModel.findTask(taskID);
+    console.log('task =', task);
+
+    const repeatEvery = task[0].repeatEvery;
+    const date = new Date(completedDate);
+    date.setDate(date.getDate() + Number(repeatEvery));
+    console.log('date =', date); 
+
+    const updateNextDate = await tasksModel.updateNextDate(taskID, houseID, date);
+    console.log('updateNextDate =', updateNextDate);
+
+    res.json({
+      message: 'success',
+      data: {
+        put: put,
+      },
+    });
+
+  } catch (err) {
+    console.log('error =', err);
+    res.status(401).json({
+      message: 'error',
+      data: err,
+    });
+  }
+
 });
 
 router.delete('/deleteTask/:houseID', auth, async (req, res) => {

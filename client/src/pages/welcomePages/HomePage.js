@@ -11,8 +11,6 @@ import PreviewImg from '../../images/previewApp-01.png';
 // components
 import SortedTitles from '../welcomeTitles/SortedTitles';
 
-
-
 const HomePage = () => {
 
   return (
@@ -27,7 +25,7 @@ const HomePage = () => {
       </section>
       <section id='computer-image'>
         <div className="container">
-          <img className="preview-image" src={PreviewImg} />
+          <img className="preview-image" src={PreviewImg} alt='home styling' />
         </div>
       </section>
     </>

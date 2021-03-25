@@ -9,7 +9,7 @@ const formatMonths = (months) => {
 }
 
 const processToDays = async (taskData) => {
-  console.log('taskData =', taskData);
+  // console.log('taskData =', taskData);
 
   // DURATION
   let duration = '';

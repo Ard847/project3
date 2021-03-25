@@ -20,11 +20,9 @@ import LeaveHousehold from '../../components/LeaveHousehold';
 import getSession from '../../functions/getSession';
 import fetcher from '../../functions/fetcher';
 
-// hooks
-// import useGetTasks from '../../hooks/useGetTasks';
-
 //cloudinary
 import { Image } from 'cloudinary-react';
+
 
 
 const DashHome = ({ members, match }) => {
@@ -82,7 +80,7 @@ const DashHome = ({ members, match }) => {
       setImageIds(response.images);
       //console.log(imageIds)
     }
-    fetchImages()
+    fetchImages();
   }, [token, userID, houseID]);
 
   // list data ----------------------------------------------------------------
@@ -164,7 +162,6 @@ const DashHome = ({ members, match }) => {
   }, [tasks]);
 
   const onRefresh = (taskID, newStatus) => {
-    console.log('here')
     refreshTasks(taskID, newStatus);
   }
 
@@ -235,6 +232,7 @@ const DashHome = ({ members, match }) => {
       </div>
       { modalOpen && <Modal closeModal={handleCloseModal} ><LeaveHousehold match={match} /></Modal>}
     </div>
-  )
+  );
 };
+
 export default DashHome;

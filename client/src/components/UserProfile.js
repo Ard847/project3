@@ -1,16 +1,18 @@
 // packages
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
 // styles
 import './UserProfile.css';
-
+//font awesome packages
+import { faCamera } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// Image
+import person from '../images/person.png';
+import house from '../images/house.png';
 // functions
 import fetcher from '../functions/fetcher';
 import getSession from '../functions/getSession';
-
 // hooks
 import useGetImages from '../hooks/useGetImages';
-
 //cloudinary
 import { Image } from 'cloudinary-react';
 
@@ -18,8 +20,8 @@ import { Image } from 'cloudinary-react';
 const UserProfile = () => {
 
   // hooks
-  const currentImage = useGetImages().toString();
-  console.log('currentImage =', currentImage);
+  const currentImage = useGetImages();
+  // console.log('currentImage =', currentImage);
 
   // variables
   let token = getSession('token').split('"');
@@ -30,9 +32,7 @@ const UserProfile = () => {
   // state
   const [userPreviewSource, setUserPreviewSource] = useState('');
   const [housePreviewSource, setHousePreviewSource] = useState('');
-  // const [selectedFile, setSelectedFile] = useState('');
-  // const [fileInputState, setFileInputState] = useState('');
-  // console.log('previewSource =', previewSource);
+  const [imageIds, setImageIds] = useState('');
 
   const uploadUserImage = async (base64EncodedImage) => {
     // console.log(base64EncodedImage);
@@ -43,7 +43,6 @@ const UserProfile = () => {
         id: userID,
       };
       await fetcher(url, 'PUT', body, token);
-      //createNewHousehold(base64EncodedImage)
     } catch (e) {
       console.log("error image", e);
     }
@@ -58,7 +57,6 @@ const UserProfile = () => {
         id: houseID,
       };
       await fetcher(url, 'PUT', body, token);
-      //createNewHousehold(base64EncodedImage)
     } catch (e) {
       console.log("error image", e);
     }
@@ -102,6 +100,14 @@ const UserProfile = () => {
     previewHouseFile(file);
   }
 
+  useEffect(() => {
+    const fetchImages = async () => {
+      const response = await fetcher(`/api/images/houseHold/${userID}`, 'GET', '', token);
+      setImageIds(response);
+    }
+    fetchImages();
+  }, [userID, token]);
+
   return (
     <div id='user-profile-content'>
       <article id='profile-1'>
@@ -114,7 +120,7 @@ const UserProfile = () => {
               src={userPreviewSource}
               alt="user"
             />
-          ) : (
+          ) : (currentImage !== null ?
             <Image
               key={userID}
               className='user-img'
@@ -122,11 +128,18 @@ const UserProfile = () => {
               alt='placeholder'
               publicID={currentImage}
             />
+            :
+            <img
+              className='user-img'
+              src={person}
+              alt="user"
+            />
           )
         }
 
         <form className='profile-form' onSubmit={handleSubmitUserFile}>
-          <input className="chooseFile" type="file" name="image" onChange={handleUserFileInputChange} />
+          <input id='update-user-image' className="chooseFile" type="file" name="image" onChange={handleUserFileInputChange} hidden/>
+          <label htmlFor='update-user-image' ><FontAwesomeIcon className="dash-icon" icon={faCamera} />Upload image</label>
           <button className='profile-image-btn' type="submit">Save Profile Image</button>
         </form>
 
@@ -134,24 +147,22 @@ const UserProfile = () => {
       <article id='profile-2'>
         <h3> House Profile </h3>
 
-        {(housePreviewSource !== '')
+        {imageIds && (imageIds[0] === null)
           ? (
             <img
-              className='user-img'
-              src={housePreviewSource}
-              alt="house"
+              className='household-img'
+              src={house}
+              alt='generic house'
             />
-          ) : (
-            <img
-              className='user-img'
-              src=''
-              alt=''
-            />
-          )
-        }
+          ) : (<Image
+            cloudName='dii2emagu'
+            publicId={imageIds && imageIds.length > 0 ? imageIds[0] : imageIds}
+            className='household-img'
+          />)}
 
         <form className='profile-form' onSubmit={handleSubmitHouseFile}>
-          <input className="chooseFile" type="file" name="image" onChange={handleHouseFileInputChange} />
+          <input id='update-household-image' className="chooseFile" type="file" name="image" onChange={handleHouseFileInputChange} hidden/>
+          <label htmlFor='update-household-image' ><FontAwesomeIcon className="dash-icon" icon={faCamera} />Upload Image</label>
           <button className='profile-image-btn' type="submit">Save House Image</button>
         </form>
       </article>

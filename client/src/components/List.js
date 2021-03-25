@@ -17,7 +17,6 @@ const List = ({ title, id, list, refresh }) => {
   const houseID = parseInt(getSession('houseID'));
   let token = getSession('token').split('"');
   token = token[1];
-
   
   const toggelTaskComplete = async (taskID, taskName, checked) => {
 
@@ -60,7 +59,6 @@ const List = ({ title, id, list, refresh }) => {
         return (
           <div key={task.id}>
             <p 
-            // className={'test'} 
             style={getPriority(task)}
             >{task.taskName}</p>
             {

@@ -1,6 +1,5 @@
 // packages
 import React, { useEffect, useState } from 'react';
-
 // styles
 import './Clock.css';
 
@@ -35,7 +34,6 @@ const Clock = ({day, time}) => {
   // const s = dateObject.getSeconds(); 
   // console.log(day)
  
-
   const tick = () => {
     setDate(dateObject);
   }

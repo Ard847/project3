@@ -13,24 +13,21 @@ const checkTaskStatus = (allTasks) => {
 
     const todayDate = new Date();
     const endDate = new Date(task.nextDate);
+    const completedDate = new Date (task.completedDate);
     endDate.setDate(endDate.getDate() + Number(task.completeBy));
     const startDate = new Date(task.nextDate);
     startDate.setDate(startDate.getDate() - Number(task.alertBefore));
 
-    if (task.status === 'complete' && startDate > todayDate) {
-      console.log(`the task is ${task.taskName}`);
+    if (task.status === 'complete' && completedDate < todayDate) {
+      // console.log(`the task is ${task.taskName}`);
 
       const url = `/api/task/updateStatus/${houseID}`;
       const body = {
         taskID: task.id,
         newStatus: 'to-do',
       };
-      const updateStatusResponse = await fetcher(url, 'PUT', body, token);
-      // console.log('updateResponse =', updateResponse);
-
-      if (updateStatusResponse.message === 'success') {
-        console.log(`updated ${task.taskName}`)
-      }
+      await fetcher(url, 'PUT', body, token);
+      
     }
   })
 

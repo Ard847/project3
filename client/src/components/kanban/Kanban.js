@@ -2,23 +2,18 @@
 import React, { useCallback, useEffect, useState, useContext } from 'react'
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-
 // styles
 import './Kanban.css';
-
 // context
 import TaskContext from '../../context/TaskContext';
-
 // components
 import KanbanBoard from './KanbanBoard';
 import Card from './Card';
 import Modal from '../Modal';
 import Clock from '../Clock';
 import EditTask from '../EditTask';
-
 // hooks
 import useGetMembers from '../../hooks/useGetMembers';
-
 // functions
 import getSession from '../../functions/getSession';
 import fetcher from '../../functions/fetcher';
@@ -29,14 +24,13 @@ const Kanban = () => {
   const { tasks, refreshTasks } = useContext(TaskContext);
   // console.log('tasks =', tasks);
 
-  // const [ message , setMessage ] = useState(false);
   const [ modalOpen, setModalOpen ] = useState(false);
   const [ selectedTask , setSelectedTask ] = useState({});
   const [ filteredTasks, setFilteredTasks ] = useState([]);
   const [ completedTasks, setCompletedTasks ] = useState([]);
 
   const members = useGetMembers('kanban');
-  // console.log('members =', members);
+  // console.log('members kanban =', members);
 
   useEffect(() => {
     let filteredData = [];
@@ -85,7 +79,7 @@ const Kanban = () => {
     setModalOpen(false);
   }
 
-  
+
   // drag and drop -----------------------------------------------------------
   const moveCard = useCallback(async (item, newStatus) => {
     // console.log('item =', item);
@@ -94,6 +88,7 @@ const Kanban = () => {
 
       let token = getSession('token').split('"');
       token = token[1];
+      // console.log('token =', token);
       const houseID = getSession('houseID');
 
       if (item.data.userID === null && newStatus === 'assigned'){
@@ -123,8 +118,9 @@ const Kanban = () => {
           taskID: item.id,
           completedDate: getDate,
         };
-        const updateCompletedDateResponse = await fetcher(dateURL, 'PUT', date, token);
-        console.log('updateCompletedDateResponse =', updateCompletedDateResponse);
+        // const updateCompletedDateResponse = 
+        await fetcher(dateURL, 'PUT', date, token);
+        // console.log('updateCompletedDateResponse =', updateCompletedDateResponse);
       }
 
       const url = `/api/task/updateStatus/${houseID}`
@@ -134,7 +130,6 @@ const Kanban = () => {
       };
       const updateStatusResponse = await fetcher(url, 'PUT', body, token);
       // console.log('updateResponse =', updateResponse);
-
       if (updateStatusResponse.message === 'success') {
         refreshTasks(item.id, newStatus);
       }
@@ -148,8 +143,9 @@ const Kanban = () => {
     <DndProvider backend={HTML5Backend}>
       <div id='kanban-content'>
       <Clock day={true} time={false} />
-        {/* {message ? <h6>You must assign a member in the task editor first</h6> : <h6></h6>} */}
+        
         <div id='kanban-board-container'>
+
           <KanbanBoard title={'Tasks to do'} status={'to-do'} moveCard={moveCard} >
             {filteredTasks
               .filter((task) => {
@@ -219,6 +215,7 @@ const Kanban = () => {
                 return null;
               })}
           </KanbanBoard>
+          
         </div>
         { modalOpen && <Modal closeModal={handleCloseModal} > <EditTask task={selectedTask} refresh={() => refreshTasks()} /></Modal> }
       </div>

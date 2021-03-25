@@ -1,12 +1,9 @@
 // packages
-import React, { useEffect, useState, useContext, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route } from 'react-router-dom';
 
 // styles
 import './DashApp.css';
-
-// context
-import MediaContext from '../../context/MediaContext';
 
 // hooks
 import useGetMembers from '../../hooks/useGetMembers';
@@ -27,8 +24,6 @@ import DashTasks from './DashTasks';
 
 const DashApp = ({ match, location }) => {
 
-  const { isMobileDevice, isSmallScreen, isTabletDevice, isDesktopDevice, isLargeScreen } = useContext(MediaContext);
-
   // console.log('match =', match);
   // console.log('location =', location);
 
@@ -41,7 +36,6 @@ const DashApp = ({ match, location }) => {
   }
 
   // state
-  
   const [currentUser, setCurrentUser] = useState({});
   const [modalOpen, setModalOpen] = useState(false);
   const [modalProfile, setModalProfile] = useState(false);
@@ -52,7 +46,6 @@ const DashApp = ({ match, location }) => {
   const handleToggelModal = () => {
     setModalOpen(true);
   }
-
 
   const handleCloseModal = () => {
     setModalOpen(false);
