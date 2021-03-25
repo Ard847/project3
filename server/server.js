@@ -1,14 +1,14 @@
 const express = require('express');
 const app = express();
 const path = require("path")
-const cors = require('cors');
+// const cors = require('cors');
 
 const connection = require('./config/db');
 
 const PORT = process.env.PORT || 3001;
 
 // middleware
-//app.use(cors());
+// app.use(cors());
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
@@ -31,7 +31,7 @@ app.use('/api/images', imagesRoutes);
 // Send every other request to the React app
 // Define any API routes before this runs
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/build/index.html"));
+   res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
 
 // server
