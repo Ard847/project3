@@ -6,12 +6,8 @@ const FILES_TO_CACHE = [
   '/index.html',
  // '../src/images',
 ];
-//
-// install
 // install
 self.addEventListener('install', function (evt) {
-    // pre cache image data
-     
     // pre cache all static assets
     evt.waitUntil(
       caches.open(CACHE_NAME).then((cache) => cache.addAll(FILES_TO_CACHE))
