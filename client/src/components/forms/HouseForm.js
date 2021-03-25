@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 
 // styles
-import './Forms.css';
+import './HouseForm.css';
 
 // functions 
 import fetcher from '../../functions/fetcher';
@@ -93,10 +93,6 @@ const HouseForm = ({ userID, type }) => {
 
   return (
     <form>
-      <label htmlFor='house-name'>{
-        type === 'create'
-          ? 'Household Name' : 'Household ID'
-      }</label>
       {type === 'create' && (<div id='create-household'>
         {previewSource ? (
           <img
@@ -105,12 +101,12 @@ const HouseForm = ({ userID, type }) => {
             alt="chosen"
           />) : (
           <img
-            className='household-img'
+            className='wrapper'
             src=''
             alt=''
           />
         )}
-        <input type="file" name="image" onChange={handleFileInputChange} />
+        <input className="chooseFile" type="file" name="image" onChange={handleFileInputChange} />
       </div>)}
 
       <input
@@ -140,3 +136,4 @@ const HouseForm = ({ userID, type }) => {
 }
 
 export default HouseForm;
+

@@ -4,4 +4,5 @@ div.clock-content {
 
 div.clock-content > p {
   font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 900;
 }

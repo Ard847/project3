@@ -183,10 +183,10 @@ const DashHome = ({ members, match }) => {
       </div>
 
       <div id='dash-intro' className='container'>
-        <h4>Today's Date:
+        <h4>
               <Clock day={true} time={true} />
         </h4>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi labore at odio quis, dolor qui? Iure repellendus reprehenderit, nemo veritatis ut magnam labore tempore, nostrum fuga ducimus quas corporis obcaecati.</p>
+        <p> Welcome to your family dashboard. We are delighted to have you here. Invite as many family memebers as you wish. </p>
       </div>
 
       <div id='dash-members' className='container'>

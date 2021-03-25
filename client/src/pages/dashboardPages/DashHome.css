@@ -23,7 +23,7 @@ div.dash-title {
 .container,
 .list-container {
   /*background-color: var(--white);*/
-  background-color: #f7f5f2;
+  background-color: #f9f6f6;
   padding: 12px;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
@@ -80,4 +80,5 @@ div#house-id{
 div#house-id > p {
   margin: auto 0;
 }
+
 

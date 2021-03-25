@@ -8,3 +8,9 @@ div.household > a:hover {
   transform: scale(1.1);
 }
 
+p.house-name{
+  color: #000;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+

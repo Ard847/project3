@@ -2,10 +2,12 @@
   height: 100%;
   display: grid;
   grid-template-rows: 50px auto;
+ 
 }
 
 #kanban-board-container {
   display: flex;
+  
   
   
 }
@@ -15,13 +17,13 @@
   padding: 6px;
   width: 25%;
   height: 100%;
-  border-radius: 5px;
-  background-color: var(--white);
+  border-radius: 12px;
+  
+  
 }
 
 .kanban-title {
-  border-radius: 5px;
-  background-color: var(--grey);
+  border-bottom: 2px #fa853c9a solid;
   margin-top: 0;
   text-align: center;
 }

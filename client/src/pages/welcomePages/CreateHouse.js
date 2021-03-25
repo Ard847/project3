@@ -26,22 +26,13 @@ const CreateHouse = () => {
      <SortedTitles />
       <section>
         <article id='create-household-content'>
-          <h2> Create New Household</h2>
-
-          <div id='create-household'>
-            <img
-              className='household-img'
-              src=''
-              alt='house profile'
-            />
-          </div>
-    
+          
           <HouseForm userID={id} type={'create'} />
-
-          <h2> Join an Existing Household</h2>
+          <h4>or</h4>
+          <h3> Join an Existing Household</h3>
           <HouseForm userID={id} type={'join'} />
 
-          <NavLink to='/logIn/:userID' >Back to Households</NavLink>
+          <NavLink to='/logIn/:userID' className="return-btn">Back to Households</NavLink>
         </article>
       </section>
     </>

@@ -30,7 +30,6 @@ div#task-information > div > * {
 div#task-information > div > label > input {
   outline: unset;
   border: unset;
-
   background-color: rgba(255, 255, 255, 0.5);
   max-width: 50px;
 }
