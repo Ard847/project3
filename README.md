@@ -46,14 +46,14 @@ During the project we have been able to implement different strategies and techn
 
 **Samantha Wakelam** worked on the react framework and mechanics for the front-end and the routes and server for the back-end. 
 
-**Sumaya** worked on the front-end design and css including the Sorted branding and imagery for the project. 
+**Sumaya Hassan** worked on the front-end design and css including the Sorted branding and imagery for the project. 
 
 ## Difficulties 
 While building the react framework, a difficulty presented itself in rendering the new tasks created in the ‘open page’ below modules and other overlaying tools. Given that react will re-render only the components that change depending on the props or state change, the decision was taken to lift the tasks out of state and put them in context. We felt the tasks were such an integral aspect to many of the components across the website that it was a suitable use for the context hook; this allowed for the tasks to be reached and refreshed from anywhere on the site and rendered from multiple sources.  
 
 **Auth** – any difficulties? Decision where to include the token in the site? Conclusion? 
 
-**Decision for css framework** – suggest describing the use and reason for removal of css styled library. 
+**Decision for css framework** – The inital css framework was setup by Sam using a css grid system and react responsive. Other methods were also used such as react-bootstrap and styled components by Sumaya but as a team we realised that the different css frameworks would cause difficulties in ensuring the website is responsive on all devices. We decided to not use styled components and to use react-bootstrap for minimal styling. Our focus was to make sure the design of the website worked with the inital grid setup. 
 
 ---
 
@@ -66,7 +66,13 @@ After pitching the idea to the project team, the idea became apparent that it wa
 
 **Sumaya** created some initial black and white framework designs which gave a good base to create the react application around before needing to put the final branding and design over the top. 
 
-INSERT SCREEN SHOTS HERE
+![mockup1](./client/src/images/mockup-1.1.png)
+![mockup2](./client/src/images/mockup-1.2.png)
+![mockup3](./client/src/images/mockup-1.3.png)
+![mockup4](./client/src/images/mockup-1.4.png)
+![mockup5](./client/src/images/mockup-1.5.png)
+![mockup6](./client/src/images/mockup-1.6.png)
+![mockup7](./client/src/images/mockup-1.7.png)
 
 We started out with a full application idea including budget tracker, vehicle task detailing and other more categorised functionality. 
 

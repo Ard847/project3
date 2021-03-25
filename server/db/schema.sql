@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS `users` (
     `firstName` VARCHAR(50), 
     `lastName` VARCHAR(50), 
     `email` VARCHAR(50) NOT NULL, 
-    `username` VARCHAR(50) NOT NULL, 
+    `username` VARCHAR(50) NOT NULL UNIQUE, 
     `userPassword` VARCHAR(255) NOT NULL, 
     `image` VARCHAR(255), 
     `color` VARCHAR(16), 

@@ -68,8 +68,7 @@ router.post('/createNew', async (req, res) => {
 
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(req.body.password, salt);
-  await userModel
-    .createUser(
+  const post = await userModel.createUser(
       req.body.firstName,
       req.body.lastName,
       req.body.email,
@@ -77,18 +76,15 @@ router.post('/createNew', async (req, res) => {
       hash,
       req.body.color,
     )
-    .then((post) => {
-      res.json({
-        message: 'success',
-        data: post,
-      });
-    })
-    .catch((err) => {
+    if(post === undefined){
       res.status(401).json({
         message: 'error',
-        data: err,
       });
-    })
+    }
+    res.json({
+        message: 'success',
+        data: post,
+    });
 });
 
 
