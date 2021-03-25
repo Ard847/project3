@@ -1,39 +1,33 @@
 // packages
-import React, { useEffect, useState, useContext, useRef } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
-
 // context
 import MediaContext from '../../context/MediaContext';
-
-//font awesome packages
-// import { faCalendar, faTasks } from "@fortawesome/free-solid-svg-icons";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-// functions
-import getSession from '../../functions/getSession';
-
-// hooks
-import useGetImages from '../../hooks/useGetImages';
-
 // styles
 import './DashNav.css';
-
 // images
 import person from '../../images/person.png';
-
+//font awesome packages
+import { faCalendar, faTasks, faUser, faThumbtack } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// functions
+import getSession from '../../functions/getSession';
+// hooks
+import useGetImages from '../../hooks/useGetImages';
 //cloudinary
 import { Image } from 'cloudinary-react';
+
 
 const DashNav = ({ match, currentUser, toggelModal, toggelProfile }) => {
   // console.log('currentUser =', currentUser);
   // console.log('match dash nav =', match);
 
-  const { isMobileDevice, isSmallScreen, isTabletDevice, isDesktopDevice, isLargeScreen } = useContext(MediaContext);
+  const { isMobileDevice, isSmallScreen, isTabletDevice } = useContext(MediaContext);
   const content = useRef(null);
 
   const userID = getSession('id');
   const imageString = useGetImages();
-  console.log('imageString =', !!imageString);
+  
   const userStyle = {
     'backgroundColor': currentUser?.color,
     'borderRadius': '30px',
@@ -47,7 +41,6 @@ const DashNav = ({ match, currentUser, toggelModal, toggelProfile }) => {
   const [activeState, setActiveState] = useState('');
   const [activeStyle, setActiveStyle] = useState('');
   const [contentWidth, setContentWidth] = useState('0px');
-
   // console.log('activeState =', activeState);
   // console.log('activeStyle =', activeStyle);
   // console.log('contentWidth =', contentWidth);
@@ -79,8 +72,6 @@ const DashNav = ({ match, currentUser, toggelModal, toggelProfile }) => {
     );
 
   }
-
-  console.log('contentWidth =', contentWidth);
 
   return (<>
 
@@ -126,18 +117,18 @@ const DashNav = ({ match, currentUser, toggelModal, toggelProfile }) => {
       </div>
 
       <ul>
-        <button className="nav-item" onClick={toggelProfile}>User Profile</button>
+        <button className="nav-item" onClick={toggelProfile}><FontAwesomeIcon className="dash-icon" icon={faUser} />User Profile</button>
 
         <li className='nav-item'>
-          {/* <FontAwesomeIcon className="dash-icon" icon={faCalendar} /> */}
+          <FontAwesomeIcon className="dash-icon" icon={faCalendar} />
           <NavLink to={`${match.url}`}>Dashboard Home</NavLink>
         </li>
         <li className='nav-item'>
-          {/* <FontAwesomeIcon className="dash-icon" icon={faTasks} /> */}
+          <FontAwesomeIcon className="dash-icon" icon={faTasks} />
           <NavLink to={`${match.url}/task-manager`}>Task Manager</NavLink>
         </li>
 
-        <button className="nav-item" onClick={toggelModal}>Create Task</button>
+        <button className="nav-item" onClick={toggelModal}><FontAwesomeIcon className="dash-icon" icon={faThumbtack} />Create Task</button>
 
       </ul>
     </nav>

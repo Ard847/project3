@@ -65,7 +65,7 @@ const AccountForm = ({ type, onCreate, onSubmit, onSuccess, isFieldEmpty, isEmai
         username: usernameInput,
         password: passwordInput,
         color: colour,
-      }
+      };
       // console.log('AccountForm.js, submitCreate, user =', user);
       onCreate(user);
 
@@ -93,7 +93,6 @@ const AccountForm = ({ type, onCreate, onSubmit, onSuccess, isFieldEmpty, isEmai
 
   return (
 
-    
       <div className="">
 
         <div className="cardForm">

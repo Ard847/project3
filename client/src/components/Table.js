@@ -1,19 +1,14 @@
 // packages
 import React, { useEffect, useState, useContext } from 'react';
-
 // styles
 import './Table.css';
-
 // components
 import Modal from '../components/Modal';
 import EditTask from '../components/EditTask';
-
 // context
 import TaskContext from '../context/TaskContext';
-
 // hooks
 import useGetMembers from '../hooks/useGetMembers';
-
 // functions
 import getSession from '../functions/getSession';
 import fetcher from '../functions/fetcher';
@@ -135,7 +130,7 @@ const Table = () => {
       { modalOpen && <Modal closeModal={handleCloseModal} ><EditTask task={selectedTask} refresh={() => refreshTasks()} /></Modal> }
       
     </div>
-  )
+  );
 }
 
 export default Table;

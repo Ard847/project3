@@ -10,6 +10,18 @@ div#user-profile-content {
   justify-self: center;
 }
 
+div#user-profile-content > article > form > label {
+  display: inline-block;
+  color: white;
+  background: linear-gradient(to right, #fa853c, #d48019);
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  cursor: pointer;
+  padding: 12px 24px;
+  border-radius: 30px;
+  min-height: 40px;
+  width: fit-content;
+}
+
 button.profile-image-btn {
   margin: 12px;
   width: fit-content;

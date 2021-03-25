@@ -1,21 +1,27 @@
 // packages
 import React, { useEffect, useState } from 'react';
-
 // styles
 import './EditTask.css';
-
+// images
+import person from '../images/person.png';
 // hooks
 import useGetMembers from '../hooks/useGetMembers';
-
 // functions
 import fetcher from '../functions/fetcher';
 import getSession from '../functions/getSession';
+//cloudinary
+import { Image } from 'cloudinary-react';
+
 
 
 const EditTask = ({ task, refresh }) => {
 
   // console.log('EditTask, props, task =', task);
   const members = useGetMembers();
+  const houseID = getSession('houseID');
+  const userID = getSession('id');
+  let token = getSession('token').split('"');
+  token = token[1];
 
   const [taskData, setTaskData] = useState({
     id: task.id,
@@ -32,10 +38,11 @@ const EditTask = ({ task, refresh }) => {
   });
   const [user, setUser] = useState({});
   const [displayDate, setDisplayDate] = useState('');
+  const [imageIds, setImageIds] = useState([]);
   // console.log('members =',members);
   // console.log('taskData =', taskData);
-
   // console.log("displayDate =", displayDate );
+
   useEffect(() => {
     // console.log('taskData.nextDate =', taskData.nextDate);
     if (taskData.nextDate === null) {
@@ -61,7 +68,7 @@ const EditTask = ({ task, refresh }) => {
           firstName: 'All Household',
           lastName: 'Members',
         }
-      )
+      );
       // console.log('user taskData.userID false =', user);
     }
 
@@ -73,6 +80,17 @@ const EditTask = ({ task, refresh }) => {
     }
 
   }, [taskData, members]);
+
+  //Fetch user images
+  useEffect(() => {
+    const fetchImages = async () => {
+      const response = await fetcher(`/api/images/user/${houseID}&${userID}`, 'GET', '', token);
+      //console.log(response);
+      setImageIds(response.images);
+      //console.log(imageIds);
+    }
+    fetchImages()
+  }, [token, userID, houseID]);
 
   const handleInputChange = (event) => {
     const target = event.target;
@@ -127,10 +145,13 @@ const EditTask = ({ task, refresh }) => {
       taskID: task.id,
       user: member.id,
     }
+
     let token = getSession('token').split('"');
     token = token[1];
+
     const updateUserResponse = await fetcher(url, 'PUT', body, token);
     // console.log('updateUserResponse =', updateUserResponse.message);
+
     if (updateUserResponse.message === 'success') {
       // console.log('in this block');
       let newTaskData = { ...taskData };
@@ -192,21 +213,26 @@ const EditTask = ({ task, refresh }) => {
         </p>
         <p>Assign a household member: </p>
         <div id='dash-members' className='container'>
-          {members.map((member) => {
+          {members.map((member, index) => {
             return (
               <div key={member.id} className='member-profile' onClick={() => { assignHouseholdMember(member) }}>
-                <img
-                  className='member-img'
-                  src=''
-                  alt=''
-                />
-                <p
-                  id='user-name'
-                  style={{
-                    'backgroundColor': member.color,
-                    'borderRadius': '5px',
-                    'padding': '3px 6px',
-                  }}
+                {imageIds && imageIds[index] == null ? (<img
+                className='member-img'
+                src={person}
+                alt='generic person'
+              />) : (<Image
+                key={index}
+                cloudName='dii2emagu'
+                publicId={imageIds && imageIds.length > 0 ? imageIds[index] : imageIds}
+                className='member-img'
+              />)}
+              <p
+                id='user-name'
+                style={{
+                  'backgroundColor': member.color,
+                  'borderRadius': '5px',
+                  'padding': '3px 6px',
+                }}
                   className='text-centre'>{member.firstName} {member.lastName}
                 </p>
               </div>
@@ -214,10 +240,6 @@ const EditTask = ({ task, refresh }) => {
           })}
         </div>
       </div>
-
-      {/* <div id='status' >
-        <p>Status: {taskData.status}</p>
-      </div> */}
 
       <div id='duration' >
         <p><span className='ETF-lable'>Duration:</span></p>
