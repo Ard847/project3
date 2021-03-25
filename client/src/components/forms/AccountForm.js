@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import './Forms.css';
 
 
-const AccountForm = ({ type, onCreate, onSubmit, onSuccess, isFieldEmpty, isEmailValid }) => {
+const AccountForm = ({ type, onCreate, onSubmit, onSuccess, isFieldEmpty, isEmailValid, userExists }) => {
 
   // console.log('AccountForm.js, type =', type);
 
@@ -198,6 +198,11 @@ const AccountForm = ({ type, onCreate, onSubmit, onSuccess, isFieldEmpty, isEmai
             {(onSuccess !== true && isEmailValid === false) &&(
               <p>Please insert a valid email</p>
             )}
+            {(onSuccess !== true && userExists === true) && (
+              <p>Username chosen already exists</p>
+            ) 
+
+            }
             {(type === 'login') && (
               <button 
                 className="submit-btn" 

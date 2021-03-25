@@ -49,7 +49,7 @@ router.post('/createNew/:houseID', auth, async (req, res) => {
         message: 'error',
         data: err,
       });
-    })
+    });
 });
 
 router.put('/updateStatus/:houseID', auth, async (req, res) => {
@@ -72,7 +72,7 @@ router.put('/updateStatus/:houseID', auth, async (req, res) => {
         message: 'error',
         data: err,
       });
-    })
+    });
 });
 
 router.put('/updateUser/:houseID', auth, async (req, res) => {
@@ -103,7 +103,7 @@ router.put('/updateUser/:houseID', auth, async (req, res) => {
               message: 'success',
               data: put,
             });
-          })
+          });
       }
     })
     .catch((err) => {
@@ -111,7 +111,7 @@ router.put('/updateUser/:houseID', auth, async (req, res) => {
         message: 'error',
         data: err,
       });
-    })
+    });
 });
 
 router.put('/updateAll/:houseID', auth, async (req, res) => {
@@ -131,7 +131,7 @@ router.put('/updateAll/:houseID', auth, async (req, res) => {
         message: 'error',
         data: err,
       });
-    })
+    });
 });
 
 router.put('/updateCompletedDate/:houseID', auth, async (req, res) => {
@@ -192,8 +192,7 @@ router.delete('/deleteTask/:houseID', auth, async (req, res) => {
         message: 'error',
         data: err,
       });
-    })
-
+    });
 });
 
 module.exports = router;
