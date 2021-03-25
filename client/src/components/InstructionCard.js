@@ -43,7 +43,9 @@ const InstructionCard = ({children, title, initialContent}) => {
               style={{ maxHeight: `${contentHeight}` }}
               className="collapse-content-card"
             >
+              <br/>
               {children}
+              <br/>
             </div>
           </div>
         </div>

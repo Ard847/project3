@@ -8,21 +8,26 @@ img.household-img {
   display: block;
 }
 
+img.household-img:hover {
+  transform: scale(1.05);
+}
+
 div.household > a {
   text-decoration: none;
 }
 
-div.household > a:hover {
-  transform: scale(1.1);
-}
-
-p.house-name{
+p.house-name {
   width: 110px;
   margin: 20px 10px 20px 20px;
   color: #fa853c;
   font-family: 'Noto Serif', serif;
   font-size: 16px;
   text-decoration: none;
+  padding: 3px 12px;
 }
 
-
+p.house-name:hover {
+  padding: 3px 12px;
+  box-shadow: 4px 4px 5px 2px var(--grey);
+  border-radius: 30px;
+}

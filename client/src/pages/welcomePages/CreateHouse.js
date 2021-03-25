@@ -4,7 +4,9 @@ import { NavLink } from 'react-router-dom';
 
 // styles
 import './CreateHouse.css';
-
+//font awesome packages
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // components
 import HouseForm from '../../components/forms/HouseForm';
 import SortedTitles from '../welcomeTitles/SortedTitles';
@@ -32,7 +34,7 @@ const CreateHouse = () => {
           <h3> Join an Existing Household</h3>
           <HouseForm userID={id} type={'join'} />
 
-          <button><NavLink to='/logIn/:userID' >Back to Households</NavLink></button>
+          <button><NavLink to='/logIn/:userID' ><FontAwesomeIcon className="dash-icon" icon={faArrowLeft} />Back to Households</NavLink></button>
         </article>
       </section>
     </>
