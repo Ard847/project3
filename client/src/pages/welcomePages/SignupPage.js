@@ -19,46 +19,46 @@ const SignupPage = () => {
 
   const { loggedIn, userLoggedOut } = useContext(LoggedInContext);
 
-  const [isFieldEmpty,setisFieldEmpty] = useState(false);
-  const [isEmailValid,setIsEmailValid] = useState(true);
+  const [isFieldEmpty, setisFieldEmpty] = useState(false);
+  const [isEmailValid, setIsEmailValid] = useState(true);
   const [userCreated, setUserCreated] = useState(false);
 
   const handleCreate = async (user) => {
     const url = '/api/user/createNew';
     //console.log(user)
-    if(user.firstName  === ""|| user.lastName === ""|| user.username === "" || user.email === "" || user.password === "" )return setisFieldEmpty(true);
+    if (user.firstName === "" || user.lastName === "" || user.username === "" || user.email === "" || user.password === "") return setisFieldEmpty(true);
     setisFieldEmpty(false);
-    const email = ValidateEmail(user.email)
+    const email = ValidateEmail(user.email);
     //console.log(email)
-    // const createUserResponse = 
-    if(email === false) return setIsEmailValid(false)
-    setIsEmailValid(true)
+    
+    if (email === false) return setIsEmailValid(false);
+    setIsEmailValid(true);
     const createUserResponse = await fetcher(url, 'POST', user);
-    console.log('createUserResponse =', createUserResponse);
+    // console.log('createUserResponse =', createUserResponse);
     if (createUserResponse.message === 'success') {
       setUserCreated(true);
     }
   }
 
-const ValidateEmail = (mail) =>{
-  const mailFormat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-  if (mail.match(mailFormat))return (true)
-  return (false)
-}
+  const ValidateEmail = (mail) => {
+    const mailFormat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if (mail.match(mailFormat)) return (true);
+    return (false);
+  }
 
   if (loggedIn === false) {
 
     return (
       <>
         <SignUpTitles />
-        <section>
+        <section id='sign-up-form'>
           <article id='login-content'>
-            <AccountForm type={'create-account'} onCreate={handleCreate} onSuccess={userCreated} isFieldEmpty = {isFieldEmpty} isEmailValid = {isEmailValid}/>
+            <AccountForm type={'create-account'} onCreate={handleCreate} onSuccess={userCreated} isFieldEmpty={isFieldEmpty} isEmailValid={isEmailValid} />
           </article>
         </section>
       </>
 
-    )
+    );
 
   } else if (loggedIn === true) {
 
@@ -74,7 +74,7 @@ const ValidateEmail = (mail) =>{
         </section>
       </>
 
-    )
+    );
 
   }
 }

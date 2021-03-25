@@ -20,11 +20,13 @@ const NavBar = () => {
   const content = useRef(null);
   // state
   const [activeState, setActiveState] = useState('');
+  const [activeStyle, setActiveStyle] = useState('');
   const [contentHeight, setContentHeight] = useState('');
 
   const toggelCollapse = () => {
 
     setActiveState(activeState === '' ? 'active' : '');
+    setActiveStyle(activeStyle === '' ? 'active-style' : '');
     // console.log(content.current.scrollHeight);
 
     // if setActive is equal to active. 
@@ -55,10 +57,12 @@ const NavBar = () => {
         (isMobileDevice || isSmallScreen) && (<>
           <button
             id='collapsed-menu'
-            className={`collapsible ${activeState}`}
+            className={`${activeState}`}
             onClick={toggelCollapse}
           >
-            Menu
+            <div id="bar1" className={`${activeStyle}`}></div>
+            <div id="bar2" className={`${activeStyle}`}></div>
+            <div id="bar3" className={`${activeStyle}`}></div>
           </button>
           <div
             ref={content}

@@ -40,8 +40,11 @@ nav#main-nav > .navLink:last-child {
   margin-left: 5px;
 }
 
-button.active:after {
-  content: "\2212";
+
+
+button#collapsed-menu {
+  background: #fff;
+  box-shadow: unset;
 }
 
 .collapse-content {
@@ -62,14 +65,20 @@ button.active:after {
 
   padding: 0 18px;
   max-height: 0;
-  background-color: #f3f5f2ee;
-  
+  background-color: #f9f6f6;
 }
 
 .collapse-content > .navLink {
   text-align: center;
   padding: 6px;
+  color: #fa853c;
+  text-decoration: 0;
 }
+
+.collapse-content > .navLink:hover {
+  background-color: #dfd5d5;
+}
+
 
 .collapse-content > .navLink:last-child {
   padding-bottom: 12px;
@@ -78,13 +87,13 @@ button.active:after {
 @media screen and (max-width: 576px) {
 
   button#collapsed-menu {
-    margin-right: 36px;
+    margin-right: 12px;
   }
 }
 
 @media screen and (min-width: 576px) and (max-width: 768px) {
 
   button#collapsed-menu {
-    margin-right: 36px;
+    margin-right: 24px;
   }
 }

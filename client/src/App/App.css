@@ -1,7 +1,9 @@
 main {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   max-width: 100vw;
+  min-height: calc(100vh - 110px);
   border: 5px solid var(--red);
 }
 
@@ -26,12 +28,12 @@ section {
 
 @media screen and (min-width: 992px) and (max-width: 1200px) {
 
-  main {
+  /* main {
     min-height: calc(100vh - 110px);
-  }
+  } */
 
   section {
-    max-height: 50vh;
+    mix-height: calc(100vh - 120px);
   }
 
 }

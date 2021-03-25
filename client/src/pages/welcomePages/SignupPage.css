@@ -1,0 +1,12 @@
+
+#login-content {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+#login-content > button {
+  width: fit-content;
+  margin: 0 auto;
+}
+

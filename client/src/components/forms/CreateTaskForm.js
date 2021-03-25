@@ -142,7 +142,7 @@ const CreateTaskForm = () => {
   return (
     <form id='create-task'>
       <div id='name-input-section'>
-        <label htmlFor='task-name'>Task Name:</label>
+        <label className='CTF-lable' htmlFor='task-name'>Task Name:</label>
         <input
           id='task-name'
           type='text'
@@ -151,7 +151,7 @@ const CreateTaskForm = () => {
         />
       </div>
       <div id='duration-number'>
-        <label htmlFor='duration'>Duration:</label>
+        <label className='CTF-lable' htmlFor='duration'>Duration:</label>
         <input
           id='duration'
           type='number'
@@ -180,7 +180,7 @@ const CreateTaskForm = () => {
         <label htmlFor='mins'>Minutes</label>
       </div>
       <div id='repeat-number'>
-        <label htmlFor='duration'>Repeat every...</label>
+        <label className='CTF-lable' htmlFor='duration'>Repeat every...</label>
         <input
           id='repeat'
           type='number'
@@ -218,7 +218,7 @@ const CreateTaskForm = () => {
         <label htmlFor='repeat-months'>Months</label>
       </div>
       <div id='alert-number'>
-        <label htmlFor='duration'>Alert time:</label>
+        <label className='CTF-lable' htmlFor='duration'>Alert time:</label>
         <input
           id='alert'
           type='number'
@@ -257,7 +257,7 @@ const CreateTaskForm = () => {
       </div>
 
       <div id='complete-number'>
-        <label htmlFor='duration'>Completion time:</label>
+        <label className='CTF-lable' htmlFor='duration'>Completion time:</label>
         <input
           id='completeBy'
           type='number'

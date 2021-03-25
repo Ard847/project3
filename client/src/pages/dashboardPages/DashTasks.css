@@ -15,5 +15,17 @@ select#tasks-views{
   margin: 12px;
   text-align: center;
   justify-content: center;
+  outline: none;
+  border: none;
+  background-color: #f9f6f6;
+  border-radius: 30px;
+  padding: 3px 24px;
+}
+
+@media screen and (max-width: 576px) {
+
+  div#dash-tasks-content {
+    grid-template-rows: auto;
+  }
   
 }

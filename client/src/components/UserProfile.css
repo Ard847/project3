@@ -4,6 +4,8 @@ div#user-profile-content {
   column-gap: 12px;
 
   padding: 12px;
+  margin: 20px 0;
+  
   max-height: 90%;
   justify-self: center;
 }
@@ -32,4 +34,31 @@ article#profile-2 {
 form.profile-form > input,
 form.profile-form > button {
   justify-self: center;
+}
+
+@media screen and (max-width: 576px) {
+
+  div#user-profile-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    row-gap: 12px;
+  
+    padding: 12px;
+    margin: 20px 0;
+    
+    max-height: 90%;
+    justify-self: center;
+  }
+
+  article#profile-1 {
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 1;
+  }
+  
+  article#profile-2 {
+    grid-column: 1 / span 1;
+    grid-row: 2 / span 1;
+  }
+  
 }

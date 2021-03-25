@@ -4,6 +4,9 @@ import React, { useState } from 'react';
 // styles
 import './HouseForm.css';
 
+// images
+import house from '../../images/house.png'
+
 // functions 
 import fetcher from '../../functions/fetcher';
 import getSession from "../../functions/getSession";
@@ -92,25 +95,30 @@ const HouseForm = ({ userID, type }) => {
   }
 
   return (
-    <form>
-      {type === 'create' && (<div id='create-household'>
-        {previewSource ? (
-          <img
-            className='household-img'
-            src={previewSource}
-            alt="chosen"
-          />) : (
-          <img
-            className='wrapper'
-            src=''
-            alt=''
-          />
-        )}
-        <input className="chooseFile" type="file" name="image" onChange={handleFileInputChange} />
-      </div>)}
+    <form className='create-household'>
+      {type === 'create' && (
+        <div id='create-household'>
+          {previewSource ? (
+            <img
+              className='household-img'
+              src={previewSource}
+              alt="chosen"
+            />) : (
+            <img
+              className='household-img'
+              src={house}
+              alt='generic house'
+            />
+          )}
+          <form className='file-upload'>
+            <input id='create-household-input' className="chooseFile" type="file" name="image" onChange={handleFileInputChange} hidden/>
+            <label htmlFor='create-household-input' >Upload image</label>
+          </form>
+        </div>)
+      }
 
       <input
-        id='house-name'
+        className='house-name'
         type='text'
         placeholder={
           type === 'create'
@@ -120,9 +128,9 @@ const HouseForm = ({ userID, type }) => {
       />
 
       {type === 'create' ? (
- 
-        <button className="user-btn" onClick= {(e) => {handleSubmitFile(e);}} > Create </button>
-  
+
+        <button className="user-btn" onClick={(e) => { handleSubmitFile(e); }} > Create </button>
+
       ) : (
         <button onClick={joinExistingHousehold} > Join </button>
       )}

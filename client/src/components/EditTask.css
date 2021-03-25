@@ -15,8 +15,9 @@ div#task-information > div > input {
   outline: unset;
   border: unset;
 
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: #f9f6f6;
   max-width: 200px;
+  margin: 0 5px;
 }
 
 div#task-information > div > input::placeholder,
@@ -27,11 +28,16 @@ div#task-information > div > * {
   padding: 6px;
 }
 
+div#task-information > div > label {
+  margin: 0;
+}
+
 div#task-information > div > label > input {
   outline: unset;
   border: unset;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: #f9f6f6;
   max-width: 50px;
+  margin: 0 5px;
 }
 
 div#task-information > div > button {
@@ -71,4 +77,41 @@ input#due-date-input {
 
 span {
   margin: 0 6px;
+}
+
+div#task-information > div > button.save-btn {
+  padding: 3px 24px;
+  color: #fff;
+  margin: 10px 0;
+}
+
+.ETF-lable {
+  width: 110px;
+  margin: 20px 10px 20px 20px;
+  color: #fa853c;
+  font-family: 'Noto Serif', serif;
+}
+
+@media screen and (max-width: 576px) {
+  div#task-information {
+    padding: 12px;
+    max-height: 90%;
+    overflow-y: visible;
+  }
+
+  .ETF-lable {
+    width: 110px;
+    margin: 20px 0;
+    color: #fa853c;
+    font-family: 'Noto Serif', serif;
+  }
+
+  div#task-information > div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+ 
 }

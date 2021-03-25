@@ -30,7 +30,7 @@ const DashTasks = () => {
       {(view === 'kanban')  && <Kanban />}
       {(view === 'all-tasks') && <Table />}
    </div>
-  )
+  );
 }
 
 export default DashTasks; 

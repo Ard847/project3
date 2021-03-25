@@ -21,6 +21,11 @@ div#tasks-to-do {
   grid-row: 3 / span 1;
 }
 
+div#dash-month-list {
+  grid-column: 3 / span 1;
+  grid-row: 3 / span 1;
+}
+
 div#tasks-col-4 {
   grid-column: 4 / span 1;
   grid-row: 3 / span 1;
@@ -50,11 +55,33 @@ div#dash-complete-list {
 }
 
 
-div#dash-month-list {
-  grid-column: 3 / span 1;
-  grid-row: 3 / span 1;
-}
 
 p.test {
   background-color: rgba(248, 120, 34, 0.5);
+}
+
+@media screen and (max-width: 576px) {
+
+  div#dash-today-list {
+    grid-column: 1 / span 1;
+    grid-row: 4 / span 1;
+  }
+  
+  div#tasks-to-do {
+    grid-column: 1 / span 1;
+    grid-row: 5 / span 1;
+  }
+
+  div#dash-month-list {
+    grid-column: 1 / span 1;
+    grid-row: 7 / span 1;
+  }
+  
+  div#tasks-col-4 {
+    grid-column: 1 / span 1;
+    grid-row: 6 / span 1;
+  }
+
+  
+
 }

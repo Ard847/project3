@@ -73,8 +73,6 @@ const Kanban = () => {
     }
   }, [tasks]);
 
-  
-
 
   // call modal --------------------------------------------------------------
   const handleToggelModal = (task) => {
@@ -87,6 +85,7 @@ const Kanban = () => {
     setModalOpen(false);
   }
 
+  
   // drag and drop -----------------------------------------------------------
   const moveCard = useCallback(async (item, newStatus) => {
     // console.log('item =', item);
@@ -143,7 +142,6 @@ const Kanban = () => {
 
   }, [refreshTasks]);
 
-  
 
   // rendered ----------------------------------------------------------------
   return (
@@ -213,7 +211,7 @@ const Kanban = () => {
                 if (members.length !== 0) {
                   let user = members.find(member => member.id === task.userID)
                   if (user) {
-                    return <Card key={task.id} data={task} index={index} toggelModal={handleToggelModal} member={user.firstName} />
+                    return <Card key={task.id} data={task} index={index} toggelModal={handleToggelModal} member={user.firstName} colour={user.color} />
                   } else {
                     return <Card key={task.id} data={task} index={index} toggelModal={handleToggelModal}/>
                   }

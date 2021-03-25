@@ -1,6 +1,6 @@
 div#table-content {
   overflow-x: scroll;
-  background-color: var(--white);
+  background-color: #f9f6f6;
   padding: 12px;
 }
 

@@ -1,9 +1,12 @@
 // packages
-import React, { useEffect, useState} from 'react';
-import { Route} from 'react-router-dom';
+import React, { useEffect, useState, useContext, useRef } from 'react';
+import { Route } from 'react-router-dom';
 
 // styles
 import './DashApp.css';
+
+// context
+import MediaContext from '../../context/MediaContext';
 
 // hooks
 import useGetMembers from '../../hooks/useGetMembers';
@@ -24,6 +27,8 @@ import DashTasks from './DashTasks';
 
 const DashApp = ({ match, location }) => {
 
+  const { isMobileDevice, isSmallScreen, isTabletDevice, isDesktopDevice, isLargeScreen } = useContext(MediaContext);
+
   // console.log('match =', match);
   // console.log('location =', location);
 
@@ -35,6 +40,8 @@ const DashApp = ({ match, location }) => {
     saveToSession('houseName', location.aboutProps.houseName);
   }
 
+  // state
+  
   const [currentUser, setCurrentUser] = useState({});
   const [modalOpen, setModalOpen] = useState(false);
   const [modalProfile, setModalProfile] = useState(false);
@@ -42,16 +49,15 @@ const DashApp = ({ match, location }) => {
   const members = useGetMembers('dash-app');
   // console.log(members);
 
-
   const handleToggelModal = () => {
     setModalOpen(true);
   }
 
-  
+
   const handleCloseModal = () => {
     setModalOpen(false);
   }
-  
+
   const handleToggelProfile = () => {
     setModalProfile(true);
   }
@@ -73,26 +79,26 @@ const DashApp = ({ match, location }) => {
   // console.log('match.url =', match.url);
   return (
     <>
-      
-        <section id='dashboard-content' className='dashboard'>
 
-          <DashNav match={match} currentUser={currentUser} toggelModal={handleToggelModal} toggelProfile={handleToggelProfile} />
-          <article id='dash-body'>
-            <Route exact path={`${match.url}`} render={(props) => (
-              <DashHome {...props} members={members} />
-            )}
-            />
-            <Route exact path={`${match.url}/task-manager`} render={(props) => (
-              <DashTasks {...props} />
-            )} />
-            
-          </article>
-
-        </section>
+      <section id='dashboard-content'>
         
-        {modalOpen && <Modal closeModal={handleCloseModal} ><CreateTaskForm /></Modal>}
-        {modalProfile && <Modal closeModal={handleCloseProfile} ><UserProfile /></Modal>}
-      
+        <DashNav match={match} currentUser={currentUser} toggelModal={handleToggelModal} toggelProfile={handleToggelProfile}/>
+        <article id='dash-body'>
+          <Route exact path={`${match.url}`} render={(props) => (
+            <DashHome {...props} members={members} />
+          )}
+          />
+          <Route exact path={`${match.url}/task-manager`} render={(props) => (
+            <DashTasks {...props} />
+          )} />
+
+        </article>
+
+      </section>
+
+      {modalOpen && <Modal closeModal={handleCloseModal} ><CreateTaskForm /></Modal>}
+      {modalProfile && <Modal closeModal={handleCloseProfile} ><UserProfile /></Modal>}
+
     </>
   )
 

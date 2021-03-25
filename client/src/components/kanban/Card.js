@@ -64,6 +64,7 @@ const Card = ({ data, member, toggelModal, colour }) => {
               'backgroundColor': colour,
               'borderRadius': '5px',
               'padding': '3px 6px',
+              'color': '#fff',
             }}
           > {member}
           </span>
@@ -71,7 +72,7 @@ const Card = ({ data, member, toggelModal, colour }) => {
       }
       <p className='sml-text' style={getPriority(data)}>Due date: {data.nextDate}</p>
     </div>
-  )
+  );
 }
 
 export default Card;

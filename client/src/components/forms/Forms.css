@@ -3,31 +3,27 @@ form{
 }
 
 label {
-  margin: 12px 0 3px 0;
+  /* margin: 12px 0 3px 0; */
+  margin: 20px 12px;
+}
+
+.input-submit,
+button {
+  outline: none;
+  cursor: pointer;
+  
+  color: #fff;
+  font-weight: 500;
+  background: linear-gradient(to right, #fa853c, #d48019);
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  border: none;
+  border-radius: 30px;
+  min-height: 40px;
+  padding: 3px 24px;
 }
 
 .input-submit {
-  margin: 0 10px 6px 0;
-  background-color: #fa853c;
-  color: white;
-  outline: none;
-  font-weight: 500;
-  border: none;
-  height: 40px;
-  padding: 3px 24px;
-  
-}
-
-button {
-  color: #fff;
-  outline: none;
-  font-weight: 500;
-  background: linear-gradient(to right, #fa853c, #d48019);
-  cursor: pointer;
-  border: none;
-  border-radius: 30px;
-  height: 40px;
-  padding: 3px 24px;
+  width: max-content;
 }
 
 .cardForm{

@@ -1,7 +1,15 @@
+div.household {
+  margin: 12px;
+}
+
 img.household-img {
-  margin: 6px;
+  margin: 12px auto;
   border-radius: 75px;
-  background-image:url('https://images.pexels.com/photos/7059942/pexels-photo-7059942.jpeg?cs=srgb&dl=pexels-andrew-neel-7059942.jpg&fm=jpg');
+  display: block;
+}
+
+div.household > a {
+  text-decoration: none;
 }
 
 div.household > a:hover {
@@ -9,8 +17,12 @@ div.household > a:hover {
 }
 
 p.house-name{
-  color: #000;
-  font-weight: 900;
-  text-transform: uppercase;
+  width: 110px;
+  margin: 20px 10px 20px 20px;
+  color: #fa853c;
+  font-family: 'Noto Serif', serif;
+  font-size: 16px;
+  text-decoration: none;
 }
+
 

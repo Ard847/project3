@@ -6,10 +6,13 @@
   align-items: center;
 }
 
-#create-household {
-  justify-self: center;
-  margin-top: 20px;
-  padding: 20px;
+#create-household-content > button {
+  margin: 20px;
+}
+
+#create-household-content > button > a {
+  text-decoration: none;
+  color: #fff;
 }
 
 img.household-img {
@@ -18,10 +21,4 @@ img.household-img {
   margin: 6px;
   border-radius: 75px;
   background-image:url('https://images.pexels.com/photos/7059942/pexels-photo-7059942.jpeg?cs=srgb&dl=pexels-andrew-neel-7059942.jpg&fm=jpg');
-}
-
-.return-btn{
-  color: #000;
-  font-weight: 900;
-  margin: 10px;
 }
