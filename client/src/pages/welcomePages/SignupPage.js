@@ -22,6 +22,7 @@ const SignupPage = () => {
   const [isFieldEmpty, setisFieldEmpty] = useState(false);
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [userCreated, setUserCreated] = useState(false);
+  const [userExists,setUserExists] = useState(false);
 
   const handleCreate = async (user) => {
     const url = '/api/user/createNew';
@@ -38,6 +39,7 @@ const SignupPage = () => {
     if (createUserResponse.message === 'success') {
       setUserCreated(true);
     }
+    setUserExists(true);
   }
 
   const ValidateEmail = (mail) => {
@@ -53,7 +55,7 @@ const SignupPage = () => {
         <SignUpTitles />
         <section id='sign-up-form'>
           <article id='login-content'>
-            <AccountForm type={'create-account'} onCreate={handleCreate} onSuccess={userCreated} isFieldEmpty={isFieldEmpty} isEmailValid={isEmailValid} />
+            <AccountForm type={'create-account'} onCreate={handleCreate} onSuccess={userCreated} isFieldEmpty={isFieldEmpty} isEmailValid={isEmailValid} userExists = {userExists} />
           </article>
         </section>
       </>
