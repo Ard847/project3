@@ -11,6 +11,13 @@ article#home-content {
 
 .background-img{
   width: 90%;
-  margin: 0 5%;
-  
+  margin: 0 5%; 
+}
+
+section#computer-image {
+  width: 100vw;
+}
+
+.preview-image {
+  width: 100%;
 }

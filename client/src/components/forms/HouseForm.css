@@ -10,9 +10,9 @@
  transition: 0.5s;*/
 }
 
-.chooseFile::-webkit-file-upload-button{
+/* .chooseFile::-webkit-file-upload-button{
    visibility: hidden;
-}
+} */
 
 .chooseFile::before{
     font-family: "Font Awesome 5 Free"; font-weight: 900; font-size: 2rem; content: "\f030";
@@ -20,24 +20,32 @@
     color: black;
 }
 
-.chooseFile::before:hover{
-    background: blanchedalmond;
-}
 
-.wrapper{
-    height: 200px;
-    width: 200px;
-    position: relative;
-    border: 5px solid rgb(247, 179, 32);
-    border-radius: 50%;
-    display: flex;
-    background-size: 100% 100%;
-    margin: 20px auto;
-    overflow: hidden;
-    background-image: url('https://images.pexels.com/photos/3764119/pexels-photo-3764119.jpeg?cs=srgb&dl=pexels-matheus-bertelli-3764119.jpg&fm=jpg');
-}
 
-input#house-name{
+input.house-name{
     margin: 10px auto;
     width: 100%;
+}
+
+form.create-household {
+    width: 300px;
+    margin-bottom: 20px;
+}
+
+form.file-upload {
+    display: flex;
+    justify-content: center;
+}
+
+div#create-household > form > label {
+  display: inline-block;
+  color: white;
+  background: linear-gradient(to right, #fa853c, #d48019);
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  cursor: pointer;
+  padding: 12px 24px;
+  border-radius: 30px;
+  min-height: 40px;
+  width: fit-content;
+
 }

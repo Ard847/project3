@@ -1,47 +1,38 @@
 // packages
-import React, { useContext } from 'react';
-import { Redirect } from 'react-router-dom';
+import React from 'react';
 
 // styles
 import './HomePage.css';
 
 //images
 import HomeImage from '../../images/bg33-01.png';
-
-// context
-import LoggedInContext from "../../context/LoggedInContext";
+import PreviewImg from '../../images/previewApp-01.png';
 
 // components
 import SortedTitles from '../welcomeTitles/SortedTitles';
-
-// functions
-import getSession from '../../functions/getSession';
 
 
 
 const HomePage = () => {
 
-  const { loggedIn } = useContext(LoggedInContext);
-
-  const id = getSession('id');
-
-  // if (loggedIn) {
-  //   return (<Redirect to={`/home/${id}`} />);
-  // } else {
-    return (
-      <>
-        <SortedTitles />
-        <section>
-          <article id='home-content'>
-            <div >
-              <img src={HomeImage} className="background-img" alt='home styling' />
-            </div>
-          </article>
-        </section>
-      </>
-    )
-  // }
-
+  return (
+    <>
+      <SortedTitles />
+      <section>
+        <article id='home-content'>
+          <div >
+            <img src={HomeImage} className="background-img" alt='home styling' />
+          </div>
+        </article>
+      </section>
+      <section id='computer-image'>
+        <div className="container">
+          <img className="preview-image" src={PreviewImg} />
+        </div>
+      </section>
+    </>
+  )
+  
 }
 
 export default HomePage;

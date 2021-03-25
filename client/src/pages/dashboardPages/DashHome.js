@@ -4,6 +4,9 @@ import React, { useEffect, useState, useContext } from 'react';
 // styles
 import './DashHome.css';
 
+// images
+import person from '../../images/person.png';
+
 // context
 import TaskContext from '../../context/TaskContext';
 
@@ -15,7 +18,7 @@ import LeaveHousehold from '../../components/LeaveHousehold';
 
 // functions
 import getSession from '../../functions/getSession';
-import fetcher from '../../functions/fetcher'
+import fetcher from '../../functions/fetcher';
 
 // hooks
 // import useGetTasks from '../../hooks/useGetTasks';
@@ -31,8 +34,8 @@ const DashHome = ({ members, match }) => {
   const getHouseName = getSession('houseName');
   const houseName = getHouseName.replace(/['"]+/g, '');
   const userID = parseInt(getSession('id'));
-  let token = getSession('token').split('"')
-  token = token[1]
+  let token = getSession('token').split('"');
+  token = token[1];
 
   // hooks -------------------------------------------------------------------
   // const [tasks, refreshTasks] = useGetTasks();
@@ -48,7 +51,7 @@ const DashHome = ({ members, match }) => {
   const [overdueTasks, setOverdueTasks] = useState([]);
   const [completedTasks, setCompletedTasks] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
-  const [imageIds, setImageIds] = useState([])
+  const [imageIds, setImageIds] = useState([]);
 
   // Invite to household ------------------------------------------------------
   const handleShowHouseID = (event) => {
@@ -168,7 +171,7 @@ const DashHome = ({ members, match }) => {
   // render ------------------------------------------------------------------------
   return (
     <div id='dash-home-content'>
-      {/* <> */}
+      
       <div id='title-bar'>
         <div className='dash-title' >
           <h2>Dashboard of {houseName}</h2>
@@ -186,7 +189,11 @@ const DashHome = ({ members, match }) => {
         <h4>
               <Clock day={true} time={true} />
         </h4>
-        <p> Welcome to your family dashboard. We are delighted to have you here. Invite as many family memebers as you wish. </p>
+        <p> 
+          Welcome to your family dashboard. 
+          We are delighted to have you here. 
+          Invite as many family members as you wish. 
+        </p>
       </div>
 
       <div id='dash-members' className='container'>
@@ -196,8 +203,8 @@ const DashHome = ({ members, match }) => {
             <div key={member.id} className='member-profile'>
               {imageIds && imageIds[index] == null ? (<img
                 className='member-img'
-                src=''
-                alt=''
+                src={person}
+                alt='generic person'
               />) : (<Image
                 key={index}
                 cloudName='dii2emagu'

@@ -168,7 +168,7 @@ const EditTask = ({ task, refresh }) => {
   return (
     <div id='task-information'>
       <div id='task-name' >
-        <label htmlFor='task-name-input'>Task Name: </label>
+        <label className='ETF-lable' htmlFor='task-name-input'><span className='ETF-lable'>TaskName:</span> </label>
         <input
           type='text'
           id='task-name-input'
@@ -180,7 +180,7 @@ const EditTask = ({ task, refresh }) => {
       </div>
 
       <div id='assigned-to' >
-        <p>Assigned To:
+        <p> <span className='ETF-lable'>Assigned To:</span>
           <span style={{
             'backgroundColor': user?.color,
             'borderRadius': '5px',
@@ -220,6 +220,7 @@ const EditTask = ({ task, refresh }) => {
       </div> */}
 
       <div id='duration' >
+        <p><span className='ETF-lable'>Duration:</span></p>
         <label htmlFor='durationinput'>The task takes
           <input
             type='number'
@@ -234,7 +235,7 @@ const EditTask = ({ task, refresh }) => {
       </div>
 
       <div id='due-date' >
-        <p>Due Date: {displayDate === 'Invalid Date' ? 'No Date set' : displayDate}</p>
+        <p><span className='ETF-lable' > Due Date:</span> {displayDate === 'Invalid Date' ? 'No Date set' : displayDate}</p>
         <p>Set Date: </p>
         <input
           type='date'
@@ -246,7 +247,7 @@ const EditTask = ({ task, refresh }) => {
       </div>
 
       <div id='alert-date' >
-        <label htmlFor='alert-input'>Alert Me:
+        <label htmlFor='alert-input'><span className='ETF-lable'>Alert Me:</span>
           <input
             type='number'
             id='alert-date-input'
@@ -260,7 +261,7 @@ const EditTask = ({ task, refresh }) => {
       </div>
 
       <div id='completeBy-date' >
-        <label htmlFor='completeBy-date-input'>Deadline tollerance
+        <label htmlFor='completeBy-date-input'><span className='ETF-lable' > Deadline tollerance </span>
         <input
             type='number'
             id='completeBy-date-input'
@@ -274,7 +275,7 @@ const EditTask = ({ task, refresh }) => {
       </div>
 
       <div id='repeat-input' >
-        <label htmlFor='durationinput'>The task will repeat every
+        <label htmlFor='durationinput'>The task will <span className='ETF-lable' >repeat</span> every
           <input
             type='number'
             id='repeat-input'

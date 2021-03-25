@@ -1,8 +1,5 @@
 // packages
-import React, { useContext } from 'react';
-
-//images
-// import PreviewImg from '../../images/previewApp-01.png'
+import React from 'react';
 
 // styles
 import './Instructions.css';
@@ -10,13 +7,9 @@ import './Instructions.css';
 // components
 import InstructionCard from '../../components/InstructionCard';
 
-// context
-import MediaContext from '../../context/MediaContext';
 
 
 const Instructions = () => {
-
-  const { isMobileDevice, isSmallScreen, isTabletDevice, isDesktopDevice, isLargeScreen } = useContext(MediaContext);
 
   return (
     <section id='instructions-content'>
@@ -255,15 +248,10 @@ const Instructions = () => {
             </p>
           </div>
         </div>
-
       </div>
 
-      {/* <div className="container">
-        <img className="preview-image" src={PreviewImg} />
-      </div> */}
     </section>
-
-  )
+  );
 }
 
 export default Instructions;

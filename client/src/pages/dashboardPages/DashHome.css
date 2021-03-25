@@ -1,7 +1,7 @@
 div#dash-home-content {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 64px 150px auto ;
+  grid-template-rows: 100px 150px auto ;
   row-gap: 12px;
   column-gap: 12px;
 
@@ -14,6 +14,7 @@ div#title-bar {
   grid-column: 1 / span 4;
   
 }
+
 div.dash-title {
   display: flex;
   justify-content: space-between;
@@ -57,11 +58,12 @@ img.member-img {
   background-color: var(--grey);
 }
 
-button#invite,
-button#leave-household {
+button.btn-style {
   margin: 12px;
   width: fit-content;
   cursor: pointer;
+  height: max-content;
+  padding: 3px 12px;
 }
 
 button#leave-household {
@@ -82,3 +84,46 @@ div#house-id > p {
 }
 
 
+@media screen and (max-width: 576px) {
+  
+  div#dash-home-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto ;
+    row-gap: 12px;
+    column-gap: 12px;
+  
+    padding: 12px;
+    height: 100%;
+  }
+  
+  div#title-bar {
+    flex-wrap: wrap;
+    justify-content: center;
+    grid-column: 1 / span 1;
+  }
+
+  div.dash-title {
+    flex-wrap: wrap;
+    flex-flow: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  button.btn-style {
+    margin: 12px 0;
+  }
+
+  div#dash-intro {
+    grid-column: 1 / span 1;
+    grid-row: 2 / span 1;
+  }
+  
+  div#dash-members {
+    grid-column: 1 / span 1;
+    grid-row: 3 / span 1;
+    display: flex;
+    padding: 12px;
+  }
+  
+}
