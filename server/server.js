@@ -1,14 +1,14 @@
 const express = require('express');
 const app = express();
 const path = require("path")
-// const cors = require('cors');
+const cors = require('cors');
 
 const connection = require('./config/db');
 
 const PORT = process.env.PORT || 3001;
 
 // middleware
-// app.use(cors());
+//app.use(cors());
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {

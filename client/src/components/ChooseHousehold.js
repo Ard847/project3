@@ -28,6 +28,7 @@ const ChooseHouse = () => {
     const fetchImages = async () => {
 
       const response = await fetcher(`/api/images/houseHold/${id}`, 'GET', '', token);
+      //console.log('image fetched',response)
       setImageIds(response);
     }
     fetchImages();
