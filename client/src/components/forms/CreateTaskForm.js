@@ -49,7 +49,7 @@ const CreateTaskForm = () => {
 
     // console.log('taskData =', taskData);
     const timings = await processToDays(taskData);
-    console.log('timings =', timings);
+    // console.log('timings =', timings);
 
     const body = {
       name: taskData.name,
@@ -60,7 +60,6 @@ const CreateTaskForm = () => {
     const createTaskResponse = await fetcher(url, 'POST', body, token);
     // console.log('createTaskResponse =', createTaskResponse);
     if (createTaskResponse.message === 'success'){
-      // console.log('success');
       refreshTasks();
     }
   }
@@ -68,7 +67,7 @@ const CreateTaskForm = () => {
   const handleRadioInput = (event) => {
     const target = event.target;
     // console.log('target =', target); 
-    // const value = target.type;
+
     if (target.name === 'duration') {
       let newTaskData = { ...taskData }
       newTaskData.duration.unit = target.value;
@@ -291,7 +290,7 @@ const CreateTaskForm = () => {
       <input className="input-submit" type='reset' />
 
     </form>
-  )
+  );
 }
 
 export default CreateTaskForm;

@@ -1,4 +1,4 @@
-const {User} = require('../config/orm');
+const { User } = require('../config/orm');
 
 const findOne = async (ID) => {
     return await User.findOne({where: { id :ID}});

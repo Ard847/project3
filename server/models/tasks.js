@@ -105,7 +105,7 @@ const updateTask = async (task, houseID) => {
   })
   .catch((err) => {
     console.log('task model, updateTask, error =', err);
-  })
+  });
 }
 
 const updateNextDate = async (taskID, houseID, nextDate) => {
@@ -123,7 +123,7 @@ const updateNextDate = async (taskID, houseID, nextDate) => {
   })
   .catch((err) => {
     console.log('task model, updateTask, error =', err);
-  })
+  });
 }
 
 const updateCompletedDate = async (taskID, houseID, completedDate) => {
@@ -136,7 +136,7 @@ const updateCompletedDate = async (taskID, houseID, completedDate) => {
     },
   })
   .then((data) => {
-    // console.log('updateCompletedDate, data =', data);
+    console.log('updateCompletedDate, data =', data);
     return data;
   })
   .catch((err) => {

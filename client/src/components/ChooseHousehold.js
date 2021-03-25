@@ -1,28 +1,25 @@
 // packages
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-
 // styles
 import './ChooseHousehold.css';
-
 // hooks
 import useGetHouseholds from '../hooks/useGetHouseholds';
-
 // functions
 import getSession from '../functions/getSession';
 import fetcher from '../functions/fetcher';
-
 //cloudinary
 import { Image } from 'cloudinary-react';
-
 // images
 import house from '../images/house.png';
 
 
 const ChooseHouse = () => {
+
+  const [imageIds, setImageIds] = useState('');
+  
   const households = useGetHouseholds();
   //  console.log('households =', households);
-  const [imageIds, setImageIds] = useState('');
   const id = getSession('id');
   let token = getSession('token').split('"');
   token = token[1];
@@ -33,7 +30,7 @@ const ChooseHouse = () => {
       const response = await fetcher(`/api/images/houseHold/${id}`, 'GET', '', token);
       setImageIds(response);
     }
-    fetchImages()
+    fetchImages();
   }, [id, token]);
 
   return (
@@ -78,12 +75,13 @@ const ChooseHouse = () => {
                   <p className="text-center house-name">{household.houseName}</p>
                 </NavLink>
               </div>
-            )
+            );
           })}
+
         </div>
       </article>
     </>
-  )
+  );
 }
 
 export default ChooseHouse;

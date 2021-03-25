@@ -41,7 +41,7 @@ const LeaveHousehold = ({match}) => {
         <h2>Are you sure you want to leave? </h2>
         <button onClick={toggleLeave}>Yes!</button>
       </div>
-    )
+    );
   }
   
 }

@@ -1,12 +1,9 @@
 // packages
 import React, { useState } from 'react';
-
 // styles
 import './HouseForm.css';
-
 // images
 import house from '../../images/house.png'
-
 // functions 
 import fetcher from '../../functions/fetcher';
 import getSession from "../../functions/getSession";
@@ -16,36 +13,28 @@ const HouseForm = ({ userID, type }) => {
   // console.log('HouseForm, userID =', userID);
   // console.log('HouseForm, type =', type);
 
-  // const id = getSession('id');
-  //Use states used for the image
-  // const [fileInputState,setFileInputState] = useState('');
-  // const [selectedFile, setSelectedFile] = useState('');
+  let token = getSession('token').split('"');
+  token = token[1];
+
   const [previewSource, setPreviewSource] = useState('');
-  //Variable for the name of the houses
-  // const [name,setName] = useState('');
   const [houseInput, setHouseInput] = useState('');
   // console.log('HouseForm, houseInput =', houseInput);
   const [houseCreated, setHouseCreated] = useState(false);
   const [houseJoined, setHouseJoined] = useState(false);
 
-
   const houseInputChange = (event) => {
     setHouseInput(event.target.value);
   }
 
-
   const createNewHousehold = async (base64EncodedImage) => {
-    let token = getSession('token').split('"');
-    token = token[1];
-    // console.log('createNewHousehold');
+
     const url = `/api/household/createNew/${userID}`
-    //console.log("data passing",data)
+
     const createHouseholdResponse = await fetcher(url, 'POST', { name: houseInput, data: base64EncodedImage }, token);
-    console.log('createHouseholdResponse =', createHouseholdResponse);
+    // console.log('createHouseholdResponse =', createHouseholdResponse);
     if (createHouseholdResponse.message === 'success') {
       setHouseCreated(true);
     }
-
   }
 
   const joinExistingHousehold = async (event) => {
@@ -56,11 +45,12 @@ const HouseForm = ({ userID, type }) => {
     // console.log('joinExistingHousehold');
     const url = `/api/household/join/${userID}`;
     const joinHouseholdResponse = await fetcher(url, 'POST', { householdID: houseInput }, token);
-    console.log('joinHouseholdResponse =', joinHouseholdResponse);
+    // console.log('joinHouseholdResponse =', joinHouseholdResponse);
     if (joinHouseholdResponse.message === 'success') {
       setHouseJoined(true);
     }
   }
+
   //Image handlers
   const handleFileInputChange = (e) => {
     const file = e.target.files[0]
@@ -78,19 +68,13 @@ const HouseForm = ({ userID, type }) => {
     e.preventDefault();
     //if(!previewSource) return;
     uploadImage(previewSource)
-    //const reader = new FileReader();
-    // reader.
   }
 
   const uploadImage = async (base64EncodedImage) => {
-    // let token = getSession('token').split('"');
-    // token = token[1];
-    //console.log(base64EncodedImage)
     try {
-      //await fetcher('/api/images/upload','Post',{data :base64EncodedImage, id : id},token)
-      createNewHousehold(base64EncodedImage)
+      createNewHousehold(base64EncodedImage);
     } catch (e) {
-      console.log("error image", e)
+      console.log("error image", e);
     }
   }
 
@@ -111,11 +95,11 @@ const HouseForm = ({ userID, type }) => {
             />
           )}
           <form className='file-upload'>
-            <input id='create-household-input' className="chooseFile" type="file" name="image" onChange={handleFileInputChange} hidden/>
+            <input id='create-household-input' className="chooseFile" type="file" name="image" onChange={handleFileInputChange} hidden />
             <label htmlFor='create-household-input' >Upload image</label>
           </form>
-        </div>)
-      }
+        </div>
+      )}
 
       <input
         className='house-name'
@@ -137,7 +121,6 @@ const HouseForm = ({ userID, type }) => {
 
       {houseCreated && <p>Household created, go back to households to enter the manager. </p>}
       {houseJoined && <p>Household Joined, go back to households to enter the manager. </p>}
-
     </form>
   )
 

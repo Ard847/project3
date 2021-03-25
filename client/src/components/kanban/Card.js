@@ -2,10 +2,8 @@
 import React, { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { ItemTypes } from './Constants';
-
 // styles
 import './Kanban.css';
-
 // functions
 import getPriority from '../../functions/getPriority';
 
@@ -13,7 +11,6 @@ import getPriority from '../../functions/getPriority';
 const Card = ({ data, member, toggelModal, colour }) => {
 
   // console.log('member =', member);
-
   const id = data.id;
   const ref = useRef(null);
 
@@ -37,11 +34,6 @@ const Card = ({ data, member, toggelModal, colour }) => {
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
-    // end: (item, monitor) => {
-    //   const dropEffect = monitor.getDropResult();
-    //   // console.log("just dropped item", item);
-    //   // console.log("dropEffect", dropEffect);
-    // },
   }));
 
   drag(drop(ref));
@@ -51,7 +43,7 @@ const Card = ({ data, member, toggelModal, colour }) => {
       className='card'
       ref={ref}
       style={{
-        backgroundColor: isDragging ? 'var(--yellow)' : 'white',
+        backgroundColor: isDragging ? '#dfd5d5' : 'white',
       }}
       onClick={onToggelModal}
     >

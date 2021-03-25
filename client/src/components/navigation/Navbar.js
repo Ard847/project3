@@ -1,13 +1,10 @@
 // packages
 import React, { useContext, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-
 //images
 import Logo from '../../images/sortedOrange-01.png';
-
 // styles
 import './NavBar.css';
-
 // context
 import LoggedInContext from '../../context/LoggedInContext';
 import MediaContext from '../../context/MediaContext';
