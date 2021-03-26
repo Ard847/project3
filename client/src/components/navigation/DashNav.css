@@ -20,6 +20,7 @@ nav#dash-nav > ul {
   text-align: center;
   padding: 12px;
 }
+
 nav#dash-nav > ul > li {
   display: flex;
   align-items: center;
@@ -44,6 +45,7 @@ a:hover {
 .nav-item {
   padding: 3px 24px;
   margin: 12px 0;
+  min-height: 40px;
 
   max-width: 90%;
 

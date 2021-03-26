@@ -1,5 +1,5 @@
 // packages
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Route } from 'react-router-dom';
 // styles
 import './DashApp.css';
@@ -53,6 +53,10 @@ const DashApp = ({ match, location }) => {
     refreshMembers();
     setModalProfile(false);
   }
+
+  useEffect(() => {
+    refreshMembers();
+  }, []);
 
   // console.log('match.url =', match.url);
   return (

@@ -37,7 +37,7 @@ const DashHome = ({ match }) => {
   // context -----------------------------------------------------------------
   const { tasks, refreshTasks } = useContext(TaskContext);
   const { members } = useContext(MembersContext);
-
+  // console.log('members =', members );
   // state --------------------------------------------------------------------
   const [showInviteButton, setShowInviteButton] = useState(true);
   const [todaysTasks, setTodaysTasks] = useState([]);
@@ -163,6 +163,10 @@ const DashHome = ({ match }) => {
     refreshTasks(taskID, newStatus);
   }
 
+  useEffect(() => {
+    refreshTasks();
+  }, []);
+
   // render ------------------------------------------------------------------------
   return (
     <div id='dash-home-content'>
@@ -210,8 +214,8 @@ const DashHome = ({ match }) => {
                 id='user-name'
                 style={{
                   'backgroundColor': member.color,
-                  'borderRadius': '5px',
-                  'padding': '3px 6px',
+                  'borderRadius': '12px',
+                  'padding': '3px 12px',
                   'color': '#fff',
                 }}
                 className='text-centre'>{member.firstName} {member.lastName}</p>
