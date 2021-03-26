@@ -17,7 +17,7 @@ const MembersContextProvider = ({ children }) => {
   // const [ houseID , setHouseID ] = useState('');
   // const { loggedIn } = useContext(LoggedInContext);
   const houseID = getSession('houseID');
-  console.log('houseID', houseID);
+  // console.log('houseID', houseID);
 
   const fetchData = useCallback(async () => {
 
@@ -27,7 +27,7 @@ const MembersContextProvider = ({ children }) => {
 
       const url = `/api/user/getusers/${houseID}`;
       const userResponse = await fetcher(url, 'GET', '', token);
-      console.log(`userResponse called =`, userResponse);
+      // console.log(`userResponse called =`, userResponse);
       if (userResponse.message === 'success') {
         setMembers(userResponse.members);
 
@@ -54,7 +54,7 @@ const MembersContextProvider = ({ children }) => {
   },[fetchData]);
 
   
-  console.log('membersContext members =', members);
+  // console.log('membersContext members =', members);
 
   return (
     <MembersContext.Provider value={{ members, refreshMembers }}>

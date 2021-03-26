@@ -28,17 +28,21 @@ const DashNav = ({ match, toggelModal, toggelProfile }) => {
   const { members } = useContext(MembersContext);
   const content = useRef(null);
 
+  console.log('members =', members);
   const userID = getSession('id');
-  const imageString = useGetImages();
-  
+
+
   // state
   const [activeState, setActiveState] = useState('');
   const [activeStyle, setActiveStyle] = useState('');
   const [contentWidth, setContentWidth] = useState('0px');
   const [currentUser, setCurrentUser] = useState({});
+  // const [imageString, setImageString] = useState('');
   // console.log('activeState =', activeState);
   // console.log('activeStyle =', activeStyle);
   // console.log('contentWidth =', contentWidth);
+  console.log('currentuser =', currentUser);
+  const imageString = useGetImages();
 
   let navAttr;
   if (isTabletDevice || isSmallScreen || isMobileDevice) {
@@ -80,9 +84,10 @@ const DashNav = ({ match, toggelModal, toggelProfile }) => {
   useEffect(() => {
     const fetchUser = async () => {
       const user = await members.find(member => member.id === userID);
-      // console.log('user =', user );
+      console.log('user =', user );
       // console.log('user.id =', user.id );
       setCurrentUser(user);
+      // setImageString(user.image);
     }
     fetchUser();
   }, [members, userID]);
