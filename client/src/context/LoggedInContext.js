@@ -30,8 +30,9 @@ const LoggedInContextProvider = ({children}) => {
   const userLoggedOut = async () => {
     setLoggedIn(false);
     removeFromSession('id');
-    removeFromSession('id');
+    removeFromSession('houseID');
     removeFromSession('houseName');
+    removeFromSession('token');
   }
 
   // console.log('LoggedInContext loggedIn =', loggedIn);

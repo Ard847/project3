@@ -66,13 +66,13 @@ After pitching the idea to the project team, the idea became apparent that it wa
 
 **Sumaya** created some initial black and white framework designs which gave a good base to create the react application around before needing to put the final branding and design over the top. 
 
-![mockup1](./client/src/images/mockup-1.1.png)
-![mockup2](./client/src/images/mockup-1.2.png)
-![mockup3](./client/src/images/mockup-1.3.png)
-![mockup4](./client/src/images/mockup-1.4.png)
-![mockup5](./client/src/images/mockup-1.5.png)
-![mockup6](./client/src/images/mockup-1.6.png)
-![mockup7](./client/src/images/mockup-1.7.png)
+![mockup1](./client/public/assets/mockup-1.1.png)
+![mockup2](./client/public/assets/mockup-1.2.png)
+![mockup3](./client/public/assets/mockup-1.3.png)
+![mockup4](./client/public/assets/mockup-1.4.png)
+![mockup5](./client/public/assets/mockup-1.5.png)
+![mockup6](./client/public/assets/mockup-1.6.png)
+![mockup7](./client/public/assets/mockup-1.7.png)
 
 We started out with a full application idea including budget tracker, vehicle task detailing and other more categorised functionality. 
 

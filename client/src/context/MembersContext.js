@@ -14,21 +14,29 @@ const MembersContext = createContext();
 const MembersContextProvider = ({ children }) => {
 
   const [members, setMembers] = useState([]);
-  const { loggedIn } = useContext(LoggedInContext);
+  // const [ houseID , setHouseID ] = useState('');
+  // const { loggedIn } = useContext(LoggedInContext);
+  const houseID = getSession('houseID');
+  console.log('houseID', houseID);
 
   const fetchData = useCallback(async () => {
-    if (loggedIn) {
-      const houseID = getSession('houseID');
+
+    if (houseID !== null) {
       let token = getSession('token').split('"');
       token = token[1];
 
       const url = `/api/user/getusers/${houseID}`;
       const userResponse = await fetcher(url, 'GET', '', token);
-      // console.log(`userResponse called =`, userResponse);
-      setMembers(userResponse);
+      console.log(`userResponse called =`, userResponse);
+      if (userResponse.message === 'success') {
+        setMembers(userResponse.members);
+
+      } else {
+        setMembers([]);
+      }
     }
 
-  }, [loggedIn]);
+  }, [houseID]);
 
   const refreshMembers = () => {
     // console.log('refreshing');
@@ -38,11 +46,15 @@ const MembersContextProvider = ({ children }) => {
   useEffect(() => {
 
     fetchData();
+    
     return () => {
       console.log(`I did unmount`);
     };
 
-  }, []);
+  },[fetchData]);
+
+  
+  console.log('membersContext members =', members);
 
   return (
     <MembersContext.Provider value={{ members, refreshMembers }}>
