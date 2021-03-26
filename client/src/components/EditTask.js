@@ -1,11 +1,11 @@
 // packages
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 // styles
 import './EditTask.css';
 // images
 import person from '../images/person.png';
-// hooks
-import useGetMembers from '../hooks/useGetMembers';
+// context
+import MembersContext from '../context/MembersContext';
 // functions
 import fetcher from '../functions/fetcher';
 import getSession from '../functions/getSession';
@@ -17,7 +17,8 @@ import { Image } from 'cloudinary-react';
 const EditTask = ({ task, refresh }) => {
 
   // console.log('EditTask, props, task =', task);
-  const members = useGetMembers();
+  const { members } = useContext(MembersContext);
+
   const houseID = getSession('houseID');
   const userID = getSession('id');
   let token = getSession('token').split('"');

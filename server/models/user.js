@@ -61,7 +61,7 @@ const findAllUser = async (houseID) => {
     attributes: ['id', 'houseName'],
     include: [{
       model: User,
-      attributes: ['id', 'firstName', 'lastName', 'color'],
+      attributes: ['id', 'firstName', 'lastName', 'color', 'image'],
     }],
   })
     .then((data) => {

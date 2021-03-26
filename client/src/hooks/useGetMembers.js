@@ -20,6 +20,10 @@ const useGetMembers = (calledFrom) => {
     setMembers(userResponse);
   }
 
+  const refreshMembers = () => {
+    fetchData();
+  }
+
   useEffect(() => {
 
     fetchData();
@@ -31,7 +35,7 @@ const useGetMembers = (calledFrom) => {
 
   // console.log(`hook ${here} members =`, members);
 
-  return members;
+  return [members, refreshMembers];
 }
 
 export default useGetMembers;

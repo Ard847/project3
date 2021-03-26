@@ -2,8 +2,7 @@ section#app-titles {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-
-  padding: 12px 36px;
+  padding: 0px 36px;
 }
 
 .coll-1{

@@ -1,9 +1,7 @@
 // packages
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 // styles
 import './Modal.css';
-// Context
-import MediaContext from '../context/MediaContext';
 
 
 const Modal = ({ closeModal, children }) => {

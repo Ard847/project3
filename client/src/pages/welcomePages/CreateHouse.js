@@ -9,7 +9,7 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // components
 import HouseForm from '../../components/forms/HouseForm';
-import SortedTitles from '../welcomeTitles/SortedTitles';
+import CreateTitles from '../welcomeTitles/CreateTitles';
 
 // functions
 import getSession from '../../functions/getSession';
@@ -25,7 +25,7 @@ const CreateHouse = () => {
 
   return (
     <>
-     <SortedTitles />
+     <CreateTitles />
       <section>
         <article id='create-household-content'>
           

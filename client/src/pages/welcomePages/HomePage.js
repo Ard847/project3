@@ -25,12 +25,20 @@ const HomePage = () => {
       </section>
       <section id='computer-image'>
         <div className="container">
+          <div>
+            <h2 className="text-center subheading">Take us with you: </h2>
+            <h3 className="subheading text-center">
+              We are a fully responsive Web application to make it easy 
+              for you to use us on any device you choose, at home or out and 
+              about. 
+            </h3>
+          </div>
           <img className="preview-image" src={PreviewImg} alt='home styling' />
         </div>
       </section>
     </>
   )
-  
+
 }
 
 export default HomePage;

@@ -42,7 +42,7 @@ router.get('/households/:id', auth, async (req, res) => {
     console.log(e);
     res.status(500).json({
       message: "error",
-      error: error,
+      error: e,
     });
   }
 });
@@ -80,7 +80,10 @@ router.get('/user/:houseID&:id', auth, async (req, res) => {
     res.send({ images, currentUser: currentUser.image });
   } catch (e) {
     console.log(e)
-    res.status(500).json({ err: "Something went wrong" });
+    res.status(500).json({
+      message: "error",
+      error: e
+    });
   }
 })
 
@@ -95,10 +98,13 @@ router.put('/upload/user', auth, async (req, res) => {
     });
     await imageModels.updateImageUser(uploadResponse.public_id, req.body.id)//orm.User.update({image : uploadResponse.public_id},{where:{ id : req.body.id}});
     //console.log('uploaded',req.body.id)
-    res.json({ msg: "Saved with success" });
+    res.json({ message: "success" });
   } catch (e) {
     console.log(e);
-    res.status(500).json({ err: "Something went wrong" });
+    res.status(500).json({
+      message: "error",
+      error: e
+    });
   }
 })
 
@@ -113,10 +119,13 @@ router.put('/upload/house', auth, async (req, res) => {
     });
     await imageModels.updateImageHouse(uploadResponse.public_id, req.body.id)//orm.User.update({image : uploadResponse.public_id},{where:{ id : req.body.id}});
     //console.log('uploaded',req.body.id)
-    res.json({ msg: "Saved with success" });
+    res.json({ message: "success" });
   } catch (e) {
     console.log(e);
-    res.status(500).json({ err: "Something went wrong" });
+    res.status(500).json({
+      message: "error",
+      error: e
+    });
   }
 })
 

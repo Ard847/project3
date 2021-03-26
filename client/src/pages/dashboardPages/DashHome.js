@@ -1,15 +1,12 @@
 // packages
 import React, { useEffect, useState, useContext } from 'react';
-
 // styles
 import './DashHome.css';
-
 // images
 import person from '../../images/person.png';
-
 // context
 import TaskContext from '../../context/TaskContext';
-
+import MembersContext from '../../context/MembersContext';
 // components
 import Clock from '../../components/Clock';
 import List from '../../components/List';
@@ -25,7 +22,7 @@ import { Image } from 'cloudinary-react';
 
 
 
-const DashHome = ({ members, match }) => {
+const DashHome = ({ match }) => {
 
   // variables
   const houseID = parseInt(getSession('houseID'));
@@ -39,6 +36,7 @@ const DashHome = ({ members, match }) => {
   // const [tasks, refreshTasks] = useGetTasks();
   // context -----------------------------------------------------------------
   const { tasks, refreshTasks } = useContext(TaskContext);
+  const { members } = useContext(MembersContext);
 
   // state --------------------------------------------------------------------
   const [showInviteButton, setShowInviteButton] = useState(true);

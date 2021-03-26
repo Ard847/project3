@@ -7,8 +7,7 @@ import Modal from '../components/Modal';
 import EditTask from '../components/EditTask';
 // context
 import TaskContext from '../context/TaskContext';
-// hooks
-import useGetMembers from '../hooks/useGetMembers';
+import MembersContext from '../context/MembersContext';
 // functions
 import getSession from '../functions/getSession';
 import fetcher from '../functions/fetcher';
@@ -19,10 +18,9 @@ const Table = () => {
 
   // hooks
   const { tasks, refreshTasks } = useContext(TaskContext);
+  const { members } = useContext(MembersContext);
   // const [tasks, refreshTasks ] = useGetTasks();
   // console.log('tasks =', tasks);
-
-  const members = useGetMembers('table');
   // console.log('members =', members);
 
   // variables

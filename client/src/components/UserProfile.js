@@ -17,7 +17,7 @@ import useGetImages from '../hooks/useGetImages';
 import { Image } from 'cloudinary-react';
 
 
-const UserProfile = () => {
+const UserProfile = ({refresh}) => {
 
   // hooks
   const currentImage = useGetImages();
@@ -44,7 +44,12 @@ const UserProfile = () => {
         data: base64EncodedImage,
         id: userID,
       };
-      await fetcher(url, 'PUT', body, token);
+      const fetch = await fetcher(url, 'PUT', body, token);
+      // console.log('fetch =', fetch);
+      if (fetch.message === 'success'){
+        // console.log('success');
+        refresh();
+      }
     } catch (e) {
       console.log("error image", e);
     }
@@ -58,7 +63,10 @@ const UserProfile = () => {
         data: base64EncodedImage,
         id: houseID,
       };
-      await fetcher(url, 'PUT', body, token);
+      const fetch = await fetcher(url, 'PUT', body, token);
+      if (fetch.message === 'success'){
+        refresh();
+      }
     } catch (e) {
       console.log("error image", e);
     }
@@ -124,7 +132,7 @@ const UserProfile = () => {
       setImageIds(response[0]);
     }
     fetchImages();
-  }, [userID, token]);
+  }, [userID, token, houseID]);
 
   useEffect(() => {
     const fetchColour = async () => {

@@ -60,7 +60,7 @@ const TaskContextProvider = ({children}) => {
   }, [fetchData]);
 
   return (
-    <TaskContext.Provider value={{ tasks, fetchData, refreshTasks }}>
+    <TaskContext.Provider value={{ tasks, refreshTasks }}>
       {children}
     </TaskContext.Provider>
   )
