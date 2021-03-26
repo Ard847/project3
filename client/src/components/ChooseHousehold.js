@@ -27,7 +27,7 @@ const ChooseHouse = () => {
   useEffect(() => {
     const fetchImages = async () => {
 
-      const response = await fetcher(`/api/images/houseHold/${id}`, 'GET', '', token);
+      const response = await fetcher(`/api/images/households/${id}`, 'GET', '', token);
       //console.log('image fetched',response)
       setImageIds(response);
     }
@@ -60,7 +60,7 @@ const ChooseHouse = () => {
                     pathname: `/dashboard/${id}/${household.id}`,
                     aboutProps: { houseName: household.houseName },
                   }} >
-                  {imageIds && (imageIds[index] === null)
+                  {imageIds === '' || (imageIds[index] === null)
                     ? (
                       <img
                         className='household-img'

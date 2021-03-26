@@ -64,7 +64,7 @@ const updateStatus = async (taskID, houseID, newStatus) => {
   })
   .catch((err) => {
     console.log('task model, updateStatus, error =', err);
-  })
+  });
 }
 
 const updateUser = async (taskID, houseID, user) => {

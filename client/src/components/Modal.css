@@ -2,7 +2,7 @@
   position: absolute;
   z-index: 2;
   width: 100%;
-  min-height: 100%;
+  min-height: 100vh;
   height: fit-content;
   top: 0;
   left: 0;
@@ -18,9 +18,16 @@
   margin-top: 8%;
   z-index: 3;
   width: 80%;
-  height: fit-content;
+  height: 80vh;
   background-color: #fff;
   padding: 12px;
   border-radius: 5px;
-  /* overflow-y: scroll; */
+  overflow-y: scroll;
+}
+
+@media screen and (max-width: 576px) {
+
+  #modal-content {
+    height: fit-content;
+  }
 }

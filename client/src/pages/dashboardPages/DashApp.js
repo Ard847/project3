@@ -1,22 +1,17 @@
 // packages
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Route } from 'react-router-dom';
-
 // styles
 import './DashApp.css';
-
-// hooks
-import useGetMembers from '../../hooks/useGetMembers';
-
+// context
+import MembersContext from '../../context/MembersContext';
 // functions
 import saveToSession from '../../functions/saveToSession';
-
 // components
 import DashNav from '../../components/navigation/DashNav';
 import Modal from '../../components/Modal';
 import CreateTaskForm from '../../components/forms/CreateTaskForm';
 import UserProfile from '../../components/UserProfile';
-
 // pages
 import DashHome from './DashHome';
 import DashTasks from './DashTasks';
@@ -27,7 +22,6 @@ const DashApp = ({ match, location }) => {
   // console.log('match =', match);
   // console.log('location =', location);
 
-  const userID = parseInt(match.params.id);
   const houseID = parseInt(match.params.householdID);
   saveToSession('houseID', houseID);
 
@@ -36,11 +30,10 @@ const DashApp = ({ match, location }) => {
   }
 
   // state
-  const [currentUser, setCurrentUser] = useState({});
   const [modalOpen, setModalOpen] = useState(false);
   const [modalProfile, setModalProfile] = useState(false);
 
-  const members = useGetMembers('dash-app');
+  const { refreshMembers } = useContext(MembersContext);
   // console.log(members);
 
   const handleToggelModal = () => {
@@ -49,6 +42,7 @@ const DashApp = ({ match, location }) => {
 
   const handleCloseModal = () => {
     setModalOpen(false);
+    
   }
 
   const handleToggelProfile = () => {
@@ -56,18 +50,9 @@ const DashApp = ({ match, location }) => {
   }
 
   const handleCloseProfile = () => {
+    refreshMembers();
     setModalProfile(false);
   }
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      const user = await members.find(member => member.id === userID);
-      // console.log('user =', user );
-      // console.log('user.id =', user.id );
-      setCurrentUser(user);
-    }
-    fetchUser();
-  }, [members, userID]);
 
   // console.log('match.url =', match.url);
   return (
@@ -75,12 +60,9 @@ const DashApp = ({ match, location }) => {
 
       <section id='dashboard-content'>
         
-        <DashNav match={match} currentUser={currentUser} toggelModal={handleToggelModal} toggelProfile={handleToggelProfile}/>
+        <DashNav match={match} toggelModal={handleToggelModal} toggelProfile={handleToggelProfile}/>
         <article id='dash-body'>
-          <Route exact path={`${match.url}`} render={(props) => (
-            <DashHome {...props} members={members} />
-          )}
-          />
+          <Route exact path={`${match.url}`} component={DashHome} />
           <Route exact path={`${match.url}/task-manager`} render={(props) => (
             <DashTasks {...props} />
           )} />
@@ -90,7 +72,7 @@ const DashApp = ({ match, location }) => {
       </section>
 
       {modalOpen && <Modal closeModal={handleCloseModal} ><CreateTaskForm /></Modal>}
-      {modalProfile && <Modal closeModal={handleCloseProfile} ><UserProfile /></Modal>}
+      {modalProfile && <Modal closeModal={handleCloseProfile} ><UserProfile refresh={() => refreshMembers()}/></Modal>}
 
     </>
   )

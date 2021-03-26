@@ -10,7 +10,7 @@ const householdModel = require('../models/household');
 // WE NEED TO INCLUDE ERROR HANDELING, 
 // FEEDBACK FOR LAST PROJECT WAS WE WERE MARKED DOWN FOR NOT HAVING IT.
 
-router.get('/gethousehold/:id',auth ,async (req, res) => {
+router.get('/gethousehold/:id', auth, async (req, res) => {
   const userHouseholds = await householdModel
     .findAllHousehold(req.params.id);
   // console.log('userHouseholds =', userHouseholds);
@@ -19,27 +19,38 @@ router.get('/gethousehold/:id',auth ,async (req, res) => {
   res.send(households);
 });
 
-router.post('/createNew/:id', auth ,async (req, res) => {
-  console.log('householdRoutes, req.body.name =', req.body.name);
-  console.log('householdRoutes, req.params =', req.params);
-   
-   try {
-    const fileStr = req.body.data
-    const uploadRespose = await cloudinary.uploader.upload(fileStr, {
-      use_filename : true,
-      folder : "project3/houses"
-  }) 
-     console.log(uploadRespose)   
-    const household = await householdModel.createHousehold(req.body.name,uploadRespose.public_id);
-    console.log('household =', household.dataValues);
+router.post('/createNew/:id', auth, async (req, res) => {
+  // console.log('householdRoutes, req.body.name =', req.body.name);
+  // console.log('householdRoutes, req.params =', req.params);
+
+  try {
+    let imageURL;
+    if(req.body.data){
+      const fileStr = req.body.data
+      // console.log('fileStr =', fileStr);
+      const uploadRespose = await cloudinary.uploader.upload(fileStr, {
+        use_filename: true,
+        folder: "project3/houses",
+      });
+      // console.log('uploadRespose =', uploadRespose);
+      imageURL = uploadRespose.public_id;
+    } else {
+      imageURL = null; 
+    }
+
+    const household = await householdModel.createHousehold(req.body.name, imageURL);
+    // console.log('household =', household.dataValues);
+
     const householdMember = await householdModel.addNewMember(household.dataValues.id, req.params.id);
     // console.log('householdMember =', householdMember);
+
     const response = {
       memberID: householdMember.dataValues.id,
       householdID: householdMember.dataValues.householdID,
       userID: householdMember.dataValues.userID,
       houseName: household.dataValues.houseName,
-    }; 
+    };
+
     res.json({
       message: 'success',
       data: response,
@@ -49,10 +60,10 @@ router.post('/createNew/:id', auth ,async (req, res) => {
       message: 'error',
       data: err,
     });
-  } 
+  }
 });
 
-router.post('/join/:id',auth,async (req, res) => {
+router.post('/join/:id', auth, async (req, res) => {
   // console.log('householdRoutes, req.body =', req.body);
   // console.log('householdRoutes, req.params =', req.params);
 
@@ -85,7 +96,7 @@ router.delete('/leaveHousehold/:userID/:houseID', auth, async (req, res) => {
   try {
     const removeMember = await householdModel.deleteMember(req.params.userID, req.params.houseID);
     // console.log('removeMember =', removeMember);
-    
+
     res.json({
       message: 'success',
       data: removeMember,

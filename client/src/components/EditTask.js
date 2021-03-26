@@ -1,11 +1,11 @@
 // packages
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 // styles
 import './EditTask.css';
 // images
 import person from '../images/person.png';
-// hooks
-import useGetMembers from '../hooks/useGetMembers';
+// context
+import MembersContext from '../context/MembersContext';
 // functions
 import fetcher from '../functions/fetcher';
 import getSession from '../functions/getSession';
@@ -17,7 +17,8 @@ import { Image } from 'cloudinary-react';
 const EditTask = ({ task, refresh }) => {
 
   // console.log('EditTask, props, task =', task);
-  const members = useGetMembers();
+  const { members } = useContext(MembersContext);
+
   const houseID = getSession('houseID');
   const userID = getSession('id');
   let token = getSession('token').split('"');
@@ -188,6 +189,7 @@ const EditTask = ({ task, refresh }) => {
 
   return (
     <div id='task-information'>
+
       <div id='task-name' >
         <label className='ETF-lable' htmlFor='task-name-input'><span className='ETF-lable'>TaskName:</span> </label>
         <input
@@ -204,8 +206,9 @@ const EditTask = ({ task, refresh }) => {
         <p> <span className='ETF-lable'>Assigned To:</span>
           <span style={{
             'backgroundColor': user?.color,
-            'borderRadius': '5px',
-            'padding': '3px 6px',
+            'borderRadius': '12px',
+            'padding': '3px 12px',
+            'color': '#fff',
             }}
           >
             {`${user?.firstName} ${user?.lastName}`}
@@ -230,8 +233,9 @@ const EditTask = ({ task, refresh }) => {
                 id='user-name'
                 style={{
                   'backgroundColor': member.color,
-                  'borderRadius': '5px',
-                  'padding': '3px 6px',
+                  'borderRadius': '12px',
+                  'padding': '3px 12px',
+                  'color':'#fff',
                 }}
                   className='text-centre'>{member.firstName} {member.lastName}
                 </p>

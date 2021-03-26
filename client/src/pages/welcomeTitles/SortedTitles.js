@@ -18,27 +18,38 @@ const SortedTitles = () => {
 
       <div className="coll-1">
         <h2 className="sorted-title">Sorted:</h2>
-        {
-          ( loggedIn ) 
-          ? <h3> Create New Household</h3>
-          : <h3> Home Management System</h3>
-        }
-        {
-          ( loggedIn )
-        ? <p>
-          To create a new household, upload any image that you would like to represent your household. Then Enter the name of your house. However if you would like to join a household that is already created then simply input the household ID and click join. You can now click the button 'My household' or 'Back to households' and you can view your household.
-        </p>
-        :<p>
-        Welcome to sorted, a home management tool that enables families to manage tasks around the home.
-       
-      </p>
-        }
-        {
-          ( loggedIn ) 
-          ? <NavLink to="/logIn"><button type="button">My Households</button></NavLink>
-          : <NavLink to="/logIn"><button type="button">Get Started</button></NavLink>
-        }
+        <h3> Home Management System</h3>
         
+        {
+          (loggedIn)
+            ? (<>
+              <p>
+                Welcome to sorted, a home management tool that enables families to manage tasks around the home.
+              </p>
+              <p>
+                Sorted Task Manager takes the tasks you program in and delivers you a list for the day including 
+                priority and task duration in order for you to easily fit your jobs around your life and leisure.
+              </p>
+              <p>Great, you've logged In, now you can begin by creating a household, joining or opening an existing 
+                household. Follow the link below or in the Navigation bar called My Households.</p>
+              </>)
+            :
+            (<>
+            <p>
+              Welcome to sorted, a home management tool that enables families to manage tasks around the home.
+            </p>
+            <p>
+              Sorted Task Manager takes the tasks you program in and delivers you a list for the day including 
+              priority and task duration in order for you to easily fit your jobs around your life and leisure.
+            </p>
+            </>)
+        }
+        {
+          (loggedIn)
+            ? <NavLink to="/logIn"><button type="button">My Households</button></NavLink>
+            : <NavLink to="/logIn"><button type="button">Get Started</button></NavLink>
+        }
+
       </div>
 
     </section>

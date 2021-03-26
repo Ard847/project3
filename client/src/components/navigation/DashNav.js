@@ -1,5 +1,5 @@
 // packages
-import React, { useState, useContext, useRef } from 'react';
+import React, { useState, useContext, useRef, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 // context
 import MediaContext from '../../context/MediaContext';
@@ -14,33 +14,28 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import getSession from '../../functions/getSession';
 // hooks
 import useGetImages from '../../hooks/useGetImages';
+// context
+import MembersContext from '../../context/MembersContext';
 //cloudinary
 import { Image } from 'cloudinary-react';
 
 
-const DashNav = ({ match, currentUser, toggelModal, toggelProfile }) => {
+const DashNav = ({ match, toggelModal, toggelProfile }) => {
   // console.log('currentUser =', currentUser);
   // console.log('match dash nav =', match);
 
   const { isMobileDevice, isSmallScreen, isTabletDevice } = useContext(MediaContext);
+  const { members } = useContext(MembersContext);
   const content = useRef(null);
 
   const userID = getSession('id');
   const imageString = useGetImages();
   
-  const userStyle = {
-    'backgroundColor': currentUser?.color,
-    'borderRadius': '30px',
-    'padding': '3px 12px',
-    'color': '#fff',
-    'fontWeight': '500',
-    'boxShadow': 'rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px',
-  }
-
   // state
   const [activeState, setActiveState] = useState('');
   const [activeStyle, setActiveStyle] = useState('');
   const [contentWidth, setContentWidth] = useState('0px');
+  const [currentUser, setCurrentUser] = useState({});
   // console.log('activeState =', activeState);
   // console.log('activeStyle =', activeStyle);
   // console.log('contentWidth =', contentWidth);
@@ -62,6 +57,15 @@ const DashNav = ({ match, currentUser, toggelModal, toggelProfile }) => {
     }
   }
 
+  const userStyle = {
+    'backgroundColor': currentUser?.color,
+    'borderRadius': '30px',
+    'padding': '3px 12px',
+    'color': '#fff',
+    'fontWeight': '500',
+    'boxShadow': 'rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px',
+  }
+
   const toggelCollapse = () => {
 
     setActiveState(activeState === '' ? 'active' : '');
@@ -72,6 +76,16 @@ const DashNav = ({ match, currentUser, toggelModal, toggelProfile }) => {
     );
 
   }
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const user = await members.find(member => member.id === userID);
+      // console.log('user =', user );
+      // console.log('user.id =', user.id );
+      setCurrentUser(user);
+    }
+    fetchUser();
+  }, [members, userID]);
 
   return (<>
 
