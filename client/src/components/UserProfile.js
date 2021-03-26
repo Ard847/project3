@@ -35,11 +35,11 @@ const UserProfile = () => {
   const [imageIds, setImageIds] = useState('');
 
   const uploadUserImage = async (base64EncodedImage) => {
-    // console.log(base64EncodedImage);
+    //console.log(base64EncodedImage);
     try {
       const url = '/api/images/upload/user';
       const body = {
-        data: base64EncodedImage,
+        data : base64EncodedImage,
         id: userID,
       };
       await fetcher(url, 'PUT', body, token);
@@ -49,7 +49,7 @@ const UserProfile = () => {
   };
 
   const uploadHouseImage = async (base64EncodedImage) => {
-    // console.log(base64EncodedImage);
+    //console.log(base64EncodedImage);
     try {
       const url = '/api/images/upload/house';
       const body = {
@@ -147,11 +147,11 @@ const UserProfile = () => {
       <article id='profile-2'>
         <h3> House Profile </h3>
 
-        {imageIds && (imageIds[0] === null)
+        {imageIds && (imageIds[0] === null || housePreviewSource !== '')
           ? (
             <img
               className='household-img'
-              src={house}
+              src={housePreviewSource === '' ? {house} :housePreviewSource}
               alt='generic house'
             />
           ) : (<Image

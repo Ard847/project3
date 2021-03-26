@@ -3,8 +3,7 @@ const DATA_CACHE_NAME = 'data-cache-v1';
 const FILES_TO_CACHE = [
   '.',
   '/manifest.json',
-  '/index.html',
- // '../src/images',
+  '/index.html'
 ];
 // install
 self.addEventListener('install', function (evt) {
