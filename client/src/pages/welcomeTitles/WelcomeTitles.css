@@ -3,6 +3,8 @@ section#app-titles {
   align-items: center;
   flex-wrap: wrap;
   padding: 0px 36px;
+  background-image: url(../../images/background-circles-01.png);
+  background-size: cover;
 }
 
 .coll-1{
