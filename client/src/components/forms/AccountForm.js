@@ -84,7 +84,6 @@ const AccountForm = ({ type, onCreate, onSubmit, onSuccess, isFieldEmpty, isEmai
       username: usernameInput,
       password: passwordInput,
     }
-     console.log('AccountForm, submitLogin, user =', user);
     onSubmit(user);
   }
 

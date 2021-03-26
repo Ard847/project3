@@ -59,18 +59,22 @@ button#collapsed-menu {
   /* important for collapse */
   position: absolute;
   top: 110px;
-  left: 0;
+  left: 10px;
   z-index: 1;
 
   display: flex;
   flex-wrap: wrap;
   flex-flow: column;
 
-  width: 100%;
+  width: calc(100% - 20px);
 
   padding: 0 18px;
   max-height: 0;
-  background-color: #f9f6f6;
+  
+  background-color: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  border-radius: 0 0 10px 10px;
+
 }
 
 .collapse-content > .navLink {

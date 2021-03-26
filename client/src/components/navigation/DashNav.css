@@ -5,7 +5,7 @@ nav#dash-nav {
 
   background-color: #ffffff;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-  border-radius: 10px;
+  border-radius: 10px 10px 10px 0;
 }
 
 .users-name{
@@ -71,7 +71,7 @@ a:hover {
   color: #fff;
 }
 
-
+img.household-img,
 img.user-img {
   height: 150px;
   width: 150px;

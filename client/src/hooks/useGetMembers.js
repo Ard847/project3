@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import getSession from '../functions/getSession';
 import fetcher from '../functions/fetcher';
 
-const useGetMembers = (here) => {
+const useGetMembers = (calledFrom) => {
 
   const [ members, setMembers ] = useState([]);
 
@@ -24,10 +24,10 @@ const useGetMembers = (here) => {
 
     fetchData();
     return () => {
-      console.log(`I did unmount at ${here}`);
+      console.log(`I did unmount at ${calledFrom}`);
     }; 
 
-  }, [here]);
+  }, [calledFrom]);
 
   // console.log(`hook ${here} members =`, members);
 

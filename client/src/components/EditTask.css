@@ -2,6 +2,7 @@ div#task-information {
   padding: 12px;
   max-height: 90%;
   overflow-y: scroll;
+  margin: 6px 0;
 }
 
 div#task-information > div {
@@ -9,6 +10,13 @@ div#task-information > div {
   margin: 6px 0;
   padding: 6px;
   cursor: default;
+  height: min-content;
+  overflow: auto;
+}
+div#task-information > div:after {
+  content: "";
+  clear: both;
+  display: table;
 }
 
 div#task-information > div > input {
@@ -55,7 +63,7 @@ div#dash-members {
 
 div.member-profile {
   display: grid;
-  grid-template-rows: auto, auto;
+  grid-template-rows: 3fr 1fr;
   margin: 6px;
 }
 
@@ -87,7 +95,7 @@ div#task-information > div > button.save-btn {
 
 .ETF-lable {
   width: 110px;
-  margin: 20px 10px 20px 20px;
+  margin: 20px 10px 20px 0px;
   color: #fa853c;
   font-family: 'Noto Serif', serif;
 }

@@ -214,6 +214,7 @@ const DashHome = ({ members, match }) => {
                   'backgroundColor': member.color,
                   'borderRadius': '5px',
                   'padding': '3px 6px',
+                  'color': '#fff',
                 }}
                 className='text-centre'>{member.firstName} {member.lastName}</p>
             </div>

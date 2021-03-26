@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import { LoggedInContextProvider } from './context/LoggedInContext';
 import { TaskContextProvider } from './context/TaskContext';
 import { MediaContextProvider } from './context/MediaContext';
+import { MembersContextProvider } from './context/MembersContext';
 
 // styles
 import './index.css';
@@ -17,9 +18,11 @@ ReactDOM.render(
   <React.StrictMode>
     <LoggedInContextProvider>
       <MediaContextProvider>
-        <TaskContextProvider >
-          <App />
-        </TaskContextProvider>
+        <MembersContextProvider>
+          <TaskContextProvider >
+            <App />
+          </TaskContextProvider>
+        </MembersContextProvider>
       </MediaContextProvider>
     </LoggedInContextProvider>
   </React.StrictMode>,
