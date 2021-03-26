@@ -22,6 +22,7 @@ button {
   padding: 3px 24px;
 }
 
+.input-submit:hover,
 button:hover {
   box-shadow: 4px 4px 5px 2px var(--grey);
 }
@@ -48,9 +49,6 @@ button:hover {
   display: none;
 }
 
-div#errorForm, div#errorName, div#errorEmail, div#errorEmail2  {
-  color: red;
-}
 
 .login-body{
   margin-top: 50px;
@@ -85,6 +83,19 @@ div#errorForm, div#errorName, div#errorEmail, div#errorEmail2  {
 .form-box{
   margin: 20px 60px 0px 60px;
   padding: 10px;
+}
+
+input[type='password'],
+input[type='number'],
+input[type='text'] {
+  flex-grow: 1;
+  padding: 3px;
+  margin: 20px 0px;
+  border: none;
+  background: transparent;
+  box-shadow: 0px 2px 0px 0px orange;
+  
+  outline: none;
 }
 
 .wrap-btn{
