@@ -25,7 +25,7 @@ const DashNav = ({ match, toggelModal, toggelProfile }) => {
   // console.log('match dash nav =', match);
 
   const { isMobileDevice, isSmallScreen, isTabletDevice } = useContext(MediaContext);
-  const { members } = useContext(MembersContext);
+  const { members,refreshMembers,userImage  } = useContext(MembersContext);
   const content = useRef(null);
 
   const userID = getSession('id');
@@ -80,12 +80,13 @@ const DashNav = ({ match, toggelModal, toggelProfile }) => {
   useEffect(() => {
     const fetchUser = async () => {
       const user = await members.find(member => member.id === userID);
+      //console.log('current user');
       // console.log('user =', user );
       // console.log('user.id =', user.id );
       setCurrentUser(user);
     }
     fetchUser();
-  }, [members, userID]);
+  }, [members, userImage]);
 
   return (<>
 

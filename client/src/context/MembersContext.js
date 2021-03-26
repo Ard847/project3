@@ -15,6 +15,8 @@ const MembersContextProvider = ({ children }) => {
 
   const [members, setMembers] = useState([]);
   const { loggedIn } = useContext(LoggedInContext);
+  const [userImage,setUserImage] = useState(true);
+  const [imageChange,setChangeImage] = useState(false);
 
   const fetchData = useCallback(async () => {
     if (loggedIn) {
@@ -25,10 +27,13 @@ const MembersContextProvider = ({ children }) => {
       const url = `/api/user/getusers/${houseID}`;
       const userResponse = await fetcher(url, 'GET', '', token);
       // console.log(`userResponse called =`, userResponse);
+       
       setMembers(userResponse);
     }
 
   }, [loggedIn]);
+
+
 
   const refreshMembers = () => {
     // console.log('refreshing');
@@ -36,16 +41,14 @@ const MembersContextProvider = ({ children }) => {
   }
 
   useEffect(() => {
-
-    fetchData();
-    return () => {
-      console.log(`I did unmount`);
-    };
-
-  }, []);
+    if(loggedIn){
+      setTimeout(() => {window.location.reload() }, 3000);
+    }
+   
+  }, [userImage]);
 
   return (
-    <MembersContext.Provider value={{ members, refreshMembers }}>
+    <MembersContext.Provider value={{ members, refreshMembers, userImage, setUserImage/* , refresh */ }}>
       {children}
     </MembersContext.Provider>
   )

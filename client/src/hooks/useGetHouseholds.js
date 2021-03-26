@@ -25,7 +25,7 @@ const useGetHouseholds = () => {
 
     fetchData();
     return () => {
-      console.log('I did unmount');
+     // console.log('I did unmount');
     }; 
     
   }, []);

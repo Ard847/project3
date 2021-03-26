@@ -12,7 +12,7 @@ import fetcher from '../functions/fetcher';
 
 const LeaveHousehold = ({match}) => {
 
-  console.log(match)
+  //console.log(match)
 
   const [ leaveHousehold , setLeaveHousehold ] = useState(false);
 
