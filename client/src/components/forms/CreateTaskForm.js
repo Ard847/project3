@@ -54,15 +54,11 @@ const CreateTaskForm = () => {
 
     const houseID = getSession('houseID')
     let token = getSession('token').split('"');
-    token = token[1];
-
-    // validation
-    
+    token = token[1]
 
     // console.log('taskData =', taskData);
-
-
-      console.log('all form is filled');
+    
+     
       const timings = await processToDays(taskData);
       // console.log('timings =', timings);
 
@@ -70,11 +66,21 @@ const CreateTaskForm = () => {
         name: taskData.name,
         timings: timings,
       }
+    // validation 
+    //console.log(taskData.repeat)
+    if(body.name === '' || body.timings.alert === '' || body.timings.complete === '' || body.timings.duration === '' || 
+       body.timingsrepeat === '' || taskData.duration.unit === ''  || taskData.repeat.unit === '' || taskData.alert.unit  === '' || taskData.complete.unit === ''){
+      setisFieldEmpty(true)
+      return
+    }
+
+    //console.log('all form is filled');
 
       const url = `/api/task/createNew/${houseID}`;
       const createTaskResponse = await fetcher(url, 'POST', body, token);
-      console.log('createTaskResponse =', createTaskResponse);
+      //console.log('createTaskResponse =', createTaskResponse);
       if (createTaskResponse.message === 'success') {
+        setisFieldEmpty(false)
         setCreateNewSuccess(true);
         setTimeout(() => {
           setCreateNewSuccess(false);
@@ -88,9 +94,6 @@ const CreateTaskForm = () => {
           setCreateNewError(false);
         }, 2000);
       }
-
-    
-
   }
 
   const handleRadioInput = (event) => {
