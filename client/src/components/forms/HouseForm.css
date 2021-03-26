@@ -1,3 +1,8 @@
+div#create-household {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
 
 input.house-name{
     margin: 10px auto;
@@ -7,6 +12,7 @@ input.house-name{
 form.create-household {
     width: 300px;
     margin-bottom: 20px;
+    justify-content: center;
 }
 
 div.file-upload {

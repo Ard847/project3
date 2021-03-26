@@ -122,8 +122,8 @@ const HouseForm = ({ userID, type }) => {
         <button onClick={joinExistingHousehold} ><FontAwesomeIcon className="dash-icon" icon={faSignInAlt} /> Join </button>
       )}
 
-      {houseCreated && <p>Household created, go back to households to enter the manager. </p>}
-      {houseJoined && <p>Household Joined, go back to households to enter the manager. </p>}
+      {houseCreated && <p className='success text-centre'>Household created, go back to households to enter the manager. </p>}
+      {houseJoined && <p className='success text-centre'>Household Joined, go back to households to enter the manager. </p>}
     </form>
   )
 

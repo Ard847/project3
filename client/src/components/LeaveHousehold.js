@@ -33,7 +33,7 @@ const LeaveHousehold = ({match}) => {
   }
 
   if (leaveHousehold){
-    return (<Redirect from={`${match.url}`} to={`/home/${userID}`} />);
+    return (<Redirect from={`${match.url}`} to={`/login/${userID}`} />);
     
   } else {
     return (
