@@ -1,5 +1,5 @@
 // packages
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Route } from 'react-router-dom';
 // styles
 import './DashApp.css';

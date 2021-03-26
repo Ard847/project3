@@ -37,7 +37,16 @@ const CreateTaskForm = () => {
       unit: '',
     },
   });
+  const [createNewSuccess, setCreateNewSuccess] = useState(false);
+  const [createNewError, setCreateNewError] = useState(false);
+  const [isFieldEmpty, setisFieldEmpty] = useState(false);
 
+  const handleReset = async (event) => {
+    event.stopPropagation();
+    setCreateNewSuccess(false);
+    setCreateNewError(false);
+    setisFieldEmpty(false);
+  }
   const handleSubmit = async (event) => {
     event.preventDefault();
     event.stopPropagation();
@@ -47,21 +56,41 @@ const CreateTaskForm = () => {
     let token = getSession('token').split('"');
     token = token[1];
 
+    // validation
+    
+
     // console.log('taskData =', taskData);
-    const timings = await processToDays(taskData);
-    // console.log('timings =', timings);
 
-    const body = {
-      name: taskData.name,
-      timings: timings,
-    }
 
-    const url = `/api/task/createNew/${houseID}`;
-    const createTaskResponse = await fetcher(url, 'POST', body, token);
-    // console.log('createTaskResponse =', createTaskResponse);
-    if (createTaskResponse.message === 'success'){
-      refreshTasks();
-    }
+      console.log('all form is filled');
+      const timings = await processToDays(taskData);
+      // console.log('timings =', timings);
+
+      const body = {
+        name: taskData.name,
+        timings: timings,
+      }
+
+      const url = `/api/task/createNew/${houseID}`;
+      const createTaskResponse = await fetcher(url, 'POST', body, token);
+      console.log('createTaskResponse =', createTaskResponse);
+      if (createTaskResponse.message === 'success') {
+        setCreateNewSuccess(true);
+        setTimeout(() => {
+          setCreateNewSuccess(false);
+        }, 2000);
+        refreshTasks();
+      }
+      if (createTaskResponse.message === 'error') {
+        refreshTasks();
+        setCreateNewError(true);
+        setTimeout(() => {
+          setCreateNewError(false);
+        }, 2000);
+      }
+
+    
+
   }
 
   const handleRadioInput = (event) => {
@@ -108,29 +137,29 @@ const CreateTaskForm = () => {
   const handleNumberInput = (event) => {
     const target = event.target;
     // console.log('target =', target);
-    if(target.name === 'duration'){
-      let newTaskData = {...taskData}
+    if (target.name === 'duration') {
+      let newTaskData = { ...taskData }
       newTaskData.duration.time = target.value;
       // console.log('newTaskData =',newTaskData);
       setTaskData(newTaskData);
     }
 
-    if(target.name === 'repeat'){
-      let newTaskData = {...taskData}
+    if (target.name === 'repeat') {
+      let newTaskData = { ...taskData }
       newTaskData.repeat.time = target.value;
       // console.log('newTaskData =',newTaskData);
       setTaskData(newTaskData);
     }
 
-    if(target.name === 'alert'){
-      let newTaskData = {...taskData}
+    if (target.name === 'alert') {
+      let newTaskData = { ...taskData }
       newTaskData.alert.time = target.value;
       // console.log('newTaskData =',newTaskData);
       setTaskData(newTaskData);
     }
 
-    if(target.name === 'complete'){
-      let newTaskData = {...taskData}
+    if (target.name === 'complete') {
+      let newTaskData = { ...taskData }
       newTaskData.complete.time = target.value;
       // console.log('newTaskData =',newTaskData);
       setTaskData(newTaskData);
@@ -287,7 +316,17 @@ const CreateTaskForm = () => {
       </div>
 
       <input className="input-submit" type='submit' onClick={handleSubmit} />
-      <input className="input-submit" type='reset' />
+      <input className="input-submit" type='reset' onClick={handleReset}/>
+
+      {createNewSuccess && (
+        <p className='success text-centre'>Task Created!</p>
+      )}
+      {createNewError && (
+        <p className='error text-centre'>Whoops Something went wrong.</p>
+      )}
+      {isFieldEmpty && (
+        <p className="error text-center" >Please fill every empty field</p>
+      )}
 
     </form>
   );

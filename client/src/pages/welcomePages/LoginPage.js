@@ -60,14 +60,8 @@ const LoginPage = () => {
         <LogInTitles />
         <section>
           <article id='login-content'>
-            <AccountForm type={'login'} onSubmit={handleSubmit} />
-            {userNoMatch && (
-              <p
-                className="error-login-msg text-center"
-              >
-                The credentials do not match any users!
-              </p>
-            )}
+            <AccountForm type={'login'} onSubmit={handleSubmit} userNoMatch={userNoMatch} />
+            
           </article>
         </section>
       </>
