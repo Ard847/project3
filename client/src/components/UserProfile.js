@@ -1,5 +1,5 @@
 // packages
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 // styles
 import './UserProfile.css';
 //font awesome packages
@@ -13,6 +13,8 @@ import fetcher from '../functions/fetcher';
 import getSession from '../functions/getSession';
 // hooks
 import useGetImages from '../hooks/useGetImages';
+// context
+import MembersContext from '../context/MembersContext';
 //cloudinary
 import { Image } from 'cloudinary-react';
 
@@ -28,6 +30,8 @@ const UserProfile = ({refresh}) => {
   token = token[1];
   const userID = getSession('id');
   const houseID = getSession('houseID');
+
+  const { refreshMembers } = useContext(MembersContext);
 
   // state
   const [userPreviewSource, setUserPreviewSource] = useState('');
@@ -48,7 +52,7 @@ const UserProfile = ({refresh}) => {
       // console.log('fetch =', fetch);
       if (fetch.message === 'success'){
         // console.log('success');
-        refresh();
+        refreshMembers();
       }
     } catch (e) {
       console.log("error image", e);

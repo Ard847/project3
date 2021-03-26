@@ -287,7 +287,7 @@ const EditTask = ({ task, refresh }) => {
       </div>
 
       <div id='completeBy-date' >
-        <label htmlFor='completeBy-date-input'><span className='ETF-lable' > Deadline tollerance </span>
+        <label htmlFor='completeBy-date-input'><span className='ETF-lable' > Deadline tolerance </span>
         <input
             type='number'
             id='completeBy-date-input'
