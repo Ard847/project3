@@ -6,28 +6,28 @@ const getPriority = (task) => {
   endDate.setDate(endDate.getDate() + Number(task.completeBy));
   const startDate = new Date(task.nextDate);
   startDate.setDate(startDate.getDate() - Number(task.alertBefore));
-  
-  if (task.nextDate === null){
+
+  if (task.nextDate === null) {
     return {
       'backgroundColor': 'unset',
-      'borderRadius': '5px',
-      'padding': '3px 6px',
+      'borderRadius': '12px',
+      'padding': '3px 12px',
     }
   }
 
-  if(task.status === 'complete'){
+  if (task.status === 'complete') {
     return {
       'backgroundColor': 'rgba(8, 243, 125, 0.5)',
-      'borderRadius': '5px',
-      'padding': '3px 6px',
+      'borderRadius': '12px',
+      'padding': '3px 12px',
     }
   }
 
-  if ((todayDate < startDate ) || (todayDate > endDate && task.status === 'complete' )){
+  if ((todayDate < startDate) || (todayDate > endDate && task.status === 'complete')) {
     return {
       'backgroundColor': 'unset',
-      'borderRadius': '5px',
-      'padding': '3px 6px',
+      'borderRadius': '12px',
+      'padding': '3px 12px',
     }
   }
 
@@ -35,13 +35,13 @@ const getPriority = (task) => {
   if (endDate < todayDate) {
     return {
       'backgroundColor': 'rgba(243, 40, 26, 0.5)',
-      'borderRadius': '5px',
-      'padding': '3px 6px',
+      'borderRadius': '12px',
+      'padding': '3px 12px',
     }
   }
 
-  if ( endDate > todayDate && task.status !== 'complete') {
-    
+  if (endDate > todayDate && task.status !== 'complete') {
+
     const currentRange = Math.floor((todayDate - startDate) / (1000 * 3600 * 24));
     // console.log('currentRange =', currentRange);
     const fullRange = Math.floor((endDate - startDate) / (1000 * 3600 * 24));
@@ -49,45 +49,45 @@ const getPriority = (task) => {
 
     const rangePercentage = currentRange / fullRange;
     // green
-    if( rangePercentage <= 0.2){
+    if (rangePercentage <= 0.2) {
       return {
         'backgroundColor': 'rgba(8, 243, 39, 0.5)',
-        'borderRadius': '5px',
-        'padding': '3px 6px',
+        'borderRadius': '12px',
+        'padding': '3px 12px',
       }
     }
     // yellow/green 
-    if( rangePercentage > 0.2 && rangePercentage <= 0.4){
+    if (rangePercentage > 0.2 && rangePercentage <= 0.4) {
       return {
         'backgroundColor': 'rgba(161, 243, 8, 0.5)',
-        'borderRadius': '5px',
-        'padding': '3px 6px',
+        'borderRadius': '12px',
+        'padding': '3px 12px',
       }
     }
     // yellow
-    if( rangePercentage > 0.4 && rangePercentage <= 0.6){
+    if (rangePercentage > 0.4 && rangePercentage <= 0.6) {
       return {
         'backgroundColor': 'rgba(243, 239, 8, 0.5)',
-        'borderRadius': '5px',
-        'padding': '3px 6px',
+        'borderRadius': '12px',
+        'padding': '3px 12px',
       }
     }
     // orange 
-    if( rangePercentage > 0.6 && rangePercentage <= 0.8){
+    if (rangePercentage > 0.6 && rangePercentage <= 0.8) {
       return {
         'backgroundColor': 'rgba(248, 180, 34, 0.5)',
-        'borderRadius': '5px',
-        'padding': '3px 6px',
+        'borderRadius': '12px',
+        'padding': '3px 12px',
       }
     }
     // red/orange 
-      if( rangePercentage > 0.8){
-        return {
-          'backgroundColor': 'rgba(248, 120, 34, 0.5)',
-          'borderRadius': '5px',
-          'padding': '3px 6px',
-        }
+    if (rangePercentage > 0.8) {
+      return {
+        'backgroundColor': 'rgba(248, 120, 34, 0.5)',
+        'borderRadius': '12px',
+        'padding': '3px 12px',
       }
+    }
   }
 }
 

@@ -6,6 +6,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import './Kanban.css';
 // context
 import TaskContext from '../../context/TaskContext';
+import MembersContext from '../../context/MembersContext';
 // components
 import KanbanBoard from './KanbanBoard';
 import Card from './Card';
@@ -13,7 +14,7 @@ import Modal from '../Modal';
 import Clock from '../Clock';
 import EditTask from '../EditTask';
 // hooks
-import useGetMembers from '../../hooks/useGetMembers';
+// import useGetMembers from '../../hooks/useGetMembers';
 // functions
 import getSession from '../../functions/getSession';
 import fetcher from '../../functions/fetcher';
@@ -29,7 +30,7 @@ const Kanban = () => {
   const [ filteredTasks, setFilteredTasks ] = useState([]);
   const [ completedTasks, setCompletedTasks ] = useState([]);
 
-  const members = useGetMembers('kanban');
+  const {members} = useContext(MembersContext);
   // console.log('members kanban =', members);
 
   useEffect(() => {
