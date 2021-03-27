@@ -34,7 +34,7 @@ const DashHome = ({ match }) => {
   // const [tasks, refreshTasks] = useGetTasks();
   // context -----------------------------------------------------------------
   const { tasks, refreshTasks } = useContext(TaskContext);
-  const { members,refreshMembers,userImage,setUserImage } = useContext(MembersContext);
+  const { members, refreshMembers } = useContext(MembersContext);
   // console.log('members =', members );
   // state --------------------------------------------------------------------
   const [showInviteButton, setShowInviteButton] = useState(true);
@@ -161,9 +161,7 @@ const DashHome = ({ match }) => {
     refreshTasks(taskID, newStatus);
   }
 
-  useEffect(() => {
-    refreshTasks();    
-  }, [refreshTasks]);
+
 
   // render ------------------------------------------------------------------------
   return (

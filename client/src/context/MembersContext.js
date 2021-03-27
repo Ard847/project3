@@ -1,22 +1,17 @@
 // packages
-import { useState, createContext, useEffect, useContext, useCallback } from 'react';
+import { useState, createContext, useEffect, useCallback } from 'react';
 
 // functions
 import getSession from '../functions/getSession';
 import fetcher from '../functions/fetcher';
-// context
-import LoggedInContext from './LoggedInContext';
 
 // create context 
 const MembersContext = createContext();
 
-
 const MembersContextProvider = ({ children }) => {
 
   const [members, setMembers] = useState([]);
-  const [userImage,setUserImage] = useState(true);
-  // const [ houseID , setHouseID ] = useState('');
-  const { loggedIn } = useContext(LoggedInContext);
+
   const houseID = getSession('houseID');
   // console.log('houseID', houseID);
 
@@ -31,14 +26,11 @@ const MembersContextProvider = ({ children }) => {
       // console.log(`userResponse called =`, userResponse);
       if (userResponse.message === 'success') {
         setMembers(userResponse.members);
-
       } else {
         setMembers([]);
       }
     }
-
   }, [houseID]);
-
 
 
   const refreshMembers = () => {
@@ -46,25 +38,20 @@ const MembersContextProvider = ({ children }) => {
     fetchData();
   }
 
+
   useEffect(() => {
-    if(loggedIn){
-      setTimeout(() => {window.location.reload() }, 3000);
+    if(houseID !== null){
+      fetchData();
+      return () => {
+        //console.log(`I did unmount`);
+      };
     }
-  }, [userImage]);
-
-  useEffect(() => {
-    fetchData();
-    
-    return () => {
-      //console.log(`I did unmount`);
-    };
-
-  },[fetchData]);
+  },[fetchData, houseID]);
 
   // console.log('membersContext members =', members);
 
   return (
-    <MembersContext.Provider value={{ members, refreshMembers, userImage, setUserImage }}>
+    <MembersContext.Provider value={{ members, refreshMembers }}>
       {children}
     </MembersContext.Provider>
   )

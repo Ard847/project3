@@ -1,7 +1,13 @@
 const getSession = (key) => {
   const sessionData = sessionStorage.getItem(key);
-  // console.log('sessionData', sessionData);
-  return sessionData;
+  if(key ==='id'){
+    return parseInt(sessionData);
+    
+  } else {
+    // console.log('sessionData', sessionData);
+    return sessionData;
+
+  }
 }
 
 export default getSession;

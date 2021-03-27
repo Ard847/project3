@@ -18,46 +18,34 @@ import MembersContext from '../context/MembersContext';
 //cloudinary
 import { Image } from 'cloudinary-react';
 
-
-const UserProfile = () => {
-  const { members, refreshMembers, userImage, setUserImage } = useContext(MembersContext);
+const UserProfile = ({refresh}) => {
   // hooks
   const currentImage = useGetImages();
   // console.log('currentImage =', currentImage);
-
   // variables
   let token = getSession('token').split('"');
   token = token[1];
   const userID = getSession('id');
   const houseID = getSession('houseID');
-  
-  
+
+  const { refreshMembers } = useContext(MembersContext);
+
   // state
   const [userPreviewSource, setUserPreviewSource] = useState('');
   const [housePreviewSource, setHousePreviewSource] = useState('');
   const [imageIds, setImageIds] = useState('');
-  const [userImageUpdate,setUserImageUpdate] = useState(false);
-  const [hasImageUser, sethasImageUser] = useState(true);
-  const [houseImageUpdate,sethouseImageUpdate] = useState(false);
-  const [hasImageHouse, sethasImageHouse] = useState(true);
-
+  const [colour, setColourInput] = useState('');
+  const [colourUpdateSuccess, setColourUpdateSuccess] = useState(false);
+  const [houseUpdateSuccess, setHouseUpdateSuccess] = useState(false);
+  // console.log('housePreviewSource =', housePreviewSource);
   const uploadUserImage = async (base64EncodedImage) => {
     //console.log(base64EncodedImage);
-    if(base64EncodedImage === ''){
-      sethasImageUser(false);
-      return;
-    }
-    sethasImageUser(true);
-    
     try {
       const url = '/api/images/upload/user';
       const body = {
-        data : base64EncodedImage,
+        data: base64EncodedImage,
         id: userID,
       };
-      setUserImage((state) => !state);
-      setUserImageUpdate(true)
-      //window.location.reload();
       const fetch = await fetcher(url, 'PUT', body, token);
       // console.log('fetch =', fetch);
       if (fetch.message === 'success'){
@@ -68,33 +56,31 @@ const UserProfile = () => {
       console.log("error image", e);
     }
   };
-
   const uploadHouseImage = async (base64EncodedImage) => {
     //console.log(base64EncodedImage);
-    if(base64EncodedImage === ''){
-      sethasImageHouse(false);
-      return;
-    }
-    sethasImageHouse(true)
     try {
       const url = '/api/images/upload/house';
       const body = {
         data: base64EncodedImage,
         id: houseID,
       };
-      sethouseImageUpdate(true)
-      await fetcher(url, 'PUT', body, token);
+      const fetch = await fetcher(url, 'PUT', body, token);
+      if (fetch.message === 'success'){
+        refresh();
+        setHouseUpdateSuccess(true);
+        setTimeout(() => {
+          setHouseUpdateSuccess(false);
+        }, 3000);
+      }
     } catch (e) {
       console.log("error image", e);
     }
   };
-
   const handleSubmitUserFile = (e) => {
     e.preventDefault();
     e.stopPropagation();
     uploadUserImage(userPreviewSource);
   };
-
   const previewUserFile = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file)
@@ -114,6 +100,21 @@ const UserProfile = () => {
     uploadHouseImage(housePreviewSource);
   };
 
+  const handleColourChangeSave = async (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    console.log(colour);
+    const body = {colour: colour};
+    const updateColourResponse = await fetcher(`api/user/colour/${userID}`, 'PUT', body, token);
+    // console.log('updateColourResponse =', updateColourResponse);
+    if(updateColourResponse.message === 'success'){
+      setColourUpdateSuccess(true);
+        setTimeout(() => {
+          setColourUpdateSuccess(false);
+        }, 3000);
+    }
+  }
+
   const previewHouseFile = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file)
@@ -127,19 +128,40 @@ const UserProfile = () => {
     previewHouseFile(file);
   }
 
+  const colourInputChange = (event) => {
+    // console.log('event.target.value =', event.target.value);
+    setColourInput(event.target.value);
+  }
+
   useEffect(() => {
     const fetchImages = async () => {
       const response = await fetcher(`/api/images/household/${houseID}`, 'GET', '', token);
-      setImageIds(response);
+      // console.log('fetch images response =', response);
+      setImageIds(response[0]);
     }
     fetchImages();
-  }, [userID, token]);
+  }, [userID, token, houseID]);
+
+  useEffect(() => {
+    const fetchColour = async () => {
+      const response = await fetcher(`/api/user/colour/${userID}`, 'GET', '', token);
+      // console.log('response =', response);
+      if(response.message === 'success'){
+        setColourInput(response.colour);
+        
+      }
+    }
+    fetchColour();
+  }, [userID, token ]);
+
+
+  useEffect(() => {refreshMembers()}, [refreshMembers]);
+
 
   return (
     <div id='user-profile-content'>
       <article id='profile-1'>
         <h3> User Profile </h3>
-
         {(userPreviewSource !== '')
           ? (
             <img
@@ -147,7 +169,7 @@ const UserProfile = () => {
               src={userPreviewSource}
               alt="user"
             />
-          ) : (currentImage !== null ?
+          ) : (currentImage ?
             <Image
               key={userID}
               className='user-img'
@@ -163,43 +185,54 @@ const UserProfile = () => {
             />
           )
         }
-
         <form className='profile-form' onSubmit={handleSubmitUserFile}>
-          <input id='update-user-image' className="chooseFile" type="file" name="image" onChange={handleUserFileInputChange} hidden/>
+          <input id='update-user-image' className="chooseFile" type="file" name="image" onChange={handleUserFileInputChange} hidden />
           <label className='hover' htmlFor='update-user-image' ><FontAwesomeIcon className="dash-icon" icon={faCamera} />Upload image</label>
           <button className='profile-image-btn' type="submit">Save Profile Image</button>
-          {hasImageUser && userImageUpdate && (<p className='success text-centre'>Your image was updated and this page will refresh</p>) }
-          {hasImageUser === false &&  (<p className='error text-centre'>Please upload an image</p>) }
+          <input
+                  id='colour-update'
+                  className="inputBox"
+                  type='color'
+                  onChange={colourInputChange}
+                  value={colour}
+                />
+                <button className='profile-image-btn' onClick={handleColourChangeSave} >Save Profile Colour</button>
         </form>
-
       </article>
       <article id='profile-2'>
         <h3> House Profile </h3>
-
-        {imageIds && (imageIds[0] === null || housePreviewSource !== '')
+        {(housePreviewSource !== '')
           ? (
             <img
               className='household-img'
-              src={housePreviewSource === '' ? {house} :housePreviewSource}
-              alt='generic house'
+              src={housePreviewSource}
+              alt="house"
             />
-          ) : (<Image
-            cloudName='dii2emagu'
-            publicId={imageIds && imageIds.length > 0 ? imageIds[0] : imageIds}
-            className='household-img'
-          />)}
-
+          ) : (imageIds ?
+            <Image
+              key={houseID}
+              className='household-img'
+              cloudName='dii2emagu'
+              alt='placeholder'
+              publicID={imageIds}
+            />
+            :
+            <img
+              className='household-img'
+              src={house}
+              alt="generic house"
+            />
+          )
+        }
         <form className='profile-form' onSubmit={handleSubmitHouseFile}>
-          <input id='update-household-image' className="chooseFile" type="file" name="image" onChange={handleHouseFileInputChange} hidden/>
+          <input id='update-household-image' className="chooseFile" type="file" name="image" onChange={handleHouseFileInputChange} hidden />
           <label htmlFor='update-household-image' ><FontAwesomeIcon className="dash-icon" icon={faCamera} />Upload Image</label>
           <button className='profile-image-btn' type="submit">Save House Image</button>
-          {hasImageHouse && houseImageUpdate && (<p className='success text-centre'>Your house image was successfully updated</p>) }
-          {hasImageHouse === false &&  (<p className='error text-centre'>Please upload an image</p>) }
         </form>
+        {colourUpdateSuccess && <p className='success text-centre'>Your Colour has been updated</p> }
+        {houseUpdateSuccess && <p className='success text-centre'>Your House Image has been updated</p> }
       </article>
-
     </div>
   );
 }
-
 export default UserProfile;

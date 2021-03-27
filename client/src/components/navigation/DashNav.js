@@ -12,8 +12,6 @@ import { faCalendar, faTasks, faUser, faThumbtack } from "@fortawesome/free-soli
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // functions
 import getSession from '../../functions/getSession';
-// hooks
-import useGetImages from '../../hooks/useGetImages';
 // context
 import MembersContext from '../../context/MembersContext';
 //cloudinary
@@ -25,10 +23,10 @@ const DashNav = ({ match, toggelModal, toggelProfile }) => {
   // console.log('match dash nav =', match);
 
   const { isMobileDevice, isSmallScreen, isTabletDevice } = useContext(MediaContext);
-  const { members, refreshMembers, userImage  } = useContext(MembersContext);
+  const { members } = useContext(MembersContext);
   const content = useRef(null);
 
-  //console.log('members =', members);
+  // console.log('members dash nav =', members);
   const userID = getSession('id');
 
 
@@ -37,12 +35,11 @@ const DashNav = ({ match, toggelModal, toggelProfile }) => {
   const [activeStyle, setActiveStyle] = useState('');
   const [contentWidth, setContentWidth] = useState('0px');
   const [currentUser, setCurrentUser] = useState({});
-  // const [imageString, setImageString] = useState('');
+  const [imageString, setImageString] = useState('');
   // console.log('activeState =', activeState);
   // console.log('activeStyle =', activeStyle);
   // console.log('contentWidth =', contentWidth);
   //console.log('currentuser =', currentUser);
-  const imageString = useGetImages();
 
   let navAttr;
   if (isTabletDevice || isSmallScreen || isMobileDevice) {
@@ -82,17 +79,21 @@ const DashNav = ({ match, toggelModal, toggelProfile }) => {
   }
 
   useEffect(() => {
-    const fetchUser = async () => {
-      const user = await members.find(member => member.id === userID);
-      //console.log('current user');
+    
+    if(members !== null){
+      const user = members.find(member => member.id === userID);
+      // console.log('current user');
+      // console.log('userID =', userID , typeof userID);
       // console.log('user =', user );
-      //console.log('user =', user );
-      // console.log('user.id =', user.id );
+      if(user){
+        // console.log('user.image =', user.image );
+        setImageString(user.image);
+      }
       setCurrentUser(user);
-      // setImageString(user.image);
+
     }
-    fetchUser();
-  }, [members, userImage]);
+    
+  }, [members, userID]);
 
   return (<>
 
