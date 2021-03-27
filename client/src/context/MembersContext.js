@@ -15,7 +15,6 @@ const MembersContextProvider = ({ children }) => {
 
   const [members, setMembers] = useState([]);
   const [userImage,setUserImage] = useState(true);
-  const [imageChange,setChangeImage] = useState(false);
   // const [ houseID , setHouseID ] = useState('');
   const { loggedIn } = useContext(LoggedInContext);
   const houseID = getSession('houseID');
@@ -51,7 +50,6 @@ const MembersContextProvider = ({ children }) => {
     if(loggedIn){
       setTimeout(() => {window.location.reload() }, 3000);
     }
-   
   }, [userImage]);
 
   useEffect(() => {
@@ -63,11 +61,10 @@ const MembersContextProvider = ({ children }) => {
 
   },[fetchData]);
 
-  
   // console.log('membersContext members =', members);
 
   return (
-    <MembersContext.Provider value={{ members, refreshMembers, userImage, setUserImage/* , refresh */ }}>
+    <MembersContext.Provider value={{ members, refreshMembers, userImage, setUserImage }}>
       {children}
     </MembersContext.Provider>
   )

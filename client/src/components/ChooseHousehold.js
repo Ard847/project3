@@ -59,7 +59,9 @@ const ChooseHouse = () => {
                   to={{
                     pathname: `/dashboard/${id}/${household.id}`,
                     aboutProps: { houseName: household.houseName },
-                  }} >
+                  }} 
+                  >
+                  
                   {imageIds === '' || (imageIds[index] === null)
                     ? (
                       <img
