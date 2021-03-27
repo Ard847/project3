@@ -31,6 +31,7 @@ const UserProfile = () => {
   const userID = getSession('id');
   const houseID = getSession('houseID');
   
+  
   // state
   const [userPreviewSource, setUserPreviewSource] = useState('');
   const [housePreviewSource, setHousePreviewSource] = useState('');
@@ -46,7 +47,7 @@ const UserProfile = () => {
       sethasImageUser(false);
       return;
     }
-    sethasImageUser(true)
+    sethasImageUser(true);
     
     try {
       const url = '/api/images/upload/user';
@@ -81,7 +82,7 @@ const UserProfile = () => {
         data: base64EncodedImage,
         id: houseID,
       };
-      sethasImageHouse(true)
+      sethouseImageUpdate(true)
       await fetcher(url, 'PUT', body, token);
     } catch (e) {
       console.log("error image", e);
@@ -128,7 +129,7 @@ const UserProfile = () => {
 
   useEffect(() => {
     const fetchImages = async () => {
-      const response = await fetcher(`/api/images/household/${userID}`, 'GET', '', token);
+      const response = await fetcher(`/api/images/household/${houseID}`, 'GET', '', token);
       setImageIds(response);
     }
     fetchImages();
