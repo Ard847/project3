@@ -5,7 +5,6 @@ div.list-container > div {
 }
 
 .list-title {
-  /*background-color: var(--grey);*/
   border-bottom: 2px #fa853c9a solid;
   margin-top: 0;
   text-align: center;

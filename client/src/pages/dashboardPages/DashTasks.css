@@ -3,7 +3,6 @@ div#dash-tasks-content {
   grid-template-columns: 1fr ;
   grid-template-rows: 64px auto;
   row-gap: 12px;
-
   padding: 12px;
   height: 100%;
 }
