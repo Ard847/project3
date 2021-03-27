@@ -54,9 +54,9 @@ const DashApp = ({ match, location }) => {
     setModalProfile(false);
   }
 
-  useEffect(() => {
-    refreshMembers();
-  }, []);
+  // useEffect(() => {
+  //   refreshMembers();
+  // }, [refreshMembers]);
 
   // console.log('match.url =', match.url);
   return (

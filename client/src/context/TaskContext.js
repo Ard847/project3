@@ -17,9 +17,11 @@ const TaskContextProvider = ({children}) => {
 
   const [ tasks, setTasks] = useState([]);
   const { loggedIn } = useContext(LoggedInContext);
+
+  const houseID = getSession('houseID');
   
   const fetchData = useCallback(async () => {
-      if(loggedIn){
+      if(loggedIn && houseID !== null){
       const houseID = getSession('houseID');
       let token = getSession('token').split('"');
       token = token[1];
@@ -29,7 +31,7 @@ const TaskContextProvider = ({children}) => {
       checkTaskStatus(tasksResponse.data);
       setTasks(tasksResponse.data);
     }
-  }, [loggedIn]);
+  }, [loggedIn, houseID]);
 
   const refreshTasks = (taskID, newStatus) => {
     // console.log('refreshing');
@@ -52,12 +54,14 @@ const TaskContextProvider = ({children}) => {
   
   useEffect(() => {
 
-    fetchData();
-    return () => {
-      //console.log('I did unmount');
-    };
+    if(houseID !== null ){
+      fetchData();
+      return () => {
+        //console.log('I did unmount');
+      };
+    }
 
-  }, [fetchData]);
+  }, [fetchData, houseID]);
 
   return (
     <TaskContext.Provider value={{ tasks, refreshTasks }}>

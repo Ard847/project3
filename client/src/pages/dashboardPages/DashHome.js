@@ -34,7 +34,7 @@ const DashHome = ({ match }) => {
   // const [tasks, refreshTasks] = useGetTasks();
   // context -----------------------------------------------------------------
   const { tasks, refreshTasks } = useContext(TaskContext);
-  const { members,refreshMembers,userImage,setUserImage } = useContext(MembersContext);
+  const { members, refreshMembers } = useContext(MembersContext);
   // console.log('members =', members );
   // state --------------------------------------------------------------------
   const [showInviteButton, setShowInviteButton] = useState(true);
@@ -68,6 +68,7 @@ const DashHome = ({ match }) => {
   const handleCloseModal = () => {
     setModalOpen(false);
   }
+
   //Fetch user images
   useEffect(() => {
     const fetchImages = async () => {
@@ -77,6 +78,7 @@ const DashHome = ({ match }) => {
     }
     fetchImages();
   }, [token, userID, houseID, ]);
+
   // list data ----------------------------------------------------------------
   useEffect(() => {
     let todaysTaskData = [];
@@ -159,9 +161,8 @@ const DashHome = ({ match }) => {
     refreshTasks(taskID, newStatus);
   }
 
-  useEffect(() => {
-    refreshTasks();    
-  }, []);
+
+
   // render ------------------------------------------------------------------------
   return (
     <div id='dash-home-content'>

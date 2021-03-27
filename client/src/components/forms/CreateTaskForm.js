@@ -58,7 +58,6 @@ const CreateTaskForm = () => {
 
     // console.log('taskData =', taskData);
 
-
       // console.log('all form is filled');
       const timings = await processToDays(taskData);
       // console.log('timings =', timings);
