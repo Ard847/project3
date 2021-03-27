@@ -109,7 +109,15 @@ We have used:
 
 ## Final Project 
 
-INSERT SCREEN SHOTS AND DEPLOYMENT LINK HERE
+![Screenshot1](./client/public/assets/screenshothome.png)
+![Screenshot2](./client/public/assets/screenshotabout.png)
+![Screenshot3](./client/public/assets/screenshotinstructions.png)
+![Screenshot4](./client/public/assets/screenshotsignup.png)
+![Screenshot5](./client/public/assets/screenshotlogin.png)
+![Screenshot9](./client/public/assets/screenshothouseholds.png)
+![Screenshot6](./client/public/assets/screenshotdash.png)
+![Screenshot7](./client/public/assets/screenshotkanban.png)
+![Screenshot8](./client/public/assets/screenshottable.png)
 
 ## Instructions For Use
 
