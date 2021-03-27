@@ -23,23 +23,24 @@ const DashApp = ({ match, location }) => {
   // console.log('match =', match);
   // console.log('location =', location);
 
-  
   if (location.aboutProps) {
     saveToSession('houseName', location.aboutProps.houseName);
   }
-  
+
   // state
   const [modalOpen, setModalOpen] = useState(false);
   const [modalProfile, setModalProfile] = useState(false);
-  
+
   const { refreshMembers, handleHouseID } = useContext(MembersContext);
   const { taskHouseID } = useContext(TaskContext);
   // console.log(members);
   const houseID = parseInt(match.params.householdID);
   saveToSession('houseID', houseID);
-  handleHouseID(houseID);
-  taskHouseID(houseID);
-  // refreshMembers();
+
+  useEffect(() => {
+    handleHouseID(houseID);
+    taskHouseID(houseID);
+  }, [taskHouseID, handleHouseID, houseID])
 
   const handleToggelModal = () => {
     setModalOpen(true);
@@ -47,7 +48,7 @@ const DashApp = ({ match, location }) => {
 
   const handleCloseModal = () => {
     setModalOpen(false);
-    
+
   }
 
   const handleToggelProfile = () => {
@@ -59,14 +60,13 @@ const DashApp = ({ match, location }) => {
     setModalProfile(false);
   }
 
-
   // console.log('match.url =', match.url);
   return (
     <>
 
       <section id='dashboard-content'>
-        
-        <DashNav match={match} toggelModal={handleToggelModal} toggelProfile={handleToggelProfile}/>
+
+        <DashNav match={match} toggelModal={handleToggelModal} toggelProfile={handleToggelProfile} />
         <article id='dash-body'>
           <Route exact path={`${match.url}`} component={DashHome} />
           <Route exact path={`${match.url}/task-manager`} render={(props) => (
@@ -78,7 +78,7 @@ const DashApp = ({ match, location }) => {
       </section>
 
       {modalOpen && <Modal closeModal={handleCloseModal} ><CreateTaskForm /></Modal>}
-      {modalProfile && <Modal closeModal={handleCloseProfile} ><UserProfile refresh={() => refreshMembers()}/></Modal>}
+      {modalProfile && <Modal closeModal={handleCloseProfile} ><UserProfile refresh={() => refreshMembers()} /></Modal>}
 
     </>
   )

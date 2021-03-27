@@ -26,7 +26,7 @@ const DashNav = ({ match, toggelModal, toggelProfile }) => {
   const { members } = useContext(MembersContext);
   const content = useRef(null);
 
-  console.log('members dash nav =', members);
+  // console.log('members dash nav =', members);
   const userID = getSession('id');
 
 
@@ -82,9 +82,10 @@ const DashNav = ({ match, toggelModal, toggelProfile }) => {
     
     if(members !== null){
       const user = members.find(member => member.id === userID);
-      console.log('current user');
-      console.log('userID =', userID , typeof userID);
-      console.log('user =', user );
+      // console.log('current user');
+      // console.log('userID =', userID , typeof userID);
+      // console.log('user =', user );
+
       if(user){
         // console.log('user.image =', user.image );
         setImageString(user.image);
@@ -117,7 +118,7 @@ const DashNav = ({ match, toggelModal, toggelProfile }) => {
       className={navAttr.className}
     >
       <div id='user-profile'>
-        {imageString
+        {imageString !== ''
           ? <Image
             key={userID}
             cloudName='dii2emagu'

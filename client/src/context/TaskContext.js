@@ -65,7 +65,7 @@ const TaskContextProvider = ({children}) => {
       };
     }
 
-  }, [houseID]);
+  }, [houseID, fetchData]);
 
   return (
     <TaskContext.Provider value={{ tasks, refreshTasks, taskHouseID }}>

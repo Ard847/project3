@@ -34,7 +34,7 @@ const DashHome = ({ match }) => {
   // const [tasks, refreshTasks] = useGetTasks();
   // context -----------------------------------------------------------------
   const { tasks, refreshTasks } = useContext(TaskContext);
-  const { members, refreshMembers } = useContext(MembersContext);
+  const { members } = useContext(MembersContext);
   // console.log('members =', members );
   // state --------------------------------------------------------------------
   const [showInviteButton, setShowInviteButton] = useState(true);
