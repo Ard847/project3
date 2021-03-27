@@ -51,6 +51,7 @@ router.get('/household/:houseID', auth, async (req, res) => {
   try {
     const userHousehold = await householdModel.findHousehold(req.params.houseID);
     // console.log('userHousehold =', userHousehold);
+    if(userHousehold === null)res.send([null])
     res.send([userHousehold.image]);
 
   } catch (error) {
