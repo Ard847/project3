@@ -14,8 +14,9 @@ const MembersContext = createContext();
 const MembersContextProvider = ({ children }) => {
 
   const [members, setMembers] = useState([]);
+  const [userImage,setUserImage] = useState(true);
   // const [ houseID , setHouseID ] = useState('');
-  // const { loggedIn } = useContext(LoggedInContext);
+  const { loggedIn } = useContext(LoggedInContext);
   const houseID = getSession('houseID');
   // console.log('houseID', houseID);
 
@@ -38,26 +39,32 @@ const MembersContextProvider = ({ children }) => {
 
   }, [houseID]);
 
+
+
   const refreshMembers = () => {
     // console.log('refreshing');
     fetchData();
   }
 
   useEffect(() => {
+    if(loggedIn){
+      setTimeout(() => {window.location.reload() }, 3000);
+    }
+  }, [userImage]);
 
+  useEffect(() => {
     fetchData();
     
     return () => {
-      console.log(`I did unmount`);
+      //console.log(`I did unmount`);
     };
 
   },[fetchData]);
 
-  
   // console.log('membersContext members =', members);
 
   return (
-    <MembersContext.Provider value={{ members, refreshMembers }}>
+    <MembersContext.Provider value={{ members, refreshMembers, userImage, setUserImage }}>
       {children}
     </MembersContext.Provider>
   )

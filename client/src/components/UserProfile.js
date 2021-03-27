@@ -19,8 +19,8 @@ import MembersContext from '../context/MembersContext';
 import { Image } from 'cloudinary-react';
 
 
-const UserProfile = ({refresh}) => {
-
+const UserProfile = () => {
+  const { members,refreshMembers,userImage,setUserImage } = useContext(MembersContext);
   // hooks
   const currentImage = useGetImages();
   // console.log('currentImage =', currentImage);
@@ -30,24 +30,34 @@ const UserProfile = ({refresh}) => {
   token = token[1];
   const userID = getSession('id');
   const houseID = getSession('houseID');
-
-  const { refreshMembers } = useContext(MembersContext);
-
+  
+  
   // state
   const [userPreviewSource, setUserPreviewSource] = useState('');
   const [housePreviewSource, setHousePreviewSource] = useState('');
   const [imageIds, setImageIds] = useState('');
-  const [colour, setColourInput] = useState('');
-  // console.log('housePreviewSource =', housePreviewSource);
+  const [userImageUpdate,setUserImageUpdate] = useState(false);
+  const [hasImageUser, sethasImageUser] = useState(true);
+  const [houseImageUpdate,sethouseImageUpdate] = useState(false);
+  const [hasImageHouse, sethasImageHouse] = useState(true);
 
   const uploadUserImage = async (base64EncodedImage) => {
     //console.log(base64EncodedImage);
+    if(base64EncodedImage === ''){
+      sethasImageUser(false);
+      return;
+    }
+    sethasImageUser(true);
+    
     try {
       const url = '/api/images/upload/user';
       const body = {
-        data: base64EncodedImage,
+        data : base64EncodedImage,
         id: userID,
       };
+      setUserImage((state) => !state);
+      setUserImageUpdate(true)
+      //window.location.reload();
       const fetch = await fetcher(url, 'PUT', body, token);
       // console.log('fetch =', fetch);
       if (fetch.message === 'success'){
@@ -61,16 +71,19 @@ const UserProfile = ({refresh}) => {
 
   const uploadHouseImage = async (base64EncodedImage) => {
     //console.log(base64EncodedImage);
+    if(base64EncodedImage === ''){
+      sethasImageHouse(false);
+      return;
+    }
+    sethasImageHouse(true)
     try {
       const url = '/api/images/upload/house';
       const body = {
         data: base64EncodedImage,
         id: houseID,
       };
-      const fetch = await fetcher(url, 'PUT', body, token);
-      if (fetch.message === 'success'){
-        refresh();
-      }
+      sethouseImageUpdate(true)
+      await fetcher(url, 'PUT', body, token);
     } catch (e) {
       console.log("error image", e);
     }
@@ -101,16 +114,6 @@ const UserProfile = ({refresh}) => {
     uploadHouseImage(housePreviewSource);
   };
 
-  const handleColourChangeSave = async (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    console.log(colour);
-    const body = {colour: colour};
-    // const updateColourResponse = 
-    await fetcher(`api/user/colour/${userID}`, 'PUT', body, token);
-    // console.log('updateColourResponse =', updateColourResponse);
-  }
-
   const previewHouseFile = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file)
@@ -124,30 +127,13 @@ const UserProfile = ({refresh}) => {
     previewHouseFile(file);
   }
 
-  const colourInputChange = (event) => {
-    // console.log('event.target.value =', event.target.value);
-    setColourInput(event.target.value);
-  }
-
   useEffect(() => {
     const fetchImages = async () => {
       const response = await fetcher(`/api/images/household/${houseID}`, 'GET', '', token);
-      // console.log('fetch images response =', response);
-      setImageIds(response[0]);
+      setImageIds(response);
     }
     fetchImages();
-  }, [userID, token, houseID]);
-
-  useEffect(() => {
-    const fetchColour = async () => {
-      const response = await fetcher(`/api/user/colour/${userID}`, 'GET', '', token);
-      // console.log('response =', response);
-      if(response.message === 'success'){
-        setColourInput(response.colour);
-      }
-    }
-    fetchColour();
-  }, [userID, token ]);
+  }, [userID, token]);
 
   return (
     <div id='user-profile-content'>
@@ -161,7 +147,7 @@ const UserProfile = ({refresh}) => {
               src={userPreviewSource}
               alt="user"
             />
-          ) : (currentImage ?
+          ) : (currentImage !== null ?
             <Image
               key={userID}
               className='user-img'
@@ -179,51 +165,36 @@ const UserProfile = ({refresh}) => {
         }
 
         <form className='profile-form' onSubmit={handleSubmitUserFile}>
-          <input id='update-user-image' className="chooseFile" type="file" name="image" onChange={handleUserFileInputChange} hidden />
+          <input id='update-user-image' className="chooseFile" type="file" name="image" onChange={handleUserFileInputChange} hidden/>
           <label className='hover' htmlFor='update-user-image' ><FontAwesomeIcon className="dash-icon" icon={faCamera} />Upload image</label>
           <button className='profile-image-btn' type="submit">Save Profile Image</button>
-          <input
-                  id='colour-update'
-                  className="inputBox"
-                  type='color'
-                  onChange={colourInputChange}
-                  value={colour}
-                />
-                <button className='profile-image-btn' onClick={handleColourChangeSave} >Save Profile Colour</button>
+          {hasImageUser && userImageUpdate && (<p className='success text-centre'>Your image was updated and this page will refresh</p>) }
+          {hasImageUser === false &&  (<p className='error text-centre'>Please upload an image</p>) }
         </form>
 
       </article>
       <article id='profile-2'>
         <h3> House Profile </h3>
 
-        {(housePreviewSource !== '')
+        {imageIds && (imageIds[0] === null || housePreviewSource !== '')
           ? (
             <img
               className='household-img'
-              src={housePreviewSource}
-              alt="house"
+              src={housePreviewSource === '' ? {house} :housePreviewSource}
+              alt='generic house'
             />
-          ) : (imageIds ?
-            <Image
-              key={houseID}
-              className='household-img'
-              cloudName='dii2emagu'
-              alt='placeholder'
-              publicID={imageIds}
-            />
-            :
-            <img
-              className='household-img'
-              src={house}
-              alt="generic house"
-            />
-          )
-        }
+          ) : (<Image
+            cloudName='dii2emagu'
+            publicId={imageIds && imageIds.length > 0 ? imageIds[0] : imageIds}
+            className='household-img'
+          />)}
 
         <form className='profile-form' onSubmit={handleSubmitHouseFile}>
-          <input id='update-household-image' className="chooseFile" type="file" name="image" onChange={handleHouseFileInputChange} hidden />
+          <input id='update-household-image' className="chooseFile" type="file" name="image" onChange={handleHouseFileInputChange} hidden/>
           <label htmlFor='update-household-image' ><FontAwesomeIcon className="dash-icon" icon={faCamera} />Upload Image</label>
           <button className='profile-image-btn' type="submit">Save House Image</button>
+          {hasImageHouse && houseImageUpdate && (<p className='success text-centre'>Your house image was successfully updated</p>) }
+          {hasImageHouse === false &&  (<p className='error text-centre'>Please upload an image</p>) }
         </form>
       </article>
 

@@ -24,6 +24,8 @@ const HouseForm = ({ userID, type }) => {
   // console.log('HouseForm, houseInput =', houseInput);
   const [houseCreated, setHouseCreated] = useState(false);
   const [houseJoined, setHouseJoined] = useState(false);
+  const [isFieldEmpty, setisFieldEmpty] = useState(false);
+  const [houseJoinedValidated,setHouseJoinedValidated] = useState(true)
 
   const houseInputChange = (event) => {
     setHouseInput(event.target.value);
@@ -32,7 +34,12 @@ const HouseForm = ({ userID, type }) => {
   const createNewHousehold = async (base64EncodedImage) => {
 
     const url = `/api/household/createNew/${userID}`
+    if(houseInput === ''){
+      setisFieldEmpty(true);
+      return 
 
+    }
+    setisFieldEmpty(false);
     const createHouseholdResponse = await fetcher(url, 'POST', { name: houseInput, data: base64EncodedImage }, token);
     // console.log('createHouseholdResponse =', createHouseholdResponse);
     if (createHouseholdResponse.message === 'success') {
@@ -46,6 +53,11 @@ const HouseForm = ({ userID, type }) => {
     let token = getSession('token').split('"')
     token = token[1]
     // console.log('joinExistingHousehold');
+    if(houseInput === ''){
+      setHouseJoinedValidated(false)
+      return
+    }
+    setHouseJoinedValidated(true)
     const url = `/api/household/join/${userID}`;
     const joinHouseholdResponse = await fetcher(url, 'POST', { householdID: houseInput }, token);
     // console.log('joinHouseholdResponse =', joinHouseholdResponse);
@@ -116,14 +128,15 @@ const HouseForm = ({ userID, type }) => {
 
       {type === 'create' ? (
 
-        <button className="user-btn" onClick={(e) => { handleSubmitFile(e); }} ><FontAwesomeIcon className="dash-icon" icon={faPlus} /> Create </button>
+        <button className="user-btn" onClick={(e) => { handleSubmitFile(e); }} ><FontAwesomeIcon className="dash-icon" icon={faPlus} />Create </button>
 
       ) : (
         <button onClick={joinExistingHousehold} ><FontAwesomeIcon className="dash-icon" icon={faSignInAlt} /> Join </button>
       )}
-
+      {isFieldEmpty && <p className='error  text-centre'>Please insert a name for your house. </p>}
       {houseCreated && <p className='success text-centre'>Household created, go back to households to enter the manager. </p>}
       {houseJoined && <p className='success text-centre'>Household Joined, go back to households to enter the manager. </p>}
+      {houseJoinedValidated === false && (<p className='error text-centre'>Enter a valid houseHold </p>)}
     </form>
   )
 

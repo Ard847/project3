@@ -40,6 +40,8 @@ const EditTask = ({ task, refresh }) => {
   const [user, setUser] = useState({});
   const [displayDate, setDisplayDate] = useState('');
   const [imageIds, setImageIds] = useState([]);
+  const [isFieldEmpty, setisFieldEmpty] = useState(false);
+  const [isSaved, setIsSaved] = useState(false)
   // console.log('members =',members);
   // console.log('taskData =', taskData);
   // console.log("displayDate =", displayDate );
@@ -172,16 +174,24 @@ const EditTask = ({ task, refresh }) => {
     event.preventDefault();
     event.stopPropagation();
     // console.log('taskData =', taskData);
-
+   
     const houseID = getSession('houseID');
     let token = getSession('token').split('"');
     token = token[1];
     const url = `/api/task/updateAll/${houseID}`;
+    //console.log('task',taskData)
+
+    if(taskData.taskName === '' || taskData.duration === '' || taskData.alertBefore === '' || taskData.completeBy === ''   || taskData.repeatEvery  === '' ){
+      setisFieldEmpty(true)
+      return
+    }
+    setisFieldEmpty(false)
 
     const updateTaskResponse = await fetcher(url, 'PUT', taskData, token);
     // console.log('updateTaskResponse =', updateTaskResponse);
     if (updateTaskResponse.message === 'success') {
       refresh();
+      setIsSaved(true)
     }
   }
 
@@ -313,7 +323,13 @@ const EditTask = ({ task, refresh }) => {
         </label>
         <button className='save-btn' onClick={handleSave}>Save</button>
       </div>
-
+      
+      {isSaved && (
+        <p className= 'success text-centre' >Your task was successfully updated</p>
+      )}
+      {isFieldEmpty && (
+        <p className="error text-center" >Please fill every empty field</p>
+      )}
     </div>
   )
 }

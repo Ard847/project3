@@ -22,7 +22,7 @@ self.addEventListener('install', function (evt) {
         return Promise.all(
           keyList.map(key => {
             if (key !== CACHE_NAME && key !== DATA_CACHE_NAME) {
-              console.log('Removing old cache data', key);
+              //console.log('Removing old cache data', key);
               return caches.delete(key);
             }
           })
@@ -47,11 +47,11 @@ self.addEventListener('install', function (evt) {
             .catch(err => {
               // Network request failed, try to get it from the cache
               if(err){
-                console.log(err);
+                //console.log(err);
               }
               return cache.match(evt.request);
             });
-        }).catch(err => console.log(err))
+        }).catch(/*err =>  console.log(err) */)
       );
       return;
     }
@@ -67,7 +67,7 @@ self.addEventListener('install', function (evt) {
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('serviceWorker.js').then(reg => {
-        console.log('Our service worker file is installed', reg);
+        //console.log('Our service worker file is installed', reg);
       });
     });
   }

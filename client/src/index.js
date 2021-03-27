@@ -7,6 +7,7 @@ import { LoggedInContextProvider } from './context/LoggedInContext';
 import { TaskContextProvider } from './context/TaskContext';
 import { MediaContextProvider } from './context/MediaContext';
 import { MembersContextProvider } from './context/MembersContext';
+//import {ImageContextProvider} from './context/ImageContext';
 
 // styles
 import './index.css';
@@ -20,7 +21,7 @@ ReactDOM.render(
       <MediaContextProvider>
         <MembersContextProvider>
           <TaskContextProvider >
-            <App />
+              <App />
           </TaskContextProvider>
         </MembersContextProvider>
       </MediaContextProvider>

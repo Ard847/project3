@@ -55,6 +55,7 @@ router.post('/createNew/:houseID', auth, async (req, res) => {
 router.put('/updateStatus/:houseID', auth, async (req, res) => {
   // console.log('req.body =', req.body);
   // console.log('req.params =', req.params);
+  //console.log('hereeeeeeeeee')
   const taskID = req.body.taskID;
   const houseID = req.params.houseID;
   const newStatus = req.body.newStatus;
@@ -78,6 +79,7 @@ router.put('/updateStatus/:houseID', auth, async (req, res) => {
 router.put('/updateUser/:houseID', auth, async (req, res) => {
   // console.log('req.body =', req.body);
   // console.log('req.params =', req.params);
+  //console.log('hereeeeeeeeee1')
   const taskID = req.body.taskID;
   const houseID = req.params.houseID;
   const user = req.body.user;
@@ -115,6 +117,7 @@ router.put('/updateUser/:houseID', auth, async (req, res) => {
 });
 
 router.put('/updateAll/:houseID', auth, async (req, res) => {
+  //console.log('hereeeeeeeeee2')
   console.log('req.body =', req.body);
   console.log('req.params =', req.params);
   await tasksModel
@@ -135,6 +138,8 @@ router.put('/updateAll/:houseID', auth, async (req, res) => {
 });
 
 router.put('/updateCompletedDate/:houseID', auth, async (req, res) => {
+  //console.log('hereeeeeeeeee3')
+
   // console.log('req.body =', req.body);
   // console.log('req.params =', req.params);
   const houseID = req.params.houseID;

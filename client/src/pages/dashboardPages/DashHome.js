@@ -21,9 +21,7 @@ import fetcher from '../../functions/fetcher';
 import { Image } from 'cloudinary-react';
 
 
-
-const DashHome = ({ match }) => {
-
+const DashHome = ({ match }) => { 
   // variables
   const houseID = parseInt(getSession('houseID'));
   const getHouseName = getSession('houseName');
@@ -36,7 +34,7 @@ const DashHome = ({ match }) => {
   // const [tasks, refreshTasks] = useGetTasks();
   // context -----------------------------------------------------------------
   const { tasks, refreshTasks } = useContext(TaskContext);
-  const { members } = useContext(MembersContext);
+  const { members,refreshMembers,userImage,setUserImage } = useContext(MembersContext);
   // console.log('members =', members );
   // state --------------------------------------------------------------------
   const [showInviteButton, setShowInviteButton] = useState(true);
@@ -76,11 +74,9 @@ const DashHome = ({ match }) => {
       const response = await fetcher(`/api/images/user/${houseID}&${userID}`, 'GET', '', token);
       //console.log(response)
       setImageIds(response.images);
-      //console.log(imageIds)
     }
     fetchImages();
-  }, [token, userID, houseID]);
-
+  }, [token, userID, houseID, ]);
   // list data ----------------------------------------------------------------
   useEffect(() => {
     let todaysTaskData = [];
@@ -164,9 +160,8 @@ const DashHome = ({ match }) => {
   }
 
   useEffect(() => {
-    refreshTasks();
+    refreshTasks();    
   }, []);
-
   // render ------------------------------------------------------------------------
   return (
     <div id='dash-home-content'>
