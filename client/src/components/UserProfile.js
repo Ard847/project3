@@ -128,7 +128,7 @@ const UserProfile = () => {
 
   useEffect(() => {
     const fetchImages = async () => {
-      const response = await fetcher(`/api/images/houseHold/${userID}`, 'GET', '', token);
+      const response = await fetcher(`/api/images/household/${userID}`, 'GET', '', token);
       setImageIds(response);
     }
     fetchImages();

@@ -58,7 +58,7 @@ const MembersContextProvider = ({ children }) => {
     fetchData();
     
     return () => {
-      console.log(`I did unmount`);
+      //console.log(`I did unmount`);
     };
 
   },[fetchData]);
