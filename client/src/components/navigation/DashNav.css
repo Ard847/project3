@@ -1,8 +1,6 @@
-nav#dash-nav {
-  
+nav#dash-nav { 
   width: 20vw;
   height: 100%;
-
   background-color: #ffffff;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   border-radius: 10px 10px 10px 0;

@@ -4,14 +4,12 @@ main {
   justify-content: center;
   max-width: 100vw;
   min-height: calc(100vh - 110px);
-  /* border: 5px solid var(--red); */
 }
 
 section {
   width: 50%;
   padding: 12px;
   min-height: 100%;
-  /* border: 5px solid var(--blue); */
 }
 
 
