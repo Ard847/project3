@@ -13,11 +13,10 @@ import fetcher from '../functions/fetcher';
 import getSession from '../functions/getSession';
 // hooks
 import useGetImages from '../hooks/useGetImages';
-//cloudinary
-import { Image } from 'cloudinary-react';
-
 // context
 import MembersContext from '../context/MembersContext';
+//cloudinary
+import { Image } from 'cloudinary-react';
 
 
 const UserProfile = () => {
@@ -31,7 +30,7 @@ const UserProfile = () => {
   token = token[1];
   const userID = getSession('id');
   const houseID = getSession('houseID');
-
+  
   // state
   const [userPreviewSource, setUserPreviewSource] = useState('');
   const [housePreviewSource, setHousePreviewSource] = useState('');
@@ -58,7 +57,12 @@ const UserProfile = () => {
       setUserImage((state) => !state);
       setUserImageUpdate(true)
       //window.location.reload();
-      await fetcher(url, 'PUT', body, token);
+      const fetch = await fetcher(url, 'PUT', body, token);
+      // console.log('fetch =', fetch);
+      if (fetch.message === 'success'){
+        // console.log('success');
+        refreshMembers();
+      }
     } catch (e) {
       console.log("error image", e);
     }

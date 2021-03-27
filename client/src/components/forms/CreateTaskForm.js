@@ -57,8 +57,9 @@ const CreateTaskForm = () => {
     token = token[1]
 
     // console.log('taskData =', taskData);
-    
-     
+
+
+      // console.log('all form is filled');
       const timings = await processToDays(taskData);
       // console.log('timings =', timings);
 
@@ -78,7 +79,7 @@ const CreateTaskForm = () => {
 
       const url = `/api/task/createNew/${houseID}`;
       const createTaskResponse = await fetcher(url, 'POST', body, token);
-      //console.log('createTaskResponse =', createTaskResponse);
+      // console.log('createTaskResponse =', createTaskResponse);
       if (createTaskResponse.message === 'success') {
         setisFieldEmpty(false)
         setCreateNewSuccess(true);

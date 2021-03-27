@@ -41,7 +41,10 @@ router.get('/getusers/:houseID', auth, async (req, res) => {
       .findAllUser(req.params.houseID);
     const members = householdMembers[0].dataValues.users;
 
-    res.send(members);
+    res.send({
+      message: 'success',
+      members: members,
+    });
 
   } catch (error) {
     console.log('/getusers/:houseID =', error);

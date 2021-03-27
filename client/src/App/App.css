@@ -28,10 +28,8 @@ section {
 
 @media screen and (min-width: 992px) and (max-width: 1200px) {
 
-  
-
   section {
-    mix-height: calc(100vh - 120px);
+    min-height: calc(100vh - 120px);
   }
 
 }
