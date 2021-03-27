@@ -10,18 +10,18 @@ const MembersContext = createContext();
 
 const MembersContextProvider = ({ children }) => {
 
-  const [members, setMembers] = useState([]);
-
   const houseID = getSession('houseID');
+  const [members, setMembers] = useState([]);
+  const [ houseState , setHouseState ] = useState(houseID);
   // console.log('houseID', houseID);
 
   const fetchData = useCallback(async () => {
 
-    if (houseID !== null) {
+    // if (houseID !== null) {
       let token = getSession('token').split('"');
       token = token[1];
 
-      const url = `/api/user/getusers/${houseID}`;
+      const url = `/api/user/getusers/${houseState}`;
       const userResponse = await fetcher(url, 'GET', '', token);
       // console.log(`userResponse called =`, userResponse);
       if (userResponse.message === 'success') {
@@ -29,13 +29,17 @@ const MembersContextProvider = ({ children }) => {
       } else {
         setMembers([]);
       }
-    }
-  }, [houseID]);
+    // }
+  }, [houseState]);
 
 
   const refreshMembers = () => {
     // console.log('refreshing');
     fetchData();
+  }
+
+  const handleHouseID = (id) => {
+    setHouseState(id);
   }
 
 
@@ -51,7 +55,7 @@ const MembersContextProvider = ({ children }) => {
   // console.log('membersContext members =', members);
 
   return (
-    <MembersContext.Provider value={{ members, refreshMembers }}>
+    <MembersContext.Provider value={{ members, refreshMembers, handleHouseID }}>
       {children}
     </MembersContext.Provider>
   )
