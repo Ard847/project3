@@ -25,6 +25,7 @@ const HouseForm = ({ userID, type }) => {
   const [houseCreated, setHouseCreated] = useState(false);
   const [houseJoined, setHouseJoined] = useState(false);
   const [isFieldEmpty, setisFieldEmpty] = useState(false);
+  const [houseJoinedValidated,setHouseJoinedValidated] = useState(true)
 
   const houseInputChange = (event) => {
     setHouseInput(event.target.value);
@@ -52,6 +53,11 @@ const HouseForm = ({ userID, type }) => {
     let token = getSession('token').split('"')
     token = token[1]
     // console.log('joinExistingHousehold');
+    if(houseInput === ''){
+      setHouseJoinedValidated(false)
+      return
+    }
+    setHouseJoinedValidated(true)
     const url = `/api/household/join/${userID}`;
     const joinHouseholdResponse = await fetcher(url, 'POST', { householdID: houseInput }, token);
     // console.log('joinHouseholdResponse =', joinHouseholdResponse);
@@ -130,6 +136,7 @@ const HouseForm = ({ userID, type }) => {
       {isFieldEmpty && <p className='error  text-centre'>Please insert a name for your house. </p>}
       {houseCreated && <p className='success text-centre'>Household created, go back to households to enter the manager. </p>}
       {houseJoined && <p className='success text-centre'>Household Joined, go back to households to enter the manager. </p>}
+      {houseJoinedValidated === false && (<p className='error text-centre'>Enter a valid houseHold </p>)}
     </form>
   )
 
