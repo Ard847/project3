@@ -25,7 +25,7 @@ const DashNav = ({ match, toggelModal, toggelProfile }) => {
   // console.log('match dash nav =', match);
 
   const { isMobileDevice, isSmallScreen, isTabletDevice } = useContext(MediaContext);
-  const { members,refreshMembers,userImage  } = useContext(MembersContext);
+  const { members, refreshMembers, userImage  } = useContext(MembersContext);
   const content = useRef(null);
 
   //console.log('members =', members);

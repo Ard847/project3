@@ -20,7 +20,7 @@ import { Image } from 'cloudinary-react';
 
 
 const UserProfile = () => {
-  const { members,refreshMembers,userImage,setUserImage } = useContext(MembersContext);
+  const { members, refreshMembers, userImage, setUserImage } = useContext(MembersContext);
   // hooks
   const currentImage = useGetImages();
   // console.log('currentImage =', currentImage);

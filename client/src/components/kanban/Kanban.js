@@ -138,6 +138,9 @@ const Kanban = () => {
 
   }, [refreshTasks]);
 
+  useEffect(() => {
+    refreshTasks();
+  }, []);
 
   // rendered ----------------------------------------------------------------
   return (

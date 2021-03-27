@@ -68,6 +68,7 @@ const DashHome = ({ match }) => {
   const handleCloseModal = () => {
     setModalOpen(false);
   }
+
   //Fetch user images
   useEffect(() => {
     const fetchImages = async () => {
@@ -77,6 +78,7 @@ const DashHome = ({ match }) => {
     }
     fetchImages();
   }, [token, userID, houseID, ]);
+
   // list data ----------------------------------------------------------------
   useEffect(() => {
     let todaysTaskData = [];
@@ -161,7 +163,8 @@ const DashHome = ({ match }) => {
 
   useEffect(() => {
     refreshTasks();    
-  }, []);
+  }, [refreshTasks]);
+
   // render ------------------------------------------------------------------------
   return (
     <div id='dash-home-content'>
