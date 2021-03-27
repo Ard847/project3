@@ -15,23 +15,23 @@ const TaskContext = createContext();
 
 const TaskContextProvider = ({children}) => {
 
-  const [ tasks, setTasks] = useState([]);
-  const { loggedIn } = useContext(LoggedInContext);
-
   const houseID = getSession('houseID');
+
+  const [ tasks, setTasks] = useState([]);
+  const [ houseState , setHouseState ] = useState(houseID);
+  const { loggedIn } = useContext(LoggedInContext);
   
   const fetchData = useCallback(async () => {
-      if(loggedIn && houseID !== null){
-      const houseID = getSession('houseID');
+      if(loggedIn ){
       let token = getSession('token').split('"');
       token = token[1];
-      const url = `/api/task/getTasks/${houseID}`;
+      const url = `/api/task/getTasks/${houseState}`;
       const tasksResponse = await fetcher(url, 'GET', '', token);
       // console.log('tasksResponse =', tasksResponse.data);
       checkTaskStatus(tasksResponse.data);
       setTasks(tasksResponse.data);
     }
-  }, [loggedIn, houseID]);
+  }, [loggedIn, houseState ]);
 
   const refreshTasks = (taskID, newStatus) => {
     // console.log('refreshing');
@@ -50,6 +50,10 @@ const TaskContextProvider = ({children}) => {
     fetchData();
   }
 
+  const taskHouseID = (id) => {
+    setHouseState(id);
+  }
+
   // console.log('TaskContext tasks =', tasks);
   
   useEffect(() => {
@@ -61,10 +65,10 @@ const TaskContextProvider = ({children}) => {
       };
     }
 
-  }, [fetchData, houseID]);
+  }, [houseID]);
 
   return (
-    <TaskContext.Provider value={{ tasks, refreshTasks }}>
+    <TaskContext.Provider value={{ tasks, refreshTasks, taskHouseID }}>
       {children}
     </TaskContext.Provider>
   )

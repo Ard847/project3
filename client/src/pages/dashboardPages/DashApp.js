@@ -5,6 +5,7 @@ import { Route } from 'react-router-dom';
 import './DashApp.css';
 // context
 import MembersContext from '../../context/MembersContext';
+import TaskContext from '../../context/TaskContext';
 // functions
 import saveToSession from '../../functions/saveToSession';
 // components
@@ -22,19 +23,23 @@ const DashApp = ({ match, location }) => {
   // console.log('match =', match);
   // console.log('location =', location);
 
-  const houseID = parseInt(match.params.householdID);
-  saveToSession('houseID', houseID);
-
+  
   if (location.aboutProps) {
     saveToSession('houseName', location.aboutProps.houseName);
   }
-
+  
   // state
   const [modalOpen, setModalOpen] = useState(false);
   const [modalProfile, setModalProfile] = useState(false);
-
-  const { refreshMembers } = useContext(MembersContext);
+  
+  const { refreshMembers, handleHouseID } = useContext(MembersContext);
+  const { taskHouseID } = useContext(TaskContext);
   // console.log(members);
+  const houseID = parseInt(match.params.householdID);
+  saveToSession('houseID', houseID);
+  handleHouseID(houseID);
+  taskHouseID(houseID);
+  // refreshMembers();
 
   const handleToggelModal = () => {
     setModalOpen(true);
@@ -54,9 +59,6 @@ const DashApp = ({ match, location }) => {
     setModalProfile(false);
   }
 
-  // useEffect(() => {
-  //   refreshMembers();
-  // }, [refreshMembers]);
 
   // console.log('match.url =', match.url);
   return (
